@@ -1,0 +1,453 @@
+@import "../../styles/base.scss";
+
+/** ********** AUTHENTICATIONS STYLES **********/
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100%;
+  min-height: calc(110vh - 100px);
+  font-weight: 300;
+  font-family: $code;
+}
+.header-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 2px solid $brandPantonRed;
+  height: 8vh;
+  margin: 0 8em;
+}
+.header-logo img {
+  width: 243px;
+  height: 35px;
+  padding: 18px 0;
+  background: url('../../images/carddex_logo.png') no-repeat;
+}
+.base-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  //min-height: calc(81vh - 11vh);
+  width: 100%;
+  min-height: 100%;
+  background: $white;
+}
+.main-paragraph {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  //width: 40em;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 2vh;
+  margin-left: -3em;
+}
+.main-paragraph > * {
+  margin: 0.5em 0 0 0em;
+  font-weight: 300;
+}
+.main-paragraph h1 {
+  font-size: 2em;
+}
+.main-paragraph h3 {
+  font-size: 1.2em;
+  margin-left: 0.5em;
+}
+.main-paragraph p {
+  margin-left: 0.5em;
+  width: 30em;
+}
+.code-mail {
+  font-family: "GothamPro";
+  &:hover {
+    cursor: pointer;
+    color: $brandPantonRed;
+  }
+}
+.wrapper-separator {
+  display: block;
+  position: absolute;
+  top: 500px;
+  width: 800px;
+  height: 1px;
+  background-color: $brandPantonGrey;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.wrapper-auth {
+  width: 350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: -35px 0px 0 0;
+  font-family: 'Gotham Pro';
+}
+.wrapper-auth__header {
+  height: 3vh;
+  margin: 5.2em 25em 0 0;
+}
+.auth-form {
+  width: 65em;
+  background-color: $white;
+  font-size: 5px;
+  font-family: 'Gotham Pro';
+}
+.auth-label {
+  padding-right: 1em;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 14px;
+  color: $brandPantonBlack;
+  font-family: 'Gotham Pro';
+}
+.auth-input {
+  background-color: $white;
+  border: 1px solid lightgrey;
+  border-radius: 7px;
+  height: 30px;
+  width: 100%;
+  outline: 0;
+  -webkit-transition: all 0.25s ease 0s;
+  -o-transition: all 0.25s ease 0s;
+  transition: all 0.25s ease 0s;
+  padding: 0 0.5rem;
+  font-family: 'Gotham Pro';
+  &:hover {
+    border-color: $brandSideColor;
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    transition: all 0.25s ease 0s;
+  }
+  &:focus {
+    border-color: $brandPantonRed;
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    transition: all 0.25s ease 0s;
+  }
+}
+.auth-error {
+  color: $brandPantonRed;
+  font-family: 'Gotham Pro';
+  font-size: 12px;
+  padding: 5px;
+}
+.auth-password__ask {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-family: 'Gotham Pro';
+}
+.auth-password__ask label {
+  padding: 5px 0;
+  font-weight: 100;
+  font-size: 12px;
+  font-family: 'Gotham Pro';
+}
+.auth-group__ask-password {
+  font-size: 13px;
+  font-weight: 300;
+  padding: 5px 0;
+  font-family: 'Gotham Pro';
+}
+.auth-condition {
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 100;
+  font-family: 'Gotham Pro';
+}
+.auth-conditon__confidiency {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  font-family: 'Gotham Pro';
+}
+.auth-button {
+  height: 35px;
+  margin-top: 1rem;
+  color: #ffffff;
+  background-color: $brandPantonRed;
+  border-radius: 7px;
+  border-color: transparent;
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Gotham Pro';
+  outline: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.wrapper-auth0 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 2em;
+  height: 40px;
+  font-family: 'Gotham Pro';
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+}
+.wrapper-auth0 > div {
+  padding: 1em;
+  font-size: 15px;
+  border: 1px solid $brandPantonRed;
+  border-radius: 10px;
+  width: 100%;
+}
+.google-auth0 {
+  background: url('../../images/person.png') no-repeat center;
+  padding-right: 3px;
+}
+.ok-auth0 {
+  background: url('../../images/person_add.png') no-repeat center;
+  padding-left: 3px;
+}
+.wrapper-auth0 > div:hover {
+  background-color: $brandPantonRed;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Gotham Pro';
+  //padding: 0 25em;
+  background-color: $brandSideColor; 
+  height: 100px;
+}
+.footer-copy {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  min-width: 850px;
+}
+.footer-copy h1 {
+  font-size: 14px;
+  color: $white;
+  font-weight: 100;
+}
+.footer-copy p {
+  font-size: 12px;
+  color: #FFFFFF;
+  margin: 0;
+  width: 20em;
+}
+.footer-phone {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 11em;
+}
+.footer-phone h1 {
+  font-size: 15px;
+  font-weight: 100;
+  color: #ffffff;
+  margin: 0;
+  padding: 3px 0;
+}
+.footer-phone img {
+  background: url('../../images/call.png') no-repeat;
+  width: 29.97px;
+  height: 31px;
+}
+.footer-phone__number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.footer-email {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  width: 180px;
+  background: url('../../images/email.png') no-repeat;
+}
+.footer-email img {
+  display: block;
+  width: 30.94px;
+  height: 32px;
+}
+.footer-email h1 {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 100;
+}
+.link-login {
+  color: #000000;
+  text-decoration: none;
+  font-family: 'Gotham Pro';
+  -webkit-transition: all 0.25s ease 0s;
+  -o-transition: all 0.25s ease 0s;
+  transition: all 0.25s ease 0s;
+  margin-right: 1em;
+  font-size: 15px;
+  padding: 3px;
+  &:hover {
+    -webkit-transform: translateY(-2.5px);
+    -ms-transform: translateY(-2.5px);
+    transform: translateY(-2.5px);
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+  }
+}
+.link-register {
+  color: #000000;
+  text-decoration: none;
+  font-family: 'Gotham Pro';
+  -webkit-transition: all 0.25s ease 0s;
+  -o-transition: all 0.25s ease 0s;
+  transition: all 0.25s ease 0s;
+  margin-right: 1em;
+  font-size: 15px;
+  padding: 3px;
+  &:hover {
+    -webkit-transform: translateY(-2.5px);
+    -ms-transform: translateY(-2.5px);
+    transform: translateY(-2.5px);
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+  }
+}
+.active {
+  border-bottom: 2px solid $brandPantonRed;
+}
+@media all and (max-width: 1368px) {
+  .header-logo {
+    margin: 0 4em;
+  }
+  .main-paragraph {
+    font-size: 13px;
+  }
+  .wrapper-separator {
+    top: 350px;
+    width: 550px;
+    height: 1px;
+    background-color: $brandPantonGrey;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .footer {
+    padding-left: 0;
+  }
+}
+@media all and (max-width: 1024px) {
+  .wrapper {
+    min-width: 850px;
+  }
+  .header-logo {
+    margin: 0 2em;
+  }
+  .main-paragraph {
+    font-size: 11px;
+    margin-left: 4em;
+  }
+  .wrapper-auth {
+    font-size: 13px;
+  }
+  .wrapper-separator {
+    top: 350px;
+    width: 550px;
+    height: 1px;
+    background-color: $brandPantonGrey;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .footer {
+    padding-left: 0;
+  }
+}

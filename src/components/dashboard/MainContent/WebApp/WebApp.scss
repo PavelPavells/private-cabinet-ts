@@ -1,0 +1,108 @@
+@import "../../../../styles/base.scss";
+
+/** ********** SHIPMENT STYLES **********/
+.wrapper-registration-app {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+    .wrapper__building-designer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        border: 2px solid $brandPantonGrey;
+        border-radius: 5px;
+        width: 40%;
+        padding: 15px;
+        margin: 15px;
+
+        .wrapper__building-designer-header {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+        }
+
+        .building-designer-logo {
+            width: 40px;
+            height: 40px;
+            background: url('../../../../images/regapp.png') no-repeat center left;
+        }
+    }
+    .wrapper__hardware-configuration-wizards {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        border: 2px solid $brandPantonGrey;
+        border-radius: 5px;
+        width: 40%;
+        padding: 15px;
+        margin: 15px;
+
+        .wrapper__hardware-configuration-wizards-header {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+        }
+
+        .hardware-configuration-wizards-logo {
+            width: 40px;
+            height: 40px;
+            background: url('../../../../images/regapp.png') no-repeat center left;
+        }
+    }
+    
+    .wrapper-registration-app__button {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+        margin: 15px 0;
+    
+        .button-registration-app {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: $brandPantonRed;
+            color: #FFFFFF;
+            font-weight: $light;
+            font-family: $code;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+@import '../../../../styles/base.scss';
+
+/** ********** CONTROL STYLES **********/
+.main-content__main-settings-form-control {
+    width: 30%;
+    margin-left: 8em;
+}
+.main-content__forms-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    //font-size: 15px;
+    width: 15px;
+    height: 15px;
+}

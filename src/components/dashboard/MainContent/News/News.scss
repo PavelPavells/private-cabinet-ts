@@ -1,0 +1,23 @@
+@import "../../../../styles/base.scss";
+
+/** ********** NEWS STYLES **********/
+.news-item {
+    border-bottom: 2px solid $brandPantonGrey;
+    margin: 20px;
+    padding: 40px;
+    background-color: #FFFFFF;
+}
+.image {
+    width: 200px;
+    height: 150px;
+}
+.btn {
+    width: 15em;
+    height: 3em;
+    background-color: $brandPantonBlue;
+    border-radius: 7px;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: $medium;
+}

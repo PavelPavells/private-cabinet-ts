@@ -19,7 +19,7 @@ import "./Auth.scss";
 /**
  * ********** Интерфейс пропсов компонента Login **********
  */
-interface LoginProps {
+interface RegisterProps {
   readonly registerUser: () => void,
   readonly data: any,
   readonly errors: any
@@ -28,7 +28,7 @@ interface LoginProps {
 /**
  * ********** Интерфейс локального стейта компонента Login **********
  */
-interface LoginState {
+interface RegisterState {
   readonly login: string,
   readonly pass: string,
   readonly email: string,
@@ -38,9 +38,9 @@ interface LoginState {
   readonly errors: any
 }
 
-class Register extends React.PureComponent<LoginProps, LoginState> {
+class Register extends React.PureComponent<RegisterProps, RegisterState> {
   
-    state: LoginState = {
+    state: RegisterState = {
       login: "",
       pass: "",
       email: "",
@@ -115,7 +115,6 @@ class Register extends React.PureComponent<LoginProps, LoginState> {
                   Регистрация
                 </Link>
               </div>
-
               <div className="auth-group">
                 <label>
                   <div className="auth-label">Логин</div>

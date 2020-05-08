@@ -136,36 +136,25 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
         || email === ""
       ) {
       return (
-        <div className="wrapper">
-          <div className="header-logo">
-            <img src="../../img/carddex_logo.png" alt="" />
-          </div>
-          <div className="base-wrapper">
-            <div className="main-paragraph">
-              <h1>Личный кабинет Карддекс</h1>
-              <h3>Личный кабинет партнеров и дилеров Карддекс</h3>
-              <p>
-                Войдите или зарегистрируйтесь для получения всей доступной
-                информации по продуктам Карддекс, вашим заказам, скидкам и
-                предложениям.
-              </p>
+        <div className='auth'>
+          <div className='auth-left'>
+            <div className="logo">
+              <img src="../../img/carddex_logo.png" alt="" />
             </div>
-            <div className="wrapper-separator"></div>
-            <div className="wrapper-auth">
-              <div className="wrapper-auth__header">
+            <h1 className='heading'>Авторизация</h1>
+            <div className="auth-forms">
+              <div className="auth-forms__header">
                 <Link to="/" className="link-login active">
                   Вход
                 </Link>
-                {/*
                 <Link to="/register" className="link-register">
                   Регистрация
                 </Link>
-                */}
               </div>
 
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Email</div>
+                  <div className="auth-label">Логин</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
@@ -234,11 +223,8 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
               </div>
             </div>
           </div>
-          <div className="footer">
-            <div className="footer-copy">
-              <h1>Copyright 2019 &copy; CARDDEX</h1>
-              <p>Информация на сайте не является публичной офертой</p>
-            </div>
+          <div className='auth-right'>
+            <div className='image' />
           </div>
         </div>
       )
@@ -251,16 +237,6 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
             <img src="../../img/carddex_logo.png" alt="" />
           </div>
           <div className="base-wrapper">
-            <div className="main-paragraph">
-              <h1>Личный кабинет Карддекс</h1>
-              <h3>Личный кабинет партнеров и дилеров Карддекс</h3>
-              <p>
-                Войдите или зарегистрируйтесь для получения всей доступной
-                информации по продуктам Карддекс, вашим заказам, скидкам и
-                предложениям.
-              </p>
-            </div>
-            <div className="wrapper-separator"></div>
             <div className="wrapper-auth">
               <div className="wrapper-auth__header">
                 <Link to="/" className="link-login active">
@@ -341,12 +317,6 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                   </button>
                 </Link>
               </div>
-            </div>
-          </div>
-          <div className="footer">
-            <div className="footer-copy">
-              <h1>Copyright 2019 &copy; CARDDEX</h1>
-              <p>Информация на сайте не является публичной офертой</p>
             </div>
           </div>
         </div>

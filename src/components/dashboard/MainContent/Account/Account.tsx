@@ -63,7 +63,7 @@ class Account extends Component {
     //if(account.data.length === 0 || account.isFetching) {
     //  return <Loader />
     //}
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <div className="main-content">
 

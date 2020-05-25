@@ -17,7 +17,7 @@ import Main from "./MainContent/Main/Main";
 import Account from "./MainContent/Account/Account";
 import News from "./MainContent/News/News";
 import SalePartners from "./MainContent/SalePartners/SalePartners";
-import Tasks from "./MainContent/Tasks";
+import Tasks from "./MainContent/MainContent";
 import NotFound from "../404/404";
 import PriceList from "./MainContent/PriceList/PriceList";
 import Control from "./MainContent/Control/Control";

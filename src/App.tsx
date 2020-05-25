@@ -9,8 +9,8 @@ import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
 /** ********** IMPORT COMPONENTS from __UTILS__ ********** */
-import setAuthToken from './__utils__/setAuthToken';
-import { setCurrentUser, logoutUser  } from './actions/authActions';
+//import setAuthToken from './__utils__/setAuthToken';
+//import { setCurrentUser, logoutUser  } from './actions/authActions';
 
 /**
  * ********** Импорт глобального сосотояния **********
@@ -28,8 +28,8 @@ import site from "./constants/Global";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Layout from "./components/dashboard/Layout";
-import PrivateRoute from './components/private-route/PrivateRoute';
-import NotFound from './components/404/404';
+//import PrivateRoute from './components/private-route/PrivateRoute';
+//import NotFound from './components/404/404';
 
 /**
  * ********** Импорт стилей **********
@@ -37,28 +37,28 @@ import NotFound from './components/404/404';
 import "./App.scss";
 
 // Проверка на уществование токена в localStorage
-if (localStorage.jwtTokenTeams) {
+//if (localStorage.jwtTokenTeams) {
   // Установить токен авторизации в заголовки
-  const token = JSON.parse(localStorage.jwtTokenTeams);
-  setAuthToken(token);
+//  const token = JSON.parse(localStorage.jwtTokenTeams);
+//  setAuthToken(token);
 
   // Декодировать токен, чтобы получать пользователя
-  const decoded = jwt_decode(token);
+//  const decoded = jwt_decode(token);
 
   // Set user and isAuthenticated Установить пользователя и поле isAuthenticated для Приватного Роута
-  store.dispatch(setCurrentUser(decoded));
+//  store.dispatch(setCurrentUser(decoded));
 
   // Check for expired token Проверка токена на истекшость по времени(устанавливается в бэкенде)
-  const currentTime = Date.now() / 1000; // в миллисекундах
-  if (decoded.exp < currentTime) {
+//  const currentTime = Date.now() / 1000; // в миллисекундах
+//  if (decoded.exp < currentTime) {
     // Логаут пользователя
     //@ts-ignore
-    store.dispatch(logoutUser());   /** uncommented */
+//    store.dispatch(logoutUser());   /** uncommented */
 
     // Редирект на страницу Логина
-    window.location.href = "./";
-  }
-}
+//    window.location.href = "./";
+//  }
+//}
 
 /**
  * ********** Интерфейс пропсов приложения **********

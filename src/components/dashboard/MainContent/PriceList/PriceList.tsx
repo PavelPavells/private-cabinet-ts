@@ -186,8 +186,8 @@ class PriceList extends Component {
     const { openElectronicControl, groupByCategories, page } = this.state;
     // @ts-ignore
     const { pricelist } = this.props;
-    console.log(pricelist);
-    console.log(page);
+    console.log(pricelist.data.payload);
+    //console.log(page);
     if(pricelist.data.length === 0) {
       return <Loader />
     }

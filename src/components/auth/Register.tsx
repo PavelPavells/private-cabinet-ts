@@ -1,7 +1,7 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React from "react";
+import React, { SyntheticEvent, FormEvent } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { PersonalCabinet } from '../../store/store';
@@ -38,7 +38,7 @@ interface RegisterState {
   readonly errors: any
 }
 
-class Register extends React.PureComponent<RegisterProps, RegisterState> {
+class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>> {
   
     state: RegisterState = {
       login: "",
@@ -66,13 +66,13 @@ class Register extends React.PureComponent<RegisterProps, RegisterState> {
   //}
 
   /** ********** CHANGE DATA FROM INPUT ********** */
-  private onChange = (event: { target: { id: any; value: any; }; }) => {
-    // @ts-ignore
-    this.setState({ [event.target.id]: event.target.value });
+  private onChange = (event: FormEvent<HTMLInputElement>) => {
+    const { id, value } = event.currentTarget;
+    this.setState({ [id]: value });
   };
 
   /** ********** REGISTER NEW USER ********** */
-  onSubmit = (event: { preventDefault: () => void; }) => {
+  onSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     const newUser = {
       login: this.state.login,
@@ -89,25 +89,25 @@ class Register extends React.PureComponent<RegisterProps, RegisterState> {
   /**
    * ********** Отправка формы кнопкой Enter **********
    */
-  private onKeyPress = (event: { key: string; preventDefault: () => void; stopPropagation: () => void; }) => {
+  private onKeyPress = (event: SyntheticEvent) => {
+    //@ts-ignore
     if(event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
-      // @ts-ignore
-      this.onSubmit()
+      this.onSubmit(event);
     }
   }
   render() {
     const { errors } = this.state;
     return (
       <div className='auth'>
-          <div className='auth-left'>
-            <div className="logo">
-              <img src="../../img/carddex_logo.png" alt="" />
+          <div className='auth__left left'>
+            <div className="left__logo logo">
+              <img className='logo__image' src="../../img/carddex_logo.png" alt="" />
             </div>
-            <h1 className='heading'>Авторизация</h1>
-            <div className="auth-forms">
-              <div className="auth-forms__header">
+            <h1 className='auth__heading'>Авторизация</h1>
+            <div className="auth__forms forms">
+              <div className="auth-forms__header header">
                 <Link to="/" className="link-login">
                   Вход
                 </Link>
@@ -281,8 +281,8 @@ class Register extends React.PureComponent<RegisterProps, RegisterState> {
               </div>
             </div>
           </div>
-          <div className='auth-right'>
-            <div className='image' />
+          <div className='auth__right right'>
+            <div className='right__image' />
           </div>
         </div>
     );

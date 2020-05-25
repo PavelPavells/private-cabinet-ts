@@ -177,7 +177,7 @@ class Payment extends Component {
   render() {
     // @ts-ignore
     const { payment } = this.props;
-    console.log(payment);
+    //console.log(payment);
     if(payment.data.length === 0) {
       return <Loader />
     }

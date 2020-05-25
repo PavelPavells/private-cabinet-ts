@@ -1,7 +1,7 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React from "react";
+import React, { SyntheticEvent, FormEvent } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { PersonalCabinet } from '../../store/store';
@@ -38,11 +38,11 @@ interface LoginState {
   readonly pass: string,
   readonly errors: any,
   readonly data: any,
-  readonly success: any,
+  readonly success: boolean,
   readonly loadingData: boolean
 }
 
-class Login extends React.PureComponent<LoginProps, LoginState> {
+class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
 
   state: LoginState = {
       email: "",
@@ -71,9 +71,9 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
   /**
    * ********** Запись данных в стейт из инпутов **********
    */
-  private onChange = (e: { target: { id: any; value: any; }; }) => {
-    // @ts-ignore
-    this.setState({ [e.target.id]: e.target.value });
+  private onChange = (event: FormEvent<HTMLInputElement>) => {
+    const { id, value } = event.currentTarget;
+    this.setState({ [id]: value });
   };
 
   /**
@@ -87,11 +87,12 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
   /**
    * ********** Отправка формы кнопкой Enter **********
    */
-  private onKeyPress = (event: { key: string; preventDefault: () => void; stopPropagation: () => void; }) => {
+  private onKeyPress = (event: SyntheticEvent) => {
+    //@ts-ignore
     if(event.key === 'Enter') {
-      event.preventDefault()
-      event.stopPropagation()
-      this.clickForm()
+      event.preventDefault();
+      event.stopPropagation();
+      this.clickForm();
     }
   }
 
@@ -137,24 +138,21 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
       ) {
       return (
         <div className='auth'>
-          <div className='auth-left'>
-            <div className="logo">
-              <img src="../../img/carddex_logo.png" alt="" />
-            </div>
-            <h1 className='heading'>Авторизация</h1>
-            <div className="auth-forms">
-              <div className="auth-forms__header">
+          <div className='auth__left left'>
+            <h1 className='auth__heading'>Вход</h1>
+            <div className="auth__forms forms">
+              {/*<div className="auth-forms__header header">
                 <Link to="/" className="link-login active">
                   Вход
                 </Link>
                 <Link to="/register" className="link-register">
                   Регистрация
                 </Link>
-              </div>
+              </div>*/}
 
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Логин</div>
+                  <div className="auth-label">Введите логин</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
@@ -164,6 +162,7 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                     id="email"
                     type="email"
                     className="auth-input"
+                    placeholder="Введите логин"
                   />
                   <div className="auth-error">
                     {errors.email}
@@ -173,7 +172,7 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
               </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Пароль</div>
+                  <div className="auth-label">Введите пароль</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
@@ -183,6 +182,7 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                     id="pass"
                     type="password" //passowrd
                     className="auth-input"
+                    placeholder="Введите пароль"
                   />
                   <div className="auth-error">
                     {err}
@@ -191,25 +191,14 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                 </label>
               </div>
               <div className="auth-password__ask">
-                <label>
-                  <input type="checkbox" /> Запомнить меня
-                </label>
                 <a
                   href="https://yandex.ru"
                   className="auth-group__ask-password"
                 >
-                  Забыли пароль?
+                  Не помню пароль
                 </a>
               </div>
-              <div className="auth-condition">
-                <span>Нажимая кнопку "Войти", вы принимаете</span>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-conditon__confidiency"
-                >
-                  Условия "Политики Конфиденциальности"
-                </a>
-              </div>
+              
               <div>
                 <Link to="/">
                   <button
@@ -222,9 +211,17 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                 </Link>
               </div>
             </div>
+            <div className='auth__registration registration'>
+              <div className='registration__no-login'>Нет логина?</div>
+              <div className='registration__link'><Link to='/register'>Зарегестрируйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
+            </div>
           </div>
-          <div className='auth-right'>
-            <div className='image' />
+          <div className='auth__right right'>
+            <div className="right__logo logo"></div>
+            <div className='right__text'>Личный кабинет партнера</div>
+            <div className='right__image image'>
+              <div className='image__photo'></div>
+            </div>
           </div>
         </div>
       )

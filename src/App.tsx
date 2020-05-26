@@ -8,9 +8,9 @@ import axios from 'axios';
 // @ts-ignore
 import jwt_decode from "jwt-decode";
 
-/** ********** IMPORT COMPONENTS from __UTILS__ ********** */
-//import setAuthToken from './__utils__/setAuthToken';
-//import { setCurrentUser, logoutUser  } from './actions/authActions';
+/** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
+import setAuthToken from './__utils__/setAuthToken';
+import { setCurrentUser, logoutUser  } from './actions/authActions';
 
 /**
  * ********** Импорт глобального сосотояния **********
@@ -28,37 +28,51 @@ import site from "./constants/Global";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Layout from "./components/dashboard/Layout";
-//import PrivateRoute from './components/private-route/PrivateRoute';
-//import NotFound from './components/404/404';
+import PrivateRoute from './components/private-route/PrivateRoute';
+import NotFound from './components/404/404';
 
 /**
  * ********** Импорт стилей **********
  */
 import "./App.scss";
 
-// Проверка на уществование токена в localStorage
-//if (localStorage.jwtTokenTeams) {
-  // Установить токен авторизации в заголовки
-//  const token = JSON.parse(localStorage.jwtTokenTeams);
-//  setAuthToken(token);
+/**
+ * ********** Проверка на cуществование токена в localStorage **********
+ */
+if (localStorage.jwtTokenTeams) {
+  /**
+   * ********** Установить токен авторизации в заголовки **********
+   */
+  const token = JSON.parse(localStorage.jwtTokenTeams);
+  setAuthToken(token);
 
-  // Декодировать токен, чтобы получать пользователя
-//  const decoded = jwt_decode(token);
+  /**
+   * ********** Декодировать токен, чтобы получать пользователя **********
+   */
+  const decoded = jwt_decode(token);
 
-  // Set user and isAuthenticated Установить пользователя и поле isAuthenticated для Приватного Роута
-//  store.dispatch(setCurrentUser(decoded));
+  /**
+   * ********** Установить пользователя и поле isAuthenticated для Приватного Роута **********
+   */
+  store.dispatch(setCurrentUser(decoded));
 
-  // Check for expired token Проверка токена на истекшость по времени(устанавливается в бэкенде)
-//  const currentTime = Date.now() / 1000; // в миллисекундах
-//  if (decoded.exp < currentTime) {
-    // Логаут пользователя
+  /**
+   * ********** Проверка токена на истекшость по времени(Устанавливается в Бэкенде) **********
+   */
+  const currentTime = Date.now() / 1000; // в миллисекундах
+  if (decoded.exp < currentTime) {
+    /**
+     * ********** Логаут пользователя **********
+     */
     //@ts-ignore
-//    store.dispatch(logoutUser());   /** uncommented */
+    store.dispatch(logoutUser());   /** uncommented */
 
-    // Редирект на страницу Логина
-//    window.location.href = "./";
-//  }
-//}
+    /**
+      * ********** Редирект на страницу Логина **********
+      */
+    window.location.href = "./";
+  }
+}
 
 /**
  * ********** Интерфейс пропсов приложения **********
@@ -116,9 +130,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
     localStorage.clear()
   }
   public render() {
-    //console.log(this.props);
     const { data } = this.state;
-    console.log(this.state.data)
     return (
       <Provider store={store}>
         <Router>
@@ -134,7 +146,14 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   />
                 }
               />
-              <Route exact path="/register" render={() => <Register />} />  {/** "/register/:name/:email" */}
+              
+              <Route exact path="/register" render={() => 
+                <Register
+                //@ts-ignore
+                  data={data}
+                  />
+                }
+              />  {/** "/register/:name/:email" */}
               <Route exact path="/:dashboard" render={() => 
                 // @ts-ignore
                 (data.length === 0 && Storage.uuid === null) 

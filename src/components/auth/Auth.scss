@@ -9,6 +9,29 @@
  font-family: $code;
 }
 
+//::-webkit-scrollbar {
+//  width: 4px;
+//  height: 7px;
+//}
+//::-webkit-scrollbar:horizontal {
+//  height: 7px;
+//}
+/* Track */
+//::-webkit-scrollbar-track {
+//  box-shadow: inset 0 0 5px grey; 
+//  width: 1px;
+//  border-radius: 15px;
+//}
+/* Handle */
+//::-webkit-scrollbar-thumb {
+//  background: $brandPantonGrey; 
+//  border-radius: 10px;
+//}
+/* Handle on hover */
+//::-webkit-scrollbar-thumb:hover {
+//  background: $brandPantonRed; 
+//}
+
 .auth {
     display: flex;
     flex-direction: row;
@@ -26,17 +49,25 @@
     }
 
     &__heading {
-      margin: 124px 0 20px 120px;
+      margin: 124px 0 10px 120px;
       font-weight: $regular;
       font-size: 26px;
       line-height: 1.27;
       color: #293440;
     }
 
+    &__necessary {
+      margin: 0 0 40px 120px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #8b9298;
+    }
+
     &__forms {
       width: 70%;
       display: flex;
       flex-direction: column;
+      //overflow-y: scroll;
       font-family: $code;
       margin-left: 120px;
 
@@ -69,26 +100,40 @@
     }
 
     &-error {
-      color: $brandPantonRed;
+      display: block;
+      height: 15px;
+      margin-top: 20px;
       font-family: $code;
       font-size: 12px;
-      padding: 5px;
+      line-height: 1.5;
+      color: #d03839;
     }
 
     &-password__ask {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 40px 0;
       font-family: $code;
+      
+      span {
+        margin-left: 20px;
+        font-size: 12px;
+        line-height: 1.5;
+
+        a {
+          color: #1d68d9;
+          text-decoration: underline;
+        }
+      }
     }
     
     &-group__ask-password {
       font-size: 12px;
       text-decoration: underline;
       line-height: 1.5;
-      letter-spacing: normal;
       color: #1d68d9;
-      //font-weight: $light;
       padding: 5px 0;
       font-family: $code;
     }
@@ -106,7 +151,7 @@
       outline: transparent;
     }
     &__registration, .registration {
-      margin: 160px 0 0 120px;
+      margin: 145px 0 30px 120px;
 
       &__no-login {
         font-size: 12px;
@@ -121,16 +166,18 @@
         & > a {
           color: $brandPantonBlue;
         }
-        
+
       }
 
     }
     
     &__right, .right {
         display: flex;
+        //position: relative;
         flex-direction: column;
         align-items: center;
         width: 50%;
+        height: 100%;
         background-color: $brandPantonFonts;
 
         &__logo {
@@ -150,14 +197,18 @@
 
         &__image, .image {
           display: block;
+          //position: absolute;
+          //bottom: 0;
+          //right: 42px;
           width: 100%;
-          height: 70%;
+          height: 100%;
+          //z-index: 1000;
 
           &__photo {
             display: block;
             width: 100%;
             height: 100%;
-            background: url("../../images/login-image.png") no-repeat center;
+            background: url("../../images/main-photo.png") no-repeat center;
             background-size: contain;
           }
         }

@@ -2,6 +2,8 @@
  * ********** Импорт зависимостей **********
  */
 import React, { SyntheticEvent, FormEvent } from "react";
+//@ts-ignore
+import CreatableSelect from 'react-select/creatable';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { PersonalCabinet } from '../../store/store';
@@ -29,24 +31,36 @@ interface RegisterProps {
  * ********** Интерфейс локального стейта компонента Login **********
  */
 interface RegisterState {
-  readonly login: string,
-  readonly pass: string,
   readonly email: string,
-  readonly surname: string,
+  readonly pass: string,
+  readonly repeatpass: string,
   readonly name: string,
+  readonly surname: string,
   readonly patronymic: string,
+  readonly phone: string | number,
+  readonly companyName: string,
+  readonly inn: string,
+  readonly legalAdress: string,
+  readonly webSite: string,
+  readonly direction: string,
   readonly errors: any
 }
 
 class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>> {
   
     state: RegisterState = {
-      login: "",
-      pass: "",
       email: "",
-      surname: "",
+      pass: "",
+      repeatpass: "",
       name: "",
-      patronymic: " ",
+      surname: "",
+      patronymic: "",
+      phone: "",
+      companyName: "",
+      inn: "",
+      legalAdress: "",
+      webSite: "",
+      direction: "Торговая компания",
       errors: {}
     }
 
@@ -65,25 +79,42 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
   //  }
   //}
 
-  /** ********** CHANGE DATA FROM INPUT ********** */
+  /**
+   * ********** Запись данных в стейт из инпутов **********
+   */
   private onChange = (event: FormEvent<HTMLInputElement>) => {
     const { id, value } = event.currentTarget;
     this.setState({ [id]: value });
   };
 
-  /** ********** REGISTER NEW USER ********** */
+  /**
+   * ********** Запись данных в стейт из множественного выбора(Options Tag) **********
+   */
+  private handleChange = (newValue: any) => {
+   this.setState({ direction: newValue })
+  };
+
+  /**
+   * ********** Отпрака формы Регистрации **********
+   */
   onSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     const newUser = {
-      login: this.state.login,
-      pass: this.state.pass,
       email: this.state.email,
-      surname: this.state.surname,
+      pass: this.state.pass,
+      repeatpass: this.state.repeatpass,
       name: this.state.name,
-      patronymic: this.state.patronymic
+      surname: this.state.surname,
+      patronymic: this.state.patronymic,
+      phone: this.state.phone,
+      companyName: this.state.companyName,
+      inn: this.state.inn,
+      legalAdress: this.state.legalAdress,
+      webSite: this.state.webSite,
+      direction: this.state.direction
     };
     // @ts-ignore
-    this.props.registerUser(newUser, this.props.history);
+    //this.props.registerUser(newUser, this.props.history);
   };
 
   /**
@@ -98,135 +129,99 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
     }
   }
   render() {
-    const { errors } = this.state;
+    /**
+     * Деструтктуризация данных из локального и глобального стейта
+     */
+    const { email, pass, repeatpass, name, surname, patronymic, phone, companyName, inn, legalAdress, webSite, direction } = this.state;
+    const { err } = this.props.data;
+    
+    /**
+     * Для выбора направления деятельности регистрирующейся компании
+     */
+    const options = [
+      { value: 'Торговая компания', label: 'Торговая компания' },
+      { value: 'Компания-проектировщик', label: 'Компания-проектировщик' },
+      { value: 'Инсталлятор СКУД', label: 'Инсталлятор СКУД' },
+      { value: 'Пользователь системы СКУД', label: 'Пользователь сиситемы СКУД' }
+    ]
+
     return (
+      /**
+       * Компонента Регистрация
+       */
       <div className='auth'>
           <div className='auth__left left'>
-            <div className="left__logo logo">
-              <img className='logo__image' src="../../img/carddex_logo.png" alt="" />
-            </div>
-            <h1 className='auth__heading'>Авторизация</h1>
+            <h1 className='auth__heading'>Регистрация</h1>
+            <div className='auth__necessary'>Поля, отмеченные знаком «*», обязательны для заполнения</div>
             <div className="auth__forms forms">
-              <div className="auth-forms__header header">
-                <Link to="/" className="link-login">
-                  Вход
-                </Link>
-                <Link to="/register" className="link-register active">
-                  Регистрация
-                </Link>
-              </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Логин</div>
+                  <div className="auth-label">Ваш e-mail</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.login}
-                    // @ts-ignore
-                    error={errors.email}
-                    id="login"
+                    value={email}
+                    id="email"
                     type="email"
                     className="auth-input"
+                    placeholder="ivanov@gmail.com"
                   />
-                  <div className="auth-error">
-                    {errors.email}
-                    {errors.emailnotfound}
-                  </div>
                 </label>
               </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Пароль</div>
+                  <div className="auth-label">Придумайте пароль *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.pass}
-                    // @ts-ignore
-                    error={errors.pass}
+                    value={pass}
                     id="pass"
                     type="password"
                     className="auth-input"
+                    placeholder="sbjn654btr"
                   />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
                 </label>
               </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Подтветдите пароль</div>
+                  <div className="auth-label">Повторите пароль *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.pass}
-                    // @ts-ignore
-                    error={errors.pass}
-                    id="pass"
+                    value={repeatpass}
+                    id="pass-repeat"
                     type="password"
                     className="auth-input"
+                    placeholder="sbjn654btr"
                   />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
                 </label>
               </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Email</div>
+                  <div className="auth-label">Имя *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.email}
-                    // @ts-ignore
-                    error={errors.pass}
-                    id="email"
-                    type="text"
-                    className="auth-input"
-                  />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
-                </label>
-              </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Фамилия</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={this.state.surname}
-                    // @ts-ignore
-                    error={errors.pass}
-                    id="surname"
-                    type="text"
-                    className="auth-input"
-                  />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
-                </label>
-              </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Имя</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={this.state.name}
-                    // @ts-ignore
-                    error={errors.pass}
+                    value={name}
                     id="name"
                     type="text"
                     className="auth-input"
+                    placeholder="Иван"
                   />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Фамилия *</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={surname}
+                    id="surname"
+                    type="text"
+                    className="auth-input"
+                    placeholder="Иванов"
+                  />
                 </label>
               </div>
               <div className="auth-group">
@@ -235,38 +230,102 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.patronymic}
-                    // @ts-ignore
-                    error={errors.pass}
+                    value={patronymic}
                     id="patronymic"
                     type="text"
                     className="auth-input"
+                    placeholder="Иванович"
                   />
-                  <div className="auth-error">
-                    {/*{err}*/}
-                    {errors.passwordincorrect}
-                  </div>
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Контактный телефон *</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={phone}
+                    id="contact-phone"
+                    type="text"
+                    className="auth-input"
+                    placeholder="8 (123) 456 78 90"
+                  />
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Полное наименование компании *</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={companyName}
+                    id="company-name"
+                    type="text"
+                    className="auth-input"
+                    placeholder="Иванов и Ко"
+                  />
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">ИНН *</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={inn}
+                    id="inn"
+                    type="text"
+                    className="auth-input"
+                    placeholder="Введите Ваш ИНН"
+                  />
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Юридический адрес *</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={legalAdress}
+                    id="legal-adress"
+                    type="text"
+                    className="auth-input"
+                    placeholder="Введите Ваш юридический адрес"
+                  />
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Адрес web-сайта</div>
+                  <input
+                    onChange={this.onChange}
+                    onKeyDown={this.onKeyPress}
+                    value={webSite}
+                    id="web-site"
+                    type="text"
+                    className="auth-input"
+                    placeholder="Адрес Вашего сайта"
+                  />
+                </label>
+              </div>
+              <div className="auth-group">
+                <label>
+                  <div className="auth-label">Направление деятельности</div>
+                  <CreatableSelect
+                    isClearable
+                    onChange={this.handleChange}
+                    //onInputChange={this.handleInputChange}
+                    value={direction}
+                    options={options}
+                    placeholder={direction}
+                  />
                 </label>
               </div>
               <div className="auth-password__ask">
                 <label>
-                  <input type="checkbox" /> Запомнить меня
+                  <input type="checkbox" />
                 </label>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-group__ask-password"
-                >
-                  Забыли пароль?
-                </a>
-              </div>
-              <div className="auth-condition">
-                <span>Нажимая кнопку "Войти", вы принимаете</span>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-conditon__confidiency"
-                >
-                  Условия "Политики Конфиденциальности"
-                </a>
+                <span>Нажимая на кнопку "Зарегистрироваться", я даю<br /><a>согласие на обработку персональных данных</a></span>
               </div>
               <div>
                 <Link to="/">
@@ -275,14 +334,25 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                     type="submit"
                     className="auth-button"
                   >
-                    Регистрация
+                    Зарегистрироваться
                   </button>
                 </Link>
               </div>
+              <div className="auth-error">
+                {err}
+              </div>
+            </div>
+            <div className='auth__registration registration'>
+              <div className='registration__no-login'>Уже зарегестрированы?</div>
+              <div className='registration__link'><Link to='/'>Авторизуйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
             </div>
           </div>
           <div className='auth__right right'>
-            <div className='right__image' />
+            <div className="right__logo logo"></div>
+            <div className='right__text'>Личный кабинет партнера</div>
+            <div className='right__image image'>
+              <div className='image__photo'></div>
+            </div>
           </div>
         </div>
     );

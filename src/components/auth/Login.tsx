@@ -77,7 +77,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
   };
 
   /**
-   * ********** Отпрака формы **********
+   * ********** Отпрака формы Логина **********
    */
   private clickForm = () => {
     const { email, pass } = this.state;
@@ -127,6 +127,9 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
   // }
 
   public render() {
+    /**
+     * Деструтктуризация данных из локального и глобального стейта
+     */
     const { errors, email, pass } = this.state;
     const { err } = this.props.data;
     
@@ -137,37 +140,25 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
         || email === ""
       ) {
       return (
+        /**
+         * Компонента Логин
+         */
         <div className='auth'>
           <div className='auth__left left'>
             <h1 className='auth__heading'>Вход</h1>
             <div className="auth__forms forms">
-              {/*<div className="auth-forms__header header">
-                <Link to="/" className="link-login active">
-                  Вход
-                </Link>
-                <Link to="/register" className="link-register">
-                  Регистрация
-                </Link>
-              </div>*/}
-
               <div className="auth-group">
                 <label>
                   <div className="auth-label">Введите логин</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.email}
-                    // @ts-ignore
-                    error={errors.email}
+                    value={email}
                     id="email"
                     type="email"
                     className="auth-input"
                     placeholder="Введите логин"
                   />
-                  <div className="auth-error">
-                    {errors.email}
-                    {errors.emailnotfound}
-                  </div>
                 </label>
               </div>
               <div className="auth-group">
@@ -176,18 +167,12 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={this.state.pass}
-                    // @ts-ignore
-                    error={errors.pass}
+                    value={pass}
                     id="pass"
-                    type="password" //passowrd
+                    type="password" //password
                     className="auth-input"
                     placeholder="Введите пароль"
                   />
-                  <div className="auth-error">
-                    {err}
-                    {errors.passwordincorrect}
-                  </div>
                 </label>
               </div>
               <div className="auth-password__ask">
@@ -209,6 +194,9 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                     Войти
                   </button>
                 </Link>
+              </div>
+              <div className="auth-error">
+                {err}
               </div>
             </div>
             <div className='auth__registration registration'>

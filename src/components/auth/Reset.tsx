@@ -9,7 +9,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт экшенов **********
  */
-import { loginUser } from '../../actions/authActions';
+//import { resetPassword } from '../../actions/authActions';
 
 /** 
  * ********** Импорт компонентов **********
@@ -22,31 +22,29 @@ import Layout from "../dashboard/Layout"
 import "./Auth.scss";
 
 /**
- * ********** Интерфейс пропсов компонента Login **********
+ * ********** Интерфейс пропсов компонента Reset **********
  */
-interface LoginProps {
-  readonly loginUser: (email: string, password: string) => void,
+interface ResetProps {
+  readonly resetPassword: (email: string) => void,
   readonly data: any,
   readonly errors: any
 }
 
 /**
- * ********** Интерфейс локального стейта компонента Login **********
+ * ********** Интерфейс локального стейта компонента Reset **********
  */
-interface LoginState {
+interface ResetState {
   readonly email: string,
-  readonly pass: string,
   readonly errors: any,
   readonly data: any,
   readonly success: boolean,
   readonly loadingData: boolean
 }
 
-class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
+class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
 
-  state: LoginState = {
+  state: ResetState = {
       email: "",
-      pass: "",
       errors: {},
       data: [],
       success: this.props.data.success,
@@ -77,11 +75,11 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
   };
 
   /**
-   * ********** Отпрака формы Логина **********
+   * ********** Отпрака формы Reset **********
    */
   private clickForm = () => {
-    const { email, pass } = this.state;
-    this.props.loginUser(email, pass);
+    const { email } = this.state;
+    //this.props.resetPassword(email, pass);
   };
 
   /**
@@ -130,26 +128,27 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     /**
      * Деструтктуризация данных из локального и глобального стейта
      */
-    const { errors, email, pass } = this.state;
+    const { email } = this.state;
     const { err } = this.props.data;
     
     let uuid = localStorage.getItem('uuid')
       if(this.props.data.length === 0 
         || this.props.data.success === "false" 
-        || pass === "" 
+        //|| pass === "" 
         || email === ""
       ) {
       return (
         /**
-         * Компонента Логин
+         * Компонент Reset
          */
         <div className='auth'>
           <div className='auth__left left'>
-            <h1 className='auth__heading'>Вход</h1>
+            <h1 className='auth__heading'>Восстановить пароль</h1>
+            <div className='auth__necessary'>Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
             <div className="auth__forms forms">
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Введите логин</div>
+                  <div className="auth-label">Введите e-mail</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
@@ -157,41 +156,18 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                     id="email"
                     type="email"
                     className="auth-input"
-                    placeholder="Введите логин"
+                    placeholder="Введите e-mail"
                   />
                 </label>
               </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Введите пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={pass}
-                    id="pass"
-                    type="password" //password
-                    className="auth-input"
-                    placeholder="Введите пароль"
-                  />
-                </label>
-              </div>
-              <div className="auth-password__ask">
-                <a
-                  href="/reset"
-                  className="auth-group__ask-password"
-                >
-                  Не помню пароль
-                </a>
-              </div>
-              
               <div>
-                <Link to="/">
+                <Link to="/new-password">
                   <button
                     onClick={this.clickForm}
                     type="submit"
                     className="auth-button"
                   >
-                    Войти
+                    Готово
                   </button>
                 </Link>
               </div>
@@ -199,10 +175,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                 {err}
               </div>
             </div>
-            <div className='auth__registration registration'>
-              <div className='registration__no-login'>Нет логина?</div>
-              <div className='registration__link'><Link to='/register'>Зарегестрируйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
-            </div>
+            <Link className="auth__back back" to='/'><div className="back__arrow"></div>Вернуться к авторизации</Link>
           </div>
           <div className='auth__right right'>
             <div className="right__logo logo"></div>
@@ -247,58 +220,15 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                     type="email"
                     className="auth-input"
                   />
-                  <div className="auth-error">
-                    {errors.email}
-                    {errors.emailnotfound}
-                  </div>
                 </label>
-              </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.pass}
-                    // @ts-ignore
-                    error={errors.pass}
-                    onKeyDown={this.onKeyPress}
-                    id="pass"
-                    type="password"
-                    className="auth-input"
-                  />
-                  <div className="auth-error">
-                    {errors.pass}
-                    {errors.passwordincorrect}
-                  </div>
-                </label>
-              </div>
-              <div className="auth-password__ask">
-                <label>
-                  <input type="checkbox" /> Запомнить меня
-                </label>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-group__ask-password"
-                >
-                  Забыли пароль?
-                </a>
-              </div>
-              <div className="auth-condition">
-                <span>Нажимая кнопку "Войти", вы принимаете</span>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-conditon__confidiency"
-                >
-                  Условия "Политики Конфиденциальности"
-                </a>
               </div>
               <div>
-                <Link to="/dashboard">
+                <Link to="/new-password">
                   <button
                     type="submit"
                     className="auth-button"
                   >
-                    Войти
+                    Готово
                   </button>
                 </Link>
               </div>
@@ -317,5 +247,5 @@ const mapStateToProps = (state: PersonalCabinet) => ({
 
 export default connect(
   mapStateToProps,
-  null//{ loginUser }
-)(Login);
+  null//{ resetPassword }
+)(Reset);

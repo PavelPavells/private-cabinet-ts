@@ -27,6 +27,8 @@ import site from "./constants/Global";
  */
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Reset from "./components/auth/Reset";
+import NewPassword from "./components/auth/NewPassword";
 import Layout from "./components/dashboard/Layout";
 import PrivateRoute from './components/private-route/PrivateRoute';
 import NotFound from './components/404/404';
@@ -80,6 +82,7 @@ if (localStorage.jwtTokenTeams) {
 interface AppProps {
   readonly data: any,
   readonly loginUser: (email: string, pass: string) => void,
+  readonly resetPassword: (email: string) => void,
   readonly logoutUser: () => void,
   readonly logout: () => void
 }
@@ -108,7 +111,15 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
       err: null
     }
   
-  private loginUser = (email: string, pass: string) => {
+  private resetPassword = (email: string) => {
+    console.log('RESET PASSWORD');
+  }
+
+  private newPassword = (pass: string, repeatPass: string) => {
+    console.log('NEW PASSWORD');
+  }
+
+  private loginUser = (email: string, pass: string) => {  /** Удалить знак ? */
     axios
       .post(`${site}`, {
         email: email,
@@ -154,6 +165,24 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   />
                 }
               />  {/** "/register/:name/:email" */}
+              <Route exact path="/reset" render={() =>
+                <Reset
+                  resetPassword={this.resetPassword}
+                  data={data}
+                  //@ts-ignore
+                  history={window.history}
+                />
+                }
+              />
+              <Route exact path="/new-password" render={() =>
+                <NewPassword
+                  newPassword={this.newPassword}
+                  data={data}
+                  //@ts-ignore
+                  history={window.history}
+                />
+                }
+              />
               <Route exact path="/:dashboard" render={() => 
                 // @ts-ignore
                 (data.length === 0 && Storage.uuid === null) 

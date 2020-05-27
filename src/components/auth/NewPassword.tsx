@@ -9,7 +9,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт экшенов **********
  */
-import { loginUser } from '../../actions/authActions';
+//import { resetPassword } from '../../actions/authActions';
 
 /** 
  * ********** Импорт компонентов **********
@@ -22,31 +22,29 @@ import Layout from "../dashboard/Layout"
 import "./Auth.scss";
 
 /**
- * ********** Интерфейс пропсов компонента Login **********
+ * ********** Интерфейс пропсов компонента NewPassword **********
  */
-interface LoginProps {
-  readonly loginUser: (email: string, password: string) => void,
+interface NewPasswordProps {
+  readonly newPassword: (pass: string, repeatPass: string) => void,
   readonly data: any,
   readonly errors: any
 }
 
 /**
- * ********** Интерфейс локального стейта компонента Login **********
+ * ********** Интерфейс локального стейта компонента NewPassword **********
  */
-interface LoginState {
-  readonly email: string,
-  readonly pass: string,
+interface NewPasswordState {
+  readonly password: string,
   readonly errors: any,
   readonly data: any,
   readonly success: boolean,
   readonly loadingData: boolean
 }
 
-class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
+class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPasswordState>> {
 
-  state: LoginState = {
-      email: "",
-      pass: "",
+  state: NewPasswordState = {
+      password: "",
       errors: {},
       data: [],
       success: this.props.data.success,
@@ -77,11 +75,11 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
   };
 
   /**
-   * ********** Отпрака формы Логина **********
+   * ********** Отпрака формы NewPassword **********
    */
   private clickForm = () => {
-    const { email, pass } = this.state;
-    this.props.loginUser(email, pass);
+    const { password } = this.state;
+    //this.props.newPassword(pass, repeatPass);
   };
 
   /**
@@ -130,68 +128,59 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     /**
      * Деструтктуризация данных из локального и глобального стейта
      */
-    const { errors, email, pass } = this.state;
+    const { password } = this.state;
     const { err } = this.props.data;
     
     let uuid = localStorage.getItem('uuid')
       if(this.props.data.length === 0 
         || this.props.data.success === "false" 
-        || pass === "" 
-        || email === ""
+        || password === "" 
+        //|| email === ""
       ) {
       return (
         /**
-         * Компонента Логин
+         * Компонент NewPassword
          */
         <div className='auth'>
           <div className='auth__left left'>
-            <h1 className='auth__heading'>Вход</h1>
+            <h1 className='auth__heading'>Новый пароль</h1>
             <div className="auth__forms forms">
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Введите логин</div>
+                  <div className="auth-label">Введите новый пароль</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={email}
-                    id="email"
-                    type="email"
+                    value={password}
+                    id="pass"
+                    type="pass"
                     className="auth-input"
-                    placeholder="Введите логин"
+                    placeholder="Введите новый пароль"
                   />
                 </label>
               </div>
               <div className="auth-group">
                 <label>
-                  <div className="auth-label">Введите пароль</div>
+                  <div className="auth-label">Повторите пароль</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
-                    value={pass}
-                    id="pass"
-                    type="password" //password
+                    value={password}
+                    id="repeat-pass"
+                    type="pass"
                     className="auth-input"
-                    placeholder="Введите пароль"
+                    placeholder="Повторите пароль"
                   />
                 </label>
               </div>
-              <div className="auth-password__ask">
-                <a
-                  href="/reset"
-                  className="auth-group__ask-password"
-                >
-                  Не помню пароль
-                </a>
-              </div>
-              
               <div>
-                <Link to="/">
+                <Link to="/new-password">
                   <button
                     onClick={this.clickForm}
                     type="submit"
                     className="auth-button"
                   >
-                    Войти
+                    Готово
                   </button>
                 </Link>
               </div>
@@ -199,10 +188,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                 {err}
               </div>
             </div>
-            <div className='auth__registration registration'>
-              <div className='registration__no-login'>Нет логина?</div>
-              <div className='registration__link'><Link to='/register'>Зарегестрируйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
-            </div>
+            <Link className="auth__back back" to='/'><div className="back__arrow"></div>Вернуться к авторизации</Link>
           </div>
           <div className='auth__right right'>
             <div className="right__logo logo"></div>
@@ -223,82 +209,41 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
           </div>
           <div className="base-wrapper">
             <div className="wrapper-auth">
-              <div className="wrapper-auth__header">
-                <Link to="/" className="link-login active">
-                  Вход
-                </Link>
-                {/*
-                <Link to="/register" className="link-register">
-                  Регистрация
-                </Link>
-                */}
-              </div>
-
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Email</div>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    // @ts-ignore
-                    error={errors.email}
-                    onKeyDown={this.onKeyPress}
-                    id="email"
-                    type="email"
-                    className="auth-input"
-                  />
-                  <div className="auth-error">
-                    {errors.email}
-                    {errors.emailnotfound}
-                  </div>
-                </label>
-              </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.pass}
-                    // @ts-ignore
-                    error={errors.pass}
-                    onKeyDown={this.onKeyPress}
-                    id="pass"
-                    type="password"
-                    className="auth-input"
-                  />
-                  <div className="auth-error">
-                    {errors.pass}
-                    {errors.passwordincorrect}
-                  </div>
-                </label>
-              </div>
-              <div className="auth-password__ask">
-                <label>
-                  <input type="checkbox" /> Запомнить меня
-                </label>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-group__ask-password"
-                >
-                  Забыли пароль?
-                </a>
-              </div>
-              <div className="auth-condition">
-                <span>Нажимая кнопку "Войти", вы принимаете</span>
-                <a
-                  href="https://yandex.ru"
-                  className="auth-conditon__confidiency"
-                >
-                  Условия "Политики Конфиденциальности"
-                </a>
-              </div>
+                <div className="auth-group">
+                    <label>
+                        <div className="auth-label">Введите новый пароль</div>
+                        <input
+                            onChange={this.onChange}
+                            onKeyDown={this.onKeyPress}
+                            value={password}
+                            id="pass"
+                            type="pass"
+                            className="auth-input"
+                            placeholder="Введите новый пароль"
+                        />
+                    </label>
+                </div>
+                <div className="auth-group">
+                    <label>
+                        <div className="auth-label">Повторите пароль</div>
+                        <input
+                            onChange={this.onChange}
+                            onKeyDown={this.onKeyPress}
+                            value={password}
+                            id="repeat-pass"
+                            type="pass"
+                            className="auth-input"
+                            placeholder="Повторите пароль"
+                        />
+                    </label>
+                </div>
               <div>
-                <Link to="/dashboard">
+                <Link to="/new-password">
                   <button
                     type="submit"
                     className="auth-button"
                   >
-                    Войти
+                    Готово
                   </button>
                 </Link>
               </div>
@@ -317,5 +262,5 @@ const mapStateToProps = (state: PersonalCabinet) => ({
 
 export default connect(
   mapStateToProps,
-  null//{ loginUser }
-)(Login);
+  null//{ newPassword }
+)(NewPassword);

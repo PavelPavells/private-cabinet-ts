@@ -5,17 +5,13 @@ import "./404.scss";
 
 const NotFound: React.FC = props => {
   return (
-    <div className="not-found">
-      <Link to="/dashboard">
-        <b>404</b>
-      </Link>
-      <br />
-      <p>Данной страницы не существует на нашем сервере</p>
-      <p>
-        Либо вы указали неверный URL, у вас нет доступа
-        привилегии для страницы, или страница, которую вы ищете, была
-        удален.
-      </p>
+    <div className="error">
+      <div className="error__image"></div>
+      <div className="error__header">Доступ к ресурсу отклонен</div>
+      <div className="error__description">Предоставленные данные не прошли проверку</div>
+      <div className="error__code">Ошибка 404</div>
+      <Link to="/" className="error__button">Авторизуйтесь</Link>
+      <div className="error__link">Или перейдите на <a href="https://carddex.ru" target="_blank">официальный сайт</a></div>
     </div>
   );
 };

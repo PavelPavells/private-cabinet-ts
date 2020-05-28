@@ -34,7 +34,8 @@ interface NewPasswordProps {
  * ********** Интерфейс локального стейта компонента NewPassword **********
  */
 interface NewPasswordState {
-  readonly password: string,
+  readonly pass: string,
+  readonly repeatpass: string,
   readonly errors: any,
   readonly data: any,
   readonly success: boolean,
@@ -44,7 +45,8 @@ interface NewPasswordState {
 class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPasswordState>> {
 
   state: NewPasswordState = {
-      password: "",
+      pass: "",
+      repeatpass: "",
       errors: {},
       data: [],
       success: this.props.data.success,
@@ -78,7 +80,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
    * ********** Отпрака формы NewPassword **********
    */
   private clickForm = () => {
-    const { password } = this.state;
+    const { pass } = this.state;
     //this.props.newPassword(pass, repeatPass);
   };
 
@@ -128,13 +130,13 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
     /**
      * Деструтктуризация данных из локального и глобального стейта
      */
-    const { password } = this.state;
+    const { pass, repeatpass } = this.state;
     const { err } = this.props.data;
     
     let uuid = localStorage.getItem('uuid')
       if(this.props.data.length === 0 
         || this.props.data.success === "false" 
-        || password === "" 
+        || pass === "" 
         //|| email === ""
       ) {
       return (
@@ -145,46 +147,58 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
           <div className='auth__left left'>
             <h1 className='auth__heading'>Новый пароль</h1>
             <div className="auth__forms forms">
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Введите новый пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={password}
-                    id="pass"
-                    type="pass"
-                    className="auth-input"
-                    placeholder="Введите новый пароль"
-                  />
-                </label>
-              </div>
-              <div className="auth-group">
-                <label>
-                  <div className="auth-label">Повторите пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={password}
-                    id="repeat-pass"
-                    type="pass"
-                    className="auth-input"
-                    placeholder="Повторите пароль"
-                  />
-                </label>
-              </div>
-              <div>
-                <Link to="/new-password">
-                  <button
-                    onClick={this.clickForm}
-                    type="submit"
-                    className="auth-button"
-                  >
-                    Готово
-                  </button>
-                </Link>
-              </div>
-              <div className="auth-error">
+                <div className="auth__group">
+                    <label>
+                        <div className="auth__label">Введите новый пароль</div>
+                        <input
+                            onChange={this.onChange}
+                            onKeyDown={this.onKeyPress}
+                            value={pass}
+                            id="pass"
+                            type="password"
+                            className="auth__input"
+                            placeholder="Введите новый пароль"
+                        />
+                    </label>
+                </div>
+                <div className="auth__group">
+                    <label>
+                        <div className="auth__label">Повторите пароль</div>
+                        <input
+                            onChange={this.onChange}
+                            onKeyDown={this.onKeyPress}
+                            value={repeatpass}
+                            id="repeatpass"
+                            type="password"
+                            className="auth__input"
+                            placeholder="Повторите пароль"
+                        />
+                    </label>
+                </div>
+                {pass && repeatpass
+                    ? 
+                    <div>
+                      <Link to="/">
+                        <button
+                          onClick={this.clickForm}
+                          type="submit"
+                          className="auth__button"
+                        >
+                          Войти
+                        </button>
+                      </Link>
+                    </div>
+                    :
+                    <div>
+                        <button
+                          type="submit"
+                          className="auth__button inaccessible"
+                        >
+                          Войти
+                        </button>
+                    </div>
+                }
+              <div className="auth__error">
                 {err}
               </div>
             </div>
@@ -204,35 +218,32 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
     } else {
       return (
         <div className="wrapper">
-          <div className="header-logo">
-            <img src="../../img/carddex_logo.png" alt="" />
-          </div>
           <div className="base-wrapper">
             <div className="wrapper-auth">
-                <div className="auth-group">
+                <div className="auth__group">
                     <label>
-                        <div className="auth-label">Введите новый пароль</div>
+                        <div className="auth__label">Введите новый пароль</div>
                         <input
                             onChange={this.onChange}
                             onKeyDown={this.onKeyPress}
-                            value={password}
+                            value={pass}
                             id="pass"
-                            type="pass"
-                            className="auth-input"
+                            type="password"
+                            className="auth__input"
                             placeholder="Введите новый пароль"
                         />
                     </label>
                 </div>
-                <div className="auth-group">
+                <div className="auth__group">
                     <label>
                         <div className="auth-label">Повторите пароль</div>
                         <input
                             onChange={this.onChange}
                             onKeyDown={this.onKeyPress}
-                            value={password}
-                            id="repeat-pass"
-                            type="pass"
-                            className="auth-input"
+                            value={repeatpass}
+                            id="repeatpass"
+                            type="password"
+                            className="auth__input"
                             placeholder="Повторите пароль"
                         />
                     </label>
@@ -241,7 +252,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                 <Link to="/new-password">
                   <button
                     type="submit"
-                    className="auth-button"
+                    className="auth__button"
                   >
                     Готово
                   </button>

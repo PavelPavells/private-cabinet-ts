@@ -53,14 +53,14 @@
       font-weight: $regular;
       font-size: 26px;
       line-height: 1.27;
-      color: #293440;
+      color: $brandPantonText;
     }
 
     &__necessary {
       margin: 0 0 40px 120px;
       font-size: 12px;
       line-height: 1.5;
-      color: #8b9298;
+      color: $brandPantonSubText;
     }
 
     &__forms {
@@ -77,17 +77,17 @@
 
     }
 
-    &-label {
+    &__label {
       font-size: 12px;
       line-height: 1.5;
       margin-top: 1rem;
       margin-bottom: 0.75rem;
       font-size: 14px;
-      color: #8b9298;
+      color: $brandPantonSubText;
       font-family: $code;
     }
 
-    &-input {
+    &__input {
       width: 100%;
       border: 0;
       outline: 0;
@@ -99,17 +99,17 @@
       font-family: $code;
     }
 
-    &-error {
+    &__error {
       display: block;
       height: 15px;
       margin-top: 20px;
       font-family: $code;
       font-size: 12px;
       line-height: 1.5;
-      color: #d03839;
+      color: $brandPantonRed;
     }
 
-    &-password__ask {
+    &__password-ask, .ask {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -123,29 +123,27 @@
         line-height: 1.5;
 
         a {
-          color: #1d68d9;
+          color: $brandPantonBlue;
           text-decoration: underline;
         }
       }
+      &__password {
+        font-size: 12px;
+        text-decoration: underline;
+        line-height: 1.5;
+        color: $brandPantonBlue;
+        padding: 5px 0;
+        font-family: $code;
+      }
     }
     
-    &-group__ask-password {
-      font-size: 12px;
-      text-decoration: underline;
-      line-height: 1.5;
-      color: #1d68d9;
-      padding: 5px 0;
-      font-family: $code;
-    }
-    
-    &-button {
+    &__button {
       padding: 5px 75px;
       margin-top: 1rem;
-      color: #ffffff;
+      color: $white;
       background-color: $brandPantonBlue;
       border-radius: 15px;
       border-color: transparent;
-      //width: 50%;
       font-size: 15px;
       font-family: $code;
       outline: transparent;
@@ -157,7 +155,7 @@
       margin: 145px 0 0 120px;
       font-size: 12px;
       line-height: 1.5;
-      color: #1d68d9;
+      color: $brandPantonBlue;
       text-decoration: underline;
 
       &__arrow {
@@ -176,12 +174,12 @@
       &__no-login {
         font-size: 12px;
         line-height: 1.5;
-        color: #8b9298;
+        color: $brandPantonSubText;
       }
       &__link {
         font-size: 12px;
         line-height: 1.5;
-        color: #8b9298;
+        color: $brandPantonSubText;
 
         & > a {
           color: $brandPantonBlue;
@@ -236,10 +234,15 @@
 }
 
 /**
- * ********** Стили для выбранной формы Логин/Регистрация **********
+ * ********** Стили для выбранной формы Логин/Регистрация, стили доступности кнопки **********
  */
 .active {
   border-bottom: 2px solid $brandPantonBlue;
+}
+
+.inaccessible {
+  background-color: $brandPantonFonts;
+  color: $brandPantonSubText;
 }
 
 /**

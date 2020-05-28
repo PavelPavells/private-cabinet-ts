@@ -4,16 +4,11 @@ import "./500.scss";
 
 const intervalServerError: React.FC = props => {
     return (
-        <div className="interval-server-error">
-            <Link to='/'>
-                <b>500</b>
-            </Link>
-            <p>Ошибка на стороне сервера</p>
-            <p>
-                Либо вы указали неверный URL, у вас нет доступа
-                привилегии для страницы, или страница, которую вы ищете, была
-                удален.
-            </p> 
+        <div className="error">
+            <div className="error__image"></div>
+            <div className="error__header">Отказано в доступе</div>
+            <div className="error__description">Срок действия кода регистрации истек</div>
+            <div className="error__link"><a href="https://carddex.ru" target="_blank">Обратитесь в техническую поддуржку</a> для регистрации нового кода</div>
         </div>
     )
 }

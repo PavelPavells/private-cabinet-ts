@@ -30,8 +30,9 @@ import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import NewPassword from "./components/auth/NewPassword";
 import Layout from "./components/dashboard/Layout";
-import PrivateRoute from './components/private-route/PrivateRoute';
+//import PrivateRoute from './components/private-route/PrivateRoute';
 import NotFound from './components/404/404';
+//import NotFound from './components/500/500';
 
 /**
  * ********** Импорт стилей **********
@@ -182,6 +183,10 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   history={window.history}
                 />
                 }
+              />
+              <Route exact path="/404" render={() =>
+                <NotFound />
+              }
               />
               <Route exact path="/:dashboard" render={() => 
                 // @ts-ignore

@@ -146,32 +146,43 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
             <h1 className='auth__heading'>Восстановить пароль</h1>
             <div className='auth__necessary'>Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
             <div className="auth__forms forms">
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Введите e-mail</div>
+                  <div className="auth__label">Введите e-mail</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={email}
                     id="email"
                     type="email"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Введите e-mail"
                   />
                 </label>
               </div>
-              <div>
-                <Link to="/new-password">
-                  <button
-                    onClick={this.clickForm}
-                    type="submit"
-                    className="auth-button"
-                  >
-                    Готово
-                  </button>
-                </Link>
-              </div>
-              <div className="auth-error">
+              {email ? 
+                <div>
+                  <Link to="/new-password">
+                    <button
+                      onClick={this.clickForm}
+                      type="submit"
+                      className="auth__button"
+                    >
+                      Войти
+                    </button>
+                  </Link>
+                </div>
+                :
+                <div>
+                    <button
+                      type="submit"
+                      className="auth__button inaccessible"
+                    >
+                      Войти
+                    </button>
+                </div>
+              }
+              <div className="auth__error">
                 {err}
               </div>
             </div>
@@ -196,20 +207,9 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
           </div>
           <div className="base-wrapper">
             <div className="wrapper-auth">
-              <div className="wrapper-auth__header">
-                <Link to="/" className="link-login active">
-                  Вход
-                </Link>
-                {/*
-                <Link to="/register" className="link-register">
-                  Регистрация
-                </Link>
-                */}
-              </div>
-
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Email</div>
+                  <div className="auth__label">Email</div>
                   <input
                     onChange={this.onChange}
                     value={this.state.email}
@@ -218,7 +218,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
                     onKeyDown={this.onKeyPress}
                     id="email"
                     type="email"
-                    className="auth-input"
+                    className="auth__input"
                   />
                 </label>
               </div>
@@ -226,7 +226,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
                 <Link to="/new-password">
                   <button
                     type="submit"
-                    className="auth-button"
+                    className="auth__button"
                   >
                     Готово
                   </button>

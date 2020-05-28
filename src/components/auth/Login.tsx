@@ -147,55 +147,66 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
           <div className='auth__left left'>
             <h1 className='auth__heading'>Вход</h1>
             <div className="auth__forms forms">
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Введите логин</div>
+                  <div className="auth__label">Введите логин</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={email}
                     id="email"
                     type="email"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Введите логин"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Введите пароль</div>
+                  <div className="auth__label">Введите пароль</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={pass}
                     id="pass"
                     type="password" //password
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Введите пароль"
                   />
                 </label>
               </div>
-              <div className="auth-password__ask">
+              <div className="auth__password-ask ask">
                 <a
                   href="/reset"
-                  className="auth-group__ask-password"
+                  className="ask__password"
                 >
                   Не помню пароль
                 </a>
               </div>
-              
-              <div>
-                <Link to="/">
-                  <button
-                    onClick={this.clickForm}
-                    type="submit"
-                    className="auth-button"
-                  >
-                    Войти
-                  </button>
-                </Link>
-              </div>
-              <div className="auth-error">
+              {email && pass
+                  ? 
+                  <div>
+                    <Link to="/">
+                      <button
+                        onClick={this.clickForm}
+                        type="submit"
+                        className="auth__button"
+                      >
+                        Войти
+                      </button>
+                    </Link>
+                  </div>
+                  :
+                  <div>
+                      <button
+                        type="submit"
+                        className="auth__button inaccessible"
+                      >
+                        Войти
+                      </button>
+                  </div>
+              }
+              <div className="auth__error">
                 {err}
               </div>
             </div>
@@ -218,22 +229,8 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     } else {
       return (
         <div className="wrapper">
-          <div className="header-logo">
-            <img src="../../img/carddex_logo.png" alt="" />
-          </div>
           <div className="base-wrapper">
             <div className="wrapper-auth">
-              <div className="wrapper-auth__header">
-                <Link to="/" className="link-login active">
-                  Вход
-                </Link>
-                {/*
-                <Link to="/register" className="link-register">
-                  Регистрация
-                </Link>
-                */}
-              </div>
-
               <div className="auth-group">
                 <label>
                   <div className="auth-label">Email</div>

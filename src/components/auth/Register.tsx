@@ -154,163 +154,163 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
             <h1 className='auth__heading'>Регистрация</h1>
             <div className='auth__necessary'>Поля, отмеченные знаком «*», обязательны для заполнения</div>
             <div className="auth__forms forms">
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Ваш e-mail</div>
+                  <div className="auth__label">Ваш e-mail</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={email}
                     id="email"
                     type="email"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="ivanov@gmail.com"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Придумайте пароль *</div>
+                  <div className="auth__label">Придумайте пароль *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={pass}
                     id="pass"
                     type="password"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="sbjn654btr"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Повторите пароль *</div>
+                  <div className="auth__label">Повторите пароль *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={repeatpass}
-                    id="pass-repeat"
+                    id="repeatpass"
                     type="password"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="sbjn654btr"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Имя *</div>
+                  <div className="auth__label">Имя *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={name}
                     id="name"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Иван"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Фамилия *</div>
+                  <div className="auth__label">Фамилия *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={surname}
                     id="surname"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Иванов"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Отчетсво</div>
+                  <div className="auth__label">Отчетсво</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={patronymic}
                     id="patronymic"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Иванович"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Контактный телефон *</div>
+                  <div className="auth__label">Контактный телефон *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={phone}
-                    id="contact-phone"
+                    id="phone"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="8 (123) 456 78 90"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Полное наименование компании *</div>
+                  <div className="auth__label">Полное наименование компании *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={companyName}
-                    id="company-name"
+                    id="companyName"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Иванов и Ко"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">ИНН *</div>
+                  <div className="auth__label">ИНН *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={inn}
                     id="inn"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Введите Ваш ИНН"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Юридический адрес *</div>
+                  <div className="auth__label">Юридический адрес *</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={legalAdress}
-                    id="legal-adress"
+                    id="legalAdress"
                     type="text"
-                    className="auth-input"
+                    className="auth__input"
                     placeholder="Введите Ваш юридический адрес"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Адрес web-сайта</div>
+                  <div className="auth__label">Адрес web-сайта</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
                     value={webSite}
-                    id="web-site"
+                    id="webSite"
                     type="text"
-                    className="auth-input"
-                    placeholder="Адрес Вашего сайта"
+                    className="auth__input"
+                    placeholder="Введите адрес Вашего сайта"
                   />
                 </label>
               </div>
-              <div className="auth-group">
+              <div className="auth__group">
                 <label>
-                  <div className="auth-label">Направление деятельности</div>
+                  <div className="auth__label">Направление деятельности</div>
                   <CreatableSelect
                     isClearable
                     onChange={this.handleChange}
@@ -321,24 +321,36 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   />
                 </label>
               </div>
-              <div className="auth-password__ask">
+              <div className="auth__password-ask">
                 <label>
                   <input type="checkbox" />
                 </label>
                 <span>Нажимая на кнопку "Зарегистрироваться", я даю<br /><a>согласие на обработку персональных данных</a></span>
               </div>
-              <div>
-                <Link to="/">
-                  <button
-                    onClick={this.onSubmit}
-                    type="submit"
-                    className="auth-button"
-                  >
-                    Зарегистрироваться
-                  </button>
-                </Link>
-              </div>
-              <div className="auth-error">
+              {email && pass && repeatpass && name && surname && phone && companyName && inn && legalAdress && direction
+                ? 
+                <div>
+                  <Link to="/">
+                    <button
+                      onClick={this.onSubmit}
+                      type="submit"
+                      className="auth__button"
+                    >
+                      Зарегистрироваться
+                    </button>
+                  </Link>
+                </div>
+                :
+                <div>
+                    <button
+                      type="submit"
+                      className="auth__button inaccessible"
+                    >
+                      Зарегистрироваться
+                    </button>
+                </div>
+              }
+              <div className="auth__error">
                 {err}
               </div>
             </div>

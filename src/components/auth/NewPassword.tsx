@@ -156,7 +156,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                             value={pass}
                             id="pass"
                             type="password"
-                            className="auth__input"
+                            className="auth__input input--icon"
                             placeholder="Введите новый пароль"
                         />
                     </label>
@@ -170,7 +170,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                             value={repeatpass}
                             id="repeatpass"
                             type="password"
-                            className="auth__input"
+                            className="auth__input input--icon"
                             placeholder="Повторите пароль"
                         />
                     </label>

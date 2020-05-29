@@ -57,15 +57,15 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
    * ********** Запрос данных **********
    */
   public componentDidMount(){
-    if(localStorage.getItem('uuid') !== null ) {
-      window.location.pathname = "/dashboard";
-      // @ts-ignore
-      window.history.back("/dashboard");
-      // @ts-ignore
-      window.history.go("/dashboard");
-      // @ts-ignore
-      this.props.history.pushState("/dashboard", Layout)
-    } 
+    // if(localStorage.getItem('uuid') !== null ) {
+    //   window.location.pathname = "/dashboard";
+    //   // @ts-ignore
+    //   window.history.back("/dashboard");
+    //   // @ts-ignore
+    //   window.history.go("/dashboard");
+    //   // @ts-ignore
+    //   this.props.history.pushState("/dashboard", Layout)
+    // } 
   }
 
   /**
@@ -133,7 +133,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     const { errors, email, pass } = this.state;
     const { err } = this.props.data;
     
-    let uuid = localStorage.getItem('uuid')
+    let uuid = localStorage.getItem('uuid');
       if(this.props.data.length === 0 
         || this.props.data.success === "false" 
         || pass === "" 
@@ -150,29 +150,19 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
               <div className="auth__group">
                 <label>
                   <div className="auth__label">Введите логин</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={email}
-                    id="email"
-                    type="email"
-                    className="auth__input"
-                    placeholder="Введите логин"
-                  />
+                  {err 
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input warning" placeholder="Введите логин" />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input" placeholder="Введите логин" />
+                  }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
                   <div className="auth__label">Введите пароль</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={pass}
-                    id="pass"
-                    type="password" //password
-                    className="auth__input"
-                    placeholder="Введите пароль"
-                  />
+                  {err
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input input--icon warning" placeholder="Введите пароль" />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input input--icon" placeholder="Введите пароль" />
+                  }
                 </label>
               </div>
               <div className="auth__password-ask ask">

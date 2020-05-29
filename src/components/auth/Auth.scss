@@ -236,8 +236,12 @@
 /**
  * ********** Стили для выбранной формы Логин/Регистрация, стили доступности кнопки **********
  */
-.active {
-  border-bottom: 2px solid $brandPantonBlue;
+.warning {
+  border-bottom: 1px solid $brandPantonRed;
+}
+
+.input--icon {
+  background: url('../../images/eye-inaccess.svg') no-repeat right;
 }
 
 .inaccessible {

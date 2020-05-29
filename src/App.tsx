@@ -188,7 +188,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                 <NotFound />
               }
               />
-              <Route exact path="/:dashboard" render={() => 
+              <Route exact path="/dashboard" render={() => 
                 // @ts-ignore
                 (data.length === 0 && Storage.uuid === null) 
                 ? 
@@ -198,6 +198,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   // @ts-ignore 
                     data={data} 
                     logoutUser={this.logoutUser} 
+                    loginUser={this.loginUser}
                     history={window.history} 
                   />
                 } 

@@ -94,8 +94,6 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
     let password: HTMLElement | any = document.getElementById('pass');
     let access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
     access.classList.toggle('access');
-    console.log(password)
-    console.log(access)
     if (password.type === 'password') {
       password.type = 'text';
     } else {
@@ -110,8 +108,6 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
     let password: HTMLElement | any = document.getElementById('repeatpass');
     let access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
     access.classList.toggle('access');
-    console.log(password)
-    console.log(access)
     if (password.type === 'password') {
       password.type = 'text';
     } else {

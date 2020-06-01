@@ -88,6 +88,38 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
   };
 
   /**
+   * ********** Скрыть/Отобразить Пароль **********
+   */
+  private showOrHidePassword = () => {
+    let password: HTMLElement | any = document.getElementById('pass');
+    let access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
+    access.classList.toggle('access');
+    console.log(password)
+    console.log(access)
+    if (password.type === 'password') {
+      password.type = 'text';
+    } else {
+      password.type = 'password';
+    }
+  }
+
+  /**
+   * ********** Скрыть/Отобразить Пароль **********
+   */
+  private showOrHidePasswordRepeat = () => {
+    let password: HTMLElement | any = document.getElementById('repeatpass');
+    let access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
+    access.classList.toggle('access');
+    console.log(password)
+    console.log(access)
+    if (password.type === 'password') {
+      password.type = 'text';
+    } else {
+      password.type = 'password';
+    }
+  }
+
+  /**
    * ********** Запись данных в стейт из множественного выбора(Options Tag) **********
    */
   private handleChange = (newValue: any) => {
@@ -172,8 +204,14 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Придумайте пароль *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input input--icon warning" placeholder="sbjn654btr"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input input--icon" placeholder="sbjn654btr"/>
+                    ? <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                        <div onClick={this.showOrHidePassword} className='inaccess'></div>
+                      </div>  
+                    : <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" />
+                        <div onClick={this.showOrHidePassword} className='inaccess'></div>  
+                      </div>
                   }
                 </label>
               </div>
@@ -181,8 +219,14 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Повторите пароль *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input input--icon warning" placeholder="sbjn654btr"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input input--icon" placeholder="sbjn654btr"/>
+                    ? <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                        <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>
+                      </div>  
+                    : <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Введите пароль" />
+                        <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>  
+                      </div>
                   }
                 </label>
               </div>

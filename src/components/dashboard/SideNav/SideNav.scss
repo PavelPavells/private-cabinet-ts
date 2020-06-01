@@ -1,20 +1,12 @@
 @import "../../../styles/base.scss";
 .side {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  //margin-top: -1em;
+  flex-direction: column;
+  justify-content: space-between;
   min-width: 20em;
   max-width: 20em;
   height: 100%;
-  background-color: $brandSideColor;
+  background-color: $brandPantonFonts;
   font-weight: 300;
   position: fixed;
   z-index: 1; 
@@ -22,12 +14,13 @@
   -webkit-transition: margin-left 0.5s ease 0s; 
   -o-transition: margin-left 0.5s ease 0s; 
   transition: margin-left 0.5s ease 0s;
+
   .top {
     margin-top: 5.55rem;
     padding-left: 7px;
+
     li {
-      background-color: $brandSideColor;
-      //font-weight: $medium;
+      background-color: $brandPantonFonts;
       &:hover {
         cursor: pointer;
       }
@@ -35,8 +28,11 @@
     .font {
       font-weight: $medium;
       padding-bottom: 3px;
-      //transform: translateX(0%);
-      //transition: 1s;
+
+      .list-name {
+        color: $brandPantonText;
+      }
+      
       .font-block-hover {
         display: none;
       }
@@ -44,34 +40,39 @@
     .subparagraph {
       margin-left: 2em;
       padding-bottom: 3px;
+
+      .list-name {
+        color: $brandPantonText;
+      }
+
       .font-block-hover {
         display: none;
       }
     }
-    .side-logo {
-      background: url('../../../images/carddex_logo.svg') no-repeat;
-      width: 243px;
-      height: 35px;
-      margin: 1em 0 2em 1em;
-    }
-    .hamburger-side-menu {
-      color: transparent;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: end;
-          -ms-flex-pack: end;
-              justify-content: flex-end;
-      margin-right: 0.5rem;
-      -webkit-transition: all 0.5s ease 0s;
-      -o-transition: all 0.5s ease 0s;
-      transition: all 0.5s ease 0s;
-      font-size: 30px;
-      //margin-bottom: 1rem;
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    // .side-logo {
+    //   background: url('../../../images/carddex_logo.svg') no-repeat;
+    //   width: 243px;
+    //   height: 35px;
+    //   margin: 1em 0 2em 1em;
+    // }
+    // .hamburger-side-menu {
+    //   color: transparent;
+    //   display: -webkit-box;
+    //   display: -ms-flexbox;
+    //   display: flex;
+    //   -webkit-box-pack: end;
+    //       -ms-flex-pack: end;
+    //           justify-content: flex-end;
+    //   margin-right: 0.5rem;
+    //   -webkit-transition: all 0.5s ease 0s;
+    //   -o-transition: all 0.5s ease 0s;
+    //   transition: all 0.5s ease 0s;
+    //   font-size: 30px;
+    //   //margin-bottom: 1rem;
+    //   &:hover {
+    //     cursor: pointer;
+    //   }
+    // }
     .side-logo__main {
       background: url('../../../images/main_page.png') no-repeat;
       width: 20px;
@@ -239,6 +240,7 @@
     .list-name {
       display: none;
       margin-left: 0;
+      color: $brandPantonText;
     }
   }
   -webkit-transition: margin-left 0.25s ease 0s;

@@ -76,6 +76,12 @@
       }
 
     }
+    
+    &__field, .field {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
 
     &__label {
       font-size: 12px;
@@ -88,6 +94,7 @@
     }
 
     &__input {
+      position: relative;
       width: 100%;
       border: 0;
       outline: 0;
@@ -240,8 +247,22 @@
   border-bottom: 1px solid $brandPantonRed;
 }
 
-.input--icon {
-  background: url('../../images/eye-inaccess.svg') no-repeat right;
+.inaccess {
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: url('../../images/eye-inaccess.svg') no-repeat center;
+}
+
+.access {
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: url('../../images/eye-access.svg') no-repeat center;
 }
 
 .inaccessible {

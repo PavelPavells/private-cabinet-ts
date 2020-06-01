@@ -31,7 +31,7 @@ import site from '../constants/Global';
 /**
  * ********** Экшен для регистрации нового пользователя **********
  */
-export const registerUser = (userData: userDataRegister[], history: string[]) => (dispatch: Dispatch<AuthActions>) => {
+export const registerUser = (userData: userDataRegister[], history: any) => (dispatch: Dispatch<AuthActions>) => {
   axios
     .post(`${site}/register`, userData)
     .then(res => history.push("/"))

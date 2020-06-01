@@ -83,8 +83,6 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     let password: HTMLElement | any = document.getElementById('pass');
     let access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
     access.classList.toggle('access');
-    console.log(password)
-    console.log(access)
     if (password.type === 'password') {
       password.type = 'text';
     } else {

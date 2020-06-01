@@ -188,7 +188,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                 <NotFound />
               }
               />
-              <Route exact path="/dashboard" render={() => 
+              <Route exact path="/dashboard" render={() => /** Изменить Route на PrivateRoute */
                 // @ts-ignore
                 (data.length === 0 && Storage.uuid === null) 
                 ? 

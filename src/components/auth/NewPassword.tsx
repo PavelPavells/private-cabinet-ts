@@ -195,11 +195,11 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                         <div className="auth__label">Повторите пароль</div>
                         {err
                           ? <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Повторите пароль" />
                               <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>
                             </div>  
                           : <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Введите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Повторите пароль" />
                               <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>  
                             </div>
                         }

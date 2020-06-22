@@ -222,7 +222,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
             </div>
             <div className='auth__registration registration'>
               <div className='registration__no-login'>Нет логина?</div>
-              <div className='registration__link'><Link to='/register'>Зарегестрируйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
+              <div className='registration__link'><Link to='/register'>Зарегистрируйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
             </div>
           </div>
           <div className='auth__right right'>

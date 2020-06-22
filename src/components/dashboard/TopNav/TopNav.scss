@@ -172,8 +172,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    border: 2px solid $brandPantonGrey;
-    background-color: $brandPantonText;
+    //border: 2px solid $brandPantonGrey;
+    background-color: $brandPantonFonts;
     padding: 1rem;
     -webkit-transform: translate(-11rem, 0.9rem);
         -ms-transform: translate(-11rem, 0.9rem);
@@ -188,18 +188,19 @@
     }
     li {
       width: 180px;
-      padding: 1rem;
+      margin: 1rem 0;
+      //padding: 2px 0;
       color: $brandPantonBlack;
-      -webkit-transition: all 0.25s ease 0s;
-      -o-transition: all 0.25s ease 0s;
-      transition: all 0.25s ease 0s;
+      //-webkit-transition: all 0.25s ease 0s;
+      //-o-transition: all 0.25s ease 0s;
+      //transition: all 0.25s ease 0s;
       font-size: 14px;
         &:hover {
-          cursor: pointer;
-          background-color: $brandPantonGrey;
-          -webkit-transition: all 0.25s ease 0s;
-          -o-transition: all 0.25s ease 0s;
-          transition: all 0.25s ease 0s;
+          //cursor: pointer;
+          border-bottom: 1px solid $brandPantonBlue;
+          //-webkit-transition: all 0.25s ease 0s;
+          //-o-transition: all 0.25s ease 0s;
+          //transition: all 0.25s ease 0s;
         }
     }
     .contact-us {

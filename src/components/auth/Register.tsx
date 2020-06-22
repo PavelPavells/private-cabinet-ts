@@ -170,7 +170,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
       { value: 'Торговая компания', label: 'Торговая компания' },
       { value: 'Компания-проектировщик', label: 'Компания-проектировщик' },
       { value: 'Инсталлятор СКУД', label: 'Инсталлятор СКУД' },
-      { value: 'Пользователь системы СКУД', label: 'Пользователь сиситемы СКУД' }
+      { value: 'Пользователь системы СКУД', label: 'Пользователь системы СКУД' }
     ]
 
     return (
@@ -355,7 +355,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
               </div>
             </div>
             <div className='auth__registration registration'>
-              <div className='registration__no-login'>Уже зарегестрированы?</div>
+              <div className='registration__no-login'>Уже зарегистрированы?</div>
               <div className='registration__link'><Link to='/'>Авторизуйтесь</Link>&nbsp;или войдите с помощью соцсетей</div>
             </div>
           </div>

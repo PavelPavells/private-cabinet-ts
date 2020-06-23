@@ -174,7 +174,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
         <div className='auth'>
           <div className='auth__left left'>
             <h1 className='auth__heading'>Новый пароль</h1>
-            <div className="auth__forms forms">
+            <div className="auth__forms forms" style={{overflow: 'hidden'}} > {/** Инлайн стиль убирающий прокрутку */}
                 <div className="auth__group">
                     <label>
                         <div className="auth__label">Введите новый пароль</div>

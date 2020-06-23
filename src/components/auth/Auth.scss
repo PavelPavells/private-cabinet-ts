@@ -9,28 +9,28 @@
  font-family: $code;
 }
 
-//::-webkit-scrollbar {
-//  width: 4px;
-//  height: 7px;
-//}
-//::-webkit-scrollbar:horizontal {
-//  height: 7px;
-//}
+.scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 7px;
+}
+.scroll::-webkit-scrollbar:horizontal {
+  height: 7px;
+}
 /* Track */
-//::-webkit-scrollbar-track {
-//  box-shadow: inset 0 0 5px grey; 
-//  width: 1px;
-//  border-radius: 15px;
-//}
+.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px $brandPantonSubText; 
+  width: 1px;
+  border-radius: 15px;
+}
 /* Handle */
-//::-webkit-scrollbar-thumb {
-//  background: $brandPantonGrey; 
-//  border-radius: 10px;
-//}
+.scroll::-webkit-scrollbar-thumb {
+  background: $brandPantonSubText; 
+  border-radius: 10px;
+}
 /* Handle on hover */
-//::-webkit-scrollbar-thumb:hover {
-//  background: $brandPantonRed; 
-//}
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: $brandPantonSubText; 
+}
 
 .auth {
     display: flex;
@@ -43,6 +43,7 @@
     &__left {
       display: flex;
       flex-direction: column;
+
       width: 50%;
       background-color: $white;
       z-index: 1000;
@@ -65,6 +66,7 @@
 
     &__forms {
       width: 70%;
+      height: 70vh;  // сделать правильно! Разница в высоте форм влияет на положение нижнего блока с текстом
       display: flex;
       flex-direction: column;
       overflow-y: scroll;
@@ -95,7 +97,8 @@
 
     &__input {
       position: relative;
-      width: 100%;
+      width: 95%;
+      //height: 40px;
       border: 0;
       outline: 0;
       color: $brandPantonGrey;
@@ -104,6 +107,19 @@
       padding: 0.7rem 0;
       font-size: 14px;
       font-family: $code;
+    }
+
+    .auth__input::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
+    .auth__input::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
+    .auth__input:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
+    .auth__input:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
+    .auth__input:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.5s ease-in;}
+    .auth__input:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.5s ease-in;}
+    .auth__input:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.5s ease-in;}
+    .auth__input:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.5s ease-in;}
+
+    &__options {
+      width: 95%;
     }
 
     &__error {
@@ -159,7 +175,7 @@
     &__back, .back {
       display: flex;
       align-items: center;
-      margin: 145px 0 0 120px;
+      margin: 145px 0 50px 120px;
       font-size: 12px;
       line-height: 1.5;
       color: $brandPantonBlue;
@@ -176,7 +192,7 @@
     }
 
     &__registration, .registration {
-      margin: 145px 0 30px 120px;
+      margin: 145px 0 50px 120px;
 
       &__no-login {
         font-size: 12px;
@@ -245,7 +261,7 @@
 .inaccess {
   display: block;
   position: absolute;
-  right: 0;
+  right: 35px;
   width: 20px;
   height: 20px;
   background: url('../../images/eye-inaccess.svg') no-repeat center;
@@ -254,7 +270,7 @@
 .access {
   display: block;
   position: absolute;
-  right: 0;
+  right: 35px;
   width: 20px;
   height: 20px;
   background: url('../../images/eye-access.svg') no-repeat center;

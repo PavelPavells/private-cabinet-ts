@@ -160,26 +160,26 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
         <div className='auth'>
           <div className='auth__left left'>
             <h1 className='auth__heading'>Вход</h1>
-            <div className="auth__forms forms">
+            <div className="auth__forms forms" style={{overflow: 'hidden'}}> {/** Инлайн стиль убирающий прокрутку */}
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Введите логин</div>
+                  <div className="auth__label">Логин</div>
                   {err 
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input warning" placeholder="Введите логин" />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input" placeholder="Введите логин" />
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input warning" placeholder="Введите логин" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="email" className="auth__input" placeholder="Введите логин" autoCorrect="off" required />
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Введите пароль</div>
+                  <div className="auth__label">Пароль</div>
                   {err
                     ? <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>
                       </div>  
                     : <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>  
                       </div>
                   }

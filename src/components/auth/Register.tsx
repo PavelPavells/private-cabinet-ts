@@ -181,7 +181,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
           <div className='auth__left left'>
             <h1 className='auth__heading'>Регистрация</h1>
             <div className='auth__necessary'>Поля, отмеченные знаком «*», обязательны для заполнения</div>
-            <div className="auth__forms forms">
+            <div className="auth__forms forms scroll"> {/** Инлайн стиль убирающий прокрутку */}
               <div className="auth__group">
                 <label>
                   <div className="auth__label">Ваш e-mail</div>
@@ -201,11 +201,11 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   <div className="auth__label">Придумайте пароль *</div>
                   {err
                     ? <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>
                       </div>  
                     : <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>  
                       </div>
                   }
@@ -216,11 +216,11 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   <div className="auth__label">Повторите пароль *</div>
                   {err
                     ? <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>
                       </div>  
                     : <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Введите пароль" />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Введите пароль" autoCorrect="off" required />
                         <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>  
                       </div>
                   }
@@ -230,8 +230,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Имя *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input warning" placeholder="Иван"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input" placeholder="Иван"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input warning" placeholder="Иван" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input" placeholder="Иван" autoCorrect="off" required />
                   }
                 </label>
               </div>
@@ -239,14 +239,14 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Фамилия *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input warning" placeholder="Иванов"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input" placeholder="Иванов"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input warning" placeholder="Иванов" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input" placeholder="Иванов" autoCorrect="off" required />
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Отчетсво</div>
+                  <div className="auth__label">Отчество</div>
                   <input
                     onChange={this.onChange}
                     onKeyDown={this.onKeyPress}
@@ -255,6 +255,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                     type="text"
                     className="auth__input"
                     placeholder="Иванович"
+                    autoCorrect="off"
                   />
                 </label>
               </div>
@@ -262,8 +263,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Контактный телефон *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input warning" placeholder="8(123)456-78-90"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input" placeholder="8(123)456-78-90"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input warning" placeholder="8(123)456-78-90" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input" placeholder="8(123)456-78-90" autoCorrect="off" required />
                   }
                 </label>
               </div>
@@ -271,8 +272,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Полное наименование компании *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input warning" placeholder="Иванов и Ко"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input" placeholder="Иванов и Ко"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input warning" placeholder="Иванов и Ко" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input" placeholder="Иванов и Ко" autoCorrect="off" required />
                   }
                 </label>
               </div>
@@ -280,8 +281,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">ИНН *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input warning" placeholder="Введите Ваш ИНН"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input" placeholder="Введите Ваш ИНН"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input warning" placeholder="Введите Ваш ИНН" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input" placeholder="Введите Ваш ИНН" autoCorrect="off" required />
                   }
                 </label>
               </div>
@@ -289,8 +290,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <div className="auth__label">Юридический адрес *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input warning" placeholder="Введите Ваш юридический адрес"/>
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input" placeholder="Введите Ваш юридический адрес"/>
+                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input warning" placeholder="Введите Ваш юридический адрес" autoCorrect="off" required />
+                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input" placeholder="Введите Ваш юридический адрес" autoCorrect="off" required />
                   }
                 </label>
               </div>
@@ -305,6 +306,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                     type="text"
                     className="auth__input"
                     placeholder="Введите адрес Вашего сайта"
+                    autoCorrect="off"
                   />
                 </label>
               </div>
@@ -318,6 +320,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                     value={direction}
                     options={options}
                     placeholder={direction}
+                    className="auth__options"
                   />
                 </label>
               </div>
@@ -325,7 +328,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 <label>
                   <input type="checkbox" />
                 </label>
-                <span>Нажимая на кнопку "Зарегистрироваться", я даю<br /><a>согласие на обработку персональных данных</a></span>
+                <span>Нажимая на кнопку "Зарегистрироваться", я даю<br />{/*<a>*/}согласие на обработку персональных данных{/*</a>*/}</span> {/** Добавить тег <a> */}
               </div>
               {email && pass && repeatpass && name && surname && phone && companyName && inn && legalAdress && direction
                 ? 

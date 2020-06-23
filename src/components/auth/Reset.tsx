@@ -145,7 +145,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
           <div className='auth__left left'>
             <h1 className='auth__heading'>Восстановить пароль</h1>
             <div className='auth__necessary'>Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
-            <div className="auth__forms forms">
+            <div className="auth__forms forms" style={{overflow: 'hidden'}} >
               <div className="auth__group">
                 <label>
                   <div className="auth__label">Введите e-mail</div>

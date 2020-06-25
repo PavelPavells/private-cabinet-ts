@@ -148,16 +148,10 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
             <div className="auth__forms forms" style={{overflow: 'hidden'}} >
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Введите e-mail</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={email}
-                    id="email"
-                    type="email"
-                    className="auth__input"
-                    placeholder="Введите e-mail"
-                  />
+                  <div className="auth__field field">
+                    <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="text" className="auth__input" required />
+                    <label className="auth__label">Введите e-mail</label>
+                  </div>  
                 </label>
               </div>
               {email ? 
@@ -189,7 +183,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
             <Link className="auth__back back" to='/'><div className="back__arrow"></div>Вернуться к авторизации</Link>
           </div>
           <div className='auth__right right'>
-            <div className="right__logo logo"></div>
+            <div className="right__logo logo"><div className="image"></div></div>
             <div className='right__text'>Личный кабинет партнера</div>
             <div className='right__image image'>
               <div className='image__photo'></div>

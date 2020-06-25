@@ -65,7 +65,6 @@
     }
 
     &__forms {
-      //width: 87%;
       height: 70vh;  // сделать правильно! Разница в высоте форм влияет на положение нижнего блока с текстом
       margin-right: 4px;
       display: flex;
@@ -73,7 +72,6 @@
       overflow-y: scroll;
       font-family: $code;
       margin-left: 120px;
-      //border: 1px solid red;
 
       &__header {
         height: 3vh;
@@ -88,11 +86,15 @@
     }
 
     &__label {
-      font-size: 12px;
+      position: absolute;
+      pointer-events: none;
+      left: 0px;
+      top: 0;
+      transition: .3s;
       line-height: 1.5;
       margin-top: 1rem;
       margin-bottom: 0.75rem;
-      font-size: 14px;
+      font-size: 16px;
       color: $brandPantonSubText;
       font-family: $code;
     }
@@ -100,8 +102,8 @@
     &__input {
       position: relative;
       width: 90%;
-      //margin-right: 40px;
-      //height: 40px;
+      margin-bottom: 15px;
+      height: 50px;
       border: 0;
       outline: 0;
       color: $brandPantonGrey;
@@ -110,17 +112,13 @@
       padding: 0.7rem 0;
       font-size: 14px;
       font-family: $code;
-      //border: 1px solid red;
     }
 
-    // .auth__input::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
-    // .auth__input::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
-    // .auth__input:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
-    // .auth__input:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.5s ease-in;}
-    // .auth__input:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.5s ease-in;}
-    // .auth__input:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.5s ease-in;}
-    // .auth__input:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.5s ease-in;}
-    // .auth__input:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.5s ease-in;}
+    .auth__input:focus~.auth__label,
+    .auth__input:not(:focus):valid~.auth__label {
+      top: -18px;
+      font-size: 13px;
+    }
 
     &__options {
       width: 90%;
@@ -222,21 +220,28 @@
         align-items: center;
         width: 50%;
         height: 100%;
-        background-color: $brandPantonFonts;
+        background: url('../../images/main_photo_auth.jpg') no-repeat center;
+        background-size: cover;
+        opacity: .9;
 
         &__logo {
           display: block;
           width: 243px;
           height: 45px;
-          background: url('../../images/carddex_logo.svg') no-repeat center;
-          margin: 124px 0 47px 0;
+          margin: 124px 0 10px 0;
+
+          .image {
+            display: block;
+            background: url('../../images/carddex_logo.svg') no-repeat center;
+            background-size: contain;
+          }
         }
 
         &__text {
-          margin-bottom: 89px;
-          font-size: 14px;
+          font-size: 18px;
+          font-weight: 500;
           line-height: 1.5;
-          color: $brandPantonGrey;
+          color: #000;
         }
 
         &__image, .image {
@@ -248,7 +253,6 @@
             display: block;
             width: 100%;
             height: 100%;
-            background: url("../../images/main-photo.png") no-repeat center;
             background-size: contain;
           }
         }

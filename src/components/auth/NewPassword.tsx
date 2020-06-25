@@ -177,14 +177,15 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
             <div className="auth__forms forms" style={{overflow: 'hidden'}} > {/** Инлайн стиль убирающий прокрутку */}
                 <div className="auth__group">
                     <label>
-                        <div className="auth__label">Введите новый пароль</div>
                         {err
                           ? <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" required />
+                              <label className="auth__label">Введите новый пароль</label>
                               <div onClick={this.showOrHidePassword} className='inaccess'></div>
                             </div>  
                           : <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" required />
+                              <label className="auth__label">Введите новый пароль</label>
                               <div onClick={this.showOrHidePassword} className='inaccess'></div>  
                             </div>
                         }
@@ -192,14 +193,15 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                 </div>
                 <div className="auth__group">
                     <label>
-                        <div className="auth__label">Повторите пароль</div>
                         {err
                           ? <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Повторите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" required />
+                              <label className="auth__label">Повторите пароль</label>
                               <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>
                             </div>  
                           : <div className="auth__field field">
-                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Повторите пароль" />
+                              <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" required />
+                              <label className="auth__label">Повторите пароль</label>
                               <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>  
                             </div>
                         }
@@ -235,7 +237,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
             <Link className="auth__back back" to='/'><div className="back__arrow"></div>Вернуться к авторизации</Link>
           </div>
           <div className='auth__right right'>
-            <div className="right__logo logo"></div>
+            <div className="right__logo logo"><div className="image"></div></div>
             <div className='right__text'>Личный кабинет партнера</div>
             <div className='right__image image'>
               <div className='image__photo'></div>

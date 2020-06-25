@@ -60,7 +60,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
       inn: "",
       legalAdress: "",
       webSite: "",
-      direction: "Торговая компания",
+      direction: "Направление деятельности",
       errors: {}
     }
 
@@ -184,28 +184,23 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
             <div className="auth__forms forms scroll"> {/** Инлайн стиль убирающий прокрутку */}
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Ваш e-mail</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={email}
-                    id="email"
-                    type="email"
-                    className="auth__input"
-                    placeholder="ivanov@gmail.com"
-                  />
+                  <div className="auth__field">
+                    <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={email} id="email" type="text" className="auth__input" required />
+                    <label className="auth__label">Введите логин</label>  
+                  </div>
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Придумайте пароль *</div>
                   {err
                     ? <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" placeholder="Введите пароль" autoCorrect="off" required />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Придумайте пароль *</label>
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>
                       </div>  
                     : <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" placeholder="Введите пароль" autoCorrect="off" required />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={pass} id="pass" type="password" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Придумайте пароль *</label>
                         <div onClick={this.showOrHidePassword} className='inaccess'></div>  
                       </div>
                   }
@@ -213,14 +208,15 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Повторите пароль *</div>
                   {err
                     ? <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" placeholder="Введите пароль" autoCorrect="off" required />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Повторите пароль *</label>
                         <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>
                       </div>  
                     : <div className="auth__field field">
-                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" placeholder="Введите пароль" autoCorrect="off" required />
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={repeatpass} id="repeatpass" type="password" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Повторите пароль *</label>
                         <div onClick={this.showOrHidePasswordRepeat} className='inaccess'></div>  
                       </div>
                   }
@@ -228,91 +224,116 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Имя *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input warning" placeholder="Иван" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input" placeholder="Иван" autoCorrect="off" required />
+                    ? 
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Имя *</label>
+                      </div>
+                      : 
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={name} id="name" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Имя *</label>
+                      </div>
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Фамилия *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input warning" placeholder="Иванов" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input" placeholder="Иванов" autoCorrect="off" required />
+                    ?  
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Фамилия *</label>
+                      </div>    
+                    : 
+                    <div className="auth__field field">
+                      <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={surname} id="surname" type="text" className="auth__input" autoCorrect="off" required />
+                      <label className="auth__label">Фамилия *</label>
+                    </div>
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Отчество</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={patronymic}
-                    id="patronymic"
-                    type="text"
-                    className="auth__input"
-                    placeholder="Иванович"
-                    autoCorrect="off"
-                  />
+                  <div className="auth__field field">
+                    <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={patronymic} id="patronymic" type="text" className="auth__input" autoCorrect="off" required />
+                    <label className="auth__label">Отчество</label> 
+                  </div>
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Контактный телефон *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input warning" placeholder="8(123)456-78-90" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input" placeholder="8(123)456-78-90" autoCorrect="off" required />
+                    ? 
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Контактный телефон *</label>  
+                      </div>      
+                    :
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Контактный телефон *</label>  
+                      </div>
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Полное наименование компании *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input warning" placeholder="Иванов и Ко" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input" placeholder="Иванов и Ко" autoCorrect="off" required />
+                    ? <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Полное наименование компании *</label>  
+                      </div>  
+                    :
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={companyName} id="companyName" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Полное наименование компании *</label>  
+                      </div> 
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">ИНН *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input warning" placeholder="Введите Ваш ИНН" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input" placeholder="Введите Ваш ИНН" autoCorrect="off" required />
+                    ? <div className="aith__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">ИНН *</label>  
+                      </div>  
+                    :
+                      <div className="aith__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={inn} id="inn" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">ИНН *</label>  
+                      </div>
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Юридический адрес *</div>
                   {err
-                    ? <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input warning" placeholder="Введите Ваш юридический адрес" autoCorrect="off" required />
-                    : <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input" placeholder="Введите Ваш юридический адрес" autoCorrect="off" required />
+                    ? 
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Юридический адрес *</label>
+                      </div>  
+                    :
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={legalAdress} id="legalAdress" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Юридический адрес *</label>
+                      </div>
                   }
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Адрес web-сайта</div>
-                  <input
-                    onChange={this.onChange}
-                    onKeyDown={this.onKeyPress}
-                    value={webSite}
-                    id="webSite"
-                    type="text"
-                    className="auth__input"
-                    placeholder="Введите адрес Вашего сайта"
-                    autoCorrect="off"
-                  />
+                  <div className="auth__field field">
+                    <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={webSite} id="webSite" type="text" className="auth__input" autoCorrect="off" required />
+                    <label className="auth__label">Адрес web-сайта</label>  
+                  </div>
                 </label>
               </div>
               <div className="auth__group">
                 <label>
-                  <div className="auth__label">Направление деятельности</div>
                   <CreatableSelect
                     isClearable
                     onChange={this.handleChange}
@@ -363,7 +384,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
             </div>
           </div>
           <div className='auth__right right'>
-            <div className="right__logo logo"></div>
+            <div className="right__logo logo"><div className="image"></div></div>
             <div className='right__text'>Личный кабинет партнера</div>
             <div className='right__image image'>
               <div className='image__photo'></div>

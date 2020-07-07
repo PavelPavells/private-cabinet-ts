@@ -1,102 +1,109 @@
-/** ********** IMPORT LIBRARIES ********** */
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
+/**
+ * ********** Импорт зависимостей **********
+ */
+import React, { SyntheticEvent } from "react";
+import { connect, MapStateToProps } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { PersonalCabinet } from "../../../store/store";
 
-/** ********** IMPORT ACTIONS ********** */
-//import { logout } from "../../../actions/securityActions";
+/**
+ * ********** Импорт экшенов **********
+ */
+import { logoutUser } from "../../../actions/authActions";
 
-/** ********** IMPORT STYLES ********** */
+/**
+ * ********** Импорт стилей **********
+ */
 import "./TopNav.scss";
 
-class TopNav extends Component {
-  //constructor(props) {
-    //super(props);
-    state = {
-      dropdown: false,
-      openContactUs: false
-    };
-  //}
-  componentDidMount() {
-    // @ts-ignore
-    document.addEventListener("mousedown", this.handleClick, false);
-  }
-  componentWillUnmount() {
-    // @ts-ignore
-    document.removeEventListener("mousedown", this.handleClick, false);
-  }
-  // @ts-ignore
-  onLogoutClick = e => {
-    e.preventDefault();
-    window.location.href = "/";
-    // @ts-ignore
-    this.props.logoutUser();
+/**
+ * ********** Интерфейс пропсов компонента Login **********
+ */
+interface TopNavProps {
+  node: any,
+  logoutUser: () => void,
+  sideNav: Element | null
+}
+
+/**
+ * ********** Интерфейс локального стейта компонента Login **********
+ */
+interface TopNavState {
+  dropdown: Boolean,
+  openContactUs: Boolean
+}
+
+class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
+  
+  state: TopNavState = {
+    dropdown: false,
+    openContactUs: false
   };
-  // @ts-ignore
-  handleProfileClick = event => {
-    this.setState({ dropdown: !this.state.dropdown });
-    //if (this.state.dropdown && !this.node.contains(event.target)) {
-    //  this.setState({ dropdown: !this.state.dropdown });
-    //}
-  };
-  // @ts-ignore
-  handleContactClick = event => {
+
+  // public componentDidMount() {
+  //   document.addEventListener("mousedown", this.handleClick, false);
+  // };
+
+  // public componentWillUnmount() {
+  //   document.removeEventListener("mousedown", this.handleClick, false);
+  // }
+
+  private onLogoutClick = (event: SyntheticEvent) => {
     event.preventDefault();
-    this.setState({ openContactUs: !this.state.openContactUs });
+    window.location.href = "/";
+    //this.props.logoutUser();
+  };
+  private handleProfileClick = (event: SyntheticEvent) => {
+    this.setState({ dropdown: !this.state.dropdown });
+    //@ts-ignore
     //if (this.state.dropdown && !this.node.contains(event.target)) {
-    //  this.setState({ openContactUs: !this.state.openContactUs });
+    // this.setState({ dropdown: !this.state.dropdown });
     //}
   };
+
+  private handleContactClick = () => {
+    this.setState({ openContactUs: !this.state.openContactUs });
+  };
+
   // Show Side Nav
-  // @ts-ignore
-  toggleMenu = e => {
-    e.preventDefault();
-    let sideNav = document.querySelector(".right");
-    // @ts-ignore
+  private toggleMenu = () => {
+    let sideNav: Element | any = document.querySelector(".right");
     sideNav.classList.toggle("invisible");
   };
-  render() {
+  
+  public render() {
     //const { name } = this.props.auth.user; // {/*company_inn*/}
     let partnerStatus = localStorage.getItem("partnerStatus");
     let contragentName = localStorage.getItem("contragentName");
     return (
-      <nav className="top-nav">
+      <nav className="nav">
         {/* ref={node => (this.node = node)} */}
-        <div className="left-top">
+        <div className="nav__left nav-left">
           <i
             onClick={this.toggleMenu}
-            className="material-icons hamburger-top-menu"
+            className="material-icons nav-left__hamburger"
           >
             menu
           </i>
-          <div className="side-logo__carddex"></div>
+          <div className="nav-left__logo"></div>
         </div>
-        <ul className="right-top">
-          <div className="top-nav__info">
+        <ul className="nav__right nav-right">
+          <div className="nav-right__info">
             Личный кабинет: <strong>{contragentName}</strong>
           </div>
           <div className="top-right__block">
-          <li className="notification-header">
-            <div></div>
-          </li>
-          <li className="email-header">
-            <div></div>
-          </li>
-          <li className="right-top__list">
-            <div className="email">
-              <p>
-                Вы вошли как <strong>{partnerStatus}</strong>
-              </p>
-            </div>
-            <div className="role">
-              <p>Администратор</p>
-            </div>
-          </li>
-          <li>
-            <div className="profile" onClick={this.handleProfileClick}>
-              {/*<span>{name !== undefined && name.split("")[0]}</span>*/}
-            </div>
+            <li className="right-top__list">
+              <div className="email">
+                <p>
+                  Вы вошли как <strong>{partnerStatus}</strong>
+                </p>
+              </div>
+              <div className="role">
+                <p>Администратор</p>
+              </div>
+            </li>
+            <li>
+            <div className="profile" onClick={this.handleProfileClick}></div>
             {this.state.dropdown ? (
               <ul className="dropdown">
                 <p>Здравствуйте</p>
@@ -106,7 +113,10 @@ class TopNav extends Component {
                 <Link to="/account">
                   <li>Настройки</li>
                 </Link>
-                <li onClick={this.handleContactClick}>
+                <li
+                  //@ts-ignore
+                  onClick={this.handleContactClick}
+                >
                   Связаться с нами
                   {this.state.openContactUs ? (
                     <div className="contact-us">
@@ -135,17 +145,24 @@ class TopNav extends Component {
     );
   }
 }
-// @ts-ignore
-TopNav.propTypes = {
-  topnav: PropTypes.object,
-  security: PropTypes.object
-}
-// @ts-ignore
-const mapStateToProps = state => ({
+
+const mapStateToProps = (state: PersonalCabinet) => ({
   topnav: state.topnav
 });
-export default connect(
+
+export default connect<{}, {}, TopNavProps>(
+  //@ts-ignore
   mapStateToProps,
-  null//{ logout }
-  // @ts-ignore
-)(withRouter(TopNav));
+  {
+    logoutUser
+  }
+)(TopNav);
+
+// export default connect<{}, {}, TopNavProps>(
+//   //@ts-ignore
+//   mapStateToProps,
+//   {
+//     logoutUser
+//   }
+//   //@ts-ignore
+// )(withRouter(TopNav));

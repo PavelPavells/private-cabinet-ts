@@ -1,14 +1,9 @@
 @import "../../../styles/base.scss";
 .main-content {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 auto 1;
-          flex: 0 auto 1;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex: 0 auto 1;
+  flex-direction: column;
   background-color: $white;
-  margin-left: 22em;
+  margin-left: 25em;
   margin-top: 5.5em;
   margin-bottom: 1em;
   margin-right: 2em;

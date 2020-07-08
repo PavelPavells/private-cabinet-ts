@@ -88,57 +88,30 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
           <div className="nav-left__logo"></div>
         </div>
         <ul className="nav__right nav-right">
-          <div className="nav-right__info">
+          <div className="nav-right__text">
             Личный кабинет: <strong>{contragentName}</strong>
           </div>
-          <div className="top-right__block">
-            <li className="right-top__list">
-              <div className="email">
-                <p>
-                  Вы вошли как <strong>{partnerStatus}</strong>
-                </p>
-              </div>
-              <div className="role">
-                <p>Администратор</p>
-              </div>
-            </li>
-            <li>
+          <div className="nav-right__info right-info">
             <div className="profile" onClick={this.handleProfileClick}></div>
             {this.state.dropdown ? (
               <ul className="dropdown">
-                <p>Здравствуйте</p>
-                <Link to="/dashboard">
-                  <li>Главная</li>
-                </Link>
-                <Link to="/account">
-                  <li>Настройки</li>
-                </Link>
+                <Link className="dropdown__item item" to="/account"><div className="item__profile-icon"></div><div>Профиль пользователя</div></Link>
+                <Link className="dropdown__item item" to="/control"><div className="item__settings-icon"></div><div>Настройки</div></Link>
                 <li
                   //@ts-ignore
                   onClick={this.handleContactClick}
                 >
-                  Связаться с нами
-                  {this.state.openContactUs ? (
-                    <div className="contact-us">
-                      <h3>Связаться с нами:</h3>
-                      <div className="contact-us__phone">
-                        Телефон: <span>8(800)333-93-36</span>
-                      </div>
-                      <div className="contact-us__email">
-                        E-mail: <span>sales@carddex.ru</span>
-                      </div>
-                    </div>
-                  ) : null}
                 </li>
-                {/*
-                <Link to="/tasks">
-                  <li>My Tasks</li>
-                </Link>
-                */}
-                <li onClick={this.onLogoutClick}>Выйти</li>
+                <div className="dropdown__logout" onClick={this.onLogoutClick}>Выйти</div>
               </ul>
             ) : null}
-          </li>
+            <div className="right-info__list info-list">
+              <div className="info-list__text">
+                <div className="name">Иванов И.И.</div>
+                <div className="role">Администратор</div>
+              </div>
+              <div className="arrow-info"></div>
+            </div>
           </div>
         </ul>
       </nav>

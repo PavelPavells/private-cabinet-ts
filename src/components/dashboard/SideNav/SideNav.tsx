@@ -1,5 +1,5 @@
 /** ********** IMPORT LIBRARIES ********** */
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 /** ********** IMPORT STYLES ********** */
 import "./SideNav.scss";
 
-class SideNav extends Component {
+class SideNav extends React.PureComponent {
   // @ts-ignore
   onLogoutClick = e => {
     //this.props.logoutUser(this.props.history);
@@ -16,7 +16,7 @@ class SideNav extends Component {
   render() {
     return (
       <nav className="side">
-        <ul className="top">
+        <ul className="side__top">
           <NavLink exact activeClassName="active-page" to="/dashboard">
             <li className="font">
               <i className="side-logo__main icon"></i>
@@ -25,34 +25,34 @@ class SideNav extends Component {
             </li>
           </NavLink>
           <NavLink exact activeClassName="active-page" to="/sales">
-            <li className="subparagraph">
+            <li className="font">               {/** Изменить на subparagraph чтобы вернуть подпараграфы */}
               <i className="side-logo__sales icon"></i>
-              <span className="list-name">История скидок</span>
-              <div className="font-block-hover">История скидок</div>
+              <span className="list-name">Скидки</span>
+              <div className="font-block-hover">Скидки</div>
             </li>
           </NavLink>
           <NavLink exact activeClassName="active-page" to="/payment">
-            <li className="subparagraph">
+            <li className="font">               {/** Изменить на subparagraph чтобы вернуть подпараграфы */}
               <i className="side-logo__main-payment icon"></i>
-              <span className="list-name">История платежей</span>
-              <div className="font-block-hover">История платежей</div>
+              <span className="list-name">Платежи</span>
+              <div className="font-block-hover">Платежи</div>
             </li>
           </NavLink>
           <NavLink exact activeClassName="active-page" to="/shipment">
-            <li className="subparagraph">
+            <li className="font">                {/** Изменить на subparagraph чтобы вернуть подпараграфы */}
               <i className="side-logo__main-shipment-story icon"></i>
-              <span className="list-name">История отгрузок</span>
-              <div className="font-block-hover">История отгрузок</div>
+              <span className="list-name">Отгрузки</span>
+              <div className="font-block-hover">Отгрузки</div>
             </li>
           </NavLink>
           <NavLink exact activeClassName="active-page" to="/price-list">
-            <li className="subparagraph">
+            <li className="font">
               <i className="side-logo__price-list icon"></i>
-              <span className="list-name">Прайс-лист</span>
-              <div className="font-block-hover">Прайс-лист</div>
+              <span className="list-name">Прайс-лист продукции CARDDEX</span>
+              <div className="font-block-hover">Прайс-лист продукции CARDDEX</div>
             </li>
           </NavLink>
-          <NavLink exact activeClassName="active-page" to="/news">
+          {/*<NavLink exact activeClassName="active-page" to="/news">
             <li className="font">
               <i className="side-logo__news icon"></i>
               <span className="list-name">Новости</span>
@@ -65,15 +65,15 @@ class SideNav extends Component {
               <span className="list-name">Архив новостей</span>
               <div className="font-block-hover">Архив новостей</div>
             </li>
-          </NavLink>
-          <NavLink exact activeClassName="active-page" to="/control">
+          </NavLink>*/}
+          <NavLink exact activeClassName="active-page" to="/account">
             <li className="font">
-              <i className="side-logo__main-administration icon"></i>
-              <span className="list-name">Администрирование</span>
-              <div className="font-block-hover">Администрирование</div>
+              <i className="side-logo__main-account icon"></i>
+              <span className="list-name">Профиль</span>
+              <div className="font-block-hover">Профиль</div>
             </li>
           </NavLink>
-          <NavLink exact activeClassName="active-page" to="/control">
+          {/*<NavLink exact activeClassName="active-page" to="/control">
             <li className="subparagraph">
               <i className="side-logo__main-users icon"></i>
               <span className="list-name">Пользователи</span>
@@ -86,12 +86,12 @@ class SideNav extends Component {
               <span className="list-name">WEB-приложения</span>
               <div className="font-block-hover">WEB-приложения</div>
             </li>
-          </NavLink>
-          <NavLink exact activeClassName="active-page" to="/account">
+          </NavLink>*/}
+          <NavLink exact activeClassName="active-page" to="/control">
             <li className="font">
-              <i className="side-logo__main-account icon"></i>
-              <span className="list-name">Учетная запись</span>
-              <div className="font-block-hover">Учетная запись</div>
+              <i className="side-logo__main-administration icon"></i>
+              <span className="list-name">Настройки</span>
+              <div className="font-block-hover">Настройки</div>
             </li>
           </NavLink>
         </ul>

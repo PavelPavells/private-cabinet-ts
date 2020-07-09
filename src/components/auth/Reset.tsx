@@ -132,11 +132,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
     const { err } = this.props.data;
     
     let uuid = localStorage.getItem('uuid')
-      if(this.props.data.length === 0 
-        || this.props.data.success === "false" 
-        //|| pass === "" 
-        || email === ""
-      ) {
+      
       return (
         /**
          * Компонент Reset
@@ -191,46 +187,7 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
           </div>
         </div>
       )
-    } else if(this.props.data.success === "true" && uuid !== null) {
-      return <Redirect to="/dashboard" />
-    } else {
-      return (
-        <div className="wrapper">
-          <div className="header-logo">
-            <img src="../../img/carddex_logo.png" alt="" />
-          </div>
-          <div className="base-wrapper">
-            <div className="wrapper-auth">
-              <div className="auth__group">
-                <label>
-                  <div className="auth__label">Email</div>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    // @ts-ignore
-                    error={errors.email}
-                    onKeyDown={this.onKeyPress}
-                    id="email"
-                    type="email"
-                    className="auth__input"
-                  />
-                </label>
-              </div>
-              <div>
-                <Link to="/new-password">
-                  <button
-                    type="submit"
-                    className="auth__button"
-                  >
-                    Готово
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
+    
   }
 }
 

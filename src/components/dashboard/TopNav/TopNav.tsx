@@ -29,15 +29,13 @@ interface TopNavProps {
  * ********** Интерфейс локального стейта компонента Login **********
  */
 interface TopNavState {
-  dropdown: Boolean,
-  openContactUs: Boolean
+  dropdown: Boolean
 }
 
 class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
   
   state: TopNavState = {
-    dropdown: false,
-    openContactUs: false
+    dropdown: false
   };
 
   // public componentDidMount() {
@@ -54,16 +52,17 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
     //this.props.logoutUser();
   };
   private handleProfileClick = (event: SyntheticEvent) => {
+    let arrow = document.getElementsByClassName("info-list__arrow")[0];
+    arrow.classList.toggle("toggle-window");
     this.setState({ dropdown: !this.state.dropdown });
-    //@ts-ignore
     //if (this.state.dropdown && !this.node.contains(event.target)) {
     // this.setState({ dropdown: !this.state.dropdown });
     //}
   };
 
-  private handleContactClick = () => {
-    this.setState({ openContactUs: !this.state.openContactUs });
-  };
+  //private handleContactClick = () => {
+  //  this.setState({ openContactUs: !this.state.openContactUs });
+  //};
 
   // Show Side Nav
   private toggleMenu = () => {
@@ -87,16 +86,32 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
           </i>
           <div className="nav-left__logo"></div>
         </div>
-        <ul className="nav__right nav-right">
+        <div className="nav__right nav-right">
           <div className="nav-right__text">
             Личный кабинет: <strong>{contragentName}</strong>
           </div>
           <div className="nav-right__info right-info">
-            <div className="profile" onClick={this.handleProfileClick}></div>
+            <div className="right-info__bell bell">
+              <div className="bell__icon"></div>
+            </div>
+            <div className="profile"></div>
+            <div className="right-info__list info-list">
+              <div className="info-list__text">
+                <div className="name">Иванов И.И.</div>
+                <div className="role">Администратор</div>
+              </div>
+              <div onClick={this.handleProfileClick} className="info-list__arrow"></div>
+            </div>
             {this.state.dropdown ? (
               <ul className="dropdown">
-                <Link className="dropdown__item item" to="/account"><div className="item__profile-icon"></div><div>Профиль пользователя</div></Link>
-                <Link className="dropdown__item item" to="/control"><div className="item__settings-icon"></div><div>Настройки</div></Link>
+                <Link className="dropdown__item item" to="/account">
+                  <div className="item__profile-icon"></div>
+                  <div>Профиль пользователя</div>
+                </Link>
+                <Link className="dropdown__item item" to="/control">
+                  <div className="item__settings-icon"></div>
+                  <div>Настройки</div>
+                </Link>
                 <li
                   //@ts-ignore
                   onClick={this.handleContactClick}
@@ -105,15 +120,8 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
                 <div className="dropdown__logout" onClick={this.onLogoutClick}>Выйти</div>
               </ul>
             ) : null}
-            <div className="right-info__list info-list">
-              <div className="info-list__text">
-                <div className="name">Иванов И.И.</div>
-                <div className="role">Администратор</div>
-              </div>
-              <div className="arrow-info"></div>
-            </div>
           </div>
-        </ul>
+        </div>
       </nav>
     );
   }

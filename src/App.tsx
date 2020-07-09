@@ -166,7 +166,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   />
                 }
               />  {/** "/register/:name/:email" */}
-              <Route exact path="/reset" render={() =>
+              <Route path="/reset" render={() =>
                 <Reset
                   resetPassword={this.resetPassword}
                   data={data}

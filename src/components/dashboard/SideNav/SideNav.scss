@@ -14,9 +14,9 @@
   margin-left: 0px;
 
   &__top {
-    margin-top: 5.55rem;
-    padding-left: 7px;
-    padding-inline-start: 0px;
+    margin-top: 4.4rem;
+    padding-left: 13px;
+    //padding-inline-start: 0px;
 
     li {
       background-color: $white;
@@ -27,14 +27,28 @@
       }
     }
     .font {
+      display: flex;
+      flex-direction: row;
       margin-left: 0;
-      //margin-bottom: 30px;
       font-weight: $medium;
-      padding: 30px 0;
+      padding: 20px 0;
+      border-bottom: 2px solid $brandPantonFonts;
 
       .list-name {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 16px;
+        font-weight: 400;
         color: $brandPantonGrey;
+
+        &__icon {
+          display: block;
+          width: 15px;
+          height: 15px;
+          margin-right: 10px;
+          background: url('../../../images/arrow-info.svg') no-repeat center;
+        }
       }
       
       .font-block-hover {
@@ -45,89 +59,91 @@
       margin-left: 2em;
       padding-bottom: 3px;
 
-      .list-name {
-        font-size: 16px;
-        color: $brandPantonText;
-      }
-
       .font-block-hover {
         display: none;
       }
     }
+
+    /* Иконка для страницы Главная */
     .side-logo__main {
       background: url('../../../images/main-page.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 40em;
+      margin-left: 27em;
       background-size: contain;
     }
-    .side-logo__sales {
-      background: url('../../../images/main-payment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 40em;
-      background-size: contain;
-    }
-    .side-logo__main-payment {
-      background: url('../../../images/main-payment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 40em;
-      background-size: contain;
-    }
-    .side-logo__main-shipment-story {
-      background: url('../../../images/main-shipment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 40em;
-      background-size: contain;
-    }
+
+    /* Иконка для страницы Прайс-Лист */
     .side-logo__price-list {
       background: url('../../../images/main-price.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 40em;
+      margin-left: 29em;
       background-size: contain;
-    }
-    .side-logo__news {
-      background: url('../../../images/main_news_page.png') no-repeat;
-      width: 20px;
-      height: 22px;
-      margin-left: 40em;
-    }
-    .side-logo__main-archive {
-      background: url('../../../images/main_archive.png') no-repeat;
-      width: 20px;
-      height: 20px;
-      margin-left: 40em;
-    }
-    .side-logo__main-administration {
-      background: url('../../../images/settings-user.svg') no-repeat;
+    } 
+
+    /* Иконка для страницы Заказы */
+    .side-logo__sales {
+      background: url('../../../images/main-payment.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 40em;
+      margin-left: 27em;
       background-size: contain;
     }
-    .side-logo__main-users {
-      background: url('../../../images/main_users.png') no-repeat;
-      width: 20px;
-      height: 20px;
-      margin-left: 40em;
-      border: none;
+
+    /* Иконка для страницы Платежи */
+    .side-logo__main-payment {
+      background: url('../../../images/main-payment.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
     }
-    // .side-logo__main-app {
-    //   background: url('../../../images/web-app.png') no-repeat;
-    //   width: 20px;
-    //   height: 20px;
-    //   margin-left: 1em;
-    // }
+
+    /* Иконка для страницы Отгрузки */
+    .side-logo__main-shipment-story {
+      background: url('../../../images/main-shipment.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Профиль */
     .side-logo__main-account {
       background: url('../../../images/profile-user.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 40em;
+      margin-left: 27em;
       background-size: contain;
     }
+
+    /* Иконка для страницы Управление */
+    .side-logo__main-administration {
+      background: url('../../../images/control-user.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Настройки */
+    .side-logo__main-settings {
+      background: url('../../../images/settings-user.svg') no-repeat;
+      width: 20px;
+      height: 20px;
+      margin-left: 27em;
+      border: none;
+    }
+
+    /* Иконка для страницы Конфигуратор */
+    .side-logo__configurator {
+      background: url('../../../images/configurator.svg') no-repeat;
+      width: 18px;
+      height: 20px;
+      margin-left: 27em;
+    }
+
     div,
     a {
       color: $white;
@@ -149,7 +165,7 @@
           display: inline-block;
           font-size: 1px;
           vertical-align: text-bottom;
-          padding-right: 1rem;
+          padding-right: 20px;
           padding-left: 1rem;
           padding-top: 0.25rem;
         }
@@ -208,76 +224,88 @@
         //}
         
           background-color: none;
+          border-bottom: 2px solid transparent;
         
       }
-      .side-logo__main {
-        background: url('../../../images/main-page.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__sales {
-        background: url('../../../images/main-payment.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__main-payment {
-        background: url('../../../images/main-payment.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__main-shipment-story {
-        background: url('../../../images/main-shipment.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__price-list {
-        background: url('../../../images/main-price.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__news {
-        background: url('../../../images/main_news_page.png') no-repeat;
-        width: 20px;
-        height: 22px;
-        margin-left: 25em;
-      }
-      .side-logo__main-archive {
-        background: url('../../../images/main_archive.png') no-repeat;
-        width: 20px;
-        height: 20px;
-        margin-left: 25em;
-      }
-      .side-logo__main-administration {
-        background: url('../../../images/settings-user.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
-      .side-logo__main-users {
-        background: url('../../../images/main_users.png') no-repeat;
-        width: 20px;
-        height: 20px;
-        margin-left: 25em;
-        border: none;
-      }
-      .side-logo__main-account {
-        background: url('../../../images/profile-user.svg') no-repeat;
-        width: 18px;
-        height: 18px;
-        margin-left: 25em;
-        background-size: contain;
-      }
+      /* Иконка для страницы Главная */
+    .side-logo__main {
+      background: url('../../../images/main-page.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Прайс-Лист */
+    .side-logo__price-list {
+      background: url('../../../images/main-price.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 29em;
+      background-size: contain;
+    } 
+
+    /* Иконка для страницы Заказы */
+    .side-logo__sales {
+      background: url('../../../images/main-payment.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Платежи */
+    .side-logo__main-payment {
+      background: url('../../../images/main-payment.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Отгрузки */
+    .side-logo__main-shipment-story {
+      background: url('../../../images/main-shipment.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Профиль */
+    .side-logo__main-account {
+      background: url('../../../images/profile-user.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Управление */
+    .side-logo__main-administration {
+      background: url('../../../images/control-user.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
+    }
+
+    /* Иконка для страницы Настройки */
+    .side-logo__main-settings {
+      background: url('../../../images/settings-user.svg') no-repeat;
+      width: 20px;
+      height: 20px;
+      margin-left: 27em;
+      border: none;
+    }
+
+    /* Иконка для страницы Конфигуратор */
+    .side-logo__configurator {
+      background: url('../../../images/configurator.svg') no-repeat;
+      width: 18px;
+      height: 20px;
+      margin-left: 27em;
+    }
       .subparagraph {
         position: relative;
         margin-left: 1px;
@@ -343,159 +371,3 @@
     background-color: $brandPantonRed;
   }
 }
-.side-footer__copy {
-  margin-left: 4em;
-  color: $white;
-}
-
-// @media all and (max-width: 1366px) {
-//   .invisible {
-//     .main-content {
-//       margin-left: 6em;
-//     }
-//     .side {
-//       margin-left: -16em;
-//     }
-//     .top {
-//       padding-left: 260px;
-//       .font {
-//         position: relative;
-//         margin-left: 1px;
-//         margin-right: 7px;
-//         //transform: translateX(10%);
-//         //transition: 1s;
-//         &:hover {
-//           .font-block-hover {
-//             height: 0;
-//             display: flex;
-//             flex-direction: row;
-//             align-items: center;
-//             justify-content: flex-start;
-//             position: absolute;
-//             padding-left: 10px;
-//             top: -9px;
-//             left: 59px;
-//             bottom: 0;
-//             width: 245px;
-//             height: 46px;
-//             color: #FFFFFF;
-//             font-weight: $medium;
-//             //transform: translateX(100%);
-//             transition-duration: 2s linear;
-//             background-color: $brandSideColor;
-//           }
-//           border-bottom: 2px solid #3f8fda;
-//         }
-//       }
-//       .subparagraph {
-//         position: relative;
-//         margin-left: 1px;
-//         margin-right: 7px;
-//         &:hover {
-//           .font-block-hover {
-//             display: flex;
-//             flex-direction: row;
-//             align-items: center;
-//             justify-content: flex-start;
-//             position: absolute;
-//             padding-left: 10px;
-//             top: -9px;
-//             left: 59px;
-//             bottom: 0;
-//             width: 245px;
-//             height: 46px;
-//             color: #FFFFFF;
-//             font-weight: $light;
-//             transition-duration: 2s linear;
-//             background-color: $brandSideColor;
-//           }
-//           border-bottom: 2px solid #3f8fda;
-//         }
-//       }
-//       .list-name {
-//         display: none;
-//         margin-left: 0;
-//       }
-//     }
-//     -webkit-transition: margin-left 0.25s ease 0s;
-//     -o-transition: margin-left 0.25s ease 0s;
-//     transition: margin-left 0.25s ease 0s;
-    
-//   }
-// }
-// @media all and (max-width: 1172px) {
-//   .invisible {
-//     .main-content {
-//       margin-left: 4em;
-//     }
-//     .side {
-//       margin-left: -17em;
-      
-//     }
-//     .top {
-//       padding-left: 260px;
-//       .font {
-//         position: relative;
-//         margin-left: 10px;
-//         margin-right: 6px;
-//         //transform: translateX(10%);
-//         //transition: 1s;
-//         &:hover {
-//           .font-block-hover {
-//             height: 0;
-//             display: flex;
-//             flex-direction: row;
-//             align-items: center;
-//             justify-content: flex-start;
-//             position: absolute;
-//             padding-left: 10px;
-//             top: -9px;
-//             left: 50px;
-//             bottom: 0;
-//             width: 245px;
-//             height: 46px;
-//             color: #FFFFFF;
-//             font-weight: $medium;
-//             //transform: translateX(100%);
-//             transition-duration: 2s linear;
-//             background-color: $brandSideColor;
-//           }
-//           border-bottom: 2px solid #3f8fda;
-//         }
-//       }
-//       .subparagraph {
-//         position: relative;
-//         margin-left: 10px;
-//         margin-right: 7px;
-//         &:hover {
-//           .font-block-hover {
-//             display: flex;
-//             flex-direction: row;
-//             align-items: center;
-//             justify-content: flex-start;
-//             position: absolute;
-//             padding-left: 10px;
-//             top: -9px;
-//             left: 59px;
-//             bottom: 0;
-//             width: 245px;
-//             height: 46px;
-//             color: #FFFFFF;
-//             font-weight: $light;
-//             transition-duration: 2s linear;
-//             background-color: $brandSideColor;
-//           }
-//           border-bottom: 2px solid #3f8fda;
-//         }
-//       }
-//       .list-name {
-//         display: none;
-//         margin-left: 0;
-//       }
-//     }
-//     -webkit-transition: margin-left 0.25s ease 0s;
-//     -o-transition: margin-left 0.25s ease 0s;
-//     transition: margin-left 0.25s ease 0s;
-    
-//   }
-// }

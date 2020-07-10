@@ -74,7 +74,7 @@
     }
 
     /* Иконка для страницы Прайс-Лист */
-    .side-logo__price-list {
+    .side-logo__price {
       background: url('../../../images/main-price.svg') no-repeat;
       width: 18px;
       height: 18px;
@@ -84,7 +84,7 @@
 
     /* Иконка для страницы Заказы */
     .side-logo__sales {
-      background: url('../../../images/main-payment.svg') no-repeat;
+      background: url('../../../images/main-orders.svg') no-repeat;
       width: 18px;
       height: 18px;
       margin-left: 27em;
@@ -92,7 +92,7 @@
     }
 
     /* Иконка для страницы Платежи */
-    .side-logo__main-payment {
+    .side-logo__payment {
       background: url('../../../images/main-payment.svg') no-repeat;
       width: 18px;
       height: 18px;
@@ -101,7 +101,7 @@
     }
 
     /* Иконка для страницы Отгрузки */
-    .side-logo__main-shipment-story {
+    .side-logo__shipment {
       background: url('../../../images/main-shipment.svg') no-repeat;
       width: 18px;
       height: 18px;
@@ -110,7 +110,7 @@
     }
 
     /* Иконка для страницы Профиль */
-    .side-logo__main-account {
+    .side-logo__account {
       background: url('../../../images/profile-user.svg') no-repeat;
       width: 18px;
       height: 18px;
@@ -118,22 +118,22 @@
       background-size: contain;
     }
 
-    /* Иконка для страницы Управление */
-    .side-logo__main-administration {
-      background: url('../../../images/control-user.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
-
     /* Иконка для страницы Настройки */
-    .side-logo__main-settings {
+    .side-logo__settings {
       background: url('../../../images/settings-user.svg') no-repeat;
       width: 20px;
       height: 20px;
       margin-left: 27em;
       border: none;
+    }
+
+    /* Иконка для страницы Управление */
+    .side-logo__administration {
+      background: url('../../../images/control-user.svg') no-repeat;
+      width: 18px;
+      height: 18px;
+      margin-left: 27em;
+      background-size: contain;
     }
 
     /* Иконка для страницы Конфигуратор */
@@ -227,85 +227,86 @@
           border-bottom: 2px solid transparent;
         
       }
+
       /* Иконка для страницы Главная */
-    .side-logo__main {
-      background: url('../../../images/main-page.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      .side-logo__main {
+        background: url('../../../images/main-page.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Прайс-Лист */
-    .side-logo__price-list {
-      background: url('../../../images/main-price.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 29em;
-      background-size: contain;
-    } 
+      /* Иконка для страницы Прайс-Лист */
+      .side-logo__price {
+        background: url('../../../images/main-price.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 29em;
+        background-size: contain;
+      } 
 
-    /* Иконка для страницы Заказы */
-    .side-logo__sales {
-      background: url('../../../images/main-payment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      /* Иконка для страницы Заказы */
+      .side-logo__sales {
+        background: url('../../../images/main-orders.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Платежи */
-    .side-logo__main-payment {
-      background: url('../../../images/main-payment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      /* Иконка для страницы Платежи */
+      .side-logo__payment {
+        background: url('../../../images/main-payment.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Отгрузки */
-    .side-logo__main-shipment-story {
-      background: url('../../../images/main-shipment.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      /* Иконка для страницы Отгрузки */
+      .side-logo__shipment {
+        background: url('../../../images/main-shipment.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Профиль */
-    .side-logo__main-account {
-      background: url('../../../images/profile-user.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      /* Иконка для страницы Профиль */
+      .side-logo__account {
+        background: url('../../../images/profile-user.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Управление */
-    .side-logo__main-administration {
-      background: url('../../../images/control-user.svg') no-repeat;
-      width: 18px;
-      height: 18px;
-      margin-left: 27em;
-      background-size: contain;
-    }
+      /* Иконка для страницы Настройки */
+      .side-logo__settings {
+        background: url('../../../images/settings-user.svg') no-repeat;
+        width: 20px;
+        height: 20px;
+        margin-left: 27em;
+        border: none;
+      }
 
-    /* Иконка для страницы Настройки */
-    .side-logo__main-settings {
-      background: url('../../../images/settings-user.svg') no-repeat;
-      width: 20px;
-      height: 20px;
-      margin-left: 27em;
-      border: none;
-    }
+      /* Иконка для страницы Управление */
+      .side-logo__administration {
+        background: url('../../../images/control-user.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-left: 27em;
+        background-size: contain;
+      }
 
-    /* Иконка для страницы Конфигуратор */
-    .side-logo__configurator {
-      background: url('../../../images/configurator.svg') no-repeat;
-      width: 18px;
-      height: 20px;
-      margin-left: 27em;
-    }
+      /* Иконка для страницы Конфигуратор */
+      .side-logo__configurator {
+        background: url('../../../images/configurator.svg') no-repeat;
+        width: 18px;
+        height: 20px;
+        margin-left: 27em;
+      }
       .subparagraph {
         position: relative;
         margin-left: 1px;

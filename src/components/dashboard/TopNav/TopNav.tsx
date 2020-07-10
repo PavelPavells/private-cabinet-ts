@@ -92,9 +92,13 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
           </div>
           <div className="nav-right__info right-info">
             <div className="right-info__bell bell">
-              <div className="bell__icon"></div>
+              <div className="bell__icon notifications">
+                <div className="notifications__number">5</div>
+              </div>
             </div>
-            <div className="profile"></div>
+            <div className="profile">
+              <div className="profile__status"></div>
+            </div>
             <div className="right-info__list info-list">
               <div className="info-list__text">
                 <div className="name">Иванов И.И.</div>

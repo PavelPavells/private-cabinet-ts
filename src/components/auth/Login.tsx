@@ -20,6 +20,7 @@ import Layout from "../dashboard/Layout"
  * ********** Импорт стилей **********
  */
 import "./Auth.scss";
+import "../../fonts/fonts.scss"
 
 /**
  * ********** Интерфейс пропсов компонента Login **********

@@ -1,4 +1,6 @@
-// base colors
+/**
+ * ********** Переменные основных цветов **********
+ */
 $white: #fff;
 $brandSideColor: #404040;
 $brandPantonBlack: #000000;
@@ -10,12 +12,19 @@ $brandPantonText: #293440;
 $brandPantonSubText: #8b9298;
 $brandSideBorderColor: #94cbfd;
 
-// font weights
+/**
+ * ********** Начертания шрифтов **********
+ */
 $light: 300;
 $regular: 400;
 $medium: 500;
 $semibold: 600;
 $bold: 700;
 $heavy: 800;
-// fonts
-$code: 'Gotham Pro';
+
+/**
+ * ********** Шрифты **********
+ */
+$code: 'Gotham Pro Light';
+$font-light: 'Gotham Pro Light';
+$font-regular: 'Gotham Pro Regular';

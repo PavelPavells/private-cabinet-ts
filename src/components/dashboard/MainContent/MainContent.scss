@@ -4,14 +4,15 @@
   flex: 0 auto 1;
   flex-direction: column;
   background-color: $white;
-  margin-left: 25em;
-  margin-top: 5.5em;
+  margin-left: 24.5em;
+  margin-top: 6em;
   margin-bottom: 1em;
-  margin-right: 2em;
+  margin-right: 0.6em;
   -webkit-transition: all 0.5s ease 0s;
   -o-transition: all 0.5s ease 0s;
   transition: all 0.5s ease 0s;
   font-family: $code;
+  //background-color: grey;
 }
 .header {
   font-size: 32px;

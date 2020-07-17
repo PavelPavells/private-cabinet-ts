@@ -79,7 +79,7 @@ class SideNav extends React.PureComponent {
               <div className="font-block-hover">Главная</div>
             </li>
           </NavLink>
-          <NavLink exact activeClassName="active-page" to="/dashboard">
+          {/*<NavLink exact activeClassName="active-page" to="/dashboard">
             <li onClick={this.handleClickMain} className="subparagraph">
               <i className="side-logo__main icon"></i>
               <div className="list-name">Главная<div className="list-name__icon"></div></div>
@@ -92,7 +92,7 @@ class SideNav extends React.PureComponent {
               <div className="list-name">Главная<div className="list-name__icon"></div></div>
               <div className="font-block-hover">Главная</div>
             </li>
-          </NavLink>
+          </NavLink>*/}
           <NavLink exact activeClassName="active-page" to="/price-list">
             <li onClick={this.handleClickPrice} className="font">
               <i className="side-logo__price icon"></i>

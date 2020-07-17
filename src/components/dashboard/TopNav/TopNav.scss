@@ -10,7 +10,7 @@
   align-items: center;
   height: 70px;
   background-color: $white;
-  border-bottom: 2px solid $brandPantonFonts;
+  border-bottom: 1px solid $brandPantonFonts;
   position: fixed;
   width: 100%;
   z-index: 10000;
@@ -53,9 +53,13 @@
     color: $brandPantonBlack;
     padding-left: 80px;
 
-    &__text {
+    &__text, .right-text {
       font-size: 16px;
       color: $brandPantonText;
+
+      &__name {
+        color: $brandPantonBlue;
+      }
     }
     
     &__info, .right-info {

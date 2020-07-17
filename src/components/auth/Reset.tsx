@@ -27,7 +27,7 @@ import "./Auth.scss";
 interface ResetProps {
   readonly resetPassword: (email: string) => void,
   readonly data: any,
-  readonly errors: any
+  //readonly errors: any
 }
 
 /**
@@ -54,17 +54,17 @@ class Reset extends React.PureComponent<ResetProps, Partial<ResetState>> {
   /**
    * ********** Запрос данных **********
    */
-  public componentDidMount(){
-    if(localStorage.getItem('uuid') !== null ) {
-      window.location.pathname = "/dashboard";
+  //public componentDidMount(){
+    //if(localStorage.getItem('uuid') !== null ) {
+    //  window.location.pathname = "/dashboard";
       // @ts-ignore
-      window.history.back("/dashboard");
+    //  window.history.back("/dashboard");
       // @ts-ignore
-      window.history.go("/dashboard");
+    //  window.history.go("/dashboard");
       // @ts-ignore
-      this.props.history.pushState("/dashboard", Layout)
-    } 
-  }
+    //  this.props.history.pushState("/dashboard", Layout)
+   // } 
+  //}
 
   /**
    * ********** Запись данных в стейт из инпутов **********

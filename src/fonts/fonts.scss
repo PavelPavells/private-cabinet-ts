@@ -1,4 +1,6 @@
-
+/**
+ * ********** Подключение шрифтов **********
+ */
 @font-face {
 	font-family: "Gotham Pro Light";
 	src: url("./GothamProLight/GothamProLight.eot");
@@ -15,6 +17,16 @@
 	src: url("./GothamProRegular/GothamProRegular.eot")format("embedded-opentype"),
 		url("./GothamProRegular/GothamProRegular.woff") format("woff"),
 		url("./GothamProRegular/GothamProRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "Gotham Pro";
+	src: url("./GothamProMedium/GothamProMedium.eot");
+	src: url("./GothamProMedium/GothamProMedium.eot")format("embedded-opentype"),
+		url("./GothamProMedium/GothamProMedium.woff") format("woff"),
+		url("./GothamProMedium/GothamProMedium.ttf") format("truetype");
 	font-style: normal;
 	font-weight: normal;
 }

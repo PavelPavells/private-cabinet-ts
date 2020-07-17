@@ -87,8 +87,8 @@ class TopNav extends React.PureComponent<TopNavProps, TopNavState> {
           <div className="nav-left__logo"></div>
         </div>
         <div className="nav__right nav-right">
-          <div className="nav-right__text">
-            Личный кабинет: <strong>{contragentName}</strong>
+          <div className="nav-right__text right-text">
+            Личный кабинет: <strong className="right-text__name">{contragentName}</strong>
           </div>
           <div className="nav-right__info right-info">
             <div className="right-info__bell bell">

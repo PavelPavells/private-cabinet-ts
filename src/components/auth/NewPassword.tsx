@@ -27,7 +27,7 @@ import "./Auth.scss";
 interface NewPasswordProps {
   readonly newPassword: (pass: string, repeatPass: string) => void,
   readonly data: any,
-  readonly errors: any
+  //readonly errors: any
 }
 
 /**
@@ -56,17 +56,17 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
   /**
    * ********** Запрос данных **********
    */
-  public componentDidMount(){
-    if(localStorage.getItem('uuid') !== null ) {
-      window.location.pathname = "/dashboard";
-      // @ts-ignore
-      window.history.back("/dashboard");
-      // @ts-ignore
-      window.history.go("/dashboard");
-      // @ts-ignore
-      this.props.history.pushState("/dashboard", Layout)
-    } 
-  }
+  // public componentDidMount(){
+  //   if(localStorage.getItem('uuid') !== null ) {
+  //     window.location.pathname = "/dashboard";
+  //     // @ts-ignore
+  //     window.history.back("/dashboard");
+  //     // @ts-ignore
+  //     window.history.go("/dashboard");
+  //     // @ts-ignore
+  //     this.props.history.pushState("/dashboard", Layout)
+  //   } 
+  // }
 
   /**
    * ********** Запись данных в стейт из инпутов **********

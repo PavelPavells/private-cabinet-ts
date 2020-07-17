@@ -345,7 +345,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   />
                 </label>
               </div>
-              <div className="auth__password-ask">
+              <div className="auth__password-ask ask__register">
                 <label>
                   <input type="checkbox" />
                 </label>

@@ -50,18 +50,19 @@
     }
 
     &__heading {
-      margin: 124px 0 10px 120px;
-      font-weight: $regular;
+      margin: 220px 0 40px 220px;
       font-size: 26px;
       line-height: 1.27;
-      color: $brandPantonText;
+      color: $brandPantonBlack;
+      font-weight: $regular;
+      font-family: $font-regular;
     }
 
     &__necessary {
-      margin: 0 0 40px 120px;
+      margin: 0 0 40px 220px;
       font-size: 12px;
       line-height: 1.5;
-      color: $brandPantonSubText;
+      color: $brandPantonBlack;
     }
 
     &__forms {
@@ -71,7 +72,7 @@
       flex-direction: column;
       overflow-y: scroll;
       font-family: $code;
-      margin-left: 120px;
+      margin-left: 220px;
 
       &__header {
         height: 3vh;
@@ -94,14 +95,14 @@
       line-height: 1.5;
       margin-top: 1rem;
       margin-bottom: 0.75rem;
-      font-size: 16px;
-      color: $brandPantonSubText;
-      font-family: $code;
+      font-size: 14px;
+      color: $brandPantonBlack;
+      font-family: $font-light;
     }
 
     &__input {
       position: relative;
-      width: 90%;
+      width: 71%;
       margin-bottom: 15px;
       height: 50px;
       border: 0;
@@ -116,8 +117,10 @@
 
     .auth__input:focus~.auth__label,
     .auth__input:not(:focus):valid~.auth__label {
-      top: -18px;
-      font-size: 13px;
+      top: -20px;
+      font-size: 12px;
+      color: $brandPantonBlack;
+      font-family: $font-light;
     }
 
     &__options {
@@ -139,7 +142,7 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      margin: 40px 0;
+      margin-bottom: 20px;
       font-family: $code;
       
       span {
@@ -152,32 +155,37 @@
           text-decoration: underline;
         }
       }
+
+      &__register {
+        margin-top: 10px;
+      }
+
       &__password {
         font-size: 12px;
         text-decoration: underline;
         line-height: 1.5;
         color: $brandPantonBlue;
         padding: 5px 0;
-        font-family: $code;
+        font-family: $font-light;
       }
     }
     
     &__button {
-      padding: 5px 75px;
+      padding: 6px 76px;
       margin-top: 1rem;
       color: $white;
       background-color: $brandPantonBlue;
       border-radius: 15px;
       border-color: transparent;
       font-size: 15px;
-      font-family: $code;
+      font-family: $font-regular;
       outline: transparent;
     }
 
     &__back, .back {
       display: flex;
       align-items: center;
-      margin: 145px 0 50px 120px;
+      margin: 145px 0 220px 220px;
       font-size: 12px;
       line-height: 1.5;
       color: $brandPantonBlue;
@@ -194,17 +202,17 @@
     }
 
     &__registration, .registration {
-      margin: 145px 0 50px 120px;
+      margin: 145px 0 220px 220px;
 
       &__no-login {
         font-size: 12px;
         line-height: 1.5;
-        color: $brandPantonSubText;
+        color: $brandPantonBlack;
       }
       &__link {
         font-size: 12px;
         line-height: 1.5;
-        color: $brandPantonSubText;
+        color: $brandPantonBlack;
 
         & > a {
           color: $brandPantonBlue;
@@ -228,7 +236,7 @@
           display: block;
           width: 243px;
           height: 45px;
-          margin: 124px 0 10px 0;
+          margin: 220px 0 40px 0;
 
           .image {
             display: block;
@@ -238,10 +246,11 @@
         }
 
         &__text {
-          font-size: 18px;
+          font-size: 14px;
           font-weight: 500;
           line-height: 1.5;
-          color: #000;
+          color: $brandPantonBlack;
+          font-family: $font-regular;
         }
 
         &__image, .image {
@@ -269,7 +278,7 @@
 .inaccess {
   display: block;
   position: absolute;
-  right: 80px;
+  right: 29%;
   width: 20px;
   height: 20px;
   background: url('../../images/eye-inaccess.svg') no-repeat center;
@@ -278,7 +287,7 @@
 .access {
   display: block;
   position: absolute;
-  right: 80px;
+  right: 29%;
   width: 20px;
   height: 20px;
   background: url('../../images/eye-access.svg') no-repeat center;
@@ -286,9 +295,104 @@
 
 .inaccessible {
   background-color: $brandPantonFonts;
-  color: $brandPantonSubText;
+  color: $brandPantonBlack;
 }
 
 /**
  * ********** Стили для адаптива компонента Авторизация **********
  */
+
+ @media all and (max-width:1440px) {
+    .auth__heading {
+      margin-left: 120px;
+    }
+    .auth__necessary {
+      margin-left: 120px!important;
+      width: 60%;
+    }
+    .auth__forms {
+      margin-left: 120px;
+    }
+    .auth__input {
+      width: 80%;
+    }
+    .auth__back, .back {
+      margin-left: 120px!important;
+    }
+    .registration {
+      margin-left: 120px!important; /** исправить! */
+    }
+    .right__logo, .logo {
+      margin: 220px 0 40px 0!important;
+    }
+    .access {
+      right: 20%;
+    }
+    .inaccess {
+      right: 20%;
+    }
+ }
+
+ @media all and (max-width:1080px) {
+  .auth__heading {
+    margin-left: 120px;
+  }
+  .auth__necessary {
+    margin-left: 120px!important;
+  }
+  .auth__forms {
+    margin-left: 120px;
+  }
+  .auth__input {
+    width: 80%;
+  }
+  .registration {
+    margin-left: 120px!important; /** исправить! */
+  }
+  .right__logo, .logo {
+    margin: 220px 0 40px 0!important;
+  }
+  .access {
+    right: 20%;
+  }
+  .inaccess {
+    right: 20%;
+  }
+}
+
+ @media all and  (max-width: 968px) {
+
+   .auth__heading {
+      margin-left: 120px;
+      margin-top: 150px;
+    }
+
+    .auth__necessary {
+      margin-left: 120px!important;
+    }
+
+    .auth__forms {
+      margin-left: 120px;
+    }
+
+    .auth__input {
+      width: 80%;
+    }
+
+    .registration {
+      margin-left: 120px!important; /** исправить! */
+    }
+
+    .auth__left {
+      width: 100%;
+    }
+
+    .auth__options {
+      width: 80%;
+    }
+ 
+
+   .auth__right {
+     display: none!important;
+   }
+ }

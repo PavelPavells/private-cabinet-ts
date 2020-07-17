@@ -1,7 +1,7 @@
 /** 
  * ********** Импорт глобальных переменных **********
  */
-const isEmpty = require("is-empty");
+//const isEmpty = require("is-empty");
 
 import {
     AuthState,
@@ -24,7 +24,7 @@ export default function(state = initialState, action: AuthActions): AuthState {
     case SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
+        isAuthenticated: action.payload, //!isEmpty(action.payload),
         user: action.payload
       };
     case USER_LOADING:

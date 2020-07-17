@@ -166,12 +166,12 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   />
                 }
               />  {/** "/register/:name/:email" */}
-              <Route path="/reset" render={() =>
+              <Route exact path="/reset" render={() =>
                 <Reset
                   resetPassword={this.resetPassword}
                   data={data}
                   //@ts-ignore
-                  history={window.history}
+                  //history={window.history}
                 />
                 }
               />
@@ -180,7 +180,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                   newPassword={this.newPassword}
                   data={data}
                   //@ts-ignore
-                  history={window.history}
+                  //history={window.history}
                 />
                 }
               />

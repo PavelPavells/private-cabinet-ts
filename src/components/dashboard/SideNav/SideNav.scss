@@ -33,7 +33,7 @@
       margin-left: 0;
       font-weight: $medium;
       padding: 20px 0;
-      border-bottom: 2px solid $brandPantonFonts;
+      border-bottom: 1px solid $brandPantonFonts;
 
       .list-name {
         display: flex;
@@ -70,7 +70,7 @@
       background: url('../../../images/main-page.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 27em;
+      margin-left: 25em;
       background-size: contain;
     }
 
@@ -79,7 +79,7 @@
       background: url('../../../images/main-price.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 29em;
+      margin-left: 28em;
       background-size: contain;
     } 
 
@@ -88,7 +88,7 @@
       background: url('../../../images/main-orders.svg') no-repeat;
       width: 18px;
       height: 18px;
-      margin-left: 27em;
+      margin-left: 28em;
       background-size: contain;
     }
 
@@ -178,7 +178,7 @@
 .invisible {
 
   .main-content {
-    margin-left: 7em;
+    margin-left: 6.5em;
   }
   .side {
     margin-left: -18em;

@@ -13,9 +13,7 @@ class Tasks extends Component {
   render() {
     //const { projects } = this.props.projects;
     return (
-      <div className="main-content">
-        <h1 className="header">Your Tasks</h1>
-      </div>
+      <div className="main-content"></div>
     );
   }
 }

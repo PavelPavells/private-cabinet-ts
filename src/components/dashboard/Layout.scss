@@ -5,6 +5,10 @@
   justify-content: space-between;
   font-family: $code;
 }
+.right {
+  background-color: $brandPantonFonts;
+  height: 100vh;
+}
 /* width */
 //::-webkit-scrollbar {
 //  width: 0px;

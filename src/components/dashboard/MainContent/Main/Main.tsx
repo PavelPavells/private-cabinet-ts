@@ -38,111 +38,88 @@ class Main extends Component {
     //}
     return (
       <div className="main-content">
-        <div className="wrapper-main">
-          <div className="wrapper-main-info">
-            <p className="wrapper-main-info__paragraph">Статус:</p>
-            <div className="wrapper-registration__partner">
-              <p className="registration-partner">
-                Зарегистрированный торговый партнер
+        <div className="main">
+          <div className="main__info info">
+            <p className="info__paragraph">Данные о компании:</p>
+            <p className="info__name">ООО "Название компании"</p>
+            <p className="info__registration">Зарегистрирована: 01-06-2019</p>
+            <p className="info__taxes">Налоговый учет: с НДС 20%</p>
+            <p className="info__status">Статус:</p>
+            <p className="info__partner">Зарегистрированный торговый партнер</p>
+            <div className="info__accumulator accumulator">
+              <p className="accumulator__text amount-percent">Текущая накопительная скидка на продукцию Карддекс:
+                <p className="amount-percent__percent">22%</p>
               </p>
-              <div className="partner-stars__rating">
-                <span>☆</span>
-                <span>☆</span>
-                <span>☆</span>
-                {/*
-                <span>☆</span>
-                <span>☆</span>
-                */}
-              </div>
             </div>
-            <div className="wrapper-sales__partner">
-              <p className="sales-partner">
-                Текущая накопительная скидка на продукцию Кардекс:
-              </p>
-              {currentDiscount.map((item, key) => (
-                <p key={item.id} className="sales-percent">
-                  {item.current_discount}
-                </p>
-              ))}
+            <div className="info__purchase purchase">
+              <p className="purchase__text">Объем учтенных закупок для расчета скидки:</p>
+              <p className="purchase__sum">351 000 руб.</p>
             </div>
-            <div className="wrapper-volume__purchase">
-              <p className="volume-purchase">
-                Объем учтенных закупок для расчета скидки
-              </p>
-              {volumePurchase.map((item, key) => (
-                <p key={item.id} className="volume-sum">
-                  {item.current_discount}
-                </p>
-              ))}
-            </div>
-            <p className="wrapper-main-info__paragraph">
-              Предоставляемые накопительные скидки:
-            </p>
-            <div className="wrapper-main-table">
-              <div className="wrapper-block__left">
-                <div className="table-block__one">Объем закупок, в руб.</div>
-                <div className="table-block__two">
-                  <div className="table-block__left">От</div>
-                  <div className="table-block__right">До</div>
+            <div className="info__table table">
+              <div className="table__left table-left">
+                <div className="table-left__one">Объем закупок, в руб.</div>
+                <div className="table-left__two two">
+                  <div className="two__left">От</div>
+                  <div className="two__right">До</div>
                 </div>
-                <div className="table-block__two">
-                  <div className="table-block__left">
+                <div className="table-left__two two">
+                  <div className="two__left">
                     <strong className="numbers">300000</strong>
                   </div>
-                  <div className="table-block__right">
+                  <div className="two__right">
                     <div className="numbers">1000000</div>
                   </div>
                 </div>
-                <div className="table-block__two">
-                  <div className="table-block__left">
+                <div className="table-left__two two">
+                  <div className="two__left">
                     <div className="numbers">1000001</div>
                   </div>
-                  <div className="table-block__right">
+                  <div className="two__right">
                     <div className="numbers">3000000</div>
                   </div>
                 </div>
-                <div className="table-block__two">
-                  <div className="table-block__left">
+                <div className="table-left__two two">
+                  <div className="two__left">
                     <div className="numbers">3000001</div>
                   </div>
                   <div className="table-block__right"></div>
                 </div>
               </div>
-              <div className="wrapper-block__center">
-                <div className="table-block__one-center">Скидка</div>
-                <div className="table-block__two-center">
+              <div className="table__center table-center">
+                <div className="table-center__one">Скидка</div>
+                <div className="table-center__two">
                   <div className="numbers">22%</div>
                 </div>
-                <div className="table-block__three-center">
+                <div className="table-center__three">
                   <div className="numbers">28%</div>
                 </div>
-                <div className="table-block__four-center">
+                <div className="table-center__four">
                   <div className="numbers">23%</div>
                 </div>
               </div>
-              <div className="wrapper-block__right">
-                <div className="table-block__one-right">
+              <div className="table__right table-right">
+                <div className="table-right__one">
                   Условия получения скидки
                 </div>
                 {ordersTable.map((index, key) => (
-                  <div key={index.id} className="table-block__two-right">
+                  <div key={index.id} className="table-right__two">
                     {index.conditions || "Закупка от 349 001 руб."}
                   </div>
                 ))}
                 {ordersTable.map((index, key) => (
-                  <div key={index.id} className="table-block__three-right">
+                  <div key={index.id} className="table-right__three">
                     {index.conditions || "Закупка от 649 001 руб."}
                   </div>
                 ))}
                 {ordersTable.map((index, key) => (
-                  <div key={index.id} className="table-block__four-right">
+                  <div key={index.id} className="table-right__four">
                     {index.conditions || "Закупка от 2 649 001 руб."}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="separator-block"></div>
           </div>
+          {/*
           <div className="wrapper-main-news">
             <div className="wrapper-news__header">
               <div>
@@ -179,6 +156,7 @@ class Main extends Component {
               ))}
             </div>
           </div>
+            */}
         </div>
       </div>
     );

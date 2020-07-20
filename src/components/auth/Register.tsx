@@ -342,6 +342,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                     options={options}
                     placeholder={direction}
                     className="auth__options"
+                    styles={{color: 'red'}}
                   />
                 </label>
               </div>

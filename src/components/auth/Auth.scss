@@ -43,7 +43,6 @@
     &__left {
       display: flex;
       flex-direction: column;
-
       width: 50%;
       background-color: $white;
       z-index: 1000;
@@ -112,7 +111,7 @@
       transition: all 0.25s ease 0s;
       padding: 0.7rem 0;
       font-size: 14px;
-      font-family: $code;
+      font-family: $font-regular;
     }
 
     .auth__input:focus~.auth__label,
@@ -124,7 +123,7 @@
     }
 
     &__options {
-      width: 90%;
+      width: 71%;
     }
 
     &__error {
@@ -202,7 +201,7 @@
     }
 
     &__registration, .registration {
-      margin: 145px 0 220px 220px;
+      margin: 65px 0 220px 220px;
 
       &__no-login {
         font-size: 12px;
@@ -271,6 +270,7 @@
 /**
  * ********** Стили для выбранной формы Логин/Регистрация, стили доступности кнопки **********
  */
+
 .warning {
   border-bottom: 1px solid $brandPantonRed;
 }

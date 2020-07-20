@@ -47,9 +47,9 @@ class Main extends Component {
             <p className="info__status">Статус:</p>
             <p className="info__partner">Зарегистрированный торговый партнер</p>
             <div className="info__accumulator accumulator">
-              <p className="accumulator__text amount-percent">Текущая накопительная скидка на продукцию Карддекс:
+              <div className="accumulator__text amount-percent">Текущая накопительная скидка на продукцию Карддекс:
                 <p className="amount-percent__percent">22%</p>
-              </p>
+              </div>
             </div>
             <div className="info__purchase purchase">
               <p className="purchase__text">Объем учтенных закупок для расчета скидки:</p>

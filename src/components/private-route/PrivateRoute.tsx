@@ -1,7 +1,7 @@
 /**
  * Импорт зависимостей
  */
-import React from "react";
+import React, { Component, JSXElementConstructor, ClassAttributes } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { PersonalCabinet } from '../../store/store';
@@ -12,7 +12,7 @@ import { PersonalCabinet } from '../../store/store';
 interface SecuredRouteProps {
   auth: {
     isAuthenticated: boolean,
-    user: any
+    user: string
   },
   component: any
 }

@@ -1,272 +1,369 @@
 @import "../../../../styles/base.scss";
 
+
+
+
+.main-content {
+    flex: 0 auto 1;
+    flex-direction: column;
+    background-color: $white;
+    margin-left: 24.5em;
+    margin-top: 6em;
+    margin-bottom: 1em;
+    margin-right: 0.6em;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+    font-family: $code;
+}
+
 /** ********** MAIN STYLES **********/
 .main {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  overflow-y: scroll;
-  height: 100%;
-
-  &__info, .info {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 10px 0 0 10px;
+    justify-content: space-between;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100%;
 
-    &__paragraph {
-      margin-bottom: 21px;
-      font-size: 20px;
-      line-height: 19px;
-      font-weight: $bold;
-    }
-
-    &__name {
-      margin-bottom: 21px;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 18px;
-      color: $brandPantonBlack;
-    }
-
-    &__registration {
-      margin-bottom: 21px;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 18px;
-      color: $brandPantonBlack;
-    }
-
-    &__taxes {
-      margin-bottom: 10px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid $brandPantonFonts;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 18px;
-      color: $brandPantonBlack;
-    }
-
-    &__status {
-      margin-bottom: 21px;
-      font-style: normal;
-      font-weight: $bold;
-      font-size: 16px;
-      line-height: 18px;
-      color: $brandPantonBlack;
-    }
-
-    &__partner {
-      margin-bottom: 21px;
-      margin-right: 1em;
-      font-weight: $light;
-    }
-
-    &__accumulator, .accumulator {
-      display: flex;
-      flex-direction: column;
-
-      &__text, .amount-percent {
-        display: flex;
-        margin-bottom: 21px;
-        font-weight: $light;
-
-        &__percent {
-          margin-left: 21px;
-          color: $brandPantonBlue;
-        }
-      }
-      
-    }
-    &__purchase, .purchase {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-
-      &__text {
-        font-weight: $light;
-      }
-      &__sum {
-        margin-left: 21px;
-        margin-bottom: 26px;
-        font-weight: $medium;
-        color: $brandPantonBlue;
-      }
-    }
-    &__table, .table {
-      display: flex;
-      flex-direction: row;
-      max-width: 1000px;
-      margin-bottom: 10px;
-  
-      &__left, .table-left {
+    &__info, .info {
         display: flex;
         flex-direction: column;
-        width: 30%;
-        border: 1px solid $brandPantonFonts;
-  
-        &__one {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          //height: 20%;
-          padding: 10px 0;
-          border-bottom: 1px solid $brandPantonFonts;
+        width: 100%;
+        //margin: 10px 0 0 10px;
+
+        &__paragraph {
+            margin-bottom: 21px;
+            font-size: 20px;
+            font-weight: $bold;
+            margin-top: 10px;
+            margin-left: 10px;
         }
-  
-        &__two, .two {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          width: 100%;
-          //height: 20%;
-          //padding: 10px 0;
-          border-bottom: 1px solid $brandPantonFonts;
-  
-          &__left {
+
+        &__name {
+            margin-bottom: 21px;
+            margin-left: 10px;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            color: $brandPantonBlack;
+        }
+
+        &__registration {
+            margin-bottom: 21px;
+            margin-left: 10px;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            color: $brandPantonBlack;
+        }
+
+        &__taxes {
+            margin-bottom: 10px;
+            margin-left: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid $brandPantonFonts;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            color: $brandPantonBlack;
+        }
+
+        &__status {
+            margin-bottom: 21px;
+            margin-left: 10px;
+            font-style: normal;
+            font-weight: $bold;
+            font-size: 16px;
+            color: $brandPantonBlack;
+        }
+
+        &__partner {
+            margin-bottom: 21px;
+            margin-left: 10px;
+            margin-right: 1em;
+            font-weight: $light;
+        }
+
+        &__accumulator, .accumulator {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50%;
-            //height: 100%;
-            padding: 10px 0;
-            border-right: 1px solid $brandPantonFonts;
-          }
-  
-          &__right {
+            flex-direction: column;
+
+            &__text, .amount-percent {
+                display: flex;
+                margin-bottom: 21px;
+                margin-left: 10px;
+                font-weight: $light;
+
+                &__percent {
+                    margin-left: 21px;
+                    color: $brandPantonBlue;
+                }
+            }
+
+        }
+
+        &__purchase, .purchase {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50%;
-            //height: 100%;
-            padding: 10px 0;
-          }
-        }
-      }
-  
-      &__center, .table-center {
-        display: flex;
-        width: 20%;
-        flex-direction: column;
-        border-top: 1px solid $brandPantonFonts;
-        border-right: 1px solid $brandPantonFonts;
-        border-bottom: 1px solid $brandPantonFonts;
+            flex-direction: row;
+            justify-content: flex-start;
 
-        &__one {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 40%;
-          border-bottom: 1px solid $brandPantonFonts;
+            &__text {
+                font-weight: $light;
+                margin-left: 10px;
+            }
+
+            &__sum {
+                margin-left: 21px;
+                margin-bottom: 26px;
+                font-weight: $medium;
+                color: $brandPantonBlue;
+            }
         }
 
-        &__two {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
+        &__table, .table {
+            display: flex;
+            flex-direction: row;
+            max-width: 1000px;
+            margin-bottom: 20px;
+            margin-left: 10px;
 
-        &__three {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
+            &__left, .table-left {
+                display: flex;
+                flex-direction: column;
+                width: 30%;
+                border: 1px solid $brandPantonFonts;
 
-        &__four {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
-      }
+                &__one {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    padding: 10px 0;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
 
-      &__right, .table-right {
-        display: flex;
-        width: 36%;
-        flex-direction: column;
-        border-top: 1px solid $brandPantonFonts;
-        border-right: 1px solid $brandPantonFonts;
-        border-bottom: 1px solid $brandPantonFonts;
+                &__two, .two {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    border-bottom: 1px solid $brandPantonFonts;
 
-        &__one {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 40%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
+                    &__left {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 50%;
+                        padding: 10px 0;
+                        border-right: 1px solid $brandPantonFonts;
+                    }
 
-        &__two {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
+                    &__right {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 50%;
+                        padding: 10px 0;
+                    }
+                }
+            }
 
-        &__three {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
-        }
+            &__center, .table-center {
+                display: flex;
+                width: 20%;
+                flex-direction: column;
+                border-top: 1px solid $brandPantonFonts;
+                border-right: 1px solid $brandPantonFonts;
+                border-bottom: 1px solid $brandPantonFonts;
 
-        &__four {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 20%;
-          border-bottom: 1px solid $brandPantonFonts;
+                &__one {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__two {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__three {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__four {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+            }
+
+            &__right, .table-right {
+                display: flex;
+                width: 36%;
+                flex-direction: column;
+                border-top: 1px solid $brandPantonFonts;
+                border-right: 1px solid $brandPantonFonts;
+                border-bottom: 1px solid $brandPantonFonts;
+
+                &__one {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__two {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__three {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+
+                &__four {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20%;
+                    border-bottom: 1px solid $brandPantonFonts;
+                }
+            }
         }
-      }
     }
-  }
+
+    &__alert, .alert {
+        display: flex;
+        flex-direction: row;
+        background-color: $brandPantonFonts;
+        padding-top: 10px;
+
+        &__text, .alert-text {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 15px 0;
+            background-color: $brandPantonBlue;
+            color: $white;
+
+            &__icon {
+                display: block;
+                margin-right: 15px;
+                margin-left: 10px;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: $white;
+                color: $brandPantonBlack;
+            }
+        }
+    }
+    &__offers, .offers {
+        display: flex;
+        background-color: $brandPantonFonts;
+
+        &__block, .offer-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 250px;
+            height: 250px;
+            margin: 10px 10px 10px 2px;
+            border: 1px solid $brandPantonFonts;
+            background-color: $white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+
+            &__header {
+                padding: 15px 0 0 10px;
+                //font-family: $font-regular;
+                font-size: 16px;
+            }
+
+            &__text {
+                padding: 15px 0 0 10px;
+                font-size: 14px;
+                line-height: 25px;
+            }
+
+            &__more, .arrow-more {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+                padding: 15px 15px 15px 10px;
+                font-size: 12px;
+                text-align: right;
+
+                &__arrow {
+                    display: block;
+                    margin-left: 5px;
+                    width: 25px;
+                    height: 15px;
+                    background: url('../../../../images/arrow-more.svg') no-repeat center;
+                }
+            }
+        }
+    }
 }
 
 .numbers {
-  width: 90%;
-  text-align: right;
+    width: 90%;
+    text-align: right;
 }
 
 @media all and (max-width: 1440px) {
-  .wrapper-main {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    .wrapper-main-info {
-      width: 59%;
-      min-width: 550px;
+    .wrapper-main {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+
+        .wrapper-main-info {
+            width: 59%;
+            min-width: 550px;
+        }
     }
-  }
 }
 
 @media all and (max-width: 1366px) {
-  .wrapper-main {
-    font-size: 15px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    .wrapper-main-info {
-      width: 100%;
-      min-width: 550px;
+    .wrapper-main {
+        font-size: 15px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        .wrapper-main-info {
+            width: 100%;
+            min-width: 550px;
+        }
+
+        .wrapper-main-news {
+            width: 90%;
+            min-width: 550px;
+            margin-left: 0;
+            border: none;
+        }
     }
-    .wrapper-main-news {
-      width: 90%;
-      min-width: 550px;
-      margin-left: 0;
-      border: none;
-    }
-  }
 }

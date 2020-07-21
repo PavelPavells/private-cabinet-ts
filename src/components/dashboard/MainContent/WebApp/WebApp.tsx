@@ -164,6 +164,7 @@ const mapStateToProps = state => ({
     app: state.app
 })
 export default withRouter(
+    // @ts-ignore
     connect(
         mapStateToProps,
         { fetchDataWebApp }

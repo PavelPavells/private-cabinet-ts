@@ -161,6 +161,7 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
+  // @ts-ignore
   connect(
     mapStateToProps, 
     null                           //{ logoutUser }

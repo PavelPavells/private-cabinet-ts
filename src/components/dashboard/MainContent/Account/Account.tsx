@@ -194,7 +194,9 @@ Account.propTypes = {
 const mapStateToProps = state => ({
     data: state.account
 });
+
 export default withRouter(
+  // @ts-ignore
   connect(
     mapStateToProps,
     { fetchDataAccount }

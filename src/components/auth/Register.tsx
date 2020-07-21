@@ -43,7 +43,7 @@ interface RegisterState {
   readonly legalAdress: string,
   readonly webSite: string,
   readonly direction: string,
-  readonly errors: any
+  readonly errors:   any
 }
 
 class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>> {
@@ -84,6 +84,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
    */
   private onChange = (event: FormEvent<HTMLInputElement>) => {
     const { id, value } = event.currentTarget;
+    //@ts-ignore
     this.setState({ [id]: value });
   };
 

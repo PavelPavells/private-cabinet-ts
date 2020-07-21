@@ -11,7 +11,7 @@
   font-weight: 300;
   position: fixed;
   transition: all 0.5s ease 0s;
-  z-index: 1; 
+  z-index: 1;
   margin-left: 0px;
 
   &__top {
@@ -27,6 +27,7 @@
         cursor: pointer;
       }
     }
+
     .font {
       display: flex;
       flex-direction: row;
@@ -51,11 +52,12 @@
           background: url('../../../images/arrow-info.svg') no-repeat center;
         }
       }
-      
+
       .font-block-hover {
         display: none;
       }
     }
+
     .subparagraph {
       margin-left: 2em;
       padding-bottom: 3px;
@@ -81,7 +83,7 @@
       height: 18px;
       margin-left: 28em;
       background-size: contain;
-    } 
+    }
 
     /* Иконка для страницы Заказы */
     .side-logo__sales {
@@ -153,12 +155,14 @@
       -webkit-transition: all 0.25s ease 0s;
       -o-transition: all 0.25s ease 0s;
       transition: all 0.25s ease 0s;
+
       &:hover {
         cursor: pointer;
         -webkit-transition: all 0.25s ease 0s;
         -o-transition: all 0.25s ease 0s;
         transition: all 0.25s ease 0s;
       }
+
       li {
         padding: 0.75rem;
 
@@ -180,6 +184,7 @@
   .main-content {
     margin-left: 6.5em;
   }
+
   .side {
     margin-left: -18em;
 
@@ -188,7 +193,7 @@
 
       li {
         background-color: $white;
-  
+
         &:hover {
           background-color: $white;
           cursor: pointer;
@@ -223,10 +228,10 @@
         //   }
         //   border-bottom: 2px solid #3f8fda;
         //}
-        
-          background-color: none;
-          border-bottom: 2px solid transparent;
-        
+
+        background-color: none;
+        border-bottom: 2px solid transparent;
+
       }
 
       /* Иконка для страницы Главная */
@@ -245,7 +250,7 @@
         height: 18px;
         margin-left: 29em;
         background-size: contain;
-      } 
+      }
 
       /* Иконка для страницы Заказы */
       .side-logo__sales {
@@ -308,6 +313,7 @@
         height: 20px;
         margin-left: 27em;
       }
+
       .subparagraph {
         position: relative;
         margin-left: 1px;
@@ -333,6 +339,7 @@
         //   border-bottom: 2px solid #3f8fda;
         // }
       }
+
       .list-name {
         display: none;
         margin-left: 0;
@@ -340,34 +347,41 @@
       }
     }
   }
+
   -webkit-transition: margin-left 0.25s ease 0s;
   -o-transition: margin-left 0.25s ease 0s;
   transition: margin-left 0.25s ease 0s;
-  
+
 }
+
 .active-page {
-  color: $white !important;
+  color: $white!important;
   //background-color: $brandPantonRed;
   -webkit-transition: all 0.25s ease 0s;
   -o-transition: all 0.25s ease 0s;
   transition: all 0.25s ease 0s;
 }
+
 .bottom {
   margin-top: 4rem;
   color: $white;
   padding-left: 3.8rem;
 }
+
 .side-projects-header {
   font-family: $code;
   font-weight: 300;
 }
+
 .project-listings {
   height: 305px;
   overflow: scroll;
+
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 1px;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     background-color: $brandPantonRed;

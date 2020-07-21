@@ -14,10 +14,10 @@ interface SecuredRouteProps {
     isAuthenticated: boolean,
     user: string
   },
-  component: any
+  component: React.ComponentType<any>
 }
 
-const SecuredRoute: React.SFC<SecuredRouteProps> = ({ component: Component, auth, ...rest }) => (
+const SecuredRoute: React.SFC<SecuredRouteProps> = ({ component: Component, auth, ...rest }: SecuredRouteProps) => (
   <Route
     {...rest}
     render={props =>

@@ -1,25 +1,31 @@
-/** ********** IMPORT LIBRARIES ********** */
+/**
+ * ********** Импорт основных библиотек из NPM **********
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { PersonalCabinet } from '../../../../store/store';
 
-/** ********** IMPORT ACTIONS ********** */
+/**
+ * ********** Импорт экшенов **********
+ */
 import { ordersTable } from './data.json';
 import { fetchDataMain } from '../../../../actions/mainActions';
 
 /**
- * ********** Интерфейс локального стейта компонента Main **********
+ * ********** Импорт файлов стилей **********
  */
-// interface MainState {
-//  main: any
-// }
-
-/** ********** IMPORT STYLES ********** */
 import './Main.scss';
 
 /** ********** IMPORT LOADER from __UTILS__ ********** */
 // import Loader from "../../../../__utils__/Spinner";
+
+/**
+ * ********** Интерфейс локального стейта компонента Main **********
+ */
+interface MainState {
+    main: any;
+}
 
 /**
  * ********** Интерфейс пропсов компонента Main **********
@@ -27,15 +33,12 @@ import './Main.scss';
 interface MainProps {
     readonly fetchDataMain: (data: any) => void;
     readonly data: any;
-    // readonly errors: any
 }
 
-class Main extends React.PureComponent<MainProps> {
-    // state: MainState = {
-    //  main: []
-    // };
-
-    /** ********** FETCH DATA ACCOUNT ********** */
+class Main extends React.PureComponent<MainProps, MainState> {
+    /**
+     * ********** Запрос данных для компонента Main **********
+     */
     public componentDidMount() {
         // this.props.fetchDataMain();
     }
@@ -167,7 +170,7 @@ class Main extends React.PureComponent<MainProps> {
 }
 
 const mapStateToProps = (state: PersonalCabinet) => ({
-    data: state.main
+    main: state.main
 });
 
 export default connect(mapStateToProps, { fetchDataMain })(Main);

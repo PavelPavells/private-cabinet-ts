@@ -4,260 +4,274 @@
  * ********** Стили компонента TopNav **********
  */
 .nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  background-color: $white;
-  border-bottom: 1px solid $brandPantonFonts;
-  position: fixed;
-  width: 100%;
-  z-index: 10000;
-
-  /* Left side of nav */
-  &__left, .nav-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-
-    &__hamburger {
-      margin-left: 2.1rem;
-      font-size: 30px;
-      color: $brandPantonText;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    &__logo {
-      display: block;
-      width: 238px;
-      height: 30px;
-      margin-left: 27px;
-      color: $white;
-      background: url('../../../images/carddex_logo.svg') no-repeat center;
-      background-size: contain;
-    }
-  }
-
-  /* Right side of nav */
-  &__right, .nav-right {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 70px;
+    background-color: $white;
+    border-bottom: 1px solid $brandPantonFonts;
+    position: fixed;
     width: 100%;
-    color: $brandPantonBlack;
-    padding-left: 80px;
+    z-index: 10000;
 
-    &__text, .right-text {
-      font-size: 16px;
-      color: $brandPantonText;
-
-      &__name {
-        color: $brandPantonBlue;
-      }
-    }
-    
-    &__info, .right-info {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      //padding: 5px;
-
-      &__bell, .bell {
-        display: block;
-        padding: 15px 40px 15px 15px;
-        border-right: 2px solid $brandPantonFonts;
-
-        &__icon, .notifications {
-          display: block;
-          position: relative;
-          width: 30px;
-          height: 30px;
-          background: url("../../../images/bell.svg") no-repeat center;
-          background-size: contain;
-
-          &__number {
-            display: block;
-            position: absolute;
-            top: 1px;
-            right: 0;
-            padding: 1px 4px;
-            border-radius: 50%;
-            font-size: 9px;
-            color: $white;
-            background-color: $brandPantonBlue;
-          }
-
-        }
-      }
-
-      &__list, .info-list {
+    &__left,
+    .nav-left {
         display: flex;
         flex-direction: row;
+        justify-content: flex-start;
         align-items: center;
-        padding: 0 30px 0 15px;
 
-        &__text {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          margin-right: 15px;
+        &__hamburger {
+            margin-left: 2.1rem;
+            font-size: 30px;
+            color: $brandPantonBlue;
 
-          .name {
-            margin-bottom: 7px;
-            font-weight: $light;
-            font-size: 16px;
-            line-height: 15px;
-            color: $brandPantonText; 
-          }
-  
-          .role {
-            font-weight: $light;
-            font-size: 14px;
-            line-height: 13px;
-            color: $brandPantonSubText;
-          }
+            &:hover {
+                cursor: pointer;
+            }
         }
-        &__arrow {
-          display: block;
-          width: 15px;
-          height: 15px;
-          background: url('../../../images/arrow-info.svg') no-repeat center;
-          background-size: contain;
 
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-
-      .profile {
-        display: block;
-        position: relative;
-        height: 46px;
-        width: 46px;
-        padding: 1.25rem;
-        background: url('../../../images/profile-photo.png') no-repeat;
-        background-size: contain;
-        border-radius: 50%;
-        margin-left: 40px;
-
-        &__status {
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-          padding: 7px;
-          border-radius: 50%;
-          background-color: $brandPantonBlue;
-        }
-      }
-
-      .dropdown {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 12px;
-        background-color: $white;
-        padding: 1rem;
-        z-index: 10000;
-
-        &__item, .item {
-          display: flex;
-          align-items: center;
-          margin: 5px;
-          color: $brandPantonText;
-
-          &__profile-icon {
+        &__logo {
             display: block;
-            width: 30px;
+            width: 238px;
             height: 30px;
-            background: url('../../../images/profile-user.svg') no-repeat center;
-          }
-
-          &__settings-icon {
-            display: block;
-            width: 30px;
-            height: 30px;
-            background: url('../../../images/settings-user.svg') no-repeat center;
-          }
+            margin-left: 27px;
+            color: $white;
+            background: url('../../../images/carddex_logo.svg') no-repeat center;
+            background-size: contain;
         }
-
-        &__logout {
-          width: 100px;
-          padding: 5px 25px;
-          margin-top: 10px;
-          margin-left: 56%;
-          border-radius: 20px;
-          color: $white;
-          background-color: $brandPantonBlue;
-        }
-      }
     }
-  }
+
+    &__right,
+    .nav-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        color: $brandPantonBlack;
+        padding-left: 80px;
+
+        &__text,
+        .right-text {
+            font-size: 16px;
+            color: $brandPantonText;
+
+            &__name {
+                color: $brandPantonBlue;
+            }
+        }
+
+        &__info,
+        .right-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+            &__bell,
+            .bell {
+                display: block;
+                padding: 15px 40px 15px 15px;
+                border-right: 2px solid $brandPantonFonts;
+
+                &__icon,
+                .notifications {
+                    display: block;
+                    position: relative;
+                    width: 30px;
+                    height: 30px;
+                    background: url("../../../images/bell.svg") no-repeat center;
+                    background-size: contain;
+
+                    &__number {
+                        display: block;
+                        position: absolute;
+                        top: 1px;
+                        right: 0;
+                        padding: 1px 4px;
+                        border-radius: 50%;
+                        font-size: 9px;
+                        color: $white;
+                        background-color: $brandPantonBlue;
+                    }
+
+                }
+            }
+
+            &__list,
+            .info-list {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 0 30px 0 15px;
+
+                &__text {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 15px;
+
+                    .name {
+                        margin-bottom: 7px;
+                        font-weight: $light;
+                        font-size: 16px;
+                        line-height: 15px;
+                        color: $brandPantonText;
+                    }
+
+                    .role {
+                        font-weight: $light;
+                        font-size: 14px;
+                        line-height: 13px;
+                        color: $brandPantonSubText;
+                    }
+                }
+
+                &__arrow {
+                    display: block;
+                    width: 15px;
+                    height: 15px;
+                    background: url('../../../images/arrow-info.svg') no-repeat center;
+                    background-size: contain;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .profile {
+                display: block;
+                position: relative;
+                height: 46px;
+                width: 46px;
+                padding: 1.25rem;
+                background: url('../../../images/profile-photo.png') no-repeat;
+                background-size: contain;
+                border-radius: 50%;
+                margin-left: 40px;
+
+                &__status {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 7px;
+                    border-radius: 50%;
+                    background-color: $brandPantonBlue;
+                }
+            }
+
+            .dropdown {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 12px;
+                background-color: $white;
+                padding: 1rem;
+                z-index: 10000;
+
+                &__item,
+                .item {
+                    display: flex;
+                    align-items: center;
+                    margin: 5px;
+                    color: $brandPantonText;
+
+                    &__profile-icon {
+                        display: block;
+                        width: 30px;
+                        height: 30px;
+                        background: url('../../../images/profile-user.svg') no-repeat center;
+                    }
+
+                    &__settings-icon {
+                        display: block;
+                        width: 30px;
+                        height: 30px;
+                        background: url('../../../images/settings-user.svg') no-repeat center;
+                    }
+                }
+
+                &__logout {
+                    width: 100px;
+                    padding: 5px 25px;
+                    margin-top: 10px;
+                    margin-left: 56%;
+                    border-radius: 20px;
+                    color: $white;
+                    background-color: $brandPantonBlue;
+                }
+            }
+        }
+    }
 }
 
 .hamburger-visible {
-  display: block !important;
+    display: block !important;
 }
 
 .toggle-window {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 @media all and (max-width: 1366px) {
-  .right-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .top-nav__info {
-    font-size: 17px;
-  }
-  .right-top {
-    .email {
-      font-size: 14px;
+    .right-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
-    .role {
-      font-size: 14px;
+
+    .top-nav__info {
+        font-size: 17px;
     }
-  }
+
+    .right-top {
+        .email {
+            font-size: 14px;
+        }
+
+        .role {
+            font-size: 14px;
+        }
+    }
 }
+
 @media all and (max-width: 1172px) {
-  .right-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .top-right__block {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    min-width: 488px;
-  }
-  .top-nav__info {
-    font-size: 17px;
-    justify-content: flex-end;
-    margin-right: 2em;
-  }
-  .right-top {
-    .email {
-      font-size: 14px;
+    .right-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
     }
-    .role {
-      font-size: 14px;
+
+    .top-right__block {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        min-width: 488px;
     }
-  }
+
+    .top-nav__info {
+        font-size: 17px;
+        justify-content: flex-end;
+        margin-right: 2em;
+    }
+
+    .right-top {
+        .email {
+            font-size: 14px;
+        }
+
+        .role {
+            font-size: 14px;
+        }
+    }
 }

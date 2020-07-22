@@ -1,6 +1,5 @@
 /** ********** IMPORT LIBRARIES ********** */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ import Main from './MainContent/Main/Main';
 import Account from './MainContent/Account/Account';
 import News from './MainContent/News/News';
 import SalePartners from './MainContent/SalePartners/SalePartners';
-import MainContent from './MainContent/MainContent';
 import NotFound from '../404/404';
 import PriceList from './MainContent/PriceList/PriceList';
 import Control from './MainContent/Control/Control';
@@ -22,14 +20,31 @@ import WebApp from './MainContent/WebApp/WebApp';
 /** ********** IMPORT STYLES ********** */
 import './Layout.scss';
 
-class Layout extends Component {
+/**
+ * ********** Интерфейс пропсов компонента Main **********
+ */
+interface LayoutProps {
+    news: string[];
+    control: string;
+    contragentName: string;
+    partnerStatus: string;
+    logoutUser: () => void;
+}
+
+/**
+ * ********** Интерфейс стейта компонента Main **********
+ */
+interface LayoutState {
+    uuid: string;
+}
+
+class Layout extends React.PureComponent<LayoutProps, LayoutState> {
     // @ts-ignore
-    constructor(props) {
-        super(props);
-        this.state = {
-            uuid: ''
-        };
-    }
+    // eslint-disable-next-line react/state-in-constructor
+    state: LayoutState = {
+        // eslint-disable-next-line react/no-unused-state
+        uuid: ''
+    };
 
     /** ********** FETCH DATA ACCOUNT ********** */
     componentDidMount() {
@@ -42,14 +57,15 @@ class Layout extends Component {
         // @ts-ignore
         const { news, control, logoutUser } = this.props;
         // @ts-ignore
+        // eslint-disable-next-line react/destructuring-assignment
         const { contragentName, partnerStatus } = this.props.data;
         const uuid = localStorage.getItem('uuid');
         // console.log(uuid)
-        let dashboardContent;
+        // let dashboardContent;
         if (!uuid) {
             return <Redirect to="/" />;
         }
-        dashboardContent = (
+        const dashboardContent = (
             <>
                 <div className="right">
                     <SideNav />
@@ -64,7 +80,7 @@ class Layout extends Component {
                         <Route
                             exact
                             path="/dashboard"
-                            // projects={projects}                //projects={projects}
+                            // projects={projects}
                             component={Main} // component={Dashboard}
                         />
                         <Route

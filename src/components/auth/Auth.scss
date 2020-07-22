@@ -4,267 +4,278 @@
  * ********** Стили компонента Авторизация **********
  */
 .wrapper {
- display: flex;
- flex-direction: column;
- font-family: $code;
+	display: flex;
+	flex-direction: column;
+	font-family: $code;
 }
 
 .scroll::-webkit-scrollbar {
-  width: 6px;
-  height: 7px;
+	width: 6px;
+	height: 7px;
 }
+
 .scroll::-webkit-scrollbar:horizontal {
-  height: 0px;
+	height: 0px;
 }
+
 /* Track */
 .scroll::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px transparent; 
-  width: 1px;
-  border-radius: 15px;
+	box-shadow: inset 0 0 5px transparent;
+	width: 1px;
+	border-radius: 15px;
 }
+
 /* Handle */
 .scroll::-webkit-scrollbar-thumb {
-  background: $brandPantonFonts; 
-  border-radius: 10px;
+	background: $brandPantonFonts;
+	border-radius: 10px;
 }
+
 /* Handle on hover */
 .scroll::-webkit-scrollbar-thumb:hover {
-  background: $brandPantonSubText; 
+	background: $brandPantonSubText;
 }
 
 .auth {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100%;
-    font-weight: $light;
-    font-family: $code;
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+	width: 100%;
+	font-weight: $light;
+	font-family: $code;
 
-    &__left {
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-      background-color: $white;
-      z-index: 1000;
-    }
+	&__left {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		background-color: $white;
+		z-index: 1000;
+	}
 
-    &__heading {
-      margin: 220px 0 40px 220px;
-      font-size: 26px;
-      line-height: 1.27;
-      color: $brandPantonBlack;
-      font-weight: $regular;
-      font-family: $font-regular;
-    }
+	&__heading {
+		margin: 220px 0 40px 220px;
+		font-size: 26px;
+		line-height: 1.27;
+		color: $brandPantonBlack;
+		font-weight: $regular;
+		font-family: $font-regular;
+	}
 
-    &__necessary {
-      margin: 0 0 40px 220px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: $brandPantonBlack;
-    }
+	&__necessary {
+		margin: 0 0 40px 220px;
+		font-size: 12px;
+		line-height: 1.5;
+		color: $brandPantonSubText;
+	}
 
-    &__forms {
-      height: 70vh;  // сделать правильно! Разница в высоте форм влияет на положение нижнего блока с текстом
-      margin-right: 4px;
-      display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
-      font-family: $code;
-      margin-left: 220px;
+	&__forms {
+		height: 70vh; // сделать правильно! Разница в высоте форм влияет на положение нижнего блока с текстом
+		margin-right: 4px;
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+		font-family: $code;
+		margin-left: 220px;
 
-      &__header {
-        height: 3vh;
-      }
+		&__header {
+			height: 3vh;
+		}
 
-    }
-    
-    &__field, .field {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
+	}
 
-    &__label {
-      position: absolute;
-      pointer-events: none;
-      left: 0px;
-      top: 0;
-      transition: .3s;
-      line-height: 1.5;
-      margin-top: 1rem;
-      margin-bottom: 0.75rem;
-      font-size: 14px;
-      color: $brandPantonBlack;
-      font-family: $font-light;
-    }
+	&__field,
+	.field {
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
 
-    &__input {
-      position: relative;
-      width: 71%;
-      margin-bottom: 15px;
-      height: 50px;
-      border: 0;
-      outline: 0;
-      color: $brandPantonGrey;
-      border-bottom: 1px solid #efefef;
-      transition: all 0.25s ease 0s;
-      padding: 0.7rem 0;
-      font-size: 14px;
-      font-family: $font-regular;
-    }
+	&__label {
+		position: absolute;
+		pointer-events: none;
+		left: 0px;
+		top: 0;
+		transition: .3s;
+		line-height: 1.5;
+		margin-top: 1rem;
+		margin-bottom: 0.75rem;
+		font-size: 14px;
+		color: $brandPantonBlack;
+		font-family: $font-light;
+	}
 
-    .auth__input:focus~.auth__label,
-    .auth__input:not(:focus):valid~.auth__label {
-      top: -20px;
-      font-size: 12px;
-      color: $brandPantonBlack;
-      font-family: $font-light;
-    }
+	&__input {
+		position: relative;
+		width: 71%;
+		margin-bottom: 15px;
+		height: 50px;
+		border: 0;
+		outline: 0;
+		color: $brandPantonGrey;
+		border-bottom: 1px solid #efefef;
+		transition: all 0.25s ease 0s;
+		padding: 0.7rem 0;
+		font-size: 14px;
+		font-family: $font-regular;
+	}
 
-    &__options {
-      width: 71%;
-    }
+	.auth__input:focus~.auth__label,
+	.auth__input:not(:focus):valid~.auth__label {
+		top: -20px;
+		font-size: 12px;
+		color: $brandPantonSubText;
+		font-family: $font-light;
+	}
 
-    &__error {
-      display: block;
-      height: 15px;
-      margin-top: 20px;
-      font-family: $code;
-      font-size: 12px;
-      line-height: 1.5;
-      color: $brandPantonRed;
-    }
+	&__options {
+		width: 71%;
+	}
 
-    &__password-ask, .ask {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      margin-bottom: 20px;
-      font-family: $code;
-      
-      span {
-        margin-left: 20px;
-        font-size: 12px;
-        line-height: 1.5;
+	&__error {
+		display: block;
+		height: 15px;
+		margin-top: 20px;
+		font-family: $code;
+		font-size: 12px;
+		line-height: 1.5;
+		color: $brandPantonRed;
+	}
 
-        a {
-          color: $brandPantonBlue;
-          text-decoration: underline;
-        }
-      }
+	&__password-ask,
+	.ask {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		margin-bottom: 20px;
+		font-family: $code;
 
-      &__register {
-        margin-top: 10px;
-      }
+		span {
+			margin-left: 20px;
+			font-size: 12px;
+			line-height: 1.5;
 
-      &__password {
-        font-size: 12px;
-        text-decoration: underline;
-        line-height: 1.5;
-        color: $brandPantonBlue;
-        padding: 5px 0;
-        font-family: $font-light;
-      }
-    }
-    
-    &__button {
-      padding: 6px 76px;
-      margin-top: 1rem;
-      color: $white;
-      background-color: $brandPantonBlue;
-      border-radius: 15px;
-      border-color: transparent;
-      font-size: 15px;
-      font-family: $font-regular;
-      outline: transparent;
-    }
+			a {
+				color: $brandPantonBlue;
+				text-decoration: underline;
+			}
+		}
 
-    &__back, .back {
-      display: flex;
-      align-items: center;
-      margin: 145px 0 220px 220px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: $brandPantonBlue;
-      text-decoration: underline;
+		&__register {
+			margin-top: 10px;
+		}
 
-      &__arrow {
-        display: block;
-        margin-right: 5px;
-        height: 15px;
-        width: 15px;
-        transform: rotate(180deg);
-        background: url('../../images/arrow-more.svg') no-repeat center;
-      }
-    }
+		&__password {
+			font-size: 12px;
+			text-decoration: underline;
+			line-height: 1.5;
+			color: $brandPantonBlue;
+			padding: 5px 0;
+			font-family: $font-light;
+		}
+	}
 
-    &__registration, .registration {
-      margin: 65px 0 220px 220px;
+	&__button {
+		padding: 6px 76px;
+		margin-top: 1rem;
+		color: $white;
+		background-color: $brandPantonBlue;
+		border-radius: 15px;
+		border-color: transparent;
+		font-size: 15px;
+		font-family: $font-regular;
+		outline: transparent;
+	}
 
-      &__no-login {
-        font-size: 12px;
-        line-height: 1.5;
-        color: $brandPantonBlack;
-      }
-      &__link {
-        font-size: 12px;
-        line-height: 1.5;
-        color: $brandPantonBlack;
+	&__back,
+	.back {
+		display: flex;
+		align-items: center;
+		margin: 145px 0 220px 220px;
+		font-size: 12px;
+		line-height: 1.5;
+		color: $brandPantonBlue;
+		text-decoration: underline;
 
-        & > a {
-          color: $brandPantonBlue;
-        }
+		&__arrow {
+			display: block;
+			margin-right: 5px;
+			height: 15px;
+			width: 15px;
+			transform: rotate(180deg);
+			background: url('../../images/arrow-more.svg') no-repeat center;
+		}
+	}
 
-      }
+	&__registration,
+	.registration {
+		margin: 65px 0 220px 220px;
 
-    }
-    
-    &__right, .right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 50%;
-        height: 100%;
-        background: url('../../images/main__photo.jpg') no-repeat center;
-        background-size: cover;
-        //opacity: .9;
+		&__no-login {
+			font-size: 12px;
+			line-height: 1.5;
+			color: $brandPantonSubText;
+		}
 
-        &__logo {
-          display: block;
-          width: 243px;
-          height: 45px;
-          margin: 220px 0 40px 0;
+		&__link {
+			font-size: 12px;
+			line-height: 1.5;
+			color: $brandPantonSubText;
 
-          .image {
-            display: block;
-            background: url('../../images/carddex_logo.svg') no-repeat center;
-            background-size: contain;
-          }
-        }
+			& > a {
+				color: $brandPantonBlue;
+			}
 
-        &__text {
-          font-size: 14px;
-          font-weight: 500;
-          line-height: 1.5;
-          color: $brandPantonBlack;
-          font-family: $font-regular;
-        }
+		}
 
-        &__image, .image {
-          display: block;
-          width: 100%;
-          height: 100%;
+	}
 
-          &__photo {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-size: contain;
-          }
-        }
-    }
+	&__right,
+	.right {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 50%;
+		height: 100%;
+		background: url('../../images/main__photo.jpg') no-repeat center;
+		background-size: cover;
+		//opacity: .9;
+
+		&__logo {
+			display: block;
+			width: 243px;
+			height: 45px;
+			margin: 220px 0 40px 0;
+
+			.image {
+				display: block;
+				background: url('../../images/carddex_logo.svg') no-repeat center;
+				background-size: contain;
+			}
+		}
+
+		&__text {
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.5;
+			color: $brandPantonBlack;
+			font-family: $font-regular;
+		}
+
+		&__image,
+		.image {
+			display: block;
+			width: 100%;
+			height: 100%;
+
+			&__photo {
+				display: block;
+				width: 100%;
+				height: 100%;
+				background-size: contain;
+			}
+		}
+	}
 }
 
 /**
@@ -272,127 +283,154 @@
  */
 
 .warning {
-  border-bottom: 1px solid $brandPantonRed;
+	border-bottom: 1px solid $brandPantonRed;
+}
+
+.remove__scrollbar {
+	&::-webkit-scrollbar {
+		width: 0;
+	}
 }
 
 .inaccess {
-  display: block;
-  position: absolute;
-  right: 29%;
-  width: 20px;
-  height: 20px;
-  background: url('../../images/eye-inaccess.svg') no-repeat center;
+	display: block;
+	position: absolute;
+	right: 29%;
+	width: 20px;
+	height: 20px;
+	background: url('../../images/eye-inaccess.svg') no-repeat center;
 }
 
 .access {
-  display: block;
-  position: absolute;
-  right: 29%;
-  width: 20px;
-  height: 20px;
-  background: url('../../images/eye-access.svg') no-repeat center;
+	display: block;
+	position: absolute;
+	right: 29%;
+	width: 20px;
+	height: 20px;
+	background: url('../../images/eye-access.svg') no-repeat center;
 }
 
 .inaccessible {
-  background-color: $brandPantonFonts;
-  color: $brandPantonBlack;
+	background-color: $brandPantonFonts;
+	color: $brandPantonBlack;
 }
 
 /**
  * ********** Стили для адаптива компонента Авторизация **********
  */
 
- @media all and (max-width:1440px) {
-    .auth__heading {
-      margin-left: 120px;
-    }
-    .auth__necessary {
-      margin-left: 120px!important;
-      width: 60%;
-    }
-    .auth__forms {
-      margin-left: 120px;
-    }
-    .auth__input {
-      width: 80%;
-    }
-    .auth__back, .back {
-      margin-left: 120px!important;
-    }
-    .registration {
-      margin-left: 120px!important; /** исправить! */
-    }
-    .right__logo, .logo {
-      margin: 220px 0 40px 0!important;
-    }
-    .access {
-      right: 20%;
-    }
-    .inaccess {
-      right: 20%;
-    }
- }
+@media all and (max-width:1440px) {
+	.auth__heading {
+		margin-left: 120px;
+	}
 
- @media all and (max-width:1080px) {
-  .auth__heading {
-    margin-left: 120px;
-  }
-  .auth__necessary {
-    margin-left: 120px!important;
-  }
-  .auth__forms {
-    margin-left: 120px;
-  }
-  .auth__input {
-    width: 80%;
-  }
-  .registration {
-    margin-left: 120px!important; /** исправить! */
-  }
-  .right__logo, .logo {
-    margin: 220px 0 40px 0!important;
-  }
-  .access {
-    right: 20%;
-  }
-  .inaccess {
-    right: 20%;
-  }
+	.auth__necessary {
+		margin-left: 120px !important;
+		width: 60%;
+	}
+
+	.auth__forms {
+		margin-left: 120px;
+	}
+
+	.auth__input {
+		width: 80%;
+	}
+
+	.auth__back,
+	.back {
+		margin-left: 120px !important;
+	}
+
+	.registration {
+		margin-left: 120px !important;
+		/** исправить! */
+	}
+
+	.right__logo,
+	.logo {
+		margin: 220px 0 40px 0 !important;
+	}
+
+	.access {
+		right: 20%;
+	}
+
+	.inaccess {
+		right: 20%;
+	}
 }
 
- @media all and  (max-width: 968px) {
+@media all and (max-width:1080px) {
+	.auth__heading {
+		margin-left: 120px;
+	}
 
-   .auth__heading {
-      margin-left: 120px;
-      margin-top: 150px;
-    }
+	.auth__necessary {
+		margin-left: 120px !important;
+	}
 
-    .auth__necessary {
-      margin-left: 120px!important;
-    }
+	.auth__forms {
+		margin-left: 120px;
+	}
 
-    .auth__forms {
-      margin-left: 120px;
-    }
+	.auth__input {
+		width: 80%;
+	}
 
-    .auth__input {
-      width: 80%;
-    }
+	.registration {
+		margin-left: 120px !important;
+		/** исправить! */
+	}
 
-    .registration {
-      margin-left: 120px!important; /** исправить! */
-    }
+	.right__logo,
+	.logo {
+		margin: 220px 0 40px 0 !important;
+	}
 
-    .auth__left {
-      width: 100%;
-    }
+	.access {
+		right: 20%;
+	}
 
-    .auth__options {
-      width: 80%;
-    }
- 
+	.inaccess {
+		right: 20%;
+	}
+}
 
-   .auth__right {
-     display: none!important;
-   }
- }
+@media all and (max-width: 968px) {
+
+	.auth__heading {
+		margin-left: 120px;
+		margin-top: 150px;
+	}
+
+	.auth__necessary {
+		margin-left: 120px !important;
+	}
+
+	.auth__forms {
+		margin-left: 120px;
+	}
+
+	.auth__input {
+		width: 80%;
+	}
+
+	.registration {
+		margin-left: 120px !important;
+		/** исправить! */
+	}
+
+	.auth__left {
+		width: 100%;
+	}
+
+	.auth__options {
+		width: 80%;
+	}
+
+
+	.auth__right {
+		display: none !important;
+	}
+}

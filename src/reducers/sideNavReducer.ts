@@ -1,25 +1,19 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    SideNavActions,
-    SideNavState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { SideNavActions, SideNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/types';
 
 const initialState: SideNavState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента SideNav **********
  */
-export default function(state = initialState, action: SideNavActions): SideNavState {
-    switch(action.type) {
+export default function (state = initialState, action: SideNavActions): SideNavState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -37,6 +31,7 @@ export default function(state = initialState, action: SideNavActions): SideNavSt
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

@@ -1,0 +1,12 @@
+os: linux
+dist: xenial
+language: node_js
+node_js:
+- 'stable'
+cache:
+directories:
+- node_modules
+env:
+- SKIP_PREFLIGHT_CHECK=true
+script:
+- yarn build

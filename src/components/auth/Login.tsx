@@ -12,11 +12,6 @@ import { PersonalCabinet } from '../../store/store';
 // import { loginUser } from '../../actions/authActions';
 
 /**
- * ********** Импорт компонентов **********
- */
-// import Layout from '../dashboard/Layout';
-
-/**
  * ********** Импорт стилей **********
  */
 import './Auth.scss';
@@ -56,17 +51,17 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     /**
      * ********** Запрос данных **********
      */
-    public componentDidMount() {
-        // if(localStorage.getItem('uuid') !== null ) {
-        //   window.location.pathname = "/dashboard";
-        //   // @ts-ignore
-        //   window.history.back("/dashboard");
-        //   // @ts-ignore
-        //   window.history.go("/dashboard");
-        //   // @ts-ignore
-        //   this.props.history.pushState("/dashboard", Layout)
-        // }
-    }
+    // public componentDidMount() {
+    // if(localStorage.getItem('uuid') !== null ) {
+    //   window.location.pathname = "/dashboard";
+    //   // @ts-ignore
+    //   window.history.back("/dashboard");
+    //   // @ts-ignore
+    //   window.history.go("/dashboard");
+    //   // @ts-ignore
+    //   this.props.history.pushState("/dashboard", Layout)
+    // }
+    // }
 
     /**
      * ********** Запись данных в стейт из инпутов **********

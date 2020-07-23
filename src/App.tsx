@@ -83,7 +83,7 @@ if (localStorage.jwtTokenTeams) {
 interface AppProps {
   readonly data: any,
   readonly loginUser: (email: string, pass: string) => void,
-  readonly resetPassword: (email: string) => void,
+  // readonly resetPassword: (email: string) => void,
   readonly logoutUser: () => void,
   readonly logout: () => void
 }
@@ -111,14 +111,6 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
       success: null,
       err: null
     }
-  
-  private resetPassword = (email: string) => {
-    console.log('RESET PASSWORD');
-  }
-
-  private newPassword = (pass: string, repeatPass: string) => {
-    console.log('NEW PASSWORD');
-  }
 
   private loginUser = (email: string, pass: string) => {  /** Удалить знак ? */
     axios
@@ -168,7 +160,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
               />  {/** "/register/:name/:email" */}
               <Route exact path="/reset" render={() =>
                 <Reset
-                  resetPassword={this.resetPassword}
+                  //  resetPassword={this.resetPassword}
                   data={data}
                   //@ts-ignore
                   //history={window.history}
@@ -177,7 +169,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
               />
               <Route exact path="/new-password" render={() =>
                 <NewPassword
-                  newPassword={this.newPassword}
+                  // newPassword={this.newPassword}
                   data={data}
                   //@ts-ignore
                   //history={window.history}

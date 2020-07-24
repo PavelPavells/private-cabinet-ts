@@ -1,37 +1,25 @@
 /**
  * Импорт зависимостей
  */
-import React, { Component, JSXElementConstructor, ClassAttributes } from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { shallowEqual, useSelector } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
 
 /**
  * Интерфейс компонента SecuredRoute
  */
 interface SecuredRouteProps {
-  auth: {
-    isAuthenticated: boolean,
-    user: string
-  },
-  component: React.ComponentType<any>
+    auth: {
+        isAuthenticated: boolean;
+        user: string;
+    };
+    component: React.ComponentType<any>;
 }
 
-const SecuredRoute: React.SFC<SecuredRouteProps> = ({ component: Component, auth, ...rest }: SecuredRouteProps) => (
-  <Route
-    {...rest}
-    render={props =>
-      auth.isAuthenticated === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/" />
-      )
-    }
-  />
-);
+const SecuredRoute: React.SFC<SecuredRouteProps> = ({ component: Component, ...rest }: SecuredRouteProps) => {
+    const { isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
+    return <Route {...rest} render={(props) => (isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />)} />;
+};
 
-const mapStateToProps = (state: PersonalCabinet) => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(SecuredRoute);
+export default SecuredRoute;

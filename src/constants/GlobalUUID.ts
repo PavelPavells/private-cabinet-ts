@@ -11,7 +11,6 @@ const login = 'f30c2a43-20c5-4da7-9c52-534cfddb07d6';
 // //const login = 'a7598cf2-ad29-4f6f-8f23-7bccdf372ee8';
 // //const login = 'f54b21e7-2fae-41f7-bfa2-fd018c537e3b';
 
-
 // //1	 carddex@carddex.ru	123456789	f30c2a43-20c5-4da7-9c52-534cfddb07d6
 // //2	 debug@debug.ru	    debug123	5b2827f4-90cf-44bc-82e4-9d23537d4a2e
 // //3	 test@test.ru	    test123	    dc8d435a-2c05-47c0-bc65-059f350a8823

@@ -25,7 +25,7 @@ import site from '../constants/Global';
 /**
  * ********** Экшен для установки текущего пользователя **********
  */
-export const setCurrentUser = (decoded: any): AuthActions => {
+export const setCurrentUser = (decoded: Object): AuthActions => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
@@ -59,13 +59,28 @@ export const resetPassword = (email: string, history?: any) => (dispatch: Dispat
 /**
  * ********** Экшен для регистрации нового пользователя **********
  */
-export const newPassword = (password: any) => (dispatch: Dispatch<AuthActions>) => {
-    axios.post(`${site}/new-password`, password).catch((err) =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
+export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
+    axios
+        .post(`${site}/new-password`, password)
+        .then((res) => {
+            // Сохранить пришедший токен в localStorage
+
+            // Установить токен в localStorage
+            const { token } = res.data;
+            localStorage.setItem('jwtNewPassword', JSON.stringify(token));
+            // Установить токен в заголовок авторизации
+            setAuthToken(token);
+            // Декодировать токен, чтобы получать пользователя
+            const decoded = jwt_decode(token);
+            // Установить текущего пользователя
+            dispatch(setCurrentUser(decoded));
         })
-    );
+        .catch((err) =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 
 /**

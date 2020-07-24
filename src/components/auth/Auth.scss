@@ -44,7 +44,7 @@
 	font-weight: $light;
 	font-family: $code;
 
-	&__left {
+	&__left, .left {
 		display: flex;
 		flex-direction: column;
 		width: 50%;
@@ -191,7 +191,7 @@
 	.back {
 		display: flex;
 		align-items: center;
-		margin: 145px 0 220px 220px;
+		margin: 145px 0 220px 0px;
 		font-size: 12px;
 		line-height: 1.5;
 		color: $brandPantonBlue;

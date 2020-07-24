@@ -3,7 +3,7 @@
  */
 // const isEmpty = require("is-empty");
 
-import { AuthState, AuthActions, SET_CURRENT_USER, USER_LOADING, RESET_CURRENT_USER, NEW_PASSWORD } from '../constants/types';
+import { AuthState, AuthActions, SET_CURRENT_USER, USER_LOADING, RESET_CURRENT_USER, NEW_PASSWORD_USER } from '../constants/types';
 
 const initialState: AuthState = {
     isAuthenticated: false,
@@ -29,7 +29,7 @@ export default function (state = initialState, action: AuthActions): AuthState {
                 isAuthenticated: false,
                 user: action.payload
             };
-        case NEW_PASSWORD:
+        case NEW_PASSWORD_USER:
             return {
                 ...state,
                 isAuthenticated: false,

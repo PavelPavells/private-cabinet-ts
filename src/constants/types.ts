@@ -5,7 +5,7 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const USER_LOADING = 'USER_LOADING';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const RESET_CURRENT_USER = 'RESET_CURRENT_USER';
-export const NEW_PASSWORD = 'NEW_PASSWORD';
+export const NEW_PASSWORD_USER = 'NEW_PASSWORD';
 
 /**
  * ********** Глобальные переменные для асинхронных запросов на сервер **********
@@ -29,7 +29,7 @@ export interface userResetPassword {
 }
 
 export interface userNewPassword {
-    type: typeof NEW_PASSWORD;
+    type: typeof NEW_PASSWORD_USER;
     payload: any;
 }
 

@@ -79,7 +79,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
      * ********** Скрыть/Отобразить Пароль **********
      */
     private showOrHidePasswordRepeat = () => {
-        const password: HTMLElement | any = document.getElementById('repeatpass');
+        const password: HTMLElement | any = document.getElementById('repeatPass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
         access.classList.toggle('access');
         if (password.type === 'password') {
@@ -200,7 +200,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                                                 onChange={this.onChange}
                                                 onKeyDown={this.onKeyPress}
                                                 value={repeatPass}
-                                                id="repeatpass"
+                                                id="repeatPass"
                                                 type="password"
                                                 className="auth__input warning"
                                                 required
@@ -214,7 +214,7 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                                                 onChange={this.onChange}
                                                 onKeyDown={this.onKeyPress}
                                                 value={repeatPass}
-                                                id="repeatpass"
+                                                id="repeatPass"
                                                 type="password"
                                                 className="auth__input"
                                                 required
@@ -248,14 +248,14 @@ class NewPassword extends React.PureComponent<NewPasswordProps, Partial<NewPassw
                                 Вернуться к авторизации
                             </Link>
                         </div>
-                        <div className="auth__right right">
-                            <div className="right__logo logo">
-                                <div className="image" />
-                            </div>
-                            <div className="right__text">Личный кабинет партнера</div>
-                            <div className="right__image image">
-                                <div className="image__photo" />
-                            </div>
+                    </div>
+                    <div className="auth__right right">
+                        <div className="right__logo logo">
+                            <div className="image" />
+                        </div>
+                        <div className="right__text">Личный кабинет партнера</div>
+                        <div className="right__image image">
+                            <div className="image__photo" />
                         </div>
                     </div>
                 </div>

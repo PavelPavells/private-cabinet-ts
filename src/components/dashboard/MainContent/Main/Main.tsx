@@ -1,28 +1,33 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
- */
+ * */
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import { PersonalCabinet } from '../../../../store/store';
 
 /**
  * ********** Импорт экшенов **********
- */
+ * */
 import { ordersTable } from './data.json';
 import { fetchDataMain } from '../../../../actions/mainActions';
 
 /**
+ * ********** Импорт типа store **********
+ * */
+import { PersonalCabinet } from '../../../../store/store';
+
+/**
  * ********** Импорт файлов стилей **********
- */
+ * */
 import './Main.scss';
 
-/** ********** IMPORT LOADER from __UTILS__ ********** */
+/**
+ * ********** IMPORT LOADER from __UTILS__ **********
+ * */
 // import Loader from "../../../../__utils__/Spinner";
 
 /**
  * ********** Интерфейс локального стейта компонента Main **********
- */
+ * */
 interface MainState {
     main: any;
 }

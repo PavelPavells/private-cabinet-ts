@@ -17,7 +17,7 @@
     "react": "^16.6.3",
     "react-dates": "^21.5.1",
     "react-dom": "^16.6.3",
-    "react-redux": "^5.1.1",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
     "react-select": "^3.1.0",
@@ -39,11 +39,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
     "@types/eslint": "^7.2.0",
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/prettier": "^2.0.2",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",
@@ -55,6 +55,5 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.7",
     "prettier": "^2.0.5"
-  
   }
 }

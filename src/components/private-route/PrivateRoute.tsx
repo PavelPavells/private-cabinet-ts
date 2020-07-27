@@ -18,8 +18,8 @@ interface SecuredRouteProps {
 }
 
 const SecuredRoute: React.SFC<SecuredRouteProps> = ({ component: Component, ...rest }: SecuredRouteProps) => {
-    const { isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    return <Route {...rest} render={(props) => (isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />)} />;
+    const { auth } = useSelector((state: PersonalCabinet) => state, shallowEqual);
+    return <Route {...rest} render={(props) => (auth.isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />)} />;
 };
 
 export default SecuredRoute;

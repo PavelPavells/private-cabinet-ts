@@ -97,7 +97,7 @@ class Layout extends React.PureComponent<LayoutProps, LayoutState> {
                         <Route
                             path="/price-list"
                             // @ts-ignore
-                            render={() => <PriceList data={uuid} />}
+                            render={() => <PriceList uuid={uuid} />}
                         />
                         <Route path="/control" component={Control} control={control} />
                         <Route

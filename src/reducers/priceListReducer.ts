@@ -1,29 +1,23 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    PriceListActions,
-    PriceListState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { PriceListActions, PriceListState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/types';
 
 const initialState: PriceListState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента PriceList **********
  */
-export default function(state = initialState, action: PriceListActions): PriceListState {
-    switch(action.type) {
+export default function (state = initialState, action: PriceListActions): PriceListState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
-                isFetching: true 
+                isFetching: true
             };
         case DATA_LOADING_SUCCESS:
             return {
@@ -37,6 +31,7 @@ export default function(state = initialState, action: PriceListActions): PriceLi
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

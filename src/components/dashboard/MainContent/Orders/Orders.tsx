@@ -7,13 +7,13 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataPriceList } from '../../../../actions/priceListActions';
+import { fetchDataOrders } from '../../../../actions/ordersActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { PriceListReq } from '../../../../constants/types';
+// import { PriceListReq } from '../../../../constants/types';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -28,11 +28,11 @@ import Search from '../../../../images/search.svg';
 /**
  * ********** Импорт файлов стилей **********
  * */
-import './PriceList.scss';
+import './Orders.scss';
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
-const PriceListComponent = ({ uuid }) => {
+const OrdersComponent = ({ uuid }) => {
     const [offset] = useState(0);
     const [size] = useState(30);
     const [exportModal, setExportModal] = useState(false);
@@ -40,7 +40,7 @@ const PriceListComponent = ({ uuid }) => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { headers, table } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
+    const { headers, table } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
@@ -50,8 +50,8 @@ const PriceListComponent = ({ uuid }) => {
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: PriceListReq = { offset, size, login: uuid };
-        dispatch(fetchDataPriceList(request));
+        const request: any = { offset, size, login: uuid };
+        dispatch(fetchDataOrders(request));
     }, []);
 
     /**
@@ -189,9 +189,9 @@ const PriceListComponent = ({ uuid }) => {
     if (headers && table) {
         return (
             <main className="main-content">
-                <div className="pricelist">
+                <div className="orders">
                     <header className="pricelist__heading heading">
-                        <div className="heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="heading__text">Заказы</div>
                         <div className="heading__buttons buttons">
                             <div className="buttons__filter">Быстрый фильтр</div>
                             <div className="buttons__export export">
@@ -223,7 +223,7 @@ const PriceListComponent = ({ uuid }) => {
                     <main className="pricelist__main pricelist-main">
                         <div className="pricelist-main__frame frame">
                             <div className="frame__caption frame-caption">
-                                {headers.map((header) => {
+                                {headers.map((header: any) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-caption__wrap wrap">
@@ -240,11 +240,11 @@ const PriceListComponent = ({ uuid }) => {
                                 })}
                             </div>
                             <div className="frame__table frame-table">
-                                {headers.map((header, i) => {
+                                {headers.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-table__column column">
-                                                {table.map((index) => {
+                                                {table.map((index: any) => {
                                                     return (
                                                         <div key={index.item_price_uuid} className="column__item">
                                                             {i === 0 && <div className="item__icon" />}
@@ -270,4 +270,4 @@ const PriceListComponent = ({ uuid }) => {
     return <Loader />;
 };
 
-export default PriceListComponent;
+export default OrdersComponent;

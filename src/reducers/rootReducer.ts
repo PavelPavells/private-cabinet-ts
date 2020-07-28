@@ -7,6 +7,7 @@ import mainReducer from './mainReducer';
 // import newsReducer from './newsReducer';
 import paymentReducer from './paymentReducer';
 import priceListReducer from './priceListReducer';
+import ordersReducer from './ordersReducer';
 import salePartnersReducer from './salePartnersReducer';
 import shipmentReducer from './shipmentReducer';
 import sideNavReducer from './sideNavReducer';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     main: mainReducer,
     payment: paymentReducer,
     pricelist: priceListReducer,
+    orders: ordersReducer,
     salepartners: salePartnersReducer,
     shipment: shipmentReducer,
     sidenav: sideNavReducer,

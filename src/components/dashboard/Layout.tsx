@@ -8,14 +8,13 @@ import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
 import Main from './MainContent/Main/Main';
 import Account from './MainContent/Account/Account';
-import News from './MainContent/News/News';
 import SalePartners from './MainContent/SalePartners/SalePartners';
 import NotFound from '../404/404';
 import PriceList from './MainContent/PriceList/PriceList';
+import Orders from './MainContent/Orders/Orders';
 import Control from './MainContent/Control/Control';
 import Payment from './MainContent/Payment/Payment';
 import Shipment from './MainContent/Shipment/Shipment';
-import WebApp from './MainContent/WebApp/WebApp';
 
 /** ********** IMPORT STYLES ********** */
 import './Layout.scss';
@@ -55,7 +54,7 @@ class Layout extends React.PureComponent<LayoutProps, LayoutState> {
 
     render() {
         // @ts-ignore
-        const { news, control, logoutUser } = this.props;
+        const { control, logoutUser } = this.props;
         // @ts-ignore
         // eslint-disable-next-line react/destructuring-assignment
         const { contragentName, partnerStatus } = this.props.data;
@@ -71,6 +70,7 @@ class Layout extends React.PureComponent<LayoutProps, LayoutState> {
                     <SideNav />
                     <TopNav
                         // @ts-ignore
+                        exact
                         contragentName={contragentName}
                         partnerStatus={partnerStatus}
                         uuid={uuid}
@@ -81,39 +81,42 @@ class Layout extends React.PureComponent<LayoutProps, LayoutState> {
                             exact
                             path="/dashboard"
                             // projects={projects}
-                            component={Main} // component={Dashboard}
+                            render={() => <Main data={uuid} />}
                         />
                         <Route
+                            exact
                             path="/sales"
                             // @ts-ignore
                             render={() => <SalePartners data={uuid} />}
                         />
                         <Route
+                            exact
                             path="/account"
                             // @ts-ignore
                             render={() => <Account data={uuid} />}
                         />
-                        <Route path="/news" component={News} news={news} />
                         <Route
                             path="/price-list"
                             // @ts-ignore
                             render={() => <PriceList uuid={uuid} />}
                         />
-                        <Route path="/control" component={Control} control={control} />
                         <Route
+                            path="/orders"
+                            // @ts-ignore
+                            render={() => <Orders uuid={uuid} />}
+                        />
+                        <Route path="/control" render={() => <Control />} control={control} />
+                        <Route
+                            exact
                             path="/payment"
                             // @ts-ignore
                             render={() => <Payment data={uuid} />}
                         />
                         <Route
+                            exact
                             path="/shipment"
                             // @ts-ignore
                             render={() => <Shipment data={uuid} />}
-                        />
-                        <Route
-                            path="/app"
-                            // @ts-ignore
-                            render={() => <WebApp data={uuid} />}
                         />
                         <Route component={NotFound} />
                     </Switch>

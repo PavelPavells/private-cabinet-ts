@@ -2,15 +2,15 @@
  * ********** Импорт глобальных переменных **********
  */
 import {
-    PriceListActions,
-    PriceListState,
+    OrdersActions,
+    OrdersState,
     DATA_LOADING_REQUEST,
     DATA_LOADING_FAILURE,
-    DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS,
-    DATA_LOADING_SUCCESS_PRICE_LIST_TABLE
+    DATA_LOADING_SUCCESS_ORDERS_HEADERS,
+    DATA_LOADING_SUCCESS_ORDERS_TABLE
 } from '../constants/types';
 
-const initialState: PriceListState = {
+const initialState: OrdersState = {
     isFetching: false,
     errorMessage: '',
     headers: null,
@@ -20,20 +20,20 @@ const initialState: PriceListState = {
 /**
  * ********** Редьюсер компонента PriceList **********
  */
-export default function priceListReducer(state = initialState, action: PriceListActions): PriceListState {
+export default function ordersReducer(state = initialState, action: OrdersActions): OrdersState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
                 isFetching: true
             };
-        case DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS:
+        case DATA_LOADING_SUCCESS_ORDERS_HEADERS:
             return {
                 ...state,
                 isFetching: false,
                 headers: action.payload
             };
-        case DATA_LOADING_SUCCESS_PRICE_LIST_TABLE:
+        case DATA_LOADING_SUCCESS_ORDERS_TABLE:
             return {
                 ...state,
                 isFetching: false,

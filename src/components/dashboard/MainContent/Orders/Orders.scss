@@ -1,9 +1,9 @@
 @import "../../../../styles/base.scss";
 
 /**
- * ********** Стили компонента Прайс-лист **********
+ * ********** Стили компонента Заказы **********
  */
-.pricelist {
+.orders {
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -191,15 +191,10 @@
                         }
                         &__icon {
                             display: block;
-                            margin-right: 5px;
                             width: 16px;
                             height: 16px;
                             background: url('../../../../images/plus_item.svg') no-repeat center;
                             background-size: contain;
-
-                            &:hover {
-                                cursor: pointer;
-                            }
                         }
                     }
                 }

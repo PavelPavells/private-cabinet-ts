@@ -168,7 +168,7 @@ class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
                             <div className="font-block-hover">Прайс-лист продукции CARDDEX</div>
                         </li>
                     </NavLink>
-                    <NavLink exact activeClassName="active-page" to="/sales">
+                    <NavLink exact activeClassName="active-page" to="/orders">
                         <li onClick={this.handleClickSales} className="font">
                             {/** Изменить на subparagraph чтобы вернуть подпараграфы* */}
                             <i className="side-logo__sales icon" />

@@ -14,6 +14,134 @@ export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 
+export const DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS = 'DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS';
+export const DATA_LOADING_SUCCESS_PRICE_LIST_TABLE = 'DATA_LOADING_SUCCESS_PRICE_LIST_TABLE';
+
+export const DATA_LOADING_SUCCESS_ORDERS_HEADERS = 'DATA_LOADING_SUCCESS_ORDERS_HEADERS';
+export const DATA_LOADING_SUCCESS_ORDERS_TABLE = 'DATA_LOADING_SUCCESS_ORDERS_TABLE';
+
+export const DATA_LOADING_SUCCESS_PAYMENTS_HEADERS = 'DATA_LOADING_SUCCESS_PAYMENTS_HEADERS';
+export const DATA_LOADING_SUCCESS_PAYMENTS_TABLE = 'DATA_LOADING_SUCCESS_PAYMENTS_TABLE';
+
+/**
+ * ********** Глобальные переменные для асинхронных запросов на сервер **********
+ */
+export interface ResponseStatus {
+    action: string;
+    result: 0 | 1;
+    result_message: string;
+}
+
+export interface PriceListHeader {
+    display_name: string;
+    field_name: string;
+    size: number;
+    visible: 0 | 1;
+}
+
+export type PriceListHeaders = Array<PriceListHeader>;
+
+export interface PriceListItem {
+    currency_desc: string;
+    currency_id: number;
+    deleted: 0 | 1;
+    deleted_str: string;
+    discount_cash: number;
+    discount_price: number;
+    discount_sum: number;
+    discount_type_name: string;
+    discount_valid_before: string | null;
+    discount_valid_until: string | null;
+    item_article: string | null;
+    item_group: string;
+    item_price_uuid: string;
+    item_short_name: string;
+    item_uuid: string;
+    item_work_name: string;
+    itype_name: string;
+    parent_itype_name: string;
+    partner_uuid: string;
+    price: number;
+    price_type: string;
+    valid_until: string | null;
+}
+
+export type PriceList = Array<PriceListItem>;
+
+export interface PriceListReq {
+    offset: number;
+    size: number;
+    login: string;
+}
+
+export interface PriceListRes {
+    payload: {
+        countUUID: number;
+        page: number;
+        recordDisplayRules: PriceListHeaders;
+        recordSet: PriceList;
+    };
+    response: ResponseStatus;
+}
+
+// export interface ResponseStatusPayment {
+//     action: string;
+//     result: 0 | 1;
+//     result_message: string;
+// }
+
+export interface PaymentHeader {
+    display_name: string;
+    field_name: string;
+    size: number;
+    visible: 0 | 1;
+}
+
+export type PaymentHeaders = Array<PaymentHeader>;
+
+export interface PaymentItem {
+    currency_desc: string;
+    currency_id: number;
+    deleted: 0 | 1;
+    deleted_str: string;
+    discount_cash: number;
+    discount_price: number;
+    discount_sum: number;
+    discount_type_name: string;
+    discount_valid_before: string | null;
+    discount_valid_until: string | null;
+    item_article: string | null;
+    item_group: string;
+    item_price_uuid: string;
+    item_short_name: string;
+    item_uuid: string;
+    item_work_name: string;
+    itype_name: string;
+    parent_itype_name: string;
+    partner_uuid: string;
+    price: number;
+    price_type: string;
+    valid_until: string | null;
+}
+
+export type PaymentList = Array<PaymentItem>;
+
+export interface PaymentListReq {
+    offset: number;
+    size: number;
+    login: string;
+}
+
+export interface PaymentListRes {
+    payload: {
+        countUUID: number;
+        page: number;
+        recordDisplayRules: PaymentHeaders;
+        recordSet: PaymentList;
+    };
+    response: ResponseStatus;
+}
+
 /**
  * *********** Интерфейсы стейта Авторизации/Регистрации **********
  */
@@ -191,12 +319,22 @@ interface PaymentSuccess {
     payload: PaymentState[];
 }
 
+interface PaymentSuccessHeaders {
+    type: typeof DATA_LOADING_SUCCESS_PAYMENTS_HEADERS;
+    payload: PaymentHeaders;
+}
+
+interface PaymentSuccessTable {
+    type: typeof DATA_LOADING_SUCCESS_PAYMENTS_TABLE;
+    payload: PaymentList;
+}
+
 interface PaymentFailure {
     type: typeof DATA_LOADING_FAILURE;
     payload: any;
 }
 
-export type PaymentActions = PaymentRequest | PaymentSuccess | PaymentFailure;
+export type PaymentActions = PaymentRequest | PaymentSuccess | PaymentSuccessHeaders | PaymentSuccessTable | PaymentFailure;
 
 /**
  * *********** Интерфейсы стейта Компонента PriceList **********
@@ -204,7 +342,8 @@ export type PaymentActions = PaymentRequest | PaymentSuccess | PaymentFailure;
 export interface PriceListState {
     isFetching: boolean;
     errorMessage: string;
-    data: any;
+    headers: PriceListHeaders | null;
+    table: PriceList | null;
 }
 
 interface PriceListRequest {
@@ -216,12 +355,58 @@ interface PriceListSuccess {
     payload: PriceListState[];
 }
 
+interface PriceListSuccessHeaders {
+    type: typeof DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS;
+    payload: PriceListHeaders;
+}
+
+interface PriceListSuccessTable {
+    type: typeof DATA_LOADING_SUCCESS_PRICE_LIST_TABLE;
+    payload: PriceList;
+}
+
 interface PriceListFailure {
     type: typeof DATA_LOADING_FAILURE;
     payload: any;
 }
 
-export type PriceListActions = PriceListRequest | PriceListSuccess | PriceListFailure;
+export type PriceListActions = PriceListSuccessHeaders | PriceListSuccessTable | PriceListRequest | PriceListSuccess | PriceListFailure;
+
+/**
+ * *********** Интерфейсы стейта Компонента Orders **********
+ */
+export interface OrdersState {
+    isFetching: boolean;
+    errorMessage: string;
+    headers: any; // PriceListHeaders | null;
+    table: any; // PriceList | null;
+}
+
+interface OrdersRequest {
+    type: typeof DATA_LOADING_REQUEST;
+}
+
+interface OrdersSuccess {
+    type: typeof DATA_LOADING_SUCCESS;
+    payload: OrdersState[];
+}
+
+interface OrdersSuccessHeaders {
+    type: typeof DATA_LOADING_SUCCESS_ORDERS_HEADERS;
+    payload: any; // PriceListHeaders;
+}
+
+interface OrdersSuccessTable {
+    type: typeof DATA_LOADING_SUCCESS_ORDERS_TABLE;
+    payload: any; // PriceList;
+}
+
+interface OrdersFailure {
+    type: typeof DATA_LOADING_FAILURE;
+    payload: any;
+}
+
+export type OrdersActions = OrdersSuccessHeaders | OrdersSuccessTable | OrdersRequest | OrdersSuccess | OrdersFailure;
 
 /**
  * *********** Интерфейсы стейта Компонента SalePartners **********

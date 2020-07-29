@@ -9,15 +9,17 @@ import { Dispatch } from 'react';
  */
 import {
     PaymentActions,
-    PaymentState,
-    PaymentHeaders,
+    PaymentHeader,
     PaymentList,
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS_PAYMENTS_HEADERS,
     DATA_LOADING_SUCCESS_PAYMENTS_TABLE,
     DATA_LOADING_FAILURE,
     ResponseStatus,
-    PaymentListReq
+    PaymentListRes,
+    PaymentListReq,
+    PaymentHeaders,
+    PRICE_LIST_SET_INPUTS
 } from '../constants/types';
 
 /**
@@ -62,8 +64,8 @@ export const fetchingDataFailure = (error: ResponseStatus): PaymentActions => ({
 export const fetchDataPayment = (data: PaymentListReq) => async (dispatch: Dispatch<PaymentActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios.post(`${site}sortBetweenCashFlows`, data).then((response: AxiosResponse<PaymentListReq>) => {
-            const filterData = response.data.payload.recordDisplayRules.filter((element: PaymentHeaders) => {
+        await axios.post(`${site}sortBetweenCashFlows`, data).then((response: AxiosResponse<PaymentListRes>) => {
+            const filterData = response.data.payload.recordDisplayRules.filter((element: PaymentHeader) => {
                 if (element.visible) {
                     return element;
                 }
@@ -79,13 +81,13 @@ export const fetchDataPayment = (data: PaymentListReq) => async (dispatch: Dispa
 /**
  * ********** Экшен для запроса данных для последней страницы **********
  */
-export const fetchDataLastPagePayment = (data: PaymentState) => async (dispatch: Dispatch<PaymentActions>) => {
-    dispatch(fetchingDataRequest());
-    try {
-        await axios.post(`${site}findLastCashFlows`, data).then((response) => {
-            dispatch(fetchingDataSuccess(response));
-        });
-    } catch (error) {
-        dispatch(fetchingDataFailure(error));
-    }
-};
+// export const fetchDataLastPagePayment = (data: PaymentState) => async (dispatch: Dispatch<PaymentActions>) => {
+//     dispatch(fetchingDataRequest());
+//     try {
+//         await axios.post(`${site}findLastCashFlows`, data).then((response) => {
+//             dispatch(fetchingDataSuccess(response));
+//         });
+//     } catch (error) {
+//         dispatch(fetchingDataFailure(error));
+//     }
+// };

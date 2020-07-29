@@ -1,5 +1,5 @@
 /** ********** IMPORT LIBRARIES AND VARIABLES ********** */
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
 
 /**
@@ -7,10 +7,16 @@ import { Dispatch } from 'react';
  */
 import {
     ShipmentActions,
-    ShipmentState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
+    DATA_LOADING_REQUEST,
     DATA_LOADING_FAILURE,
+    DATA_LOADING_SUCCESS_SHIPMENT_HEADERS,
+    DATA_LOADING_SUCCESS_SHIPMENT_TABLE,
+    ResponseStatus,
+    ShipmentListRes,
+    ShipmentListReq,
+    ShipmentList,
+    ShipmentHeader,
+    ShipmentHeaders
 } from '../constants/types';
 
 /**
@@ -28,53 +34,49 @@ export const fetchingDataRequest = (): ShipmentActions => ({
 /**
  * ********** Экшен для добавления данных в стор после запроса **********
  */
-export const fetchingDataSuccess = (data: any): ShipmentActions => ({
-    type: DATA_LOADING_SUCCESS,
-    payload: data.data
-})
+export const fetchingDataSuccessHeaders = (shipmentHeader: ShipmentHeaders): ShipmentActions => ({
+    type: DATA_LOADING_SUCCESS_SHIPMENT_HEADERS,
+    payload: shipmentHeader
+});
+
+/**
+ * ********** Экшен для добавления данных в стор после запроса **********
+ */
+export const fetchingDataSuccessTable = (shipmentList: ShipmentList): ShipmentActions => ({
+    type: DATA_LOADING_SUCCESS_SHIPMENT_TABLE,
+    payload: shipmentList
+});
 
 /**
  * ********** Экшен для обработки ошибки при запросе на сервер **********
  */
-export const fetchingDataFailure = (error: any): ShipmentActions => ({
+export const fetchingDataFailure = (error: ResponseStatus): ShipmentActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
-})
+});
 
 /**
  * ********** Экшен для запроса данных из компонентов **********
  */
-export const fetchDataShipment = (data: ShipmentState) => async (dispatch: Dispatch<ShipmentActions>) => {
+export const fetchDataShipment = (data: ShipmentListReq) => async (dispatch: Dispatch<ShipmentActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios.post(`${site}sortBetweenPartnerShipments`, data)
-        .then(data => {
-            dispatch(fetchingDataSuccess(data));
-        })
-        .catch(error => { console.log(error) })
+        await axios
+            .post(`${site}sortBetweenPartnerShipments`, data)
+            .then((response: AxiosResponse<ShipmentListRes>) => {
+                const filterData = response.data.payload.recordDisplayRules.filter((element: ShipmentHeader) => {
+                    if (element.visible) {
+                        return element;
+                    }
+                });
+                dispatch(fetchingDataSuccessHeaders(filterData));
+                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
+            })
+            .catch((error) => {
+                return error;
+            });
     } catch (error) {
         dispatch(fetchingDataFailure(error));
+        return error;
     }
-}
-
-/**
- * ********** Экшен для запроса данных из компонентов **********
- */
-export const fetchDataLastPageShipment = (data: ShipmentState) => async (dispatch: Dispatch<ShipmentActions>) => {
-    dispatch(fetchingDataRequest());
-    try {
-        await axios.post(`${site}findLastPartnerShipments`, data)
-        .then(data => {
-            dispatch(fetchingDataSuccess(data));
-        })
-        .catch(error => { console.log(error) })
-    } catch (error) {
-        dispatch(fetchingDataFailure(error));
-    }
-}
-
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW ********** */
-//export const togglePopupWindowTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE })
-
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW MAIN INFO ********** */
-//export const togglePopupWindowMainInfoTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE_MAIN_INFO })
+};

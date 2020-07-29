@@ -40,7 +40,7 @@ const OrdersComponent = ({ uuid }) => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { headers, table } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
+    const { ordersHeaders, ordersTable, isFetching } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
@@ -186,11 +186,11 @@ const OrdersComponent = ({ uuid }) => {
     //         }
     //     );
     // };
-    if (headers && table) {
+    if (!isFetching && ordersHeaders && ordersTable) {
         return (
             <main className="main-content">
                 <div className="orders">
-                    <header className="pricelist__heading heading">
+                    <header className="orders__heading heading">
                         <div className="heading__text">Заказы</div>
                         <div className="heading__buttons buttons">
                             <div className="buttons__filter">Быстрый фильтр</div>
@@ -220,10 +220,10 @@ const OrdersComponent = ({ uuid }) => {
                             </div>
                         ) : null}
                     </header>
-                    <main className="pricelist__main pricelist-main">
-                        <div className="pricelist-main__frame frame">
+                    <main className="orders__main orders-main">
+                        <div className="orders-main__frame frame">
                             <div className="frame__caption frame-caption">
-                                {headers.map((header: any) => {
+                                {ordersHeaders.map((header: any) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-caption__wrap wrap">
@@ -240,11 +240,11 @@ const OrdersComponent = ({ uuid }) => {
                                 })}
                             </div>
                             <div className="frame__table frame-table">
-                                {headers.map((header: any, i: any) => {
+                                {ordersHeaders.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-table__column column">
-                                                {table.map((index: any) => {
+                                                {ordersTable.map((index: any) => {
                                                     return (
                                                         <div key={index.item_price_uuid} className="column__item">
                                                             {i === 0 && <div className="item__icon" />}

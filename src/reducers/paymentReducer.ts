@@ -1,35 +1,43 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
 import {
     PaymentActions,
     PaymentState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
+    DATA_LOADING_REQUEST,
+    DATA_LOADING_SUCCESS_PAYMENTS_HEADERS,
+    DATA_LOADING_SUCCESS_PAYMENTS_TABLE,
+    DATA_LOADING_FAILURE
 } from '../constants/types';
 
 const initialState: PaymentState = {
     isFetching: false,
     errorMessage: '',
-    data: []
-}
+    headersPayment: null,
+    tablePayment: null
+};
 
 /**
  * ********** Редьюсер компонента Payment **********
  */
-export default function(state = initialState, action: PaymentActions): PaymentState {
-    switch(action.type) {
+export default function paymentReducer(state = initialState, action: PaymentActions): PaymentState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
                 isFetching: true
             };
-        case DATA_LOADING_SUCCESS:
+        case DATA_LOADING_SUCCESS_PAYMENTS_HEADERS:
             return {
                 ...state,
                 isFetching: false,
-                data: action.payload
+                headersPayment: action.payload
+            };
+        case DATA_LOADING_SUCCESS_PAYMENTS_TABLE:
+            return {
+                ...state,
+                isFetching: false,
+                tablePayment: action.payload
             };
         case DATA_LOADING_FAILURE:
             return {
@@ -37,6 +45,7 @@ export default function(state = initialState, action: PaymentActions): PaymentSt
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

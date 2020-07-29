@@ -16,12 +16,17 @@ export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 
 export const DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS = 'DATA_LOADING_SUCCESS_PRICE_LIST_HEADERS';
 export const DATA_LOADING_SUCCESS_PRICE_LIST_TABLE = 'DATA_LOADING_SUCCESS_PRICE_LIST_TABLE';
+export const PRICE_LIST_SET_INPUTS = 'PRICE_LIST_SET_INPUTS';
+export const PRICE_LIST_SET_INPUT = 'PRICE_LIST_SET_INPUT';
 
 export const DATA_LOADING_SUCCESS_ORDERS_HEADERS = 'DATA_LOADING_SUCCESS_ORDERS_HEADERS';
 export const DATA_LOADING_SUCCESS_ORDERS_TABLE = 'DATA_LOADING_SUCCESS_ORDERS_TABLE';
 
 export const DATA_LOADING_SUCCESS_PAYMENTS_HEADERS = 'DATA_LOADING_SUCCESS_PAYMENTS_HEADERS';
 export const DATA_LOADING_SUCCESS_PAYMENTS_TABLE = 'DATA_LOADING_SUCCESS_PAYMENTS_TABLE';
+
+export const DATA_LOADING_SUCCESS_SHIPMENT_HEADERS = 'DATA_LOADING_SUCCESS_SHIPMENT_HEADERS';
+export const DATA_LOADING_SUCCESS_SHIPMENT_TABLE = 'DATA_LOADING_SUCCESS_SHIPMENT_TABLE';
 
 /**
  * ********** Глобальные переменные для асинхронных запросов на сервер **********
@@ -84,12 +89,6 @@ export interface PriceListRes {
     response: ResponseStatus;
 }
 
-// export interface ResponseStatusPayment {
-//     action: string;
-//     result: 0 | 1;
-//     result_message: string;
-// }
-
 export interface PaymentHeader {
     display_name: string;
     field_name: string;
@@ -100,6 +99,14 @@ export interface PaymentHeader {
 export type PaymentHeaders = Array<PaymentHeader>;
 
 export interface PaymentItem {
+    cash_date: string;
+    cash_flow_uuid: string;
+    cash_sum: number;
+    cash_sum_acum: number;
+    cdx_transaction_id: number;
+    currency_str: string;
+    partner_name: string;
+    partner_uuid: string;
     currency_desc: string;
     currency_id: number;
     deleted: 0 | 1;
@@ -118,7 +125,6 @@ export interface PaymentItem {
     item_work_name: string;
     itype_name: string;
     parent_itype_name: string;
-    partner_uuid: string;
     price: number;
     price_type: string;
     valid_until: string | null;
@@ -138,6 +144,65 @@ export interface PaymentListRes {
         page: number;
         recordDisplayRules: PaymentHeaders;
         recordSet: PaymentList;
+    };
+    response: ResponseStatus;
+}
+
+export interface ShipmentHeader {
+    display_name: string;
+    field_name: string;
+    size: number;
+    visible: 0 | 1;
+}
+
+export type ShipmentHeaders = Array<ShipmentHeader>;
+
+export interface ShipmentItem {
+    cash_date: string;
+    cash_flow_uuid: string;
+    cash_sum: number;
+    cash_sum_acum: number;
+    cdx_transaction_id: number;
+    currency_str: string;
+    partner_name: string;
+    partner_uuid: string;
+    currency_desc?: string;
+    currency_id?: number;
+    deleted?: 0 | 1;
+    deleted_str?: string;
+    discount_cash?: number;
+    discount_price?: number;
+    discount_sum?: number;
+    discount_type_name?: string;
+    discount_valid_before?: string | null;
+    discount_valid_until?: string | null;
+    item_article?: string | null;
+    item_group?: string;
+    item_price_uuid?: string;
+    item_short_name?: string;
+    item_uuid?: string;
+    item_work_name?: string;
+    itype_name?: string;
+    parent_itype_name?: string;
+    price?: number;
+    price_type?: string;
+    valid_until?: string | null;
+}
+
+export type ShipmentList = Array<ShipmentItem>;
+
+export interface ShipmentListReq {
+    offset: number;
+    size: number;
+    login: string;
+}
+
+export interface ShipmentListRes {
+    payload: {
+        countUUID: number;
+        page: number;
+        recordDisplayRules: ShipmentHeaders;
+        recordSet: ShipmentList;
     };
     response: ResponseStatus;
 }
@@ -307,7 +372,8 @@ export type NewsActions = NewsRequest | NewsSuccess | NewsFailure;
 export interface PaymentState {
     isFetching: boolean;
     errorMessage: string;
-    data: any;
+    headersPayment: any;
+    tablePayment: any;
 }
 
 interface PaymentRequest {
@@ -342,8 +408,9 @@ export type PaymentActions = PaymentRequest | PaymentSuccess | PaymentSuccessHea
 export interface PriceListState {
     isFetching: boolean;
     errorMessage: string;
-    headers: PriceListHeaders | null;
-    table: PriceList | null;
+    headersPriceList: PriceListHeaders | null;
+    tablePriceList: PriceList | null;
+    inputs: PriceListInputs;
 }
 
 interface PriceListRequest {
@@ -370,7 +437,28 @@ interface PriceListFailure {
     payload: any;
 }
 
-export type PriceListActions = PriceListSuccessHeaders | PriceListSuccessTable | PriceListRequest | PriceListSuccess | PriceListFailure;
+export interface PriceListInputs {
+    [key: string]: string;
+}
+
+interface PriceListSetInputs {
+    type: typeof PRICE_LIST_SET_INPUTS;
+    payload: PriceListInputs;
+}
+
+interface PriceListSetInput {
+    type: typeof PRICE_LIST_SET_INPUT;
+    payload: { key: string; value: string };
+}
+
+export type PriceListActions =
+    | PriceListSetInput
+    | PriceListSetInputs
+    | PriceListSuccessHeaders
+    | PriceListSuccessTable
+    | PriceListRequest
+    | PriceListSuccess
+    | PriceListFailure;
 
 /**
  * *********** Интерфейсы стейта Компонента Orders **********
@@ -378,8 +466,8 @@ export type PriceListActions = PriceListSuccessHeaders | PriceListSuccessTable |
 export interface OrdersState {
     isFetching: boolean;
     errorMessage: string;
-    headers: any; // PriceListHeaders | null;
-    table: any; // PriceList | null;
+    ordersHeaders: any; // OrdersHeaders | null;
+    ordersTable: any; // Orders | null;
 }
 
 interface OrdersRequest {
@@ -439,16 +527,22 @@ export type SalePartnersActions = SalePartnersRequest | SalePartnersSuccess | Sa
 export interface ShipmentState {
     isFetching: boolean;
     errorMessage: string;
-    data: any;
+    headersShipment: any;
+    tableShipment: any;
 }
 
 interface ShipmentRequest {
     type: typeof DATA_LOADING_REQUEST;
 }
 
-interface ShipmentSuccess {
-    type: typeof DATA_LOADING_SUCCESS;
-    payload: ShipmentState[];
+interface ShipmentSuccessHeaders {
+    type: typeof DATA_LOADING_SUCCESS_SHIPMENT_HEADERS;
+    payload: ShipmentHeaders;
+}
+
+interface ShipmentSuccessTable {
+    type: typeof DATA_LOADING_SUCCESS_SHIPMENT_TABLE;
+    payload: ShipmentList;
 }
 
 interface ShipmentFailure {
@@ -456,7 +550,7 @@ interface ShipmentFailure {
     payload: any;
 }
 
-export type ShipmentActions = ShipmentRequest | ShipmentSuccess | ShipmentFailure;
+export type ShipmentActions = ShipmentRequest | ShipmentSuccessHeaders | ShipmentSuccessTable | ShipmentFailure;
 
 /**
  * *********** Интерфейсы стейта Компонента SideNav **********

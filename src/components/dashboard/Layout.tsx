@@ -110,13 +110,13 @@ class Layout extends React.PureComponent<LayoutProps, LayoutState> {
                             exact
                             path="/payment"
                             // @ts-ignore
-                            render={() => <Payment data={uuid} />}
+                            render={() => <Payment uuid={uuid} />}
                         />
                         <Route
                             exact
                             path="/shipment"
                             // @ts-ignore
-                            render={() => <Shipment data={uuid} />}
+                            render={() => <Shipment uuid={uuid} />}
                         />
                         <Route component={NotFound} />
                     </Switch>

@@ -13,8 +13,8 @@ import {
 const initialState: OrdersState = {
     isFetching: false,
     errorMessage: '',
-    headers: null,
-    table: null
+    ordersHeaders: null,
+    ordersTable: null
 };
 
 /**
@@ -31,13 +31,13 @@ export default function ordersReducer(state = initialState, action: OrdersAction
             return {
                 ...state,
                 isFetching: false,
-                headers: action.payload
+                ordersHeaders: action.payload
             };
         case DATA_LOADING_SUCCESS_ORDERS_TABLE:
             return {
                 ...state,
                 isFetching: false,
-                table: action.payload
+                ordersTable: action.payload
             };
         case DATA_LOADING_FAILURE:
             return {

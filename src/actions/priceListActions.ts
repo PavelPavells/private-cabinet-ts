@@ -18,7 +18,10 @@ import {
     PriceListReq,
     PriceListHeaders,
     PriceList,
-    PriceListHeader
+    PriceListHeader,
+    PriceListInputs,
+    PRICE_LIST_SET_INPUTS,
+    PRICE_LIST_SET_INPUT
 } from '../constants/types';
 
 /**
@@ -58,6 +61,22 @@ export const fetchingDataFailure = (error: ResponseStatus): PriceListActions => 
 });
 
 /**
+ * ********** Экшен для обработки инпутов **********
+ */
+export const priceListSetInputs = (inputs: PriceListInputs): PriceListActions => ({
+    type: PRICE_LIST_SET_INPUTS,
+    payload: inputs
+});
+
+/**
+ * ********** Экшен для обработки инпутов **********
+ */
+export const priceListSetInput = (payload: { key: string; value: string }): PriceListActions => ({
+    type: PRICE_LIST_SET_INPUT,
+    payload
+});
+
+/**
  * ********** Экшен для запроса данных из компонентов **********
  */
 export const fetchDataPriceList = (data: PriceListReq) => async (dispatch: Dispatch<PriceListActions>) => {
@@ -71,6 +90,12 @@ export const fetchDataPriceList = (data: PriceListReq) => async (dispatch: Dispa
                         return element;
                     }
                 });
+                const tempInputs = {};
+                response.data.payload.recordDisplayRules.forEach((element) => {
+                    // @ts-ignore
+                    tempInputs[element.field_name] = '';
+                });
+                dispatch(priceListSetInputs(tempInputs));
                 dispatch(fetchingDataSuccessHeaders(filterData));
                 dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
             })

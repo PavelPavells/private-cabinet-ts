@@ -129,7 +129,7 @@
                         justify-content: center;
                         position: relative;
                         text-align: center;
-                        width: 350px;
+                        width: 420px;
                         height: 40px;
                         border: 1px solid $brandPantonFonts;
 
@@ -140,6 +140,10 @@
                             width: 20px;
                             height: 20px;
                             background: url('../../../../images/filter.svg') no-repeat center;
+                        }
+
+                        &:hover {
+                            border: 1px solid $brandPantonBlue;
                         }
                     }
 
@@ -170,7 +174,7 @@
                     &__item, .item {
                         display: flex;
                         align-items: center;
-                        width: 350px;
+                        width: 420px;
                         height: 30px;
                         padding: 5px;
                         border-left: 1px solid $brandBorderColor;
@@ -200,6 +204,10 @@
                             &:hover {
                                 cursor: pointer;
                             }
+                        }
+
+                        &:hover {
+                            border: 1px solid $brandPantonBlue;
                         }
                     }
                 }

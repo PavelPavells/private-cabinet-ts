@@ -1,13 +1,13 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataPriceList } from '../../../../actions/priceListActions';
+import { fetchDataPriceList, priceListSetInput } from '../../../../actions/priceListActions';
 
 /**
  * ********** Импорт типов **********
@@ -40,12 +40,13 @@ const PriceListComponent = ({ uuid }) => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { headers, table } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
+    const { headersPriceList, tablePriceList, inputs, isFetching } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
      * */
     const dispatch = useDispatch();
+
     /**
      * запрос данных с сервера
      * */
@@ -55,14 +56,14 @@ const PriceListComponent = ({ uuid }) => {
     }, []);
 
     /**
-     * запрос данных с сервера
+     * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportModal = () => {
+    const handleExportModal = (event: MouseEvent | any) => {
         setExportModal(!exportModal);
-        // const element = document.getElementsByClassName('buttons__export');
-        // if (event.target !== element) {
-        //    setExportModal(false);
-        // }
+        const element = document.getElementsByClassName('buttons__export');
+        if (event.target !== element) {
+            setExportModal(false);
+        }
     };
 
     /** ********** SEND TEXT FOR SEARCH ********** */
@@ -186,7 +187,7 @@ const PriceListComponent = ({ uuid }) => {
     //         }
     //     );
     // };
-    if (headers && table) {
+    if (!isFetching && inputs && headersPriceList && tablePriceList) {
         return (
             <main className="main-content">
                 <div className="pricelist">
@@ -223,7 +224,7 @@ const PriceListComponent = ({ uuid }) => {
                     <main className="pricelist__main pricelist-main">
                         <div className="pricelist-main__frame frame">
                             <div className="frame__caption frame-caption">
-                                {headers.map((header) => {
+                                {headersPriceList.map((header) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-caption__wrap wrap">
@@ -231,7 +232,14 @@ const PriceListComponent = ({ uuid }) => {
                                                     <div className="index__text">{header.display_name}</div>
                                                     <div className="index__icon" />
                                                 </div>
-                                                <input type="text" className="wrap__input" />
+                                                <input
+                                                    type="text"
+                                                    className="wrap__input"
+                                                    value={inputs[header.field_name]}
+                                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                        dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                    }}
+                                                />
                                                 <img src={Search} alt="" className="wrap__icon" />
                                             </div>
                                         );
@@ -240,11 +248,11 @@ const PriceListComponent = ({ uuid }) => {
                                 })}
                             </div>
                             <div className="frame__table frame-table">
-                                {headers.map((header, i) => {
+                                {headersPriceList.map((header, i) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="frame-table__column column">
-                                                {table.map((index) => {
+                                                {tablePriceList.map((index) => {
                                                     return (
                                                         <div key={index.item_price_uuid} className="column__item">
                                                             {i === 0 && <div className="item__icon" />}

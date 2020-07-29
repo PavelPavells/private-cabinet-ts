@@ -4,7 +4,6 @@ import authReducer from './authReducer';
 import accountReducer from './accountReducer';
 import controlReducer from './controlReducer';
 import mainReducer from './mainReducer';
-// import newsReducer from './newsReducer';
 import paymentReducer from './paymentReducer';
 import priceListReducer from './priceListReducer';
 import ordersReducer from './ordersReducer';

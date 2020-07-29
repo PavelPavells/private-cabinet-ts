@@ -1,136 +1,190 @@
-/** ********** IMPORT LIBRARIES ********** */
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import "react-dates/initialize";
+/**
+ * ********** Импорт основных библиотек из NPM **********
+ * */
+import React, { useState, useEffect } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import 'react-dates/initialize';
 // @ts-ignore
-import { DateRangePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
-import "moment/locale/ru";
+// import { DateRangePicker } from 'react-dates';
+// import 'react-dates/lib/css/_datepicker.css';
+import 'moment/locale/ru';
 
-/** ********** IMPORT ACTIONS ********** */
-import { 
-  fetchDataPayment,
-  fetchDataLastPagePayment
-} from "../../../../actions/paymentActions";
+/**
+ * ********** Импорт экшенов **********
+ * */
+import { fetchDataPayment } from '../../../../actions/paymentActions';
 
-/** ********** IMPORT LOADER from __UTILS__ ********** */
-import Loader from "../../../../__utils__/Spinner";
+/**
+ * ********** Импорт типов **********
+ * */
+import { PersonalCabinet } from '../../../../store/store';
+import { PaymentListReq } from '../../../../constants/types';
 
-/** ********** IMPORT STYLES ********** */
-import "./Payment.scss";
+/**
+ * ********** Импорт LOADER из __UTILS__ **********
+ * */
+import Loader from '../../../../__utils__/Spinner';
 
-class Payment extends Component {
+/**
+ * ********** импорт лого (лупа) для поля ввода **********
+ * */
+import Search from '../../../../images/search.svg';
 
-  state = {
-    startDate: null,
-    endDate: null,
-    login: '',
-    offset: 0,
-    page: 0,
-    optionFilter: 15
-  };
+/**
+ * ********** Импорт файлов стилей **********
+ * */
+import './Payment.scss';
 
-  /** ********** FETCH DATA ACCOUNT ********** */
-  componentDidMount() {
-    let data = {
-        offset: this.state.offset,
-        size: this.state.optionFilter,
-        // @ts-ignore
-        login: this.props.data
-    }
-    // @ts-ignore
-    this.props.fetchDataPayment(data);
-  }
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
+const PaymentComponent = ({ uuid }) => {
+    // const [startDate, setStartDate] = useState(null);
+    // const [endDate, setEndDate] = useState(null);
+    const [offset] = useState(0);
+    const [size] = useState(30);
+    const [exportModal, setExportModal] = useState(false);
 
-  /** ********** CHANGE DATES FOR SEARCH ********** */
-  // @ts-ignore
-  onDatesChange = ({ startDate, endDate }) => {
-    this.setState({ startDate, endDate }, () => {
-      let data = {
-        offset: this.state.offset,
-        size: this.state.optionFilter,
-        // @ts-ignore
-        startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-        // @ts-ignore
-        endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-        // @ts-ignore
-        login: this.props.data
-      }
-      // @ts-ignore
-      this.props.fetchDataPayment(data);
-    });
-  };
+    /**
+     * ********** Импорт состояния pricelist из Redux **********
+     * */
+    const { headersPayment, tablePayment, isFetching } = useSelector((state: PersonalCabinet) => state.payment, shallowEqual);
 
-  /** ********** FIRST PAGE PAYMENT PAGINATION ********** */
-  getFirstPage = () => {
-    this.setState({ page: 0 });
-    let data = {
-      offset: 0,
-      size: this.state.optionFilter,
-      // @ts-ignore
-      login: this.props.data,
-      // @ts-ignore
-      startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-      // @ts-ignore
-      endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    }
-    // @ts-ignore
-    this.props.fetchDataPayment(data);
-  };
+    /**
+     * Отправка действий для изменения на сервере
+     * */
+    const dispatch = useDispatch();
 
-  /** ********** PREVIOUS PAGE PAYMENT PAGINATION ********** */
-  getPreviousPage = () => {
-    this.setState(prevState => {
-      // @ts-ignore
-        return prevState.page > 0 ? ({ page: prevState.page - 1 }) : null;
-      }, () => {
-        let data = {
-          offset: this.state.page,
-          size: this.state.optionFilter,
-          // @ts-ignore
-          login: this.props.data,
-          // @ts-ignore
-          startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-          // @ts-ignore
-          endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
+    /**
+     * запрос данных с сервера
+     * */
+    useEffect(() => {
+        const request: PaymentListReq = { offset, size, login: uuid };
+        dispatch(fetchDataPayment(request));
+    }, []);
+
+    /**
+     * Открыть/Закрыть модальное окно скачивания таблицы
+     * */
+    const handleExportModal = (event: MouseEvent | any) => {
+        setExportModal(!exportModal);
+        const element = document.getElementsByClassName('buttons__export');
+        if (event.target !== element) {
+            setExportModal(!exportModal);
         }
-        // @ts-ignore
-        this.props.fetchDataPayment(data);
-      }
-    );
-  };
+    };
+    // state = {
+    //     startDate: null,
+    //     endDate: null,
+    //     login: '',
+    //     offset: 0,
+    //     page: 0,
+    //     optionFilter: 15
+    // };
 
-  /** ********** NEXT PAGE PAYMENT PAGINATION ********** */
-  getNextPage = () => {
-    //const { payload } = this.props.pricelist.data;
-    this.setState(prevState => {
-        //return prevState.page >= 0 && prevState.page < payload.page ? ({ page: prevState.page + 1 }) : null;
-        // @ts-ignore
-        return prevState.page >= 0 ? ({ page: prevState.page + 1 }) : null;
-      }, () => {
-        let data = {
-          offset: this.state.page,
-          size: this.state.optionFilter,
-          // @ts-ignore
-          login: this.props.data,
-          // @ts-ignore
-          startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-          // @ts-ignore
-          endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-        }
-        // @ts-ignore
-        this.props.fetchDataPayment(data);
-      }
-    );
-  };
+    /** ********** FETCH DATA ACCOUNT ********** */
+    // componentDidMount() {
+    //     const data = {
+    //         offset: this.state.offset,
+    //         size: this.state.optionFilter,
+    //         // @ts-ignore
+    //         login: this.props.data
+    //     };
+    //     // @ts-ignore
+    //     this.props.fetchDataPayment(data);
+    // }
 
-  /** ********** LAST PAGE PAYMENT PAGINATION ********** */
-  getLastPage = () => {
-    console.log('NOT PAGE FIELD')
-    //const { payload } = this.props.pricelist.data;
-    //this.setState({ page: payload.page });
-    //let data =  {
+    /** ********** CHANGE DATES FOR SEARCH ********** */
+    // @ts-ignore
+    // onDatesChange = ({ startDate, endDate }) => {
+    //     this.setState({ startDate, endDate }, () => {
+    //         const data = {
+    //             offset: this.state.offset,
+    //             size: this.state.optionFilter,
+    //             // @ts-ignore
+    //     startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //             // @ts-ignore
+    //     endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //             // @ts-ignore
+    //             login: this.props.data
+    //         };
+    //         // @ts-ignore
+    //         this.props.fetchDataPayment(data);
+    //     });
+    // };
+
+    /** ********** FIRST PAGE PAYMENT PAGINATION ********** */
+    // getFirstPage = () => {
+    //     this.setState({ page: 0 });
+    //     const data = {
+    //         offset: 0,
+    //         size: this.state.optionFilter,
+    //         // @ts-ignore
+    //         login: this.props.data,
+    //         // @ts-ignore
+    //   startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //         // @ts-ignore
+    //   endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
+    //     };
+    //     // @ts-ignore
+    //     this.props.fetchDataPayment(data);
+    // };
+
+    /** ********** PREVIOUS PAGE PAYMENT PAGINATION ********** */
+    // getPreviousPage = () => {
+    //     this.setState(
+    //         (prevState) => {
+    //             // @ts-ignore
+    //             return prevState.page > 0 ? { page: prevState.page - 1 } : null;
+    //         },
+    //         () => {
+    //             const data = {
+    //                 offset: this.state.page,
+    //                 size: this.state.optionFilter,
+    //                 // @ts-ignore
+    //                 login: this.props.data,
+    //                 // @ts-ignore
+    //       startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //                 // @ts-ignore
+    //       endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
+    //             };
+    //             // @ts-ignore
+    //             this.props.fetchDataPayment(data);
+    //         }
+    //     );
+    // };
+
+    /** ********** NEXT PAGE PAYMENT PAGINATION ********** */
+    // getNextPage = () => {
+    //     // const { payload } = this.props.pricelist.data;
+    //     this.setState(
+    //         (prevState) => {
+    //             // return prevState.page >= 0 && prevState.page < payload.page ? ({ page: prevState.page + 1 }) : null;
+    //             // @ts-ignore
+    //             return prevState.page >= 0 ? { page: prevState.page + 1 } : null;
+    //         },
+    //         () => {
+    //             const data = {
+    //                 offset: this.state.page,
+    //                 size: this.state.optionFilter,
+    //                 // @ts-ignore
+    //                 login: this.props.data,
+    //                 // @ts-ignore
+    //                 startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //                 // @ts-ignore
+    //                 endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
+    //             };
+    //             // @ts-ignore
+    //             this.props.fetchDataPayment(data);
+    //         }
+    //     );
+    // };
+
+    /** ********** LAST PAGE PAYMENT PAGINATION ********** */
+    // getLastPage = () => {
+    // console.log('NOT PAGE FIELD');
+    // const { payload } = this.props.pricelist.data;
+    // this.setState({ page: payload.page });
+    // let data =  {
     //    offset: this.state.offset,
     //    size: this.state.optionFilter,
     //    login: this.props.data,
@@ -138,220 +192,126 @@ class Payment extends Component {
     //    endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
     //  }
     //  this.props.fetchDataLastPagePayment(data);
-  };
+    // };
 
-  /** ********** REFRESH DATA FOR PAYMENT TABLE ********** */
-  handleRefreshData = () => {
-      let data = {
-        offset: this.state.page,
-        size: this.state.optionFilter,
-        // @ts-ignore
-        login: this.props.data,
-      }
-      // @ts-ignore
-      this.props.fetchDataPayment(data);
-  };
+    /** ********** REFRESH DATA FOR PAYMENT TABLE ********** */
+    // handleRefreshData = () => {
+    //     const data = {
+    //         offset: this.state.page,
+    //         size: this.state.optionFilter,
+    //         // @ts-ignore
+    //         login: this.props.data
+    //     };
+    //     // @ts-ignore
+    //     this.props.fetchDataPayment(data);
+    // };
 
-  /** ********** FILTER FOR VISION DATA IN TABLE ********** */
-  // @ts-ignore
-  handleOptionFilter = event => {
-    let elem = event.target.value;
-    this.setState({
-        optionFilter: elem
-      }, () => {
-        let data = {
-          offset: this.state.page,
-          size: this.state.optionFilter,
-          // @ts-ignore
-          login: this.props.data,
-          // @ts-ignore
-          startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-          // @ts-ignore
-          endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-        }
-        // @ts-ignore
-        this.props.fetchDataPayment(data);
-      }
-    );
-  };
-  render() {
+    /** ********** FILTER FOR VISION DATA IN TABLE ********** */
     // @ts-ignore
-    const { payment } = this.props;
-    //console.log(payment);
-    if(payment.data.length === 0) {
-      return <Loader />
-    }
-    return (
-      <main className="main-content">
-        {/** ========================== HEADER TABLE ============================== */}
-
-        <header className="wrapper-table__header">
-          <section className="table__header-left">
-            <div className="table__header-left-up"></div>
-          </section>
-          <section className="table__header-right">
-          
-            <form 
-              // @ts-ignore
-              onChange={this.handleSendSearch}>
-              <DateRangePicker
-                anchorDirection="left"
-                block={false}
-                customArrowIcon={null}
-                customCloseIcon={null}
-                customInputIcon={null}
-                disabled={false}
-                displayFormat={function noRefCheck() {}}
-                enableOutsideDays={false}
-                horizontalMargin={0}
-                initialVisibleMonth={null}
-                isDayBlocked={function noRefCheck() {}}
-                isDayHighlighted={function noRefCheck() {}}
-                isOutsideRange={function noRefCheck() {}}
-                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                onDatesChange={this.onDatesChange} // PropTypes.func.isRequired,
-                // @ts-ignore
-                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                // @ts-ignore
-                onFocusChange={focusedInput =>
-                  this.setState({ focusedInput })
-                } // PropTypes.func.isRequired,
-                startDatePlaceholderText="Дата начала"
-                endDatePlaceholderText="Дата конца"
-                showClearDates
-                navNext={null}
-                navPosition="navPositionTop"
-                navPrev={null}
-                onNextMonthClick={function noRefCheck() {}}
-                onPrevMonthClick={function noRefCheck() {}}
-              />
-            </form>
-          </section>
-        </header>
-
-        {/** ========================== HEADER MAIN TABLE ============================== */}
-
-        <section className="wrapper-table__main-pay">
-          <section className="wrapper-table__header-pay">
-            {payment.data.payload.recordDisplayRules.map(
-              // @ts-ignore
-              (index, key) => {
-              if (index.visible === 1) {
-                return (
-                  <div key={index.field_name} className="name-of-product">
-                    <div
-                      className="table-header__text"
-                      style={{ textAlign: "center" }}
-                    >
-                      <strong>{index.display_name}</strong>
-                    </div>
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-          </section>
-
-          {/** ========================== DOOR  TABLE ============================== */}
-
-          <section className="wrapper-table__main-categories">
-            <div
-              className="wrapper-itype__name"
-            >
-              {payment.data.payload.recordSet.map(
-                // @ts-ignore
-                (index, key) => (
-                <div key={key} className="wrapper-column">
-                  <div className="toggle-itype-name-pay" key={key.id}>
-                    <div>{index.partner_name}</div>
-                  </div>
-                  <div className="toggle-itype-name-pay" key={key.id}>
-                    <div className="numbers">
-                      {index.cash_date ? index.cash_date.replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : index.cash_date} {/* eslint-disable-line */}
-                    </div>
-                  </div>
-                  <div className="toggle-itype-name-pay" key={key.id}>
-                    <div className="numbers">{index.cash_sum}</div>
-                  </div>
-                  <div className="toggle-itype-name-pay" key={key.id}>
-                    <div className="numbers">{index.cash_sum_acum}</div>
-                  </div>
-                  <div className="toggle-itype-name-pay" key={key.id}>
-                    <div>{index.currency_str}</div>
-                  </div>
+    // handleOptionFilter = (event) => {
+    //     const elem = event.target.value;
+    //     this.setState(
+    //         {
+    //             optionFilter: elem
+    //         },
+    //         () => {
+    //             const data = {
+    //                 offset: this.state.page,
+    //                 size: this.state.optionFilter,
+    //                 // @ts-ignore
+    //                 login: this.props.data,
+    //                 // @ts-ignore
+    //       startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
+    //                 // @ts-ignore
+    //       endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
+    //             };
+    //             // @ts-ignore
+    //             this.props.fetchDataPayment(data);
+    //         }
+    //     );
+    // };
+    if (!isFetching && headersPayment && tablePayment) {
+        return (
+            <main className="main-content">
+                <div className="payment">
+                    <header className="payment__heading heading">
+                        <div className="heading__text">Платежи</div>
+                        <div className="heading__buttons buttons">
+                            <div className="buttons__filter">Быстрый фильтр</div>
+                            <div className="buttons__export export">
+                                <div className="export__text" onClick={handleExportModal}>
+                                    Экспортировать документ
+                                </div>
+                            </div>
+                        </div>
+                        {exportModal ? (
+                            <div className="heading__modal modal">
+                                <div className="modal__block modal-block">
+                                    <input type="checkbox" className="modal-block__pdf" />
+                                    <div className="modal-block__text">PDF</div>
+                                </div>
+                                <div className="modal__block modal-block">
+                                    <input type="checkbox" className="modal-block__checkbox" />
+                                    <div className="modal-block__text">Excel</div>
+                                </div>
+                                <div className="modal__block modal-block">
+                                    <input type="checkbox" className="modal-block__checkbox" />
+                                    <div className="modal-block__text">LibreOffice</div>
+                                </div>
+                                <div className="modal__block modal-block modal__block--left">
+                                    <div className="modal-block__button">Скачать</div>
+                                </div>
+                            </div>
+                        ) : null}
+                    </header>
+                    <main className="payment__main payment-main">
+                        <div className="payment-main__frame frame">
+                            <div className="frame__caption frame-caption">
+                                {headersPayment.map((header: any) => {
+                                    if (header.visible) {
+                                        return (
+                                            <div key={header.field_name} className="frame-caption__wrap wrap">
+                                                <div className="wrap__index index">
+                                                    <div className="index__text">{header.display_name}</div>
+                                                    <div className="index__icon" />
+                                                </div>
+                                                <input type="text" className="wrap__input" />
+                                                <img src={Search} alt="" className="wrap__icon" />
+                                            </div>
+                                        );
+                                    }
+                                    return '';
+                                })}
+                            </div>
+                            <div className="frame__table frame-table">
+                                {headersPayment.map((header: any, i: any) => {
+                                    if (header.visible) {
+                                        return (
+                                            <div key={header.field_name} className="frame-table__column column">
+                                                {tablePayment.map((index: any) => {
+                                                    return (
+                                                        <div key={index.cash_flow_uuid} className="column__item">
+                                                            {i === 0 && <div className="item__icon" />}
+                                                            {
+                                                                // @ts-ignore
+                                                                index[header.field_name]
+                                                            }
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    }
+                                    return '';
+                                })}
+                            </div>
+                        </div>
+                    </main>
                 </div>
-              ))}
-            </div>
-          </section>
+            </main>
+        );
+    }
+    return <Loader />;
+};
 
-          {/** ========================== ELECTRONIC CONTROL  TABLE ============================== */}
-        </section>
-
-        {/** ========================== FOOTER TABLE ============================== */}
-
-        <footer className="wrapper-table__footer">
-          <section className="wrapper-table__footer-left">
-            <div
-              onClick={this.getFirstPage}
-              className="footer-table__first-page"
-            ></div>
-            <div
-              onClick={this.getPreviousPage}
-              className="footer-table__prev-page"
-            ></div>
-            <div
-              onClick={this.getNextPage}
-              className="footer-table__next-page"
-            ></div>
-            <div
-              onClick={this.getLastPage}
-              className="footer-table__last-page"
-            ></div>
-            <div className="footer-table__options">
-              <label>
-                <select
-                  value={this.state.optionFilter}
-                  onChange={this.handleOptionFilter}
-                >
-                  <option value={15}>15</option>
-                  <option value={30}>30</option>
-                  <option value={50}>50</option>
-                </select>
-              </label>
-            </div>
-            <div className="footer-table__text">Позиций на странице</div>
-          </section>
-          <section className="wrapper-table__footer-right">
-            <div className="footer-table__pages">
-              {this.state.optionFilter} из {payment.data.payload.countUUID}
-            </div>
-            {<Loader /> && (
-              <div
-                onClick={this.handleRefreshData}
-                className="footer-table__refresh-data"
-              ></div>
-            )}
-          </section>
-        </footer>
-      </main>
-    );
-  }
-}
-// @ts-ignore
-Payment.propTypes = {
-   payment: PropTypes.object.isRequired,
-   fetchDataPayment: PropTypes.func.isRequired
-}
-
-// @ts-ignore
-const mapStateToProps = state => ({
-   payment: state.payment
-})
-export default connect(
-   mapStateToProps,
-   { fetchDataPayment, fetchDataLastPagePayment }
-)(Payment)
+export default PaymentComponent;

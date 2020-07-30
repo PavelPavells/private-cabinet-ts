@@ -1,25 +1,19 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    TopNavActions,
-    TopNavState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { TopNavActions, TopNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/topNavTypes';
 
 const initialState: TopNavState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента TopNav **********
  */
-export default function(state = initialState, action: TopNavActions): TopNavState {
-    switch(action.type) {
+export default function topNavReducer(state = initialState, action: TopNavActions): TopNavState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -37,6 +31,7 @@ export default function(state = initialState, action: TopNavActions): TopNavStat
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

@@ -3,7 +3,7 @@
  */
 // const isEmpty = require("is-empty");
 
-import { AuthState, AuthActions, SET_CURRENT_USER, USER_LOADING, RESET_CURRENT_USER, NEW_PASSWORD_USER } from '../constants/types';
+import { AuthState, AuthActions, SET_CURRENT_USER, USER_LOADING, RESET_CURRENT_USER, NEW_PASSWORD_USER } from '../constants/authTypes';
 
 const initialState: AuthState = {
     isAuthenticated: false,

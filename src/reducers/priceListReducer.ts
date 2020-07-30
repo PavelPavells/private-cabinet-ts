@@ -10,7 +10,7 @@ import {
     DATA_LOADING_SUCCESS_PRICE_LIST_TABLE,
     PRICE_LIST_SET_INPUTS,
     PRICE_LIST_SET_INPUT
-} from '../constants/types';
+} from '../constants/pricelListTypes';
 
 const initialState: PriceListState = {
     isFetching: false,

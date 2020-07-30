@@ -7,13 +7,7 @@ import { Dispatch } from 'react';
 /**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    WebAppActions,
-    WebAppState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { WebAppActions, WebAppState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/webAppTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
@@ -33,7 +27,7 @@ export const fetchingDataRequest = (): WebAppActions => ({
 export const fetchingDataSuccess = (data: any): WebAppActions => ({
     type: DATA_LOADING_SUCCESS,
     payload: data.data
-})
+});
 
 /**
  * ********** Экшен для обработки ошибки при запросе на сервер **********
@@ -41,7 +35,7 @@ export const fetchingDataSuccess = (data: any): WebAppActions => ({
 export const fetchingDataFailure = (error: any): WebAppActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
-})
+});
 
 /**
  * ********** Экшен для запроса данных из компонентов **********
@@ -49,18 +43,21 @@ export const fetchingDataFailure = (error: any): WebAppActions => ({
 export const fetchDataWebApp = (data: WebAppState) => async (dispatch: Dispatch<WebAppActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios.post(`${site}`, data)
-        .then(data => {
-            dispatch(fetchingDataSuccess(data));
-        })
-        .catch(error => { console.log(error) })
+        await axios
+            .post(`${site}`, data)
+            .then((response) => {
+                dispatch(fetchingDataSuccess(response));
+            })
+            .catch((error) => {
+                return error;
+            });
     } catch (error) {
         dispatch(fetchingDataFailure(error));
     }
-}
+};
 
 /** ********** ACTIONS FOR TOGGLE POPUP WINDOW ********** */
-//export const togglePopupWindowTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE })
+// export const togglePopupWindowTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE })
 
 /** ********** ACTIONS FOR TOGGLE POPUP WINDOW MAIN INFO ********** */
-//export const togglePopupWindowMainInfoTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE_MAIN_INFO })
+// export const togglePopupWindowMainInfoTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE_MAIN_INFO })

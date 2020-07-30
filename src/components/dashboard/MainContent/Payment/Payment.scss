@@ -8,7 +8,7 @@
     flex-direction: column;
     padding: 5px;
 
-    &__heading, .heading {
+    &__heading, .payment-heading {
         display: flex;
         flex-direction: column;
         position: relative;
@@ -20,7 +20,7 @@
             font-family: $font-regular;
         }
 
-        &__buttons, .buttons {
+        &__buttons, .payment-buttons {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -41,7 +41,7 @@
                 }
             }
 
-            &__export, .export {
+            &__export, .payment-export {
                 padding: 10px 9px;
                 margin-right: 20px;
                 border: 1px solid $brandPantonBlue;
@@ -56,7 +56,7 @@
             }
         }
 
-        &__modal, .modal {
+        &__modal, .payment-modal {
             display: flex;
             flex-direction: column;
             position: absolute;
@@ -73,7 +73,7 @@
                 justify-content: flex-end;
             }
 
-            &__block, .modal-block {
+            &__block, .payment-block {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -106,23 +106,23 @@
         overflow-x: scroll;
         margin-right: 20px;
 
-        &__frame, .frame {
+        &__frame, .payment-frame {
             display: flex;
             flex-direction: column;
 
-            &__caption, .frame-caption {
+            &__caption, .payment-caption {
                 display: flex;
                 flex-direction: row;
                 position: sticky;
                 top: 0;
                 background-color: $white;
 
-                &__wrap, .wrap {
+                &__wrap, .caption-wrap {
                     display: flex;
                     flex-direction: column;
                     position: relative;
 
-                    &__index, .index {
+                    &__index, .caption-index {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -163,15 +163,15 @@
                 }
             }
 
-            &__table, .frame-table {
+            &__table, .payment-table {
                 display: flex;
                 flex-direction: row;
 
-                &__column, .column {
+                &__column, .payment-column {
                     display: flex;
                     flex-direction: column;
 
-                    &__item, .item {
+                    &__item, .payment-item {
                         display: flex;
                         align-items: center;
                         width: 420px;

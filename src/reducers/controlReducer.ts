@@ -1,25 +1,19 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    ControlActions,
-    ControlState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { ControlActions, ControlState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/controlTypes';
 
 const initialState: ControlState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента Control **********
  */
-export default function(state = initialState, action: ControlActions): ControlState {
-    switch(action.type) {
+export default function controlReducer(state = initialState, action: ControlActions): ControlState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -37,6 +31,7 @@ export default function(state = initialState, action: ControlActions): ControlSt
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

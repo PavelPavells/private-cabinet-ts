@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import "./404.scss";
 
-const NotFound: React.FC = props => {
+const NotFound: React.FC = () => {
   return (
     <div className="error">
       <div className="error__image"></div>

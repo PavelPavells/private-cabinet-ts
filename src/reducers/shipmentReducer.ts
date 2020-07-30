@@ -8,7 +8,7 @@ import {
     DATA_LOADING_SUCCESS_SHIPMENT_HEADERS,
     DATA_LOADING_SUCCESS_SHIPMENT_TABLE,
     DATA_LOADING_FAILURE
-} from '../constants/types';
+} from '../constants/shipmentTypes';
 
 const initialState: ShipmentState = {
     isFetching: false,

@@ -19,7 +19,7 @@ import {
     // PriceListHeaders,
     // PriceList,
     // PriceListHeader
-} from '../constants/types';
+} from '../constants/ordersTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********

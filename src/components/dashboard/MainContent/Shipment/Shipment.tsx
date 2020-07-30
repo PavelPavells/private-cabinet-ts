@@ -18,7 +18,7 @@ import { fetchDataShipment } from '../../../../actions/shipmentActions';
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { ShipmentListReq } from '../../../../constants/types';
+import { ShipmentListReq } from '../../../../constants/shipmentTypes';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -65,13 +65,19 @@ const ShipmentComponent = ({ uuid }) => {
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportModal = (event: MouseEvent | any) => {
+    const handleExportDocumentModal = () => {
         setExportModal(!exportModal);
-        const element = document.getElementsByClassName('buttons__export');
-        if (event.target !== element) {
-            setExportModal(false);
-        }
+        // const element = document.getElementsByClassName('buttons__export');
+        // if (event.target !== element) {
+        //    setExportModal(false);
+        // }
     };
+    /**
+     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
+     * */
+    // const handleChangePlusItems = (key: string) => {
+    //    console.log(key)
+    // };
 
     /** ********** CHANGE DATES FOR SEARCH ********** */
     // @ts-ignore
@@ -214,64 +220,76 @@ const ShipmentComponent = ({ uuid }) => {
         return (
             <main className="main-content">
                 <div className="shipment">
-                    <header className="shipment__heading heading">
-                        <div className="heading__text">Отгрузки</div>
-                        <div className="heading__buttons buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export export">
-                                <div className="export__text" onClick={handleExportModal}>
+                    <header className="shipment__heading shipment-heading">
+                        <div className="shipment-heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="shipment-heading__buttons shipment-buttons">
+                            <div className="shipment-buttons__filter">Быстрый фильтр</div>
+                            <div className="shipment-buttons__export shipment-export">
+                                <div className="shipment-export__text" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
                             </div>
                         </div>
                         {exportModal ? (
-                            <div className="heading__modal modal">
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__pdf" />
-                                    <div className="modal-block__text">PDF</div>
+                            <div className="shipment-heading__modal shipment-modal">
+                                <div className="shipment-modal__block shipment-block">
+                                    <input type="checkbox" className="shipment-block__checkbox" />
+                                    <div className="shipment-block__text">PDF</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">Excel</div>
+                                <div className="shipment-modal__block shipment-block">
+                                    <input type="checkbox" className="shipment-block__checkbox" />
+                                    <div className="shipment-block__text">Excel</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">LibreOffice</div>
+                                <div className="shipment-modal__block shipment-block">
+                                    <input type="checkbox" className="shipment-block__checkbox" />
+                                    <div className="shipment-block__text">LibreOffice</div>
                                 </div>
-                                <div className="modal__block modal-block modal__block--left">
-                                    <div className="modal-block__button">Скачать</div>
+                                <div className="shipment-modal__block shipment-modal__block--left">
+                                    <div className="shipment-block__button">Скачать</div>
                                 </div>
                             </div>
                         ) : null}
                     </header>
                     <main className="shipment__main shipment-main">
-                        <div className="shipment-main__frame frame">
-                            <div className="frame__caption frame-caption">
+                        <div className="shipment-main__frame shipment-frame">
+                            <div className="shipment-frame__caption shipment-caption">
                                 {headersShipment.map((header: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-caption__wrap wrap">
-                                                <div className="wrap__index index">
-                                                    <div className="index__text">{header.display_name}</div>
-                                                    <div className="index__icon" />
+                                            <div key={header.field_name} className="shipment-caption__wrap caption-wrap">
+                                                <div className="caption-wrap__index caption-index">
+                                                    <div className="caption-index__text">{header.display_name}</div>
+                                                    <div className="caption-index__icon" />
                                                 </div>
-                                                <input type="text" className="wrap__input" />
-                                                <img src={Search} alt="" className="wrap__icon" />
+                                                <input
+                                                    type="text"
+                                                    className="caption-wrap__input"
+                                                    // value={inputs[header.field_name]}
+                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                    // }}
+                                                />
+                                                <img src={Search} alt="" className="caption-wrap__icon" />
                                             </div>
                                         );
                                     }
                                     return '';
                                 })}
                             </div>
-                            <div className="frame__table frame-table">
+                            <div className="shipment-frame__table shipment-table">
                                 {headersShipment.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-table__column column">
+                                            <div key={header.field_name} className="shipment-table__column shipment-column">
                                                 {tableShipment.map((index: any) => {
                                                     return (
-                                                        <div key={index.item_price_uuid} className="column__item">
-                                                            {i === 0 && <div className="item__icon" />}
+                                                        <div key={index.item_price_uuid} className="shipment-column__item shipment-item">
+                                                            {i === 0 && (
+                                                                <div
+                                                                    className="shipment-item__icon"
+                                                                    // onClick={() => handleChangePlusItems(index.item_price_uuid)}
+                                                                />
+                                                            )}
                                                             {
                                                                 // @ts-ignore
                                                                 index[header.field_name]

@@ -1,25 +1,19 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    MainActions,
-    MainState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { MainActions, MainState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/mainTypes';
 
 const initialState: MainState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента Main **********
  */
-export default function(state = initialState, action: MainActions): MainState {
-    switch(action.type) {
+export default function mainReducer(state = initialState, action: MainActions): MainState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -37,6 +31,7 @@ export default function(state = initialState, action: MainActions): MainState {
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

@@ -18,7 +18,7 @@ import { fetchDataPayment } from '../../../../actions/paymentActions';
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { PaymentListReq } from '../../../../constants/types';
+import { PaymentListReq } from '../../../../constants/paymentsTypes';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -65,33 +65,20 @@ const PaymentComponent = ({ uuid }) => {
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportModal = (event: MouseEvent | any) => {
+    const handleExportDocumentModal = (event: MouseEvent | any) => {
         setExportModal(!exportModal);
         const element = document.getElementsByClassName('buttons__export');
         if (event.target !== element) {
             setExportModal(!exportModal);
         }
     };
-    // state = {
-    //     startDate: null,
-    //     endDate: null,
-    //     login: '',
-    //     offset: 0,
-    //     page: 0,
-    //     optionFilter: 15
-    // };
 
-    /** ********** FETCH DATA ACCOUNT ********** */
-    // componentDidMount() {
-    //     const data = {
-    //         offset: this.state.offset,
-    //         size: this.state.optionFilter,
-    //         // @ts-ignore
-    //         login: this.props.data
-    //     };
-    //     // @ts-ignore
-    //     this.props.fetchDataPayment(data);
-    // }
+    /**
+     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
+     * */
+    // const handleChangePlusItems = (key: string) => {
+    //    console.log(key)
+    // };
 
     /** ********** CHANGE DATES FOR SEARCH ********** */
     // @ts-ignore
@@ -234,64 +221,76 @@ const PaymentComponent = ({ uuid }) => {
         return (
             <main className="main-content">
                 <div className="payment">
-                    <header className="payment__heading heading">
-                        <div className="heading__text">Платежи</div>
-                        <div className="heading__buttons buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export export">
-                                <div className="export__text" onClick={handleExportModal}>
+                    <header className="payment__heading payment-heading">
+                        <div className="payment-heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="payment-heading__buttons payment-buttons">
+                            <div className="payment-buttons__filter">Быстрый фильтр</div>
+                            <div className="payment-buttons__export payment-export">
+                                <div className="payment-export__text" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
                             </div>
                         </div>
                         {exportModal ? (
-                            <div className="heading__modal modal">
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__pdf" />
-                                    <div className="modal-block__text">PDF</div>
+                            <div className="payment-heading__modal payment-modal">
+                                <div className="payment-modal__block payment-block">
+                                    <input type="checkbox" className="payment-block__checkbox" />
+                                    <div className="payment-block__text">PDF</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">Excel</div>
+                                <div className="payment-modal__block pricelist-block">
+                                    <input type="checkbox" className="payment-block__checkbox" />
+                                    <div className="payment-block__text">Excel</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">LibreOffice</div>
+                                <div className="payment-modal__block payment-block">
+                                    <input type="checkbox" className="payment-block__checkbox" />
+                                    <div className="payment-block__text">LibreOffice</div>
                                 </div>
-                                <div className="modal__block modal-block modal__block--left">
-                                    <div className="modal-block__button">Скачать</div>
+                                <div className="payment-modal__block payment-modal__block--left">
+                                    <div className="payment-block__button">Скачать</div>
                                 </div>
                             </div>
                         ) : null}
                     </header>
                     <main className="payment__main payment-main">
-                        <div className="payment-main__frame frame">
-                            <div className="frame__caption frame-caption">
+                        <div className="payment-main__frame payment-frame">
+                            <div className="payment-frame__caption payment-caption">
                                 {headersPayment.map((header: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-caption__wrap wrap">
-                                                <div className="wrap__index index">
-                                                    <div className="index__text">{header.display_name}</div>
-                                                    <div className="index__icon" />
+                                            <div key={header.field_name} className="payment-caption__wrap caption-wrap">
+                                                <div className="caption-wrap__index caption-index">
+                                                    <div className="caption-index__text">{header.display_name}</div>
+                                                    <div className="caption-index__icon" />
                                                 </div>
-                                                <input type="text" className="wrap__input" />
-                                                <img src={Search} alt="" className="wrap__icon" />
+                                                <input
+                                                    type="text"
+                                                    className="caption-wrap__input"
+                                                    // value={inputs[header.field_name]}
+                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                    // }}
+                                                />
+                                                <img src={Search} alt="" className="caption-wrap__icon" />
                                             </div>
                                         );
                                     }
                                     return '';
                                 })}
                             </div>
-                            <div className="frame__table frame-table">
+                            <div className="payment-frame__table payment-table">
                                 {headersPayment.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-table__column column">
+                                            <div key={header.field_name} className="payment-table__column payment-column">
                                                 {tablePayment.map((index: any) => {
                                                     return (
-                                                        <div key={index.cash_flow_uuid} className="column__item">
-                                                            {i === 0 && <div className="item__icon" />}
+                                                        <div key={index.item_price_uuid} className="payment-column__item payment-item">
+                                                            {i === 0 && (
+                                                                <div
+                                                                    className="payment-item__icon"
+                                                                    // onClick={() => handleChangePlusItems(index.item_price_uuid)}
+                                                                />
+                                                            )}
                                                             {
                                                                 // @ts-ignore
                                                                 index[header.field_name]

@@ -1,7 +1,7 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { SideNavActions, SideNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/types';
+import { SideNavActions, SideNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/sideNavTypes';
 
 const initialState: SideNavState = {
     isFetching: false,
@@ -12,7 +12,7 @@ const initialState: SideNavState = {
 /**
  * ********** Редьюсер компонента SideNav **********
  */
-export default function (state = initialState, action: SideNavActions): SideNavState {
+export default function sideNavReducer(state = initialState, action: SideNavActions): SideNavState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {

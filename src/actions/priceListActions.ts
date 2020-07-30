@@ -22,7 +22,7 @@ import {
     PriceListInputs,
     PRICE_LIST_SET_INPUTS,
     PRICE_LIST_SET_INPUT
-} from '../constants/types';
+} from '../constants/pricelListTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********

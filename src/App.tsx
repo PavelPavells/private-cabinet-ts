@@ -84,7 +84,6 @@ if (localStorage.jwtTokenTeams) {
 interface AppProps {
     readonly data: any;
     readonly loginUser: (email: string, pass: string) => void;
-    // readonly resetPassword: (email: string) => void,
     readonly logoutUser: () => void;
     readonly logout: () => void;
 }
@@ -217,8 +216,6 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                                             // @ts-ignore
                                             data={data}
                                             logoutUser={this.logoutUser}
-                                            loginUser={this.loginUser}
-                                            history={window.history}
                                         />
                                     )
                                 }

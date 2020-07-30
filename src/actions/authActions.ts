@@ -10,7 +10,7 @@ import jwt_decode from 'jwt-decode';
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { AuthActions, userDataLogin, userDataRegister, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from '../constants/types';
+import { AuthActions, userDataLogin, userDataRegister, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from '../constants/authTypes';
 
 /**
  * ********** ПО для установки токена в заголовки при запросах **********

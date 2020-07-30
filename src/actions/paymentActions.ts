@@ -18,9 +18,8 @@ import {
     ResponseStatus,
     PaymentListRes,
     PaymentListReq,
-    PaymentHeaders,
-    PRICE_LIST_SET_INPUTS
-} from '../constants/types';
+    PaymentHeaders
+} from '../constants/paymentsTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********

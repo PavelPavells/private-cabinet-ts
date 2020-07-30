@@ -17,7 +17,7 @@ import {
     ShipmentList,
     ShipmentHeader,
     ShipmentHeaders
-} from '../constants/types';
+} from '../constants/shipmentTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********

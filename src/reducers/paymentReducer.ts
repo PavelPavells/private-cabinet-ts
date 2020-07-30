@@ -8,7 +8,7 @@ import {
     DATA_LOADING_SUCCESS_PAYMENTS_HEADERS,
     DATA_LOADING_SUCCESS_PAYMENTS_TABLE,
     DATA_LOADING_FAILURE
-} from '../constants/types';
+} from '../constants/paymentsTypes';
 
 const initialState: PaymentState = {
     isFetching: false,

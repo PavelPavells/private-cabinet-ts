@@ -7,7 +7,7 @@ import { Dispatch } from 'react';
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { AccountActions, AccountState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/types';
+import { AccountActions, AccountState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/accountTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********

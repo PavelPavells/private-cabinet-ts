@@ -13,7 +13,7 @@ import { fetchDataOrders } from '../../../../actions/ordersActions';
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-// import { PriceListReq } from '../../../../constants/types';
+// import { PriceListReq } from '../../../../constants/ordersTypes';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -57,13 +57,20 @@ const OrdersComponent = ({ uuid }) => {
     /**
      * запрос данных с сервера
      * */
-    const handleExportModal = () => {
+    const handleExportDocumentModal = () => {
         setExportModal(!exportModal);
         // const element = document.getElementsByClassName('buttons__export');
         // if (event.target !== element) {
         //    setExportModal(false);
         // }
     };
+
+    /**
+     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
+     * */
+    // const handleChangePlusItems = (key: string) => {
+    //    console.log(key)
+    // };
 
     /** ********** SEND TEXT FOR SEARCH ********** */
     // const handleSendSearch = () => {
@@ -190,64 +197,76 @@ const OrdersComponent = ({ uuid }) => {
         return (
             <main className="main-content">
                 <div className="orders">
-                    <header className="orders__heading heading">
-                        <div className="heading__text">Заказы</div>
-                        <div className="heading__buttons buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export export">
-                                <div className="export__text" onClick={handleExportModal}>
+                    <header className="orders__heading orders-heading">
+                        <div className="orders-heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="orders-heading__buttons orders-buttons">
+                            <div className="orders-buttons__filter">Быстрый фильтр</div>
+                            <div className="orderst-buttons__export orders-export">
+                                <div className="orders-export__text" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
                             </div>
                         </div>
                         {exportModal ? (
-                            <div className="heading__modal modal">
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__pdf" />
-                                    <div className="modal-block__text">PDF</div>
+                            <div className="orders-heading__modal orders-modal">
+                                <div className="orders-modal__block orders-block">
+                                    <input type="checkbox" className="orders-block__checkbox" />
+                                    <div className="orders-block__text">PDF</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">Excel</div>
+                                <div className="orders-modal__block orders-block">
+                                    <input type="checkbox" className="orders-block__checkbox" />
+                                    <div className="orders-block__text">Excel</div>
                                 </div>
-                                <div className="modal__block modal-block">
-                                    <input type="checkbox" className="modal-block__checkbox" />
-                                    <div className="modal-block__text">LibreOffice</div>
+                                <div className="orders-modal__block orders-block">
+                                    <input type="checkbox" className="orders-block__checkbox" />
+                                    <div className="orders-block__text">LibreOffice</div>
                                 </div>
-                                <div className="modal__block modal-block modal__block--left">
-                                    <div className="modal-block__button">Скачать</div>
+                                <div className="orders-modal__block orders-modal__block--left">
+                                    <div className="orders-block__button">Скачать</div>
                                 </div>
                             </div>
                         ) : null}
                     </header>
                     <main className="orders__main orders-main">
-                        <div className="orders-main__frame frame">
-                            <div className="frame__caption frame-caption">
+                        <div className="orderst-main__frame orders-frame">
+                            <div className="orderst-frame__caption orders-caption">
                                 {ordersHeaders.map((header: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-caption__wrap wrap">
-                                                <div className="wrap__index index">
-                                                    <div className="index__text">{header.display_name}</div>
-                                                    <div className="index__icon" />
+                                            <div key={header.field_name} className="orders-caption__wrap caption-wrap">
+                                                <div className="caption-wrap__index caption-index">
+                                                    <div className="caption-index__text">{header.display_name}</div>
+                                                    <div className="caption-index__icon" />
                                                 </div>
-                                                <input type="text" className="wrap__input" />
-                                                <img src={Search} alt="" className="wrap__icon" />
+                                                <input
+                                                    type="text"
+                                                    className="caption-wrap__input"
+                                                    // value={inputs[header.field_name]}
+                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                    // }}
+                                                />
+                                                <img src={Search} alt="" className="caption-wrap__icon" />
                                             </div>
                                         );
                                     }
                                     return '';
                                 })}
                             </div>
-                            <div className="frame__table frame-table">
+                            <div className="orders-frame__table orders-table">
                                 {ordersHeaders.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="frame-table__column column">
+                                            <div key={header.field_name} className="orders-table__column orders-column">
                                                 {ordersTable.map((index: any) => {
                                                     return (
-                                                        <div key={index.item_price_uuid} className="column__item">
-                                                            {i === 0 && <div className="item__icon" />}
+                                                        <div key={index.item_price_uuid} className="orders-column__item orders-item">
+                                                            {i === 0 && (
+                                                                <div
+                                                                    className="orders-item__icon"
+                                                                    // onClick={() => handleChangePlusItems(index.item_price_uuid)}
+                                                                />
+                                                            )}
                                                             {
                                                                 // @ts-ignore
                                                                 index[header.field_name]

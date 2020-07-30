@@ -1,25 +1,19 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    AccountActions,
-    AccountState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+import { AccountActions, AccountState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/accountTypes';
 
 const initialState: AccountState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента Account **********
  */
-export default function(state = initialState, action: AccountActions): AccountState {
-    switch(action.type) {
+export default function accountReducer(state = initialState, action: AccountActions): AccountState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -35,9 +29,9 @@ export default function(state = initialState, action: AccountActions): AccountSt
             return {
                 ...state,
                 isFetching: false,
-                errorMessage:
-                action.payload
+                errorMessage: action.payload
             };
-        default: return state;
-    };
-};
+        default:
+            return state;
+    }
+}

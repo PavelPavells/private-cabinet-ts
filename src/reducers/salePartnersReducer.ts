@@ -1,25 +1,25 @@
-/** 
+/**
  * ********** Импорт глобальных переменных **********
  */
 import {
     SalePartnersActions,
     SalePartnersState,
-    DATA_LOADING_REQUEST, 
-    DATA_LOADING_SUCCESS, 
-    DATA_LOADING_FAILURE,
-} from '../constants/types';
+    DATA_LOADING_REQUEST,
+    DATA_LOADING_SUCCESS,
+    DATA_LOADING_FAILURE
+} from '../constants/salePartnersTypes';
 
 const initialState: SalePartnersState = {
     isFetching: false,
     errorMessage: '',
     data: []
-}
+};
 
 /**
  * ********** Редьюсер компонента SalePartners **********
  */
-export default function(state = initialState, action: SalePartnersActions): SalePartnersState {
-    switch(action.type) {
+export default function salePartnersReducer(state = initialState, action: SalePartnersActions): SalePartnersState {
+    switch (action.type) {
         case DATA_LOADING_REQUEST:
             return {
                 ...state,
@@ -37,6 +37,7 @@ export default function(state = initialState, action: SalePartnersActions): Sale
                 isFetching: false,
                 errorMessage: action.payload
             };
-        default: return state;
+        default:
+            return state;
     }
 }

@@ -12,7 +12,12 @@ import {
     DATA_LOADING_REQUEST,
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_ORDERS_HEADERS,
-    DATA_LOADING_SUCCESS_ORDERS_TABLE
+    DATA_LOADING_SUCCESS_ORDERS_TABLE,
+    OrdersHeaders,
+    OrdersList,
+    OrdersListRes,
+    OrdersHeader,
+    OrdersListReq
     // ResponseStatus,
     // PriceListRes,
     // PriceListReq,
@@ -25,6 +30,7 @@ import {
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
  */
 import site from '../constants/Global';
+import { ResponseStatus } from '../constants/paymentsTypes';
 
 /**
  * ********** Экшен для инициализации запроса **********
@@ -36,7 +42,7 @@ export const fetchingDataRequest = (): OrdersActions => ({
 /**
  * ********** Экшен для добавления данных в стор после запроса **********
  */
-export const fetchingDataSuccessHeaders = (ordersHeader: any): OrdersActions => ({
+export const fetchingDataSuccessHeaders = (ordersHeader: OrdersHeaders): OrdersActions => ({
     type: DATA_LOADING_SUCCESS_ORDERS_HEADERS,
     payload: ordersHeader
 });
@@ -44,7 +50,7 @@ export const fetchingDataSuccessHeaders = (ordersHeader: any): OrdersActions => 
 /**
  * ********** Экшен для добавления данных в стор после запроса **********
  */
-export const fetchingDataSuccessOrders = (orders: any): OrdersActions => ({
+export const fetchingDataSuccessTable = (orders: OrdersList): OrdersActions => ({
     type: DATA_LOADING_SUCCESS_ORDERS_TABLE,
     payload: orders
 });
@@ -52,7 +58,7 @@ export const fetchingDataSuccessOrders = (orders: any): OrdersActions => ({
 /**
  * ********** Экшен для обработки ошибки при запросе на сервер **********
  */
-export const fetchingDataFailure = (error: any): OrdersActions => ({
+export const fetchingDataFailure = (error: ResponseStatus): OrdersActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
 });
@@ -60,19 +66,19 @@ export const fetchingDataFailure = (error: any): OrdersActions => ({
 /**
  * ********** Экшен для запроса данных из компонентов **********
  */
-export const fetchDataOrders = (data: any) => async (dispatch: Dispatch<OrdersActions>) => {
+export const fetchDataOrders = (data: OrdersListReq) => async (dispatch: Dispatch<OrdersActions>) => {
     dispatch(fetchingDataRequest());
     try {
         await axios
             .post(`${site}orders`, data)
-            .then((response: AxiosResponse<any>) => {
-                const filterData = response.data.payload.recordDisplayRules.filter((element: any) => {
+            .then((response: AxiosResponse<OrdersListRes>) => {
+                const filterData = response.data.payload.recordDisplayRules.filter((element: OrdersHeader) => {
                     if (element.visible) {
                         return element;
                     }
                 });
                 dispatch(fetchingDataSuccessHeaders(filterData));
-                dispatch(fetchingDataSuccessOrders(response.data.payload.recordSet));
+                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
             })
             .catch((error) => {
                 return error;

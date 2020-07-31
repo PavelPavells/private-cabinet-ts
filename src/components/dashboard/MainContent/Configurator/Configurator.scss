@@ -1,0 +1,15 @@
+@import "../../../../styles/base.scss";
+
+/**
+ * ********** Стили компонента Конфигуратор **********
+ */
+
+.configurator {
+    display: flex;
+
+    &__iframe {
+        width: 100%;
+        height: 90vh;
+        padding: 10px;
+    }
+}

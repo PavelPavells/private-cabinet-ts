@@ -206,6 +206,10 @@
                     color: $white;
                     background-color: $brandPantonBlue;
                 }
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

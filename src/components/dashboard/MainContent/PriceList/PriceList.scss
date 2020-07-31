@@ -8,12 +8,12 @@
     flex-direction: column;
     padding: 5px;
 
-    &__heading, .pricelist-heading {
+    .pricelist__heading {
         display: flex;
         flex-direction: column;
         position: relative;
 
-        &__text {
+        .heading__text {
             margin-bottom: 20px;
             color: $brandPantonBlack;
             font-size: 20px;
@@ -21,7 +21,7 @@
             
         }
 
-        &__buttons, .pricelist-buttons {
+        .heading__buttons {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -29,7 +29,7 @@
             width: 100%;
             margin-bottom: 10px;
 
-            &__filter {
+            .buttons__filter {
                 padding: 10px 48px;
                 border: 1px solid $brandPantonBlue;
                 border-radius: 40px;
@@ -42,7 +42,7 @@
                 }
             }
 
-            &__export, .pricelist-export {
+            .buttons__export {
                 padding: 10px 9px;
                 margin-right: 20px;
                 border: 1px solid $brandPantonBlue;
@@ -57,7 +57,7 @@
             }
         }
 
-        &__modal, .pricelist-modal {
+        .pricelist__modal {
             display: flex;
             flex-direction: column;
             position: absolute;
@@ -69,22 +69,22 @@
             background-color: $white;
             z-index: 1000;
 
-            &__block--left {
+            .pricelist__block--left {
                 display: flex;
                 justify-content: flex-end;
             }
 
-            &__block, .pricelist-block {
+            .modal__block {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 padding: 10px;
 
-                &__text {
+                .block__text {
                     margin-left: 10px;
                 }
 
-                &__button {
+                .block__button {
                     padding: 10px 30px;
                     background-color: $white;
                     border-radius: 40px;
@@ -101,46 +101,57 @@
         }
     }
 
-    &__main, .pricelist-main {
+    .pricelist__table {
         display: flex;
         height: 79vh;
         overflow-x: scroll;
         margin-right: 20px;
 
-        &__frame, .pricelist-frame {
+        .pricelist__frame {
             display: flex;
             flex-direction: column;
 
-            &__caption, .pricelist-caption {
+            .frame__caption {
                 display: flex;
                 flex-direction: row;
                 position: sticky;
                 top: 0;
                 background-color: $white;
 
-                &__wrap, .caption-wrap {
+                .caption__wrap {
                     display: flex;
                     flex-direction: column;
                     position: relative;
 
-                    &__index, .caption-index {
+                    .wrap__index {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
                         position: relative;
                         text-align: center;
-                        width: 420px;
+                        width: 400px;
                         height: 40px;
                         border: 1px solid $brandPantonFonts;
 
-                        &__icon {
+                        .index__text {
+                            width: 300px;
+                        }
+
+                        .index__icon--sorting {
                             display: block;
                             position: absolute;
                             right: 5px;
                             width: 20px;
                             height: 20px;
-                            background: url('../../../../images/filter.svg') no-repeat center;
+                        }
+
+                        .index__icon--filtering {
+                            display: block;
+                            position: absolute;
+                            right: 5px;
+                            width: 15px;
+                            height: 15px;
                         }
 
                         &:hover {
@@ -148,7 +159,7 @@
                         }
                     }
 
-                    &__input {
+                    .wrap__input {
                         margin: 5px;
                         padding: 10px;
                         border: 1px solid $brandPantonFonts;
@@ -156,26 +167,32 @@
                         outline: none;
                     }
 
-                    &__icon {
+                    .wrap__icon--magnifier {
                         position: absolute;
                         right: 10px;
-                        bottom: 10px;
+                        bottom: 15px;
+                    }
+
+                    .wrap__icon--arrow {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 20px;
                     }
                 }
             }
 
-            &__table, .pricelist-table {
+            .frame__table {
                 display: flex;
                 flex-direction: row;
 
-                &__column, .pricelist-column {
+                .table__column {
                     display: flex;
                     flex-direction: column;
 
-                    &__item, .pricelist-item {
+                    .column__item {
                         display: flex;
                         align-items: center;
-                        width: 420px;
+                        width: 400px;
                         height: 30px;
                         padding: 5px;
                         border-left: 1px solid $brandBorderColor;
@@ -188,13 +205,13 @@
                             background-color: #f1f1f1;
                         }
     
-                        &__text {
+                        .item__text {
                             display: flex;
                             flex-direction: row;
                             align-items: center;
                             
                         }
-                        &__icon {
+                        .item__icon {
                             display: block;
                             margin-right: 5px;
                             width: 16px;

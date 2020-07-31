@@ -81,8 +81,8 @@ export interface ShipmentListRes {
 export interface ShipmentState {
     isFetching: boolean;
     errorMessage: string;
-    headersShipment: any;
-    tableShipment: any;
+    headersShipment: ShipmentHeaders | null;
+    tableShipment: ShipmentList | null;
 }
 
 interface ShipmentRequest {

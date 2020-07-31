@@ -81,8 +81,8 @@ export interface PaymentListRes {
 export interface PaymentState {
     isFetching: boolean;
     errorMessage: string;
-    headersPayment: any;
-    tablePayment: any;
+    headersPayment: PaymentHeaders | null;
+    tablePayment: PaymentList | null;
 }
 
 interface PaymentRequest {

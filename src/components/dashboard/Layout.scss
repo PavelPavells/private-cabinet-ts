@@ -43,9 +43,29 @@
 //  width: 0px;  
 //}
 
-@media (max-height: 900px) {
-    .right {
-        background-color: $brandPantonFonts;
-        height: auto;
-    }
-}
+// @media (max-height: 900px) {
+//     .right {
+//         background-color: $brandPantonFonts;
+//         height: auto;
+//     }
+// }
+
+// @media (max-width: 1368px) and (max-height: 768px) {
+//   .footer {
+//     padding-left: 15em;
+//     height: 7em;
+//   }
+//   //.main-content {
+//     //height: 78vh;
+//   //}
+// }
+// @media (min-width: 1920px) and (min-height: 1080px) {
+//   //.main-content {
+//     //height: 79vh;
+//   //}
+//   .footer {
+//     padding-left: 17em;
+//     padding-right: 22em;
+//     height: 8em;
+//   }
+// }

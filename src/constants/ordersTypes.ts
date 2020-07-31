@@ -26,35 +26,34 @@ export interface OrdersHeader {
 export type OrdersHeaders = Array<OrdersHeader>;
 
 export interface OrdersItem {
-    cash_date: string;
-    cash_flow_uuid: string;
-    cash_sum: number;
-    cash_sum_acum: number;
-    cdx_transaction_id: number;
-    currency_str: string;
-    partner_name: string;
+    clorder_uuid: string;
+    clorder_guid: string;
+    clorder_id: string;
+    create_date: number;
+    status: string;
     partner_uuid: string;
-    currency_desc: string;
+    contragent_uuid: string;
+    contragent_name: string;
+    organization_uuid: string;
+    organization_name: string;
+    contract_name: string;
     currency_id: number;
+    currency_name: string;
+    clorder_sum: number;
+    vat_include: number;
+    manager_uuid: string;
+    manager_name: string;
+    approval_status: number;
+    approval_date: number;
+    advance_sum: number;
+    prepayment_sum: number;
+    cargo_account: string;
+    consignee_account: string;
+    contact_person: string;
+    comments: string;
     deleted: 0 | 1;
-    deleted_str: string;
-    discount_cash: number;
-    discount_price: number;
-    discount_sum: number;
-    discount_type_name: string;
-    discount_valid_before: string | null;
-    discount_valid_until: string | null;
-    item_article: string | null;
-    item_group: string;
-    item_price_uuid: string;
-    item_short_name: string;
-    item_uuid: string;
-    item_work_name: string;
-    itype_name: string;
-    parent_itype_name: string;
-    price: number;
-    price_type: string;
-    valid_until: string | null;
+    user_created: string;
+    creation_date: number;
 }
 
 export type OrdersList = Array<OrdersItem>;
@@ -81,8 +80,8 @@ export interface OrdersListRes {
 export interface OrdersState {
     isFetching: boolean;
     errorMessage: string;
-    ordersHeaders: OrdersHeaders | null; // OrdersHeaders | null;
-    ordersTable: OrdersList | null; // Orders | null;
+    ordersHeaders: OrdersHeaders | null;
+    ordersTable: OrdersList | null;
 }
 
 interface OrdersRequest {
@@ -96,12 +95,12 @@ interface OrdersSuccess {
 
 interface OrdersSuccessHeaders {
     type: typeof DATA_LOADING_SUCCESS_ORDERS_HEADERS;
-    payload: any; // PriceListHeaders;
+    payload: OrdersHeaders;
 }
 
 interface OrdersSuccessTable {
     type: typeof DATA_LOADING_SUCCESS_ORDERS_TABLE;
-    payload: any; // PriceList;
+    payload: OrdersList;
 }
 
 interface OrdersFailure {

@@ -90,9 +90,8 @@ export const fetchDataPriceList = (data: PriceListReq) => async (dispatch: Dispa
                         return element;
                     }
                 });
-                const tempInputs = {};
+                const tempInputs: PriceListInputs = {};
                 response.data.payload.recordDisplayRules.forEach((element) => {
-                    // @ts-ignore
                     tempInputs[element.field_name] = '';
                 });
                 dispatch(priceListSetInputs(tempInputs));

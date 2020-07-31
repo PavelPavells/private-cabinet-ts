@@ -12,6 +12,11 @@ import { PersonalCabinet } from '../../store/store';
 // import { loginUser } from '../../actions/authActions';
 
 /**
+ * ********** Импорт компонентов **********
+ */
+// import Layout from '../dashboard/Layout';
+
+/**
  * ********** Импорт стилей **********
  */
 import './Auth.scss';

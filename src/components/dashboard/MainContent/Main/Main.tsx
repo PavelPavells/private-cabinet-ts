@@ -1,5 +1,6 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
+<<<<<<< HEAD
  * */
 import React from 'react';
 import { connect } from 'react-redux';

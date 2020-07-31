@@ -24,6 +24,7 @@ import Orders from './MainContent/Orders/Orders';
 import Control from './MainContent/Control/Control';
 import Payment from './MainContent/Payment/Payment';
 import Shipment from './MainContent/Shipment/Shipment';
+import Configurator from './MainContent/Configurator/Configurator';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -98,6 +99,12 @@ const Layout = ({ data, logoutUser }) => {
                         path="/shipment"
                         // @ts-ignore
                         render={() => <Shipment uuid={uuid} />}
+                    />
+                    <Route
+                        exact
+                        path="/configurator"
+                        // @ts-ignore
+                        render={() => <Configurator uuid={uuid} />}
                     />
                     <Route component={NotFound} />
                 </Switch>

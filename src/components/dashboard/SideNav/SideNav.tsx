@@ -240,7 +240,7 @@ class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
                             </NavLink>
                         </div>
                     ) : null}
-                    <NavLink exact activeClassName="active-page" to="/control">
+                    <NavLink exact activeClassName="active-page" to="/configurator">
                         <li onClick={this.handleClickConfigurator} className="font">
                             <i className="side-logo__configurator icon" />
                             <span className="list-name">Конфигуратор</span>

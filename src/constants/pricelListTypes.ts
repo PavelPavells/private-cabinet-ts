@@ -10,14 +10,14 @@ export const PRICE_LIST_SET_INPUT = 'PRICE_LIST_SET_INPUT';
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
  */
 export interface ResponseStatus {
-    action: string;
-    result: 0 | 1;
+    code: number;
     result_message: string;
+    action: string;
 }
 
 export interface PriceListHeader {
-    display_name: string;
-    field_name: string;
+    displayName: string;
+    fieldName: string;
     size: number;
     visible: 0 | 1;
 }
@@ -25,44 +25,73 @@ export interface PriceListHeader {
 export type PriceListHeaders = Array<PriceListHeader>;
 
 export interface PriceListItem {
-    currency_desc: string;
-    currency_id: number;
+    currencyDesc: string;
+    currencyId: number;
     deleted: 0 | 1;
-    deleted_str: string;
-    discount_cash: number;
-    discount_price: number;
-    discount_sum: number;
-    discount_type_name: string;
-    discount_valid_before: string | null;
-    discount_valid_until: string | null;
-    item_article: string | null;
-    item_group: string;
-    item_price_uuid: string;
-    item_short_name: string;
-    item_uuid: string;
-    item_work_name: string;
-    itype_name: string;
-    parent_itype_name: string;
-    partner_uuid: string;
+    deletedStr: string;
+    discountCash: number;
+    discountPrice: number;
+    discountSum: number;
+    discountTypeName: string;
+    discountValidAfter: string | null;
+    discountValidUntil: string | null;
+    itemArticle: string | null;
+    itemGroup: string;
+    itemPriceUuid: string;
+    itemShortName: string;
+    itemUuid: string;
+    itemWorkName: string;
+    itypeName: string;
+    parentItypeName: string;
+    partnerUuid: string;
     price: number;
-    price_type: string;
-    valid_until: string | null;
+    priceType: string;
+    validUntil: string | null;
 }
 
 export type PriceList = Array<PriceListItem>;
 
 export interface PriceListReq {
-    offset: number;
-    size: number;
-    login: string;
+    page: number;
+    limit: number;
+    sortBy: null | string;
+    sortDirection: number;
+    groupBy: null | string;
+    findBy: null | string;
+    findValue: null | string;
 }
 
 export interface PriceListRes {
     payload: {
-        countUUID: number;
-        page: number;
-        recordDisplayRules: PriceListHeaders;
-        recordSet: PriceList;
+        displayRules: PriceListHeaders;
+        recordSet: {
+            content: PriceList;
+        };
+        pageable: {
+            sort: {
+                sorted: boolean;
+                unsorted: boolean;
+                empty: boolean;
+            };
+            pageNumber: number;
+            pageSize: number;
+            offset: number;
+            unpaged: boolean;
+            paged: boolean;
+        };
+        totalPages: number;
+        last: boolean;
+        totalElements: number;
+        numberOfElements: number;
+        first: boolean;
+        number: number;
+        size: number;
+        sort: {
+            sorted: boolean;
+            unsorted: boolean;
+            empty: boolean;
+        };
+        empty: boolean;
     };
     response: ResponseStatus;
 }

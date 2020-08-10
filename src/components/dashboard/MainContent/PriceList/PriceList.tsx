@@ -36,9 +36,15 @@ import './PriceList.scss';
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const PriceListComponent = ({ uuid }) => {
-    const [offset] = useState(0);
-    const [size] = useState(30);
+    const [page] = useState(0);
+    const [limit] = useState(30);
+    const [sortBy] = useState(null);
+    const [sortDirection] = useState(0);
+    const [groupBy] = useState(null);
+    const [findBy] = useState(null);
+    const [findValue] = useState(null);
     const [exportModal, setExportModal] = useState(false);
+    const [filterModal, setFilterModal] = useState(false);
 
     /**
      * ********** Импорт состояния pricelist из Redux **********
@@ -54,19 +60,36 @@ const PriceListComponent = ({ uuid }) => {
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: PriceListReq = { offset, size, login: uuid };
+        // @ts-ignore
+        const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
         dispatch(fetchDataPriceList(request));
     }, []);
 
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportDocumentModal = () => {
+    const handleExportDocumentModal = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('buttons--active');
         setExportModal(!exportModal);
         // const element = document.getElementsByClassName('buttons__export');
         // if (event.target !== element) {
         //    setExportModal(false);
         // }
+    };
+
+    /**
+     * Открыть/Закрыть инпуты быстрого поиска
+     * */
+    const togglerHideShowQuickSearchInput = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('buttons--active');
+        setFilterModal(!filterModal);
+    };
+
+    /**
+     * Активайия/Деактивация филтра колонки
+     * */
+    const toggleColumnFilter = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('wrap__index--active');
     };
 
     /**
@@ -199,16 +222,22 @@ const PriceListComponent = ({ uuid }) => {
     // };
     if (!isFetching && inputs && headersPriceList && tablePriceList) {
         return (
-            <main className="main-content">
+            <section className="main-content">
                 <div className="pricelist">
                     <header className="pricelist__heading">
                         <div className="heading__text">Прайс-лист продукции CARDDEX</div>
                         <div className="heading__buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export">
-                                <div className="export__text" onClick={handleExportDocumentModal}>
+                            <div className="buttons buttons__filter" onClick={togglerHideShowQuickSearchInput}>
+                                Быстрый фильтр
+                            </div>
+                            <div className="buttons-wrapper">
+                                <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
+                            </div>
+                            <div className="search-wrapper">
+                                <input type="text" className="search-input" placeholder="Быстрый поиск" />
+                                <img src={Magnifier} alt="" className="search-icon" />
                             </div>
                         </div>
                         {exportModal ? (
@@ -237,28 +266,32 @@ const PriceListComponent = ({ uuid }) => {
                                 {headersPriceList.map((header, i) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="caption__wrap">
-                                                <div className="wrap__index">
-                                                    <div className="index__text">{header.display_name}</div>
+                                            <div key={header.fieldName} className="caption__wrap">
+                                                <div className="wrap__index" onClick={toggleColumnFilter}>
+                                                    <div className="index__text">{header.displayName}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />
                                                     ) : (
                                                         <img src={filterColumn} alt="" className="index__icon--filtering" />
                                                     )}
                                                 </div>
-                                                <input
-                                                    type="text"
-                                                    className="wrap__input"
-                                                    value={inputs[header.field_name]}
-                                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                        dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
-                                                    }}
-                                                />
-                                                {i <= 1 ? (
-                                                    <img src={Magnifier} alt="" className="wrap__icon--magnifier" />
-                                                ) : (
-                                                    <img src={Arrow} alt="" className="wrap__icon--arrow" />
-                                                )}
+                                                {filterModal ? (
+                                                    <div className="search-wrapper">
+                                                        <input
+                                                            type="text"
+                                                            className="search-input"
+                                                            value={inputs[header.fieldName]}
+                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                                dispatch(
+                                                                    priceListSetInput({ key: header.fieldName, value: event.target.value })
+                                                                );
+                                                            }}
+                                                        />
+                                                        <div className="search-icon">
+                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                        </div>
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         );
                                     }
@@ -269,10 +302,10 @@ const PriceListComponent = ({ uuid }) => {
                                 {headersPriceList.map((header, i) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="table__column">
+                                            <div key={header.fieldName} className="table__column">
                                                 {tablePriceList.map((index) => {
                                                     return (
-                                                        <div key={index.item_price_uuid} className="column__item">
+                                                        <div key={index.itemPriceUuid} className="column__item">
                                                             {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
@@ -281,7 +314,7 @@ const PriceListComponent = ({ uuid }) => {
                                                             )}
                                                             {
                                                                 // @ts-ignore
-                                                                index[header.field_name]
+                                                                index[header.fieldName]
                                                             }
                                                         </div>
                                                     );
@@ -295,7 +328,7 @@ const PriceListComponent = ({ uuid }) => {
                         </div>
                     </main>
                 </div>
-            </main>
+            </section>
         );
     }
     return <Loader />;

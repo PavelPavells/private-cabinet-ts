@@ -2,17 +2,23 @@
 
 
 .main-content {
-    flex: 0 auto 1;
+    height: calc(100vh - 70px - 20px - 20px);
+    flex: 2 100%;
     flex-direction: column;
+    position: sticky;
+    top: calc(70px + 20px);
     background-color: $white;
-    margin-left: 24.5em;
-    margin-top: 6em;
+    // margin-left: 24.5em;
+    // margin-top: 6em;
     // margin-bottom: 1em;
-    margin-right: 0.6em;
+    // margin-right: 0.6em;
+    margin: 20px;
     -webkit-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;
     transition: all 0.5s ease 0s;
-    font-family: $code;
+    font-family: "Gotham Pro Regular";
+    font-size: 14px;
+    overflow: auto;
 }
 
 /** ********** MAIN STYLES **********/

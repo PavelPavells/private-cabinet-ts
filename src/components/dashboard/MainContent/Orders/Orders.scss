@@ -4,6 +4,7 @@
  * ********** Стили компонента Заказы **********
  */
 .orders {
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -12,52 +13,13 @@
         display: flex;
         flex-direction: column;
         position: relative;
-
-        .heading__text {
-            margin-bottom: 20px;
-            color: $brandPantonBlack;
-            font-size: 20px;
-            font-family: $font-regular;
-        }
-
-        .heading__buttons {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+    
+        & > *:nth-child(n) {
             margin-bottom: 10px;
-
-            .buttons__filter {
-                padding: 10px 48px;
-                border: 1px solid $brandPantonBlue;
-                border-radius: 40px;
-                color: $brandPantonBlue;
-            
-                &:hover {
-                    background-color: $brandPantonBlue;
-                    color: $white;
-                    cursor: pointer;
-                }
-            }
-
-            .buttons__export {
-                padding: 10px 9px;
-                margin-right: 20px;
-                border: 1px solid $brandPantonBlue;
-                color: $brandPantonBlue;
-                border-radius: 40px;
-            
-                &:hover {
-                    background-color: $brandPantonBlue;
-                    color: $white;
-                    cursor: pointer;
-                }
-            }
         }
 
         .orders__modal {
-            display: flex;
+            display: none; // it turn off
             flex-direction: column;
             position: absolute;
             top: 90px;
@@ -101,10 +63,7 @@
     }
 
     .orders__table {
-        display: flex;
-        height: 79vh;
         overflow-x: scroll;
-        margin-right: 20px;
 
         .orders__frame{
             display: flex;
@@ -132,6 +91,13 @@
                         width: 420px;
                         height: 40px;
                         border: 1px solid $brandPantonFonts;
+                        cursor: pointer;
+                        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1); 
+
+                        &--active {
+                            color: $white;
+                            background: $brandPantonBlue
+                        }
 
                         .index__text {
                             width: 300px;
@@ -157,26 +123,6 @@
                             border: 1px solid $brandPantonBlue;
                         }
                     }
-
-                    .wrap__input {
-                        margin: 5px;
-                        padding: 10px;
-                        border: 1px solid $brandPantonFonts;
-                        border-color: $brandPantonFonts;
-                        outline: none;
-                    }
-
-                    .wrap__icon--magnifier {
-                        position: absolute;
-                        right: 10px;
-                        bottom: 15px;
-                    }
-
-                    .wrap__icon--arrow {
-                        position: absolute;
-                        right: 10px;
-                        bottom: 20px;
-                    }
                 }
             }
 
@@ -199,6 +145,7 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        cursor: default;
     
                         &:nth-child(odd) {
                             background-color: #f1f1f1;

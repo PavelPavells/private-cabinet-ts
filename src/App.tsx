@@ -95,7 +95,7 @@ interface AppState {
     readonly data: any;
     readonly loadingData: boolean;
     readonly uuid: any | string;
-    readonly contragentName: any | string;
+    readonly agentName: any | string;
     readonly partnerStatus: any | string;
     readonly success: any;
     readonly err: any;
@@ -109,7 +109,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
         // eslint-disable-next-line react/no-unused-state
         uuid: null,
         // eslint-disable-next-line react/no-unused-state
-        contragentName: null,
+        agentName: null,
         // eslint-disable-next-line react/no-unused-state
         partnerStatus: null,
         // eslint-disable-next-line react/no-unused-state
@@ -132,7 +132,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                     // eslint-disable-next-line react/no-unused-state
                     uuid: localStorage.setItem('uuid', res.data.uuid),
                     // eslint-disable-next-line react/no-unused-state
-                    contragentName: localStorage.setItem('contragentName', res.data.contragentName),
+                    agentName: localStorage.setItem('agentName', res.data.agentName),
                     // eslint-disable-next-line react/no-unused-state
                     partnerStatus: localStorage.setItem('partnerStatus', res.data.partnerStatus),
                     // eslint-disable-next-line react/no-unused-state

@@ -1,0 +1,76 @@
+@import "../../../../styles/base.scss";
+
+.right-info__profile {
+    display: flex;
+
+    
+
+    .profile {
+        display: block;
+        position: relative;
+        height: 46px;
+        width: 46px;
+        padding: 1.25rem;
+        background: url('../../../../images/profile-photo.png') no-repeat;
+        background-size: contain;
+        border-radius: 50%;
+        margin-left: 40px;
+
+        &__status {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 7px;
+            border-radius: 50%;
+            background-color: $brandPantonBlue;
+        }
+    }
+
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 12px;
+        background-color: $white;
+        padding: 1rem;
+        z-index: 10000;
+
+        &__item,
+        .item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+            color: $brandPantonText;
+
+            &__profile-icon {
+                display: block;
+                width: 30px;
+                height: 30px;
+                background: url('../../../../images/profile-user.svg') no-repeat center;
+            }
+
+            &__settings-icon {
+                display: block;
+                width: 30px;
+                height: 30px;
+                background: url('../../../../images/settings-user.svg') no-repeat center;
+            }
+        }
+
+        &__logout {
+            width: 100px;
+            padding: 5px 25px;
+            margin-top: 10px;
+            margin-left: 56%;
+            border-radius: 20px;
+            color: $white;
+            background-color: $brandPantonBlue;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

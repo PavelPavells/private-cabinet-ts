@@ -1,20 +1,19 @@
 @import "../../styles/base.scss";
 
-.wrapper {
-    display: flex;
-    justify-content: space-between;
-    font-family: $code;
-}
+// .wrapper {
+//     display: flex;
+//     justify-content: space-between;
+//     font-family: $code;
+// }
 
-.right {
-    background-color: $brandPantonFonts;
-    height: 100vh;
-}
+// .right {
+//     background-color: $brandPantonFonts;
+//     height: 100vh;
+// }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 7px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -23,15 +22,13 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px $brandPantonSubText;
     width: 1px;
-    border-radius: 15px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: $brandPantonSubText;
-    border-radius: 10px;
+    border-radius: 3px;
 }
 
 /* Handle on hover */
@@ -39,33 +36,8 @@
     background: $brandPantonSubText;
 }
 
-//::-webkit-scrollbar {
-//  width: 0px;  
-//}
-
-// @media (max-height: 900px) {
-//     .right {
-//         background-color: $brandPantonFonts;
-//         height: auto;
-//     }
-// }
-
-// @media (max-width: 1368px) and (max-height: 768px) {
-//   .footer {
-//     padding-left: 15em;
-//     height: 7em;
-//   }
-//   //.main-content {
-//     //height: 78vh;
-//   //}
-// }
-// @media (min-width: 1920px) and (min-height: 1080px) {
-//   //.main-content {
-//     //height: 79vh;
-//   //}
-//   .footer {
-//     padding-left: 17em;
-//     padding-right: 22em;
-//     height: 8em;
-//   }
-// }
+.main-container {
+    display: flex;
+    margin-top: 70px;
+    background: $brandBackground;
+}

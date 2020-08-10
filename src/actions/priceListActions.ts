@@ -83,20 +83,20 @@ export const fetchDataPriceList = (data: PriceListReq) => async (dispatch: Dispa
     dispatch(fetchingDataRequest());
     try {
         await axios
-            .post(`${site}findPrice`, data)
+            .post(`${site}price`, data)
             .then((response: AxiosResponse<PriceListRes>) => {
-                const filterData = response.data.payload.recordDisplayRules.filter((element: PriceListHeader) => {
+                const filterData = response.data.payload.displayRules.filter((element: PriceListHeader) => {
                     if (element.visible) {
                         return element;
                     }
                 });
                 const tempInputs: PriceListInputs = {};
-                response.data.payload.recordDisplayRules.forEach((element) => {
-                    tempInputs[element.field_name] = '';
+                response.data.payload.displayRules.forEach((element) => {
+                    tempInputs[element.fieldName] = '';
                 });
                 dispatch(priceListSetInputs(tempInputs));
                 dispatch(fetchingDataSuccessHeaders(filterData));
-                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
+                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
             })
             .catch((error) => {
                 return error;

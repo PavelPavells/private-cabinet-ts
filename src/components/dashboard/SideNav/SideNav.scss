@@ -1,443 +1,208 @@
 @import "../../../styles/base.scss";
 
 .side {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-width: 24em;
-    height: 100%;
-    background-color: $white;
-    border-right: 2px solid $brandPantonFonts;
-    font-weight: 300;
-    position: fixed;
-    transition: all 0.5s ease 0s;
-    z-index: 1;
-    margin-left: 0px;
+    flex: 1 400px;
+    width: 100%;
+    min-width: 360px;
+    height: calc(100vh - 70px);
+    overflow: auto;
+    background: $white;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
     &__top {
-        margin-top: 4.4rem;
-        padding-left: 13px;
-        //padding-inline-start: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        font-family: $font-regular;
+        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+        user-select: none;
 
-        li {
-            background-color: $white;
+        .nav-link {
+            display: block;
+            margin: 20px 20px 0 20px;            
+            border: 1px solid $brandBackground;
+            border-radius: 10px;
+            cursor: pointer;
 
-            &:hover {
-                background-color: $brandPantonFonts;
-                cursor: pointer;
+            &:last-child {
+                margin-bottom: 20px;
             }
-        }
 
-        .font {
-            display: flex;
-            flex-direction: row;
-            margin-left: 0;
-            font-weight: $medium;
-            padding: 20px 0;
-            border-bottom: 1px solid $brandPantonFonts;
+            & > *:first-child {
+                border-radius: 10px 10px 0 0;
+            }
 
-            .list-name {
+            & > *:last-child {
+                & > *:last-child li {
+                    border-radius: 0 0 10px 10px;
+                }
+            }
+
+            & > *:only-child {
+                border-radius: 10px;
+            }
+            
+            .font, .subparagraph {
+                height: 60px;
                 display: flex;
-                position: relative;
                 align-items: center;
-                justify-content: space-between;
-                font-size: 14px;
-                font-weight: 400;
-                color: $brandPantonBlack;
+                padding: 0 30px 0 20px;
+                transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
-                &__sales {
-                    border: 1px solid red;
-                    color: $brandPantonBlue;
+                &:hover {
+                    background: $brandBackground;
                 }
 
-                &__icon {
-                    display: block;
-                    width: 15px;
-                    height: 15px;
-                    margin-right: 10px;
-                    background: url('../../../images/arrow-info.svg') no-repeat center;
+                .list-name {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    position: relative;
+                    margin-left: 20px;
+                    font-size: 14px;
+                    color: $brandPantonBlack;
+                    text-overflow: clip;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+                    &__sales {
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        color: $brandPantonBlue;
+    
+                        &::before {
+                            content: "";
+                            width: 5px;
+                            height: 5px;
+                            display: block;
+                            margin-right: 3px;
+                            border-radius: 50%;
+                            background: $brandPantonBlue;
+                        }
+                    }
+
+                    &__icon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 15px;
+                        height: 15px;
+                        position: absolute;
+                        right: 0;
+                        transform: rotate(45deg);
+                        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+                        &::after {
+                            content: "\25E2";
+                        }
+                    }
+
+                    &__icon.turn {
+                        transform: rotate(225deg);
+                    }
+                }
+
+                .font-block-hover {
+                    display: none;
                 }
             }
 
-            .font-block-hover {
-                display: none;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: $brandPantonText;
+                    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+                }
             }
         }
 
-        .subparagraph {
-            display: flex;
-            align-items: center;
-            margin-left: 45px;
-            padding: 15px 0;
-            font-size: 14px;
-            border-bottom: 1px solid transparent;
+        .nav--active {
+            box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+        }
 
-            .font-block-hover {
-                display: none;
+        .active-page {
+            .font {
+                box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
             }
 
-            .list-name {
-                display: flex;
-                flex-direction: column;
-                //align-items: center;
-                //justify-content: space-between;
-                font-size: 14px;
-                font-weight: 400;
-                color: $brandPantonBlack;
+            .font, .subparagraph {
+                background: $brandPantonBlue !important;
 
-                &__sales {
-                    display: flex;
-                    align-items: center;
-                    font-size: 12px;
-                    color: $brandPantonBlue;
+                .icon {
+                    svg {
+                        fill: $white !important;
+                    }
+                }
 
-                    .dot {
-                        display: block;
-                        margin-right: 5px;
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 50%;
-                        background-color: $brandPantonBlue;
+                .list-name {
+                    color: $white !important;
+                }
+
+                .list-name__sales {
+                    color: $white;
+
+                    &::before {
+                        background: $white;
                     }
                 }
             }
-
-            &:hover {
-                background-color: $white;
-                border-bottom: 1px solid $brandPantonBlue;
-            }
         }
 
-        /* Иконка для страницы Главная */
-        .side-logo__main {
-            background: url('../../../images/main-page.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 25em;
-            background-size: contain;
-        }
+        .submenu{
+            display: none;
+            border-top: 1px solid $brandBackground;
 
-        /* Иконка для страницы О Компании */
-        .side-logo__about {
-            background: url('../../../images/about-company.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            //margin-left: 27em;
-        }
-
-        /* Иконка для страницы Административная панель */
-        .side-logo__admin {
-            background: url('../../../images/admin-panel.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            //margin-left: 27em;
-        }
-
-        /* Иконка для страницы Прайс-Лист */
-        .side-logo__price {
-            background: url('../../../images/main-price.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 28em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы Заказы */
-        .side-logo__sales {
-            background: url('../../../images/main-orders.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 28em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы Платежи */
-        .side-logo__payment {
-            background: url('../../../images/main-payment.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 27em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы Отгрузки */
-        .side-logo__shipment {
-            background: url('../../../images/main-shipment.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 27em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы Профиль */
-        .side-logo__account {
-            background: url('../../../images/profile-user.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 27em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы Настройки */
-        .side-logo__settings {
-            background: url('../../../images/settings-user.svg') no-repeat;
-            width: 20px;
-            height: 20px;
-            margin-left: 27em;
-            border: none;
-        }
-
-        /* Иконка для страницы Управление */
-        .side-logo__administration {
-            background: url('../../../images/control-user.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            margin-left: 27em;
-            background-size: contain;
-        }
-
-        /* Иконка для страницы О Компании */
-        .side-logo__users {
-            background: url('../../../images/users.svg') no-repeat;
-            width: 18px;
-            height: 18px;
-            background-size: contain;
-            //margin-left: 27em;
-        }
-
-        /* Иконка для страницы О Компании */
-        .side-logo__alert {
-            background: url('../../../images/bell.svg') no-repeat;
-            width: 30px;
-            height: 30px;
-            background-size: contain;
-            //margin-left: 27em;
-        }
-
-        /* Иконка для страницы Конфигуратор */
-        .side-logo__configurator {
-            background: url('../../../images/configurator.svg') no-repeat;
-            width: 18px;
-            height: 20px;
-            margin-left: 27em;
-        }
-
-        div,
-        a {
-            color: $brandPantonBlack;
-            width: 100%;
-            display: block;
-            -webkit-transition: all 0.25s ease 0s;
-            -o-transition: all 0.25s ease 0s;
-            transition: all 0.25s ease 0s;
-
-            &:hover {
-                cursor: pointer;
-                -webkit-transition: all 0.25s ease 0s;
-                -o-transition: all 0.25s ease 0s;
-                transition: all 0.25s ease 0s;
+            &.show {
+                display: block;
             }
 
-            li {
-                padding: 0.75rem;
-
-                .icon {
-                    display: inline-block;
-                    font-size: 1px;
-                    vertical-align: text-bottom;
-                    padding-right: 20px;
-                    padding-left: 1rem;
-                    padding-top: 0.25rem;
-                }
+            .sub-link {
+                display: block;
             }
-        }
-    }
-}
-
-.invisible {
-
-    .main-content {
-        margin-left: 6.5em;
-    }
-
-    .side {
-        margin-left: -18em;
-
-        &__top {
-            padding-left: 300px;
-
-            li {
-                background-color: $white;
-
-                &:hover {
-                    background-color: $white;
-                    cursor: pointer;
-                }
-            }
-
-            .font {
-                position: relative;
-                margin-left: 1px;
-                margin-right: 7px;
-                //transform: translateX(10%);
-                //transition: 1s;
-                // &:hover {
-                //   .font-block-hover {
-                //     height: 0;
-                //     display: flex;
-                //     flex-direction: row;
-                //     align-items: center;
-                //     justify-content: flex-start;
-                //     position: absolute;
-                //     padding-left: 10px;
-                //     top: -9px;
-                //     left: 59px;
-                //     bottom: 0;
-                //     width: 245px;
-                //     height: 46px;
-                //     color: #FFFFFF;
-                //     font-weight: $medium;
-                //     //transform: translateX(100%);
-                //     transition-duration: 2s linear;
-                //     background-color: $brandSideColor;
-                //   }
-                //   border-bottom: 2px solid #3f8fda;
-                //}
-
-                background-color: none;
-                border-bottom: 2px solid transparent;
-
-            }
-
-            /* Иконка для страницы Главная */
-            .side-logo__main {
-                background: url('../../../images/main-page.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Прайс-Лист */
-            .side-logo__price {
-                background: url('../../../images/main-price.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 29em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Заказы */
-            .side-logo__sales {
-                background: url('../../../images/main-orders.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Платежи */
-            .side-logo__payment {
-                background: url('../../../images/main-payment.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Отгрузки */
-            .side-logo__shipment {
-                background: url('../../../images/main-shipment.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Профиль */
-            .side-logo__account {
-                background: url('../../../images/profile-user.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Настройки */
-            .side-logo__settings {
-                background: url('../../../images/settings-user.svg') no-repeat;
-                width: 20px;
-                height: 20px;
-                margin-left: 27em;
-                border: none;
-            }
-
-            /* Иконка для страницы Управление */
-            .side-logo__administration {
-                background: url('../../../images/control-user.svg') no-repeat;
-                width: 18px;
-                height: 18px;
-                margin-left: 27em;
-                background-size: contain;
-            }
-
-            /* Иконка для страницы Конфигуратор */
-            .side-logo__configurator {
-                background: url('../../../images/configurator.svg') no-repeat;
-                width: 18px;
-                height: 20px;
-                margin-left: 27em;
-            }
-
+            
             .subparagraph {
                 position: relative;
-                margin-left: 1px;
-                margin-right: 7px;
-                // &:hover {
-                //   .font-block-hover {
-                //     display: flex;
-                //     flex-direction: row;
-                //     align-items: center;
-                //     justify-content: flex-start;
-                //     position: absolute;
-                //     padding-left: 10px;
-                //     top: -9px;
-                //     left: 59px;
-                //     bottom: 0;
-                //     width: 245px;
-                //     height: 46px;
-                //     color: #FFFFFF;
-                //     font-weight: $light;
-                //     transition-duration: 2s linear;
-                //     background-color: $brandSideColor;
-                //   }
-                //   border-bottom: 2px solid #3f8fda;
-                // }
-            }
+                padding-left: 40px;
 
-            .list-name {
-                display: none;
-                margin-left: 0;
-                color: $brandPantonText;
+                .list-name__icon {
+                    display: none;
+                }
+            }
+        }
+
+        & a:last-child {
+            .font {
+                svg {
+                    fill: $brandPantonBlue;
+                }
             }
         }
     }
-
-    -webkit-transition: margin-left 0.25s ease 0s;
-    -o-transition: margin-left 0.25s ease 0s;
-    transition: margin-left 0.25s ease 0s;
-
 }
 
-.active-page {
-    color: $white !important;
-    //background-color: $brandPantonRed;
-    -webkit-transition: all 0.25s ease 0s;
-    -o-transition: all 0.25s ease 0s;
-    transition: all 0.25s ease 0s;
-}
+.invisible .side {
+    flex: 1 100px;
+    min-width: 100px;
 
-/* Поворот иконки для раскрытия подменю */
-.turn {
-    transform: rotate(180deg);
+    .font {
+        padding: 20px;
+        border-radius: 10px;
+
+        .list-name {
+            width: 0%;
+            margin: 0;
+        }
+    }
+
+    .submenu {
+        display: none;
+    }
 }

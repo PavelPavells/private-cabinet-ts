@@ -6,34 +6,19 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	font-family: $code;
+	font-family: $font-regular;
 }
 
-.scroll::-webkit-scrollbar {
-	width: 6px;
-	height: 7px;
+/* Input autofill */
+input:-webkit-autofill {
+	box-shadow: 0 0 0 1000px $white inset;
 }
 
-.scroll::-webkit-scrollbar:horizontal {
-	height: 0px;
-}
-
-/* Track */
-.scroll::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 5px transparent;
-	width: 1px;
-	border-radius: 15px;
-}
-
-/* Handle */
-.scroll::-webkit-scrollbar-thumb {
-	background: $brandPantonFonts;
-	border-radius: 10px;
-}
-
-/* Handle on hover */
-.scroll::-webkit-scrollbar-thumb:hover {
-	background: $brandPantonSubText;
+input {
+	&:focus, &:hover {
+		border-bottom: 1px solid $brandPantonBlue !important;
+		transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+	}
 }
 
 .auth {
@@ -42,225 +27,162 @@
 	height: 100vh;
 	width: 100%;
 	font-weight: $light;
-	font-family: $code;
+	font-family: $font-regular;
+	font-size: 14px;
+	line-height: 18px;
+	color: $brandPantonBlack;
 
-	&__left, .left {
+	&__left {
 		display: flex;
 		flex-direction: column;
 		width: 50%;
+		padding: 220px;
 		background-color: $white;
+		overflow: auto;
 		z-index: 1000;
 	}
 
 	&__heading {
-		margin: 220px 0 40px 220px;
-		font-size: 26px;
-		line-height: 1.27;
-		color: $brandPantonBlack;
-		font-weight: $regular;
-		font-family: $font-regular;
+		margin-bottom: 30px;
+
+		h1 {
+			font-size: 26px;
+			line-height: 33px;
+			font-weight: 400;
+		}
 	}
 
 	&__necessary {
-		margin: 0 0 40px 220px;
+		margin-top: 10px;
 		font-size: 12px;
-		line-height: 1.5;
 		color: $brandPantonSubText;
 	}
 
 	&__forms {
-		height: 70vh; // сделать правильно! Разница в высоте форм влияет на положение нижнего блока с текстом
-		margin-right: 4px;
+		flex: 2 100%;
 		display: flex;
 		flex-direction: column;
-		overflow-y: scroll;
-		font-family: $code;
-		margin-left: 220px;
+		position: relative;
+	}
 
-		&__header {
-			height: 3vh;
+	&__group {
+		position: relative;
+		margin: 10px 0;
+
+		.auth__field {
+			height: 56px;
+			display: flex;
+			flex-direction: column-reverse;
+			position: relative;
 		}
 
-	}
+		.auth__input {
+			font-size: 14px;
+			line-height: 18px;
+			padding: 10px 0;
+			border-bottom: 1px solid $brandBorderColor;
+		}
 
-	&__field,
-	.field {
-		display: flex;
-		align-items: center;
-		position: relative;
-	}
+		.auth__label {
+			position: absolute;
+			top: 25px;
+			font-size: 14px;
+			line-height: 18px;
+			color: $brandPantonText;
+			transition: all 0.3s ease-out;
 
-	&__label {
-		position: absolute;
-		pointer-events: none;
-		left: 0px;
-		top: 0;
-		transition: .3s;
-		line-height: 1.5;
-		margin-top: 1rem;
-		margin-bottom: 0.75rem;
-		font-size: 14px;
-		color: $brandPantonBlack;
-		font-family: $font-light;
-	}
-
-	&__input {
-		position: relative;
-		width: 71%;
-		margin-bottom: 15px;
-		height: 50px;
-		border: 0;
-		outline: 0;
-		color: $brandPantonGrey;
-		border-bottom: 1px solid #efefef;
-		transition: all 0.25s ease 0s;
-		padding: 0.7rem 0;
-		font-size: 14px;
-		font-family: $font-regular;
-	}
-
-	.auth__input:focus~.auth__label,
-	.auth__input:not(:focus):valid~.auth__label {
-		top: -20px;
-		font-size: 12px;
-		color: $brandPantonSubText;
-		font-family: $font-light;
-	}
-
-	&__options {
-		width: 71%;
-	}
-
-	&__error {
-		display: block;
-		height: 15px;
-		margin-top: 20px;
-		font-family: $code;
-		font-size: 12px;
-		line-height: 1.5;
-		color: $brandPantonRed;
-	}
-
-	&__password-ask,
-	.ask {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		margin-bottom: 20px;
-		font-family: $code;
-
-		span {
-			margin-left: 20px;
-			font-size: 12px;
-			line-height: 1.5;
-
-			a {
-				color: $brandPantonBlue;
-				text-decoration: underline;
+			&.active {
+				position: relative;
+				top: 0;
+				font-size: 12px;
+				color: $brandPantonSubText;
 			}
 		}
+	}
 
-		&__register {
-			margin-top: 10px;
-		}
+	&__password-ask {
+		margin-bottom: 10px;
 
-		&__password {
+		.ask__password {
 			font-size: 12px;
-			text-decoration: underline;
-			line-height: 1.5;
+			line-height: 18ph;
 			color: $brandPantonBlue;
-			padding: 5px 0;
-			font-family: $font-light;
+			text-decoration: underline;
 		}
+
+			span {
+				font-size: 12px;
+				color: $brandPantonSubText;
+			}
 	}
 
 	&__button {
-		padding: 6px 76px;
-		margin-top: 1rem;
-		color: $white;
-		background-color: $brandPantonBlue;
-		border-radius: 15px;
-		border-color: transparent;
-		font-size: 15px;
-		font-family: $font-regular;
-		outline: transparent;
-	}
-
-	&__back,
-	.back {
+		width: 196px;
+		height: 30px;
 		display: flex;
+		justify-content: center;
 		align-items: center;
-		margin: 145px 0 220px 0px;
+		margin: 10px 0;
+		background: $brandPantonBlue;
+		font-family: $font-regular;
+		font-size: 14px;
+		color: $white;
+		border: none;
+		border-radius: 15px;
+		cursor: pointer;
+	}
+
+	&__registration {
 		font-size: 12px;
-		line-height: 1.5;
+		line-height: 18px;
+		color: $brandPantonSubText;
+
+		a {
+			color: $brandPantonBlue;
+			text-decoration: underline;
+		}
+	}
+
+	&__error {
+		padding: 10px 0;
+		color: $brandPantonRed;
+	}
+
+	&__back {
+		display: flex;
+		position: absolute;
+		bottom: 0;
+		font-size: 12px;
 		color: $brandPantonBlue;
-		text-decoration: underline;
+		border-bottom: 1px solid $brandPantonBlue;
 
-		&__arrow {
-			display: block;
-			margin-right: 5px;
-			height: 15px;
-			width: 15px;
-			transform: rotate(180deg);
-			background: url('../../images/arrow-more.svg') no-repeat center;
+		&::before {
+			content: '\2190';
+			padding-right: 5px;
 		}
 	}
 
-	&__registration,
-	.registration {
-		margin: 65px 0 220px 220px;
-
-		&__no-login {
-			font-size: 12px;
-			line-height: 1.5;
-			color: $brandPantonSubText;
-		}
-
-		&__link {
-			font-size: 12px;
-			line-height: 1.5;
-			color: $brandPantonSubText;
-
-			& > a {
-				color: $brandPantonBlue;
-			}
-
-		}
-
+	&__logo {
+		width: 224px;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 40px;
 	}
 
-	&__right,
-	.right {
+	&__text {
+		margin-top: 20px;	
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+	&__right {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 50%;
 		height: 100%;
-		background: url('../../images/main__photo.jpg') no-repeat center;
-		background-size: cover;
-		//opacity: .9;
-
-		&__logo {
-			display: block;
-			width: 243px;
-			height: 45px;
-			margin: 220px 0 40px 0;
-
-			.image {
-				display: block;
-				background: url('../../images/carddex_logo.svg') no-repeat center;
-				background-size: contain;
-			}
-		}
-
-		&__text {
-			font-size: 14px;
-			font-weight: 500;
-			line-height: 1.5;
-			color: $brandPantonBlack;
-			font-family: $font-regular;
-		}
+		margin-left: 4px;
+		background: $brandPantonFonts;
 
 		&__image,
 		.image {
@@ -272,7 +194,10 @@
 				display: block;
 				width: 100%;
 				height: 100%;
+				background-image: url('../../images/group-2@2x.png');
 				background-size: contain;
+				background-position: bottom;
+				background-repeat: no-repeat;
 			}
 		}
 	}
@@ -283,7 +208,7 @@
  */
 
 .warning {
-	border-bottom: 1px solid $brandPantonRed;
+	border-bottom: 1px solid $brandPantonRed !important;
 }
 
 .remove__scrollbar {
@@ -295,142 +220,50 @@
 .inaccess {
 	display: block;
 	position: absolute;
-	right: 29%;
+	right: 0;
 	width: 20px;
 	height: 20px;
+	margin-bottom: 10px;
 	background: url('../../images/eye-inaccess.svg') no-repeat center;
+	cursor: pointer;
 }
 
 .access {
-	display: block;
-	position: absolute;
-	right: 29%;
-	width: 20px;
-	height: 20px;
 	background: url('../../images/eye-access.svg') no-repeat center;
 }
 
 .inaccessible {
 	background-color: $brandPantonFonts;
-	color: $brandPantonBlack;
 }
 
 /**
  * ********** Стили для адаптива компонента Авторизация **********
  */
 
-@media all and (max-width:1440px) {
-	.auth__heading {
-		margin-left: 120px;
-	}
+@media screen and (max-width:1440px) {
+	.auth {
+		&__left {
+			padding: 120px;
+		}
 
-	.auth__necessary {
-		margin-left: 120px !important;
-		width: 60%;
-	}
-
-	.auth__forms {
-		margin-left: 120px;
-	}
-
-	.auth__input {
-		width: 80%;
-	}
-
-	.auth__back,
-	.back {
-		margin-left: 120px !important;
-	}
-
-	.registration {
-		margin-left: 120px !important;
-		/** исправить! */
-	}
-
-	.right__logo,
-	.logo {
-		margin: 220px 0 40px 0 !important;
-	}
-
-	.access {
-		right: 20%;
-	}
-
-	.inaccess {
-		right: 20%;
+		&__right {
+			&__logo {
+				top: 124px;
+			}
+		}
 	}
 }
 
-@media all and (max-width:1080px) {
-	.auth__heading {
-		margin-left: 120px;
-	}
+@media screen and (max-width:1024px) {
+	.auth {
+		&__left {
+			padding: 60px;
+		}
 
-	.auth__necessary {
-		margin-left: 120px !important;
-	}
-
-	.auth__forms {
-		margin-left: 120px;
-	}
-
-	.auth__input {
-		width: 80%;
-	}
-
-	.registration {
-		margin-left: 120px !important;
-		/** исправить! */
-	}
-
-	.right__logo,
-	.logo {
-		margin: 220px 0 40px 0 !important;
-	}
-
-	.access {
-		right: 20%;
-	}
-
-	.inaccess {
-		right: 20%;
-	}
-}
-
-@media all and (max-width: 968px) {
-
-	.auth__heading {
-		margin-left: 120px;
-		margin-top: 150px;
-	}
-
-	.auth__necessary {
-		margin-left: 120px !important;
-	}
-
-	.auth__forms {
-		margin-left: 120px;
-	}
-
-	.auth__input {
-		width: 80%;
-	}
-
-	.registration {
-		margin-left: 120px !important;
-		/** исправить! */
-	}
-
-	.auth__left {
-		width: 100%;
-	}
-
-	.auth__options {
-		width: 80%;
-	}
-
-
-	.auth__right {
-		display: none !important;
+		&__right {
+			&__logo {
+				top: 64px;
+			}
+		}
 	}
 }

@@ -46,6 +46,7 @@ const ShipmentComponent = ({ uuid }) => {
     const [offset] = useState(0);
     const [size] = useState(30);
     const [exportModal, setExportModal] = useState(false);
+    const [filterModal, setFilterModal] = useState(false);
 
     /**
      * ********** Импорт состояния shipment из Redux **********
@@ -68,19 +69,37 @@ const ShipmentComponent = ({ uuid }) => {
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportDocumentModal = () => {
+
+    const handleExportDocumentModal = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('buttons--active');
         setExportModal(!exportModal);
         // const element = document.getElementsByClassName('buttons__export');
         // if (event.target !== element) {
         //    setExportModal(false);
         // }
     };
+
+    /**
+     * Открыть/Закрыть инпуты быстрого поиска
+     * */
+    const togglerHideShowQuicSearchInput = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('buttons--active');
+        setFilterModal(!filterModal);
+    };
+
     /**
      * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
      * */
-    // const handleChangePlusItems = (key: string) => {
-    //    console.log(key)
-    // };
+    const handleChangePlusItems = (key: any) => {
+        console.log(key.pshipment_uuid);
+    };
+
+    /**
+     * Активайия/Деактивация филтра колонки
+     * */
+    const toggleColumnFilter = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('wrap__index--active');
+    };
 
     /** ********** CHANGE DATES FOR SEARCH ********** */
     // @ts-ignore
@@ -224,13 +243,19 @@ const ShipmentComponent = ({ uuid }) => {
             <main className="main-content">
                 <div className="shipment">
                     <header className="shipment__heading">
-                        <div className="heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="heading__text">Отгрузки CARDDEX</div>
                         <div className="heading__buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export">
-                                <div className="export__text" onClick={handleExportDocumentModal}>
+                            <div className="buttons buttons__filter" onClick={togglerHideShowQuicSearchInput}>
+                                Быстрый фильтр
+                            </div>
+                            <div className="buttons-wrapper">
+                                <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
+                            </div>
+                            <div className="search-wrapper">
+                                <input type="text" className="search-input" placeholder="Быстрый поиск" />
+                                <img src={Magnifier} alt="" className="search-icon" />
                             </div>
                         </div>
                         {exportModal ? (
@@ -260,7 +285,7 @@ const ShipmentComponent = ({ uuid }) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="caption__wrap">
-                                                <div className="wrap__index">
+                                                <div className="wrap__index" onClick={toggleColumnFilter}>
                                                     <div className="index__text">{header.display_name}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />
@@ -268,19 +293,21 @@ const ShipmentComponent = ({ uuid }) => {
                                                         <img src={filterColumn} alt="" className="index__icon--filtering" />
                                                     )}
                                                 </div>
-                                                <input
-                                                    type="text"
-                                                    className="wrap__input"
-                                                    // value={inputs[header.field_name]}
-                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
-                                                    // }}
-                                                />
-                                                {i <= 1 ? (
-                                                    <img src={Magnifier} alt="" className="wrap__icon--magnifier" />
-                                                ) : (
-                                                    <img src={Arrow} alt="" className="wrap__icon--arrow" />
-                                                )}
+                                                {filterModal ? (
+                                                    <div className="search-wrapper">
+                                                        <input
+                                                            type="text"
+                                                            className="search-input"
+                                                            // value={inputs[header.field_name]}
+                                                            // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                            //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                            // }}
+                                                        />
+                                                        <div className="search-icon">
+                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                        </div>
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         );
                                     }
@@ -296,10 +323,7 @@ const ShipmentComponent = ({ uuid }) => {
                                                     return (
                                                         <div key={index.cash_flow_uuid} className="column__item">
                                                             {i === 0 && (
-                                                                <div
-                                                                    className="item__icon"
-                                                                    // onClick={() => handleChangePlusItems(index.item_price_uuid)}
-                                                                />
+                                                                <div className="item__icon" onClick={() => handleChangePlusItems(index)} />
                                                             )}
                                                             {
                                                                 // @ts-ignore

@@ -46,6 +46,7 @@ const PaymentComponent = ({ uuid }) => {
     const [offset] = useState(0);
     const [size] = useState(30);
     const [exportModal, setExportModal] = useState(false);
+    const [filterModal, setFilterModal] = useState(false);
 
     /**
      * ********** Импорт состояния pricelist из Redux **********
@@ -69,11 +70,27 @@ const PaymentComponent = ({ uuid }) => {
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
     const handleExportDocumentModal = (event: MouseEvent | any) => {
+        event.currentTarget.classList.toggle('buttons--active');
         setExportModal(!exportModal);
         const element = document.getElementsByClassName('buttons__export');
         if (event.target !== element) {
             setExportModal(!exportModal);
         }
+    };
+
+    /**
+     * Открыть/Закрыть инпуты быстрого поиска
+     * */
+    const togglerHideShowQuicSearchInput = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('buttons--active');
+        setFilterModal(!filterModal);
+    };
+
+    /**
+     * Активайия/Деактивация филтра колонки
+     * */
+    const toggleColumnFilter = (event: React.SyntheticEvent) => {
+        event.currentTarget.classList.toggle('wrap__index--active');
     };
 
     /**
@@ -225,13 +242,19 @@ const PaymentComponent = ({ uuid }) => {
             <main className="main-content">
                 <div className="payment">
                     <header className="payment__heading">
-                        <div className="heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="heading__text">Платежи CARDDEX</div>
                         <div className="heading__buttons">
-                            <div className="buttons__filter">Быстрый фильтр</div>
-                            <div className="buttons__export">
-                                <div className="export__text" onClick={handleExportDocumentModal}>
+                            <div className="buttons buttons__filter" onClick={togglerHideShowQuicSearchInput}>
+                                Быстрый фильтр
+                            </div>
+                            <div className="buttons-wrapper">
+                                <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
+                            </div>
+                            <div className="search-wrapper">
+                                <input type="text" className="search-input" placeholder="Быстрый поиск" />
+                                <img src={Magnifier} alt="" className="search-icon" />
                             </div>
                         </div>
                         {exportModal ? (
@@ -261,7 +284,7 @@ const PaymentComponent = ({ uuid }) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="caption__wrap">
-                                                <div className="wrap__index">
+                                                <div className="wrap__index" onClick={toggleColumnFilter}>
                                                     <div className="index__text">{header.display_name}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />
@@ -269,19 +292,21 @@ const PaymentComponent = ({ uuid }) => {
                                                         <img src={filterColumn} alt="" className="index__icon--filtering" />
                                                     )}
                                                 </div>
-                                                <input
-                                                    type="text"
-                                                    className="wrap__input"
-                                                    // value={inputs[header.field_name]}
-                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
-                                                    // }}
-                                                />
-                                                {i <= 1 ? (
-                                                    <img src={Magnifier} alt="" className="wrap__icon--magnifier" />
-                                                ) : (
-                                                    <img src={Arrow} alt="" className="wrap__icon--arrow" />
-                                                )}
+                                                {filterModal ? (
+                                                    <div className="search-wrapper">
+                                                        <input
+                                                            type="text"
+                                                            className="search-input"
+                                                            // value={inputs[header.field_name]}
+                                                            // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                            //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                            // }}
+                                                        />
+                                                        <div className="search-icon">
+                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                        </div>
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         );
                                     }

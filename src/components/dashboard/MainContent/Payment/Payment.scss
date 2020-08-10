@@ -4,60 +4,22 @@
  * ********** Стили компонента Прайс-лист **********
  */
 .payment {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 20px;
 
     .payment__heading {
         display: flex;
         flex-direction: column;
         position: relative;
-
-        .heading__text {
-            margin-bottom: 20px;
-            color: $brandPantonBlack;
-            font-size: 20px;
-            font-family: $font-regular;
-        }
-
-        .heading__buttons {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+    
+        & > *:nth-child(n) {
             margin-bottom: 10px;
-
-            .buttons__filter {
-                padding: 10px 48px;
-                border: 1px solid $brandPantonBlue;
-                border-radius: 40px;
-                color: $brandPantonBlue;
-            
-                &:hover {
-                    background-color: $brandPantonBlue;
-                    color: $white;
-                    cursor: pointer;
-                }
-            }
-
-            .buttons__export {
-                padding: 10px 9px;
-                margin-right: 20px;
-                border: 1px solid $brandPantonBlue;
-                color: $brandPantonBlue;
-                border-radius: 40px;
-            
-                &:hover {
-                    background-color: $brandPantonBlue;
-                    color: $white;
-                    cursor: pointer;
-                }
-            }
         }
 
         .payment__modal {
-            display: flex;
+            display: none; // it turn off
             flex-direction: column;
             position: absolute;
             top: 90px;
@@ -73,7 +35,7 @@
                 justify-content: flex-end;
             }
 
-            .payment__block {
+            .modal__block {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -101,10 +63,7 @@
     }
 
     .payment__table {
-        display: flex;
-        height: 79vh;
         overflow-x: scroll;
-        margin-right: 20px;
 
         .payment__frame {
             display: flex;
@@ -132,6 +91,13 @@
                         width: 320px;
                         height: 40px;
                         border: 1px solid $brandPantonFonts;
+                        cursor: pointer;
+                        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1); 
+
+                        &--active {
+                            color: $white;
+                            background: $brandPantonBlue
+                        }
 
                         .index__text {
                             width: 300px;
@@ -188,6 +154,14 @@
                     display: flex;
                     flex-direction: column;
 
+                    &:nth-child(2),
+                    &:nth-child(3),
+                    &:nth-child(4) {
+                        .column__item {
+                            justify-content: flex-end;
+                        }
+                    }
+
                     .column__item {
                         display: flex;
                         align-items: center;
@@ -199,6 +173,7 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        cursor: default;
     
                         &:nth-child(odd) {
                             background-color: #f1f1f1;

@@ -13,7 +13,7 @@ import { fetchDataOrders } from '../../../../actions/ordersActions';
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-// import { PriceListReq } from '../../../../constants/ordersTypes';
+import { OrdersListReq } from '../../../../constants/ordersTypes';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -36,8 +36,13 @@ import './Orders.scss';
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const OrdersComponent = ({ uuid }) => {
-    const [offset] = useState(0);
-    const [size] = useState(30);
+    const [page] = useState(0);
+    const [limit] = useState(30);
+    const [sortBy] = useState(null);
+    const [sortDirection] = useState(0);
+    const [groupBy] = useState(null);
+    const [findBy] = useState(null);
+    const [findValue] = useState(null);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -54,7 +59,7 @@ const OrdersComponent = ({ uuid }) => {
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: any = { offset, size, login: uuid };
+        const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
         dispatch(fetchDataOrders(request));
     }, []);
 
@@ -65,10 +70,6 @@ const OrdersComponent = ({ uuid }) => {
     const handleExportDocumentModal = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('buttons--active');
         setExportModal(!exportModal);
-        // const element = document.getElementsByClassName('buttons__export');
-        // if (event.target !== element) {
-        //    setExportModal(false);
-        // }
     };
 
     /**
@@ -86,134 +87,6 @@ const OrdersComponent = ({ uuid }) => {
         event.currentTarget.classList.toggle('wrap__index--active');
     };
 
-    /**
-     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
-     * */
-    // const handleChangePlusItems = (key: string) => {
-    //    console.log(key)
-    // };
-
-    /** ********** SEND TEXT FOR SEARCH ********** */
-    // const handleSendSearch = () => {
-    //     const data = {
-    //         offset: page,
-    //         size: optionFilter,
-    //         value: search,
-    //         // @ts-ignore
-    //         // login: data,
-    //         search
-    //     };
-    //     // @ts-ignore
-    //     fetchDataPriceList(data);
-    // };
-
-    /** ********** FIRST PAGE PRICE LIST PAGINATION ********** */
-    // const getFirstPage = () => {
-    //     setPage(0);
-    //     const data = {
-    //         offset: 0,
-    //         size: optionFilter,
-    //         value: search
-    //         // @ts-ignore
-    //         // login: this.props.data
-    //     };
-    //     // @ts-ignore
-    //     fetchDataPriceList(data);
-    // };
-
-    /** ********** PREVIOUS PAGE PRICE LIST PAGINATION ********** */
-    // const getPreviousPage = () => {
-    //     this.setState(
-    //         (prevState) => {
-    //             // @ts-ignore
-    //             return prevState.page > 0 ? { page: prevState.page - 1 } : null;
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 value: this.state.search,
-    //                 // @ts-ignore
-    //                 login: this.props.data
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPriceList(data);
-    //         }
-    //     );
-    // };
-
-    /** ********** NEXT PAGE PRICE LIST PAGINATION ********** */
-    // getNextPage = () => {
-    //     // @ts-ignore
-    //     const { payload } = this.props.pricelist.data;
-    //     this.setState(
-    //         (prevState) => {
-    //             // @ts-ignore
-    //             return prevState.page >= 0 && prevState.page < payload.page ? { page: prevState.page + 1 } : null;
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 value: this.state.search,
-    //                 // @ts-ignore
-    //                 login: this.props.data
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPriceList(data);
-    //         }
-    //     );
-    // };
-
-    /** ********** LAST PAGE PRICE LIST PAGINATION ********** */
-    // getLastPage = () => {
-    //     // @ts-ignore
-    //     const { payload } = this.props.pricelist.data;
-    //     this.setState({ page: payload.page });
-    //     const data = {
-    //         offset: this.state.offset,
-    //         size: this.state.optionFilter,
-    //         // @ts-ignore
-    //         login: this.props.data,
-    //         value: this.state.search
-    //     };
-    //     // @ts-ignore
-    //     this.props.fetchDataLastPagePriceList(data);
-    // };
-
-    /** ********** REFRESH DATA FOR PRICE LIST TABLE ********** */
-    // handleRefreshData = () => {
-    //     const data = {
-    //         offset: this.state.page,
-    //         size: this.state.optionFilter,
-    //         // @ts-ignore
-    //         login: this.props.data
-    //     };
-    //     // @ts-ignore
-    //     this.props.fetchDataPriceList(data);
-    // };
-
-    /** ********** FILTER FOR VISION DATA IN TABLE ********** */
-    // @ts-ignore
-    // handleOptionFilter = (event) => {
-    //     const elem = event.target.value;
-    //     this.setState(
-    //         {
-    //             optionFilter: elem
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 value: this.state.search,
-    //                 // @ts-ignore
-    //                 login: this.props.data
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPriceList(data);
-    //         }
-    //     );
-    // };
     if (!isFetching && ordersHeaders && ordersTable) {
         return (
             <main className="main-content">
@@ -260,9 +133,9 @@ const OrdersComponent = ({ uuid }) => {
                                 {ordersHeaders.map((header: any, i) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="caption__wrap">
+                                            <div key={header.fieldName} className="caption__wrap">
                                                 <div className="wrap__index" onClick={toggleColumnFilter}>
-                                                    <div className="index__text">{header.display_name}</div>
+                                                    <div className="index__text">{header.displayName}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />
                                                     ) : (
@@ -287,20 +160,17 @@ const OrdersComponent = ({ uuid }) => {
                                 {ordersHeaders.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="table__column">
+                                            <div key={header.fieldName} className="table__column">
                                                 {ordersTable.map((index: any) => {
                                                     return (
-                                                        <div key={index.item_price_uuid} className="column__item">
+                                                        <div key={index.clientOrderUuid} className="column__item">
                                                             {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
                                                                     // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                                 />
                                                             )}
-                                                            {
-                                                                // @ts-ignore
-                                                                index[header.field_name]
-                                                            }
+                                                            {index[header.fieldName]}
                                                         </div>
                                                     );
                                                 })}

@@ -70,15 +70,15 @@ export const fetchDataOrders = (data: OrdersListReq) => async (dispatch: Dispatc
     dispatch(fetchingDataRequest());
     try {
         await axios
-            .post(`${site}orders`, data)
+            .post(`${site}order`, data)
             .then((response: AxiosResponse<OrdersListRes>) => {
-                const filterData = response.data.payload.recordDisplayRules.filter((element: OrdersHeader) => {
+                const filterData = response.data.payload.displayRules.filter((element: OrdersHeader) => {
                     if (element.visible) {
                         return element;
                     }
                 });
                 dispatch(fetchingDataSuccessHeaders(filterData));
-                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
+                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
             })
             .catch((error) => {
                 return error;

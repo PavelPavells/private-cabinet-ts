@@ -59,6 +59,7 @@ export interface PriceListReq {
     groupBy: null | string;
     findBy: null | string;
     findValue: null | string;
+    uuid: string;
 }
 
 export interface PriceListRes {

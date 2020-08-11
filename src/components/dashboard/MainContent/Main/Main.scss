@@ -7,380 +7,288 @@
     flex-direction: column;
     position: sticky;
     top: calc(70px + 20px);
-    background-color: $white;
-    // margin-left: 24.5em;
-    // margin-top: 6em;
-    // margin-bottom: 1em;
-    // margin-right: 0.6em;
     margin: 20px;
     -webkit-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;
     transition: all 0.5s ease 0s;
     font-family: "Gotham Pro Regular";
     font-size: 14px;
+    color: $brandPantonGrey;
     overflow: auto;
 }
 
 /** ********** MAIN STYLES **********/
 .main {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    //overflow-y: scroll;
+    padding: 20px;
     overflow-x: hidden;
-    //height: 100%;
 
-    &__info,
-    .info {
+    &__block {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        margin-bottom: 60px;
 
-        &__paragraph {
-            margin-bottom: 15px;
-            font-size: 20px;
-            font-weight: $bold;
-            margin-top: 10px;
-            margin-left: 10px;
+        &:last-child {
+            margin: 0;
         }
 
-        &__name {
-            margin-bottom: 15px;
-            margin-left: 10px;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 16px;
-            color: $brandPantonBlack;
-        }
+        &.status {
+            .block-container {
+                .block-element {
+                    margin: 0 0 10px;
+                    min-height: 96px;
 
-        &__registration {
-            margin-bottom: 15px;
-            margin-left: 10px;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 16px;
-            color: $brandPantonBlack;
-        }
+                    &:last-child {
+                        margin: 0;
+                    }
 
-        &__taxes {
-            margin-bottom: 15px;
-            margin-left: 10px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid $brandPantonFonts;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 16px;
-            color: $brandPantonBlack;
-        }
+                    &__icon{
+                        max-width: 59px;
+                        height: 59px;
+                        border-radius: 13px;
 
-        &__status {
-            margin-bottom: 15px;
-            margin-left: 10px;
-            font-style: normal;
-            font-weight: $bold;
-            font-size: 16px;
-            color: $brandPantonBlack;
-        }
+                        svg {
+                            width: 27px;
+                            height: 27px;
+                        }
+                    }
 
-        &__partner {
-            margin-bottom: 15px;
-            margin-left: 10px;
-            margin-right: 1em;
-            font-weight: $light;
-        }
+                    &__title {
+                        line-height: 18px;
+                        color: $brandPantonBlack;
+                    }
 
-        &__accumulator,
-        .accumulator {
-            display: flex;
-            flex-direction: column;
-
-            &__text,
-            .amount-percent {
-                display: flex;
-                margin-bottom: 15px;
-                margin-left: 10px;
-                font-weight: $light;
-
-                &__percent {
-                    margin-left: 21px;
-                    color: $brandPantonBlue;
+                    &__subtitle {
+                        color: $brandPantonBlue;
+                    }
                 }
             }
-
         }
 
-        &__purchase,
-        .purchase {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
+        &.seggestions {
+            .block-element {
+                &__info {
+                    margin: 0;
+                    padding: 30px 30px;
+                }
 
-            &__text {
-                font-weight: $light;
-                margin-left: 10px;
-            }
-
-            &__sum {
-                margin-left: 21px;
-                margin-bottom: 15px;
-                font-weight: $medium;
-                color: $brandPantonBlue;
-            }
-        }
-
-        &__table,
-        .table {
-            display: flex;
-            flex-direction: row;
-            max-width: 1000px;
-            margin-bottom: 15px;
-            margin-left: 10px;
-
-            &__left,
-            .table-left {
-                display: flex;
-                flex-direction: column;
-                width: 30%;
-                border: 1px solid $brandPantonFonts;
-
-                &__one {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
+                &__title {
                     padding: 10px 0;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
+                    margin: 0 10px;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: $brandPantonSubText;
 
-                &__two,
-                .two {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    width: 100%;
-                    border-bottom: 1px solid $brandPantonFonts;
-
-                    &__left {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 50%;
-                        padding: 10px 0;
-                        border-right: 1px solid $brandPantonFonts;
-                    }
-
-                    &__right {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 50%;
-                        padding: 10px 0;
+                    svg {
+                        width: 14px;
+                        height: 14px;
+                        fill: $brandPantonSubText;
+                        margin-right: 7px;
                     }
                 }
-            }
 
-            &__center,
-            .table-center {
-                display: flex;
-                width: 20%;
-                flex-direction: column;
-                border-top: 1px solid $brandPantonFonts;
-                border-right: 1px solid $brandPantonFonts;
-                border-bottom: 1px solid $brandPantonFonts;
-
-                &__one {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 40%;
-                    border-bottom: 1px solid $brandPantonFonts;
+                &__subtitle {
+                    margin: 0 10px 20px 10px;
+                    font-size: 20px;
+                    line-height: 23px;
                 }
 
-                &__two {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
+                &__description {
+                    margin: 0 10px 20px 10px;
+                    padding-left: 10px;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: $brandPantonSubText;
                 }
 
-                &__three {
+                &__button {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
-
-                &__four {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
-            }
-
-            &__right,
-            .table-right {
-                display: flex;
-                width: 36%;
-                flex-direction: column;
-                border-top: 1px solid $brandPantonFonts;
-                border-right: 1px solid $brandPantonFonts;
-                border-bottom: 1px solid $brandPantonFonts;
-
-                &__one {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 40%;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
-
-                &__two {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
-
-                &__three {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
-                }
-
-                &__four {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 20%;
-                    border-bottom: 1px solid $brandPantonFonts;
+                    padding: 16px;
+                    font-size: 15px;
+                    line-height: 14px;
+                    color: $brandPantonBlue;
+                    background: $brandSideBorderColor;
+                    cursor: pointer;
                 }
             }
         }
     }
+}
 
-    &__alert,
-    .alert {
+.block-title {
+    margin-bottom: 20px;
+    font-size: 30px;
+    line-height: 40px;
+
+    &--important {
+        height: 77px;
         display: flex;
-        flex-direction: row;
-        background-color: $brandPantonFonts;
-        padding-top: 10px;
+        align-items: center;
+        font-size: 25px;
+        line-height: 25px;
+        color: $white;
+        background: $brandPantonBlue;
+        border-radius: 20px;
 
-        &__text,
-        .alert-text {
+        span {
             display: flex;
-            justify-content: flex-start;
-            width: 100%;
-            padding: 15px 0;
-            background-color: $brandPantonBlue;
-            color: $white;
+            align-items: center;
+            padding: 0 21px;
 
-            &__icon {
-                display: block;
-                margin-right: 15px;
-                margin-left: 10px;
-                width: 20px;
-                height: 20px;
-                text-align: center;
+            &::before {
+                content: "\0069";
+                min-width: 43px;
+                height: 43px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 18px;
+                font-family: serif;
+                font-size: 35px;
+                border: 1px solid $white;
                 border-radius: 50%;
-                background-color: $white;
-                color: $brandPantonBlack;
             }
         }
     }
 
-    &__offers,
-    .offers {
+}
+
+.block-container {
+    display: flex;
+    padding-bottom: 7px;
+    overflow: auto;
+}
+
+.block-subcontainer {
+    flex: 1 33%;
+    max-width: 435px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+}
+
+.block-table {
+    flex: 1 67%;
+    display: flex;
+    flex-direction: column;
+
+    &__row {
         display: flex;
-        background-color: $brandPantonFonts;
+        font-size: 16px;
+        line-height: 15px;
+        background: $brandBackground;
+        border-left: 1px solid $brandBorderColor;        
+        border-right: 1px solid $brandBorderColor;
 
-        &__block,
-        .offer-block {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 255px;
-            height: 260px;
-            margin: 10px 10px 10px 2px;
-            border: 1px solid $brandPantonFonts;
-            background-color: $white;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        .block-table__element:nth-child(2n) {
+            border-left: 1px solid $brandBorderColor;        
+            border-right: 1px solid $brandBorderColor;
+        }
 
-            &__header {
-                padding: 15px 0 0 10px;
-                font-size: 16px;
+        &:nth-child(2n) {
+            background: $white;
+        }
+
+        &.header {
+            background: $brandPantonBlue;
+            color: $white;
+            border-radius: 10px 10px 0px 0px;
+            border: one;
+
+            .block-table__element {
+                border: none;
             }
+        }
 
-            &__text {
-                padding: 15px 0 0 10px;
-                font-size: 14px;
-                line-height: 25px;
-            }
+        &:last-child {            
+            border-bottom: 1px solid $brandBorderColor;
+        }
+    }
 
-            &__more,
-            .arrow-more {
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-                padding: 15px 15px 15px 10px;
-                font-size: 12px;
-                text-align: right;
+    &__element {
+        flex: 1;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding-left: 33px;
+    }
+}
 
-                &__arrow {
-                    display: block;
-                    margin-left: 5px;
-                    width: 25px;
-                    height: 15px;
-                    background: url('../../../../images/arrow-more.svg') no-repeat center;
+.block-element {
+    flex: 1;
+    min-width: 430px;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    background: $white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &__icon {
+        flex: 1 100%;
+        max-width: 90px;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 40px 0 33px;
+        background: $brandPantonBlue;
+        border-radius: 20px;
+
+        svg {
+            width: 42px;
+            height: 42px;
+            fill: $white;
+        }
+    }
+
+    &__info {
+        flex: 2;
+        margin-right: 33px;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 15px;
+        color: $brandPantonSubText;
+    }
+
+    &__subtitle {
+        font-size: 25px;
+        line-height: 27px;
+    }
+}
+
+.currency-unit-rub {
+    &::after {
+        content: '\20BD';
+        margin-left: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+@media (max-width: 1600px) {
+    .main {    
+        &__block {
+            &.status {
+                .block-subcontainer {
+                    margin: 0 0 20px 0;
+                }
+
+                .block-container {
+                    flex-direction: column;
                 }
             }
         }
     }
 }
-
-.numbers {
-    width: 90%;
-    text-align: right;
-}
-
-// @media all and (max-width: 1440px) {
-//     .wrapper-main {
-//         -webkit-box-orient: horizontal;
-//         -webkit-box-direction: normal;
-//         -ms-flex-direction: row;
-//         flex-direction: row;
-
-//         .wrapper-main-info {
-//             width: 59%;
-//             min-width: 550px;
-//         }
-//     }
-// }
-
-// @media all and (max-width: 1366px) {
-//     .wrapper-main {
-//         font-size: 15px;
-//         -webkit-box-orient: vertical;
-//         -webkit-box-direction: normal;
-//         -ms-flex-direction: column;
-//         flex-direction: column;
-
-//         .wrapper-main-info {
-//             width: 100%;
-//             min-width: 550px;
-//         }
-
-//         .wrapper-main-news {
-//             width: 90%;
-//             min-width: 550px;
-//             margin-left: 0;
-//             border: none;
-//         }
-//     }
-// }

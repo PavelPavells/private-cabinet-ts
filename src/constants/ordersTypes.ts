@@ -11,14 +11,14 @@ export const DATA_LOADING_SUCCESS_ORDERS_TABLE = 'DATA_LOADING_SUCCESS_ORDERS_TA
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
  */
 export interface ResponseStatus {
-    action: string;
-    result: 0 | 1;
+    code: number;
     result_message: string;
+    action: string;
 }
 
 export interface OrdersHeader {
-    display_name: string;
-    field_name: string;
+    displayName: string;
+    fieldName: string;
     size: number;
     visible: 0 | 1;
 }
@@ -26,50 +26,81 @@ export interface OrdersHeader {
 export type OrdersHeaders = Array<OrdersHeader>;
 
 export interface OrdersItem {
-    clorder_uuid: string;
-    clorder_guid: string;
-    clorder_id: string;
-    create_date: number;
+    clientOrderUuid: string;
+    clientOrderGuid: string;
+    clientOrderId: string;
+    createDate: string;
     status: string;
-    partner_uuid: string;
-    contragent_uuid: string;
-    contragent_name: string;
-    organization_uuid: string;
-    organization_name: string;
-    contract_name: string;
-    currency_id: number;
-    currency_name: string;
-    clorder_sum: number;
-    vat_include: number;
-    manager_uuid: string;
-    manager_name: string;
-    approval_status: number;
-    approval_date: number;
-    advance_sum: number;
-    prepayment_sum: number;
-    cargo_account: string;
-    consignee_account: string;
-    contact_person: string;
+    partnerUuid: string;
+    partnerGuid: string;
+    contragentGuid: string;
+    contragentName: string;
+    organizationUuid: string;
+    organizationName: string;
+    contractName: string;
+    currencyId: number;
+    currencyName: string;
+    clientOrderSum: number;
+    vatInclude: number;
+    managerUuid: string;
+    managerName: string;
+    approvalStatus: number;
+    approvalDate: string;
+    advanceSum: number;
+    prepaymentSum: number;
+    cargoAccount: string;
+    consigneeAccount: string;
+    contactPerson: string;
     comments: string;
     deleted: 0 | 1;
-    user_created: string;
-    creation_date: number;
+    userCreated: string;
+    creationDate: number;
 }
 
 export type OrdersList = Array<OrdersItem>;
 
 export interface OrdersListReq {
-    offset: number;
-    size: number;
-    login: string;
+    page: number;
+    limit: number;
+    sortBy: null | string;
+    sortDirection: number;
+    groupBy: null | string;
+    findBy: null | string;
+    findValue: null | string;
+    uuid: string;
 }
 
 export interface OrdersListRes {
     payload: {
-        countUUID: number;
-        page: number;
-        recordDisplayRules: OrdersHeaders;
-        recordSet: OrdersList;
+        displayRules: OrdersHeaders;
+        recordSet: {
+            content: OrdersList;
+        };
+        pageable: {
+            sort: {
+                sorted: boolean;
+                unsorted: boolean;
+                empty: boolean;
+            };
+            offset: number;
+            pageNumber: number;
+            pageSize: number;
+            paged: boolean;
+            unpaged: boolean;
+        };
+        totalElements: number;
+        totalPages: boolean;
+        last: boolean;
+        number: number;
+        size: boolean;
+        sort: {
+            sorted: boolean;
+            unsorted: boolean;
+            empty: boolean;
+        };
+        numberOfElements: number;
+        first: boolean;
+        empty: boolean;
     };
     response: ResponseStatus;
 }

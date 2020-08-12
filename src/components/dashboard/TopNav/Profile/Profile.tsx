@@ -31,6 +31,7 @@ const Profile: React.FC = () => {
 
     const onLogoutClick = () => {
         window.location.href = '/';
+        localStorage.clear();
     };
 
     return (
@@ -38,12 +39,12 @@ const Profile: React.FC = () => {
             <div className="profile">
                 <div className="profile__status" />
             </div>
-            <div className="right-info__list info-list">
+            <div onClick={handleProfileClick} className="right-info__list info-list">
                 <div className="info-list__text">
                     <div className="name">Иванов И.И.</div>
                     <div className="role">Администратор</div>
                 </div>
-                <div onClick={handleProfileClick} className="info-list__arrow" />
+                <div className="info-list__arrow" />
             </div>
             {dropdown ? (
                 <ul className="dropdown">

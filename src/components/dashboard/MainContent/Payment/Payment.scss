@@ -82,6 +82,27 @@
                     flex-direction: column;
                     position: relative;
 
+                    &:last-child {
+                        border-right: 1px solid $brandBorderColor;
+                    }
+
+                    &:nth-child(3){
+                        .wrap__index {
+                            width: 300px;
+                        }
+                    }
+                    &:nth-child(2){
+                        .wrap__index {
+                            width: 350px;
+                        }
+                    }
+
+                    &:nth-child(4) {
+                        .wrap__index {
+                            width: 250px;
+                        }
+                    }
+
                     .wrap__index {
                         display: flex;
                         flex-direction: row;
@@ -91,7 +112,8 @@
                         text-align: center;
                         width: 320px;
                         height: 40px;
-                        border: 1px solid $brandPantonFonts;
+                        border-left: 1px solid $brandPantonFonts;
+                        border-top: 1px solid $brandPantonFonts;
                         cursor: pointer;
                         transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1); 
 
@@ -155,11 +177,27 @@
                     display: flex;
                     flex-direction: column;
 
-                    &:nth-child(2),
-                    &:nth-child(3),
-                    &:nth-child(4) {
+                    &:last-child {
+                        border-right: 1px solid $brandBorderColor;
+                    }
+
+                    &:nth-child(3) {
                         .column__item {
                             justify-content: flex-end;
+                            width: 300px;
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        .column__item {
+                            justify-content: flex-end;
+                            width: 350px;
+                        }
+                    }
+
+                    &:nth-child(4) {
+                        .column__item {
+                            width: 250px;
                         }
                     }
 

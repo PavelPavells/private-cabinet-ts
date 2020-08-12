@@ -81,6 +81,22 @@
                     display: flex;
                     flex-direction: column;
                     position: relative;
+                    
+                    &:last-child {
+                        border-right: 1px solid $brandBorderColor;
+                    }
+
+                    &:nth-child(3){
+                        .wrap__index {
+                            width: 200px;
+                        }
+                    }
+                    &:nth-child(2),
+                    &:nth-child(4){
+                        .wrap__index {
+                            width: 250px;
+                        }
+                    }
 
                     .wrap__index {
                         display: flex;
@@ -91,9 +107,11 @@
                         text-align: center;
                         width: 400px;
                         height: 40px;
-                        border: 1px solid $brandPantonFonts;
+                        border-left: 1px solid $brandPantonFonts;
+                        border-top: 1px solid $brandPantonFonts;
                         cursor: pointer;
                         transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1); 
+
 
                         &--active {
                             color: $white;
@@ -135,11 +153,21 @@
                     display: flex;
                     flex-direction: column;
 
-                    &:nth-child(3),
-                    &:nth-child(6),
-                    &:nth-child(7) {
+                    &:last-child {
+                        border-right: 1px solid $brandBorderColor;
+                    }
+
+                    &:nth-child(3) {
                         .column__item {
                             justify-content: flex-end;
+                            width: 200px;
+                        }
+                    }
+
+                    &:nth-child(2),
+                    &:nth-child(4) {
+                        .column__item {
+                            width: 250px;
                         }
                     }
 
@@ -155,7 +183,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         cursor: default;
-    
+
                         &:nth-child(odd) {
                             background-color: #f1f1f1;
                         }
@@ -232,9 +260,23 @@
 
 .search-wrapper {
     display: flex;
-    padding: 10px;
-    border: 1px solid #ebeff3;
-    border-color: #ebeff3;
+    padding: 10px 0;
+    border: 1px solid $brandPantonFonts;
+    //border-left: 1px solid $brandPantonFonts;
+    //border-bottom: 1px solid  $brandPantonFonts;
+    //border-color: #ebeff3;
+
+    &:nth-child(2) {
+        .column__item {
+            width: 200px;
+        }
+    }
+
+    &:nth-child(3) {
+        .column__item {
+            width: 200px;
+        }
+    }
 
     &:focus-within {
         border: 1px solid $brandPantonBlue;
@@ -249,6 +291,7 @@
     }
 
     .search-icon {
+        width: 20px;
         cursor: pointer;
     }
 }

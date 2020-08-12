@@ -3,7 +3,11 @@
 .right-info__profile {
     display: flex;
 
-    
+    .right-info__list {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 
     .profile {
         display: block;

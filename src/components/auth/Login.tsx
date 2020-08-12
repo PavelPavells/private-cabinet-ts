@@ -155,7 +155,10 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                  */
                 <div className="auth">
                     <div className="auth__left left">
-                        <div className="auth__logo autofocus">
+                        <div
+                            className="auth__logo 
+                        autofocus"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320.6 31">
                                 <path
                                     fill="#2b2a29"
@@ -207,8 +210,6 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                             type="text"
                                             className="auth__input warning"
                                             autoCorrect="off"
-                                            // eslint-disable-next-line jsx-a11y/no-autofocus
-                                            autoFocus
                                             required
                                         />
                                         <label className="auth__label">Введите логин</label>
@@ -223,8 +224,6 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                             type="text"
                                             className="auth__input"
                                             autoCorrect="off"
-                                            // eslint-disable-next-line jsx-a11y/no-autofocus
-                                            autoFocus
                                             required
                                         />
                                         <label className="auth__label">Введите логин</label>

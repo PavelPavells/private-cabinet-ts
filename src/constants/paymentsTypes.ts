@@ -11,14 +11,14 @@ export const DATA_LOADING_SUCCESS_PAYMENTS_TABLE = 'DATA_LOADING_SUCCESS_PAYMENT
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
  */
 export interface ResponseStatus {
-    action: string;
-    result: 0 | 1;
+    code: string;
     result_message: string;
+    action: string;
 }
 
 export interface PaymentHeader {
-    display_name: string;
-    field_name: string;
+    fieldName: string;
+    displayName: string;
     size: number;
     visible: 0 | 1;
 }
@@ -26,52 +26,61 @@ export interface PaymentHeader {
 export type PaymentHeaders = Array<PaymentHeader>;
 
 export interface PaymentItem {
-    cash_date: string;
-    cash_flow_uuid: string;
-    cash_sum: number;
-    cash_sum_acum: number;
-    cdx_transaction_id: number;
-    currency_str: string;
-    partner_name: string;
-    partner_uuid: string;
-    currency_desc: string;
-    currency_id: number;
-    deleted: 0 | 1;
-    deleted_str: string;
-    discount_cash: number;
-    discount_price: number;
-    discount_sum: number;
-    discount_type_name: string;
-    discount_valid_before: string | null;
-    discount_valid_until: string | null;
-    item_article: string | null;
-    item_group: string;
-    item_price_uuid: string;
-    item_short_name: string;
-    item_uuid: string;
-    item_work_name: string;
-    itype_name: string;
-    parent_itype_name: string;
-    price: number;
-    price_type: string;
-    valid_until: string | null;
+    cashFlowUuid: string;
+    partnerUuid: string;
+    partnerName: string;
+    cashDate: string;
+    cashSum: number;
+    cashSumAcum: number;
+    currencyStr: string;
+    cdxTransactionId: number;
 }
 
 export type PaymentList = Array<PaymentItem>;
 
 export interface PaymentListReq {
-    offset: number;
-    size: number;
-    login: string;
+    page: number;
+    limit: number;
+    sortBy: null | string;
+    sortDirection: number;
+    groupBy: null | string;
+    findBy: null | string;
+    findValue: null | string;
+    uuid: string;
 }
 
 export interface PaymentListRes {
     payload: {
-        countUUID: number;
-        page: number;
-        recordDisplayRules: PaymentHeaders;
-        recordSet: PaymentList;
+        displayRules: PaymentHeaders;
+        recordSet: {
+            content: PaymentList;
+        };
     };
+    pageable: {
+        sort: {
+            sorted: boolean;
+            unsorted: false;
+            empty: boolean;
+        };
+        offset: number;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        unpaged: boolean;
+    };
+    totalElements: number;
+    totalPages: number;
+    last: boolean;
+    number: number;
+    size: number;
+    sort: {
+        sorted: boolean;
+        unsorted: boolean;
+        empty: boolean;
+    };
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
     response: ResponseStatus;
 }
 

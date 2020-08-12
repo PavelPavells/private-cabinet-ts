@@ -43,8 +43,13 @@ import './Payment.scss';
 const PaymentComponent = ({ uuid }) => {
     // const [startDate, setStartDate] = useState(null);
     // const [endDate, setEndDate] = useState(null);
-    const [offset] = useState(0);
-    const [size] = useState(30);
+    const [page] = useState(0);
+    const [limit] = useState(30);
+    const [sortBy] = useState(null);
+    const [sortDirection] = useState(0);
+    const [groupBy] = useState(null);
+    const [findBy] = useState(null);
+    const [findValue] = useState(null);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -62,7 +67,7 @@ const PaymentComponent = ({ uuid }) => {
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: PaymentListReq = { offset, size, login: uuid };
+        const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
         dispatch(fetchDataPayment(request));
     }, []);
 
@@ -87,156 +92,12 @@ const PaymentComponent = ({ uuid }) => {
     };
 
     /**
-     * Активайия/Деактивация филтра колонки
+     * Активация/Деактивация фильтра колонки
      * */
     const toggleColumnFilter = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('wrap__index--active');
     };
 
-    /**
-     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
-     * */
-    // const handleChangePlusItems = (key: string) => {
-    //    console.log(key)
-    // };
-
-    /** ********** CHANGE DATES FOR SEARCH ********** */
-    // @ts-ignore
-    // onDatesChange = ({ startDate, endDate }) => {
-    //     this.setState({ startDate, endDate }, () => {
-    //         const data = {
-    //             offset: this.state.offset,
-    //             size: this.state.optionFilter,
-    //             // @ts-ignore
-    //     startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //             // @ts-ignore
-    //     endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //             // @ts-ignore
-    //             login: this.props.data
-    //         };
-    //         // @ts-ignore
-    //         this.props.fetchDataPayment(data);
-    //     });
-    // };
-
-    /** ********** FIRST PAGE PAYMENT PAGINATION ********** */
-    // getFirstPage = () => {
-    //     this.setState({ page: 0 });
-    //     const data = {
-    //         offset: 0,
-    //         size: this.state.optionFilter,
-    //         // @ts-ignore
-    //         login: this.props.data,
-    //         // @ts-ignore
-    //   startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //         // @ts-ignore
-    //   endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    //     };
-    //     // @ts-ignore
-    //     this.props.fetchDataPayment(data);
-    // };
-
-    /** ********** PREVIOUS PAGE PAYMENT PAGINATION ********** */
-    // getPreviousPage = () => {
-    //     this.setState(
-    //         (prevState) => {
-    //             // @ts-ignore
-    //             return prevState.page > 0 ? { page: prevState.page - 1 } : null;
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 // @ts-ignore
-    //                 login: this.props.data,
-    //                 // @ts-ignore
-    //       startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //                 // @ts-ignore
-    //       endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPayment(data);
-    //         }
-    //     );
-    // };
-
-    /** ********** NEXT PAGE PAYMENT PAGINATION ********** */
-    // getNextPage = () => {
-    //     // const { payload } = this.props.pricelist.data;
-    //     this.setState(
-    //         (prevState) => {
-    //             // return prevState.page >= 0 && prevState.page < payload.page ? ({ page: prevState.page + 1 }) : null;
-    //             // @ts-ignore
-    //             return prevState.page >= 0 ? { page: prevState.page + 1 } : null;
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 // @ts-ignore
-    //                 login: this.props.data,
-    //                 // @ts-ignore
-    //                 startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //                 // @ts-ignore
-    //                 endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPayment(data);
-    //         }
-    //     );
-    // };
-
-    /** ********** LAST PAGE PAYMENT PAGINATION ********** */
-    // getLastPage = () => {
-    // console.log('NOT PAGE FIELD');
-    // const { payload } = this.props.pricelist.data;
-    // this.setState({ page: payload.page });
-    // let data =  {
-    //    offset: this.state.offset,
-    //    size: this.state.optionFilter,
-    //    login: this.props.data,
-    //    startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //    endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    //  }
-    //  this.props.fetchDataLastPagePayment(data);
-    // };
-
-    /** ********** REFRESH DATA FOR PAYMENT TABLE ********** */
-    // handleRefreshData = () => {
-    //     const data = {
-    //         offset: this.state.page,
-    //         size: this.state.optionFilter,
-    //         // @ts-ignore
-    //         login: this.props.data
-    //     };
-    //     // @ts-ignore
-    //     this.props.fetchDataPayment(data);
-    // };
-
-    /** ********** FILTER FOR VISION DATA IN TABLE ********** */
-    // @ts-ignore
-    // handleOptionFilter = (event) => {
-    //     const elem = event.target.value;
-    //     this.setState(
-    //         {
-    //             optionFilter: elem
-    //         },
-    //         () => {
-    //             const data = {
-    //                 offset: this.state.page,
-    //                 size: this.state.optionFilter,
-    //                 // @ts-ignore
-    //                 login: this.props.data,
-    //                 // @ts-ignore
-    //       startDate: this.state.startDate ? this.state.startDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null, // eslint-disable-line
-    //                 // @ts-ignore
-    //       endDate: this.state.endDate ? this.state.endDate._d.toISOString().replace(/([^T]+)T([^\.]+).*/g, "$1 $2") : null // eslint-disable-line
-    //             };
-    //             // @ts-ignore
-    //             this.props.fetchDataPayment(data);
-    //         }
-    //     );
-    // };
     if (!isFetching && headersPayment && tablePayment) {
         return (
             <main className="main-content">
@@ -283,9 +144,9 @@ const PaymentComponent = ({ uuid }) => {
                                 {headersPayment.map((header, i) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="caption__wrap">
+                                            <div key={header.fieldName} className="caption__wrap">
                                                 <div className="wrap__index" onClick={toggleColumnFilter}>
-                                                    <div className="index__text">{header.display_name}</div>
+                                                    <div className="index__text">{header.displayName}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />
                                                     ) : (
@@ -317,19 +178,19 @@ const PaymentComponent = ({ uuid }) => {
                                 {headersPayment.map((header, i) => {
                                     if (header.visible) {
                                         return (
-                                            <div key={header.field_name} className="table__column">
+                                            <div key={header.fieldName} className="table__column">
                                                 {tablePayment.map((index) => {
                                                     return (
-                                                        <div key={index.cash_flow_uuid} className="column__item">
+                                                        <div key={index.cashFlowUuid} className="column__item">
                                                             {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
-                                                                    // onClick={() => handleChangePlusItems(index.cash_flow_uuid)}
+                                                                    // onClick={() => handleChangePlusItems(index.cashFlowUuid)}
                                                                 />
                                                             )}
                                                             {
                                                                 // @ts-ignore
-                                                                index[header.field_name]
+                                                                index[header.fieldName]
                                                             }
                                                         </div>
                                                     );

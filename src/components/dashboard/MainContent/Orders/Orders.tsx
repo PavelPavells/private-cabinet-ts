@@ -81,7 +81,7 @@ const OrdersComponent = ({ uuid }) => {
     };
 
     /**
-     * Активайия/Деактивация филтра колонки
+     * Активация/Деактивация филтра колонки
      * */
     const toggleColumnFilter = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('wrap__index--active');

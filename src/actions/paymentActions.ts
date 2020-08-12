@@ -63,14 +63,14 @@ export const fetchingDataFailure = (error: ResponseStatus): PaymentActions => ({
 export const fetchDataPayment = (data: PaymentListReq) => async (dispatch: Dispatch<PaymentActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios.post(`${site}sortBetweenCashFlows`, data).then((response: AxiosResponse<PaymentListRes>) => {
-            const filterData = response.data.payload.recordDisplayRules.filter((element: PaymentHeader) => {
+        await axios.post(`${site}cashflow`, data).then((response: AxiosResponse<PaymentListRes>) => {
+            const filterData = response.data.payload.displayRules.filter((element: PaymentHeader) => {
                 if (element.visible) {
                     return element;
                 }
             });
             dispatch(fetchingDataSuccessHeaders(filterData));
-            dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
+            dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
         });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

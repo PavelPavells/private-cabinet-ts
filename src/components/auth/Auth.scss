@@ -3,7 +3,7 @@
 /**
  * ********** Стили компонента Авторизация **********
  */
-.wrapper {
+ .wrapper {
 	display: flex;
 	flex-direction: column;
 	font-family: $font-regular;
@@ -11,7 +11,7 @@
 
 /* Input autofill */
 input:-webkit-autofill {
-	box-shadow: 0 0 0 1000px $white inset;
+	-webkit-box-shadow: 0 0 0 1000px $white inset;
 }
 
 input {
@@ -183,6 +183,7 @@ input {
 		height: 100%;
 		margin-left: 4px;
 		background: $brandPantonFonts;
+		//opacity: .9;
 
 		&__image,
 		.image {
@@ -234,6 +235,7 @@ input {
 
 .inaccessible {
 	background-color: $brandPantonFonts;
+	color: $brandPantonSubText;
 }
 
 /**

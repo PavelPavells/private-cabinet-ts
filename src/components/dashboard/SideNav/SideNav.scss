@@ -8,6 +8,12 @@
     overflow: auto;
     background: $white;
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     &__top {
         width: 100%;
@@ -47,7 +53,7 @@
                 height: 60px;
                 display: flex;
                 align-items: center;
-                padding: 0 30px 0 20px;
+                padding: 0 20px;
                 transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
                 &:hover {
@@ -89,20 +95,17 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 15px;
-                        height: 15px;
+                        width: 30px;
+                        height: 30px;
                         position: absolute;
                         right: 0;
-                        transform: rotate(45deg);
-                        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-
-                        &::after {
-                            content: "\25E2";
-                        }
+                        transition: all 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+                        background: url('../../../images/arrow_drop.svg') no-repeat center;
+                        background-size: contain;
                     }
 
                     &__icon.turn {
-                        transform: rotate(225deg);
+                        transform: rotate(-180deg);
                     }
                 }
 
@@ -115,6 +118,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
                 svg {
                     width: 20px;
                     height: 20px;
@@ -124,14 +128,14 @@
             }
         }
 
-        .nav--active {
-            box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
-        }
+        // .nav--active {
+        //     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+        // }
 
         .active-page {
-            .font {
-                box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
-            }
+            // .font {
+            //     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+            // }
 
             .font, .subparagraph {
                 background: $brandPantonBlue !important;
@@ -156,7 +160,7 @@
             }
         }
 
-        .submenu{
+        .submenu {
             display: none;
             border-top: 1px solid $brandBackground;
 

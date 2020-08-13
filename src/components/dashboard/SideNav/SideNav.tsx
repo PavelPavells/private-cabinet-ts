@@ -29,28 +29,13 @@ interface SideNavProps {
     readonly handleClickMainSubMenu: () => void;
 }
 
-/**
- * ********** Интерфейс пропсов компонента Main **********
- */
-interface SideNavState {
-    mainSubMenu: boolean;
-    controlSubMenu: boolean;
-}
-
-class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
-    // eslint-disable-next-line react/state-in-constructor
-    state: SideNavState = {
-        mainSubMenu: true,
-        controlSubMenu: false
-    };
-
+class SideNav extends React.PureComponent<SideNavProps> {
     componentDidMount() {
         this.addShadowToActiveSubMenu();
     }
 
     componentDidUpdate() {
         this.removeShadowToActiveSubMenu();
-
         this.addShadowToActiveSubMenu();
     }
 
@@ -70,75 +55,18 @@ class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
         window.location.href = '/';
     };
 
-    /** handler обработки клика по блоку Главная */
-    private handleClickMain = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Прайс-лист */
-    private handleClickPrice = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Заказы */
-    private handleClickSales = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Платежи */
-    private handleClickPayment = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Отгрузки */
-    private handleClickShipment = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Профиль */
-    private handleClickAccount = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Настройки */
-    private handleClickSettings = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Управление */
-    private handleClickAdministration = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
-    /** handler обработки клика по блоку Конфигуратор */
-    private handleClickConfigurator = () => {
-        // const element = document.getElementsByClassName('font')[0];
-    };
-
     /**
      * ********** handler обработки клика для раскрытия подменю Главная **********
      */
     private handleClickMainSubmenu = (event: React.SyntheticEvent) => {
         const mainSubMenuElem: Element = event.currentTarget.parentElement!.getElementsByClassName('submenu')[0];
         const mainSubMenuHandler: Element = event.currentTarget.getElementsByClassName('list-name__icon')[0];
+
         mainSubMenuElem.classList.toggle('show');
         mainSubMenuHandler.classList.toggle('turn');
     };
 
-    /**
-     * ********** handler обработки клика для раскрытия подменю Управление **********
-     */
-    private handleClickControlSubmenu = (event: React.SyntheticEvent<EventTarget>) => {
-        event.preventDefault();
-        const { controlSubMenu } = this.state;
-        const controlSubMenuElem: Element = document.getElementsByClassName('list-name__icon')[1];
-        controlSubMenuElem.classList.toggle('turn');
-        this.setState({ controlSubMenu: !controlSubMenu });
-    };
-
     public render() {
-        const { mainSubMenu, controlSubMenu } = this.state;
-
         return (
             <nav className="side">
                 <ul className="side__top">
@@ -275,7 +203,7 @@ class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
                         </li>
                     </NavLink>
                     <div className="nav-link">
-                        <li className="font" onClick={this.handleClickMainSubmenu}>
+                        <div className="font" onClick={this.handleClickMainSubmenu}>
                             <div className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
                                     <path
@@ -297,7 +225,7 @@ class SideNav extends React.PureComponent<SideNavProps, SideNavState> {
                                 <div className="list-name__icon" />
                             </div>
                             <div className="font-block-hover">Управление</div>
-                        </li>
+                        </div>
                         <div className="submenu">
                             <NavLink exact activeClassName="active-page" to="/control" className="sub-link">
                                 <li className="subparagraph">

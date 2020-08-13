@@ -7,9 +7,7 @@
     flex-direction: column;
     position: sticky;
     top: calc(70px + 20px);
-    margin: 20px;
-    -webkit-transition: all 0.5s ease 0s;
-    -o-transition: all 0.5s ease 0s;
+    margin: 0 17px 0 20px;
     transition: all 0.5s ease 0s;
     font-family: "Gotham Pro Regular";
     font-size: 14px;
@@ -19,49 +17,35 @@
 
 /** ********** MAIN STYLES **********/
 .main {
-    height: 100%;
-    display: flex;
     flex-direction: column;
-    padding: 20px;
-    overflow-x: hidden;
+    padding: 0 17px 0 20px;
 
     &__block {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
 
         &:last-child {
             margin: 0;
         }
 
+        &.data {
+            .block-element:first-child {
+                grid-column: auto / span 2;
+            }
+        }
+
         &.status {
             .block-container {
                 .block-element {
-                    margin: 0 0 10px;
-                    min-height: 96px;
-
-                    &:last-child {
-                        margin: 0;
-                    }
-
-                    &__icon{
-                        max-width: 59px;
-                        height: 59px;
-                        border-radius: 13px;
-
-                        svg {
-                            width: 27px;
-                            height: 27px;
-                        }
-                    }
+                    align-items: center;
 
                     &__title {
-                        line-height: 18px;
-                        color: $brandPantonBlack;
+                        line-height: 20px;
                     }
 
-                    &__subtitle {
-                        color: $brandPantonBlue;
+                    &.discount {
+                        .block-element__title {
+                            line-height: 26px;
+                        }
                     }
                 }
             }
@@ -69,14 +53,8 @@
 
         &.seggestions {
             .block-element {
-                &__info {
-                    margin: 0;
-                    padding: 30px 30px;
-                }
-
                 &__title {
                     padding: 10px 0;
-                    margin: 0 10px;
                     font-size: 14px;
                     line-height: 18px;
                     color: $brandPantonSubText;
@@ -90,7 +68,7 @@
                 }
 
                 &__subtitle {
-                    margin: 0 10px 20px 10px;
+                    margin-bottom: 20px;
                     font-size: 20px;
                     line-height: 23px;
                 }
@@ -102,170 +80,228 @@
                     line-height: 18px;
                     color: $brandPantonSubText;
                 }
+            }
+        }
+    }
 
-                &__button {
+    
+    .block-title {
+        margin-bottom: 20px;
+        font-size: 25px;
+        line-height: 40px;
+
+        &__important {
+            height: 77px;
+            display: flex;
+            align-items: center;
+            font-size: 25px;
+            line-height: 25px;
+            color: $brandPantonBlue;
+            background: $white;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+
+            span {
+                display: flex;
+                align-items: center;
+                padding: 0 26px;
+
+                &::before {
+                    content: "\0069";
+                    min-width: 43px;
+                    height: 43px;
                     display: flex;
+                    justify-content: center;
                     align-items: center;
-                    padding: 16px;
-                    font-size: 15px;
-                    line-height: 14px;
-                    color: $brandPantonBlue;
-                    background: $brandSideBorderColor;
-                    cursor: pointer;
+                    margin-right: 15px;
+                    font-family: serif;
+                    font-size: 35px;
+                    border: 2px solid $brandPantonBlue;
+                    border-radius: 50%;
                 }
             }
         }
     }
-}
 
-.block-title {
-    margin-bottom: 20px;
-    font-size: 30px;
-    line-height: 40px;
+    .block-container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, auto));
+        grid-gap: 40px;
+    }
 
-    &--important {
-        height: 77px;
+    .block-table {
+        grid-column: auto / span 2;
         display: flex;
-        align-items: center;
-        font-size: 25px;
-        line-height: 25px;
-        color: $white;
-        background: $brandPantonBlue;
-        border-radius: 20px;
+        flex-direction: column;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    
+        &__row {
+            display: flex;
+            font-size: 16px;
+            line-height: 15px;
+            background: $brandBackground;
+    
+            &:nth-child(2n) {
+                background: $white;
+            }
+    
+            &.header {
+                font-size: 18px;
+                line-height: 17px;
+                background: $white;
+                color: $brandPantonBlue;
+                border-bottom: 1px solid $brandBackground;
 
-        span {
+                .block-table__element {
+                    border: none;
+                }
+            }
+        }
+        
+        &__row:not(.header) {
+            .block-table__element:first-child {
+                display: flex;
+
+                span {
+                    flex: 1;
+                    text-align: right;
+
+                    &:nth-child(2) {
+                        flex: 1 45px;
+                        max-width: 45px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+
+            .block-table__element:nth-child(2) {
+                span {
+                    width: 100%;
+                    text-align: right;
+                }
+            }
+        }
+    
+        &__element {
+            height: 50px;
             display: flex;
             align-items: center;
-            padding: 0 21px;
+            padding: 0 30px;
 
-            &::before {
-                content: "\0069";
-                min-width: 43px;
-                height: 43px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 18px;
-                font-family: serif;
-                font-size: 35px;
-                border: 1px solid $white;
-                border-radius: 50%;
+            &:first-child,
+            &:last-child {
+                flex: 1 40%;
+            }
+
+            &:nth-child(2) {
+                flex: 1 20%;
+            }
+    
+            &:nth-child(2n) {
+                border-left: 1px solid $brandBackground;        
+                border-right: 1px solid $brandBackground;
             }
         }
     }
 
-}
-
-.block-container {
-    display: flex;
-    padding-bottom: 7px;
-    overflow: auto;
-}
-
-.block-subcontainer {
-    flex: 1 33%;
-    max-width: 435px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 40px;
-}
-
-.block-table {
-    flex: 1 67%;
-    display: flex;
-    flex-direction: column;
-
-    &__row {
+    .block-wrapper {
         display: flex;
-        font-size: 16px;
-        line-height: 15px;
-        background: $brandBackground;
-        border-left: 1px solid $brandBorderColor;        
-        border-right: 1px solid $brandBorderColor;
+    }
 
-        .block-table__element:nth-child(2n) {
-            border-left: 1px solid $brandBorderColor;        
-            border-right: 1px solid $brandBorderColor;
+    .block-element {
+        display: flex;
+        padding: 30px;
+        background: $white;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+
+        &__chart {
+            flex: 1 100%;
+            max-width: 140px;
+            width: 100%;
+            position: relative;
+            margin-right: 30px;
+            border-radius: 50%;
         }
-
-        &:nth-child(2n) {
-            background: $white;
-        }
-
-        &.header {
-            background: $brandPantonBlue;
-            color: $white;
-            border-radius: 10px 10px 0px 0px;
-            border: one;
-
-            .block-table__element {
-                border: none;
+    
+        &__icon {
+            min-width: 90px;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 30px;
+            background: $brandBackground;
+    
+            svg {
+                width: 46px;
+                height: 46px;
+                fill: $brandPantonSubText;
             }
         }
 
-        &:last-child {            
-            border-bottom: 1px solid $brandBorderColor;
+        &__info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
         }
-    }
 
-    &__element {
-        flex: 1;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        padding-left: 33px;
-    }
-}
-
-.block-element {
-    flex: 1;
-    min-width: 430px;
-    min-height: 160px;
-    display: flex;
-    align-items: center;
-    margin-right: 40px;
-    background: $white;
-    border-radius: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
-
-    &:last-child {
-        margin-right: 0;
-    }
-
-    &__icon {
-        flex: 1 100%;
-        max-width: 90px;
-        width: 90px;
-        height: 90px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 40px 0 33px;
-        background: $brandPantonBlue;
-        border-radius: 20px;
-
-        svg {
-            width: 42px;
-            height: 42px;
-            fill: $white;
+        &__title {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 15px;
+            color: $brandPantonBlue;
         }
-    }
+    
+        &__subtitle {
+            font-size: 20px;
+            line-height: 26px;
+        }
 
-    &__info {
-        flex: 2;
-        margin-right: 33px;
-    }
+        &__button {
+            height: 49px;
+            display: flex;
+            align-items: center;
+            padding: 0 36px;
+            font-size: 15px;
+            line-height: 14px;
+            color: $brandPantonBlue;
+            border: 1px solid $brandPantonBlue;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
-    &__title {
-        margin-bottom: 10px;
-        font-size: 16px;
-        line-height: 15px;
-        color: $brandPantonSubText;
-    }
+            svg {
+                width: 57px;
+                height: 25px;
+                margin-left: 15px;
+                fill: none;
+                stroke: $brandPantonBlue;
+            }
 
-    &__subtitle {
-        font-size: 25px;
-        line-height: 27px;
+            &:hover {
+                color: $white;
+                background: $brandPantonBlue;
+
+                svg {
+                    stroke: $white;
+                }
+                
+            }
+        }
+
+        &.discount {
+            .block-element__title {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            .block-element__subtitle {
+                font-size: 14px;
+                line-height: 18px;}
+                color: $brandPantonSubText;
+        }
     }
 }
 
@@ -277,17 +313,43 @@
     }
 }
 
-@media (max-width: 1600px) {
-    .main {    
-        &__block {
-            &.status {
-                .block-subcontainer {
-                    margin: 0 0 20px 0;
-                }
+.CircularProgressbar .CircularProgressbar-trail {
+    stroke: $brandPantonFonts!important;
+    stroke-linecap: round;
+}
 
-                .block-container {
-                    flex-direction: column;
-                }
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: $brandPantonBlue!important;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: $brandPantonBlue!important;
+    font-size: 20px;
+    // dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+@media (max-width: 1600px) {
+    .main {
+        .status {
+            .block-container {
+                grid-template-columns: repeat(2, minmax(100px, auto));
+            }
+
+            .block-element__chart {
+                max-width: 90px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1400px) {
+    .main {
+        .seggestions {
+            .block-container {
+                grid-template-columns: repeat(2, minmax(100px, auto));
             }
         }
     }

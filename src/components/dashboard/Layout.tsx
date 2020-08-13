@@ -26,7 +26,7 @@ import Settings from './MainContent/Settings/Settings';
 import Control from './MainContent/Control/Control';
 import Notification from './MainContent/Notification/Notification';
 import Payment from './MainContent/Payment/Payment';
-import Shipment from './MainContent/Shipment/Shipment';
+// import Shipment from './MainContent/Shipment/Shipment';
 import Configurator from './MainContent/Configurator/Configurator';
 
 /**
@@ -86,11 +86,9 @@ const Layout = ({ data, logoutUser }) => {
                             // @ts-ignore
                             render={() => <Account data={uuid} />}
                         />
-                        <Route
-                            path="/price-list"
-                            // @ts-ignore
-                            render={() => <PriceList uuid={uuid} />}
-                        />
+                        <Route path="/price-list">
+                            <PriceList uuid={uuid} />
+                        </Route>
                         <Route
                             path="/orders"
                             // @ts-ignore
@@ -113,7 +111,8 @@ const Layout = ({ data, logoutUser }) => {
                             exact
                             path="/shipment"
                             // @ts-ignore
-                            render={() => <Shipment uuid={uuid} />}
+                            render={() => <Payment uuid={uuid} />}
+                            // Shipment component
                         />
                         <Route
                             exact

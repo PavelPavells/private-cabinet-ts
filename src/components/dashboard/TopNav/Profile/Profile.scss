@@ -9,6 +9,19 @@
         }
     }
 
+    .info-list__arrow {
+        display: block;
+        width: 30px;
+        height: 30px;
+        transition: all 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+        background: url('../../../../images/arrow_drop.svg') no-repeat center;
+        background-size: contain;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     .profile {
         display: block;
         position: relative;
@@ -41,21 +54,20 @@
         padding: 1rem;
         z-index: 10000;
 
-        &__item,
-        .item {
+        &__item {
             display: flex;
             align-items: center;
             margin: 5px;
             color: $brandPantonText;
 
-            &__profile-icon {
+            .item__profile {
                 display: block;
                 width: 30px;
                 height: 30px;
                 background: url('../../../../images/profile-user.svg') no-repeat center;
             }
 
-            &__settings-icon {
+            .item__settings {
                 display: block;
                 width: 30px;
                 height: 30px;
@@ -77,4 +89,8 @@
             cursor: pointer;
         }
     }
+}
+
+.toggle-window {
+    transform: rotate(-180deg);
 }

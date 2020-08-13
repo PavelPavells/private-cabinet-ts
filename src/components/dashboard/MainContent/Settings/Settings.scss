@@ -1,1 +1,10 @@
 @import "../../../../styles/base.scss";
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: $brandPantonBlue;
+    background-color: $white;
+}

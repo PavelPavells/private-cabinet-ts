@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import { PersonalCabinet } from '../../../store/store';
+
 import Profile from './Profile/Profile';
 
 /**
@@ -52,21 +53,21 @@ class TopNav extends React.PureComponent<TopNavProps> {
         return (
             <nav className="nav">
                 {/* ref={node => (this.node = node)} */}
-                <div className="nav__left nav-left">
-                    <i onClick={this.toggleMenu} className="material-icons nav-left__hamburger">
+                <div className="nav__left">
+                    <i onClick={this.toggleMenu} className="material-icons left__hamburger">
                         menu
                     </i>
-                    <div className="nav-left__logo" />
+                    <div className="left__logo" />
                 </div>
-                <div className="nav__right nav-right">
-                    <div className="nav-right__text right-text">
+                <div className="nav__right">
+                    <div className="right__text">
                         Личный кабинет:
-                        <strong className="right-text__name">{agentName}</strong>
+                        <strong className="text__name">{agentName}</strong>
                     </div>
-                    <div className="nav-right__info right-info">
-                        <div className="right-info__bell bell">
+                    <div className="right__info">
+                        <div className="info__bell">
                             <div className="bell__icon notifications">
-                                <div className="notifications__number">1</div>
+                                <div className="notifications__number">5</div>
                             </div>
                         </div>
                         <Profile />

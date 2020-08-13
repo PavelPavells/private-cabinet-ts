@@ -15,14 +15,13 @@
     width: 100%;
     z-index: 10000;
 
-    &__left,
-    .nav-left {
+    &__left {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
 
-        &__hamburger {
+        .left__hamburger {
             margin-left: 38px;
             font-size: 30px;
             color: $brandPantonBlue;
@@ -32,7 +31,7 @@
             }
         }
 
-        &__logo {
+        .left__logo {
             display: block;
             width: 238px;
             height: 30px;
@@ -43,8 +42,7 @@
         }
     }
 
-    &__right,
-    .nav-right {
+    &__right {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -53,30 +51,30 @@
         color: $brandPantonBlack;
         padding-left: 80px;
 
-        &__text,
-        .right-text {
-            font-size: 16px;
-            color: $brandPantonText;
+        .right__text {
+            font-size: 18px;
+            line-height: 17px;
+            color: $brandPantonBlue;
 
-            &__name {
-                color: $brandPantonBlue;
+            .text__name {
+                margin-left: 10px;
+                font-weight: 300;
+                color: $brandPantonGrey;
             }
         }
 
-        &__info,
-        .right-info {
+        .right__info {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
 
-            &__bell,
-            .bell {
+            .info__bell {
                 display: block;
-                padding: 15px 40px 15px 15px;
+                padding: 10px 40px 10px 0px;
                 border-right: 2px solid $brandPantonFonts;
 
-                &__icon,
+                .bell__icon,
                 .notifications {
                     display: block;
                     position: relative;
@@ -86,7 +84,7 @@
                     background-size: contain;
                     cursor: pointer;
 
-                    &__number {
+                    .notifications__number {
                         display: block;
                         position: absolute;
                         top: 1px;
@@ -130,18 +128,6 @@
                         color: $brandPantonSubText;
                     }
                 }
-
-                &__arrow {
-                    display: block;
-                    width: 15px;
-                    height: 15px;
-                    background: url('../../../images/arrow-info.svg') no-repeat center;
-                    background-size: contain;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
             }
         }
     }
@@ -149,10 +135,6 @@
 
 .hamburger-visible {
     display: block !important;
-}
-
-.toggle-window {
-    transform: rotate(180deg);
 }
 
 @media all and (max-width: 1366px) {

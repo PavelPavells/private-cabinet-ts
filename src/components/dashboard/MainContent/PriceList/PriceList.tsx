@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
@@ -57,6 +57,12 @@ const PriceListComponent = ({ uuid }) => {
     const dispatch = useDispatch();
 
     /**
+     * Ref для отлавливания клика вне компонента
+     * */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const innerRef = useRef();
+
+    /**
      * запрос данных с сервера
      * */
     useEffect(() => {
@@ -85,6 +91,26 @@ const PriceListComponent = ({ uuid }) => {
      * */
     const toggleColumnFilter = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('wrap__index--active');
+    };
+
+    /**
+     * Клик вне елемента
+     * */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const useOutsideHandleClick = (ref: any, callback: any) => {
+        const handleClick = (event: React.SyntheticEvent) => {
+            if (ref.current && !ref.current.contains(event.target)) {
+                callback();
+            }
+        };
+        useEffect(() => {
+            // @ts-ignore
+            document.addEventListener('click', handleClick);
+            return () => {
+                // @ts-ignore
+                document.removeEventListener('click', handleClick);
+            };
+        });
     };
 
     if (!isFetching && inputs && headersPriceList && tablePriceList) {

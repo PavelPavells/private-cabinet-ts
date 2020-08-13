@@ -48,12 +48,12 @@ const Profile: React.FC = () => {
             </div>
             {dropdown ? (
                 <ul className="dropdown">
-                    <Link className="dropdown__item item" to="/account">
-                        <div className="item__profile-icon" />
+                    <Link className="dropdown__item" to="/account">
+                        <div className="item__profile" />
                         <div>Профиль пользователя</div>
                     </Link>
-                    <Link className="dropdown__item item" to="/control">
-                        <div className="item__settings-icon" />
+                    <Link className="dropdown__item" to="/control">
+                        <div className="item__settings" />
                         <div>Настройки</div>
                     </Link>
                     <div className="dropdown__logout" onClick={onLogoutClick}>

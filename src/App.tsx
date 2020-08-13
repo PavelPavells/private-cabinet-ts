@@ -34,7 +34,6 @@ import Layout from './components/dashboard/Layout';
 // import PrivateRoute from './components/private-route/PrivateRoute';
 import NotFound from './components/404/404';
 // import NotFound from './components/500/500';
-// import { fetchDataPriceList } from './actions/priceListActions';
 
 /**
  * ********** Импорт стилей **********
@@ -210,7 +209,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                                 render={() =>
                                     /** Изменить Route на PrivateRoute */
                                     // @ts-ignore
-                                    Storage.uuid === null ? (
+                                    data.length === 0 && Storage.uuid === null ? (
                                         <Redirect to="/" />
                                     ) : (
                                         <Layout
@@ -221,6 +220,7 @@ class App extends React.PureComponent<AppProps | {}, AppState> {
                                     )
                                 }
                             />
+                            <Route exact path="*" render={() => <Layout data={data} logoutUser={this.logoutUser} />} />
                             {/* <Route
                                     component={localStorage.jwtToken ? Layout : NotFound}
                                 />

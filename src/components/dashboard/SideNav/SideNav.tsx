@@ -105,10 +105,11 @@ class SideNav extends React.PureComponent<SideNavProps> {
                                     </div>
                                     <div className="list-name">
                                         <div>Данные о компании</div>
-                                        <div className="list-name__sales">
+                                        {/* <div className="list-name__sales">
                                             <span className="dot" />
                                             Текущая скидка 22%
-                                        </div>
+                                            </div>
+                                        */}
                                         <div className="list-name__icon" />
                                     </div>
                                     <div className="font-block-hover" />
@@ -180,6 +181,7 @@ class SideNav extends React.PureComponent<SideNavProps> {
                             <div className="font-block-hover">Отгрузки</div>
                         </li>
                     </NavLink>
+                    {/*
                     <NavLink exact activeClassName="active-page" to="/account" className="nav-link">
                         <li className="font">
                             <div className="icon">
@@ -263,6 +265,7 @@ class SideNav extends React.PureComponent<SideNavProps> {
                             </NavLink>
                         </div>
                     </div>
+                    */}
                     <NavLink exact activeClassName="active-page" to="/configurator" className="nav-link">
                         <li className="font">
                             <div className="icon">

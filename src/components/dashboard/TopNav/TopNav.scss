@@ -52,12 +52,13 @@
         padding-left: 80px;
 
         .right__text {
-            font-size: 18px;
+            font-size: 14px;
             line-height: 17px;
             color: $brandPantonBlue;
 
             .text__name {
                 margin-left: 10px;
+                font-size: 16px;
                 font-weight: 300;
                 color: $brandPantonGrey;
             }
@@ -71,12 +72,12 @@
 
             .info__bell {
                 display: block;
-                padding: 10px 40px 10px 0px;
+                padding: 10px 40px 40px 0px; /* 10px 40px 10px 0px; */
                 border-right: 2px solid $brandPantonFonts;
 
                 .bell__icon,
                 .notifications {
-                    display: block;
+                    display: none; /* Временно скрытый элемент */
                     position: relative;
                     width: 30px;
                     height: 30px;

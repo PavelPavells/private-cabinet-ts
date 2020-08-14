@@ -8,10 +8,40 @@ export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 /**
  * *********** Интерфейсы стейта Компонента Main **********
  */
+
+export interface ResponseStatus {
+    code: number;
+    result_message: string;
+    action: string;
+}
+
+export interface MainItem {
+    partnerUuid: string;
+    companyName: string;
+    vatStr: string;
+    guaranteeStr: string;
+    registrationDate: string;
+    currentDiscount: number;
+    currentCash: number;
+    minDiscount: number;
+    maxDiscount: number;
+}
+export type MainList = MainItem;
+
+export interface MainListReq {
+    uuid: string;
+}
+
+export interface MainListRes {
+    payload: {
+        recordSet: MainList;
+    };
+}
+
 export interface MainState {
     isFetching: boolean;
     errorMessage: string;
-    data: any;
+    main: MainList | null;
 }
 
 interface MainRequest {
@@ -20,7 +50,7 @@ interface MainRequest {
 
 interface MainSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: MainState[];
+    payload: MainList;
 }
 
 interface MainFailure {

@@ -8,6 +8,7 @@ import axios from 'axios';
 // @ts-ignore
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import md5 from 'md5';
 
 /** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
 import setAuthToken from './__utils__/setAuthToken';

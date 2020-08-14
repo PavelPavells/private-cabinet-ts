@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import './Profile.scss';
 
@@ -48,14 +48,14 @@ const Profile: React.FC = () => {
             </div>
             {dropdown ? (
                 <ul className="dropdown">
-                    <Link className="dropdown__item" to="/account">
+                    {/* <Link className="dropdown__item" to="/account">
                         <div className="item__profile" />
-                        <div>Профиль пользователя</div>
+                        <div className="item__linck">Профиль пользователя</div>
                     </Link>
                     <Link className="dropdown__item" to="/control">
                         <div className="item__settings" />
-                        <div>Настройки</div>
-                    </Link>
+                        <div className="item__linck">Настройки</div>
+                    </Link> */}
                     <div className="dropdown__logout" onClick={onLogoutClick}>
                         Выйти
                     </div>

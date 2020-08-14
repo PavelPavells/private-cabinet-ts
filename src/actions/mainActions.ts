@@ -1,13 +1,22 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  */
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
 
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { MainActions, MainState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/mainTypes';
+import {
+    MainActions,
+    MainList,
+    MainListReq,
+    DATA_LOADING_REQUEST,
+    DATA_LOADING_SUCCESS,
+    DATA_LOADING_FAILURE,
+    ResponseStatus,
+    MainListRes
+} from '../constants/mainTypes';
 
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
@@ -24,15 +33,15 @@ export const fetchingDataRequest = (): MainActions => ({
 /**
  * ********** Экшен для добавления данных в стор после запроса **********
  */
-export const fetchingDataSuccess = (data: any): MainActions => ({
+export const fetchingDataSuccess = (main: MainList): MainActions => ({
     type: DATA_LOADING_SUCCESS,
-    payload: data.data
+    payload: main
 });
 
 /**
  * ********** Экшен для обработки ошибки при запросе на сервер **********
  */
-export const fetchingDataFailure = (error: any): MainActions => ({
+export const fetchingDataFailure = (error: ResponseStatus): MainActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
 });
@@ -40,24 +49,13 @@ export const fetchingDataFailure = (error: any): MainActions => ({
 /**
  * ********** Экшен для запроса данных из компонентов **********
  */
-export const fetchDataMain = (data: MainState) => async (dispatch: Dispatch<MainActions>) => {
+export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<MainActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios
-            .post(`${site}`, data)
-            .then((response) => {
-                dispatch(fetchingDataSuccess(response));
-            })
-            .catch((error) => {
-                return error;
-            });
+        await axios.post(`${site}main`, data).then((response: AxiosResponse<MainListRes>) => {
+            dispatch(fetchingDataSuccess(response.data.payload.recordSet));
+        });
     } catch (error) {
         dispatch(fetchingDataFailure(error));
     }
 };
-
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW ********** */
-// export const togglePopupWindowTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE })
-
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW MAIN INFO ********** */
-// export const togglePopupWindowMainInfoTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE_MAIN_INFO })

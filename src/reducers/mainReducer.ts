@@ -6,7 +6,7 @@ import { MainActions, MainState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DAT
 const initialState: MainState = {
     isFetching: false,
     errorMessage: '',
-    data: []
+    main: null
 };
 
 /**
@@ -23,7 +23,7 @@ export default function mainReducer(state = initialState, action: MainActions): 
             return {
                 ...state,
                 isFetching: false,
-                data: action.payload
+                main: action.payload
             };
         case DATA_LOADING_FAILURE:
             return {

@@ -37,7 +37,7 @@ import './Orders.scss';
 // eslint-disable-next-line react/prop-types
 const OrdersComponent = ({ uuid }) => {
     const [page] = useState(0);
-    const [limit] = useState(30);
+    const [limit] = useState(5000);
     const [sortBy] = useState(null);
     const [sortDirection] = useState(0);
     const [groupBy] = useState(null);
@@ -98,9 +98,11 @@ const OrdersComponent = ({ uuid }) => {
                                 Быстрый фильтр
                             </div>
                             <div className="buttons-wrapper">
+                                {/*
                                 <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
                                     Экспортировать документ
                                 </div>
+                                */}
                             </div>
                             <div className="search-wrapper">
                                 <input type="text" className="search-input" placeholder="Быстрый поиск" />

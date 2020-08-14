@@ -15,7 +15,7 @@ import { PersonalCabinet } from '../../store/store';
  * */
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
-import Main from './MainContent/Main/Main';
+import MainComponent from './MainContent/Main/Main';
 import Account from './MainContent/Account/Account';
 import AdminPanel from './MainContent/AdminPanel/AdminPanel';
 import SalePartners from './MainContent/SalePartners/SalePartners';
@@ -62,12 +62,9 @@ const Layout = ({ data, logoutUser }) => {
                 <div className="main-container">
                     <SideNav />
                     <Switch>
-                        <Route
-                            exact
-                            path="/dashboard"
-                            // projects={projects}
-                            render={() => <Main data={uuid} />}
-                        />
+                        <Route path="/dashboard">
+                            <MainComponent uuid={uuid} />
+                        </Route>
                         <Route
                             exact
                             path="/admin-panel"

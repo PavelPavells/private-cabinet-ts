@@ -1,8 +1,8 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { CircularProgressbar } from 'react-circular-progressbar';
 
 /**
@@ -10,6 +10,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
  * */
 // import { ordersTable } from './data.json';
 import { fetchDataMain } from '../../../../actions/mainActions';
+import { MainListReq } from '../../../../constants/mainTypes';
 
 /**
  * ********** Импорт типа store **********
@@ -23,40 +24,34 @@ import './Main.scss';
 import 'react-circular-progressbar/dist/styles.css';
 
 /**
- * ********** IMPORT LOADER from __UTILS__ **********
+ * ********** Импорт LOADER из __UTILS__ **********
  * */
-// import Loader from "../../../../__utils__/Spinner";
+import Loader from '../../../../__utils__/Spinner';
 
-/**
- * ********** Интерфейс локального стейта компонента Main **********
- * */
-interface MainState {
-    main: any;
-}
-
-/**
- * ********** Интерфейс пропсов компонента Main **********
- */
-interface MainProps {
-    readonly fetchDataMain: (data: any) => void;
-    readonly data: any;
-}
-
-class Main extends React.PureComponent<MainProps, MainState> {
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
+const MainComponent = ({ uuid }) => {
+    const [personalSuggestion] = useState(false);
     /**
-     * ********** Запрос данных для компонента Main **********
-     */
-    public componentDidMount() {
-        // this.props.fetchDataMain();
-    }
+     * ********** Импорт состояния pricelist из Redux **********
+     * */
+    const { main, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
 
-    public render() {
-        // const { main } = this.props;
-        // console.log(main);
-        // if(main.data.length === 0 || main.isFetching) {
-        //  return <Loader />
-        // }
-        const percentage = 28;
+    /**
+     * Отправка действий для изменения на сервере
+     * */
+    const dispatch = useDispatch();
+
+    /**
+     * запрос данных с сервера
+     * */
+    useEffect(() => {
+        // @ts-ignore
+        const request: MainListReq = { uuid };
+        dispatch(fetchDataMain(request));
+    }, []);
+
+    if (!isFetching && main) {
         return (
             <div className="main-content">
                 <div className="main">
@@ -94,7 +89,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                         <span>Наименование компании</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span>ООО «Название компании»</span>
+                                        <span>{main.companyName}</span>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +120,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                         <span>Налоговый учет</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span>с НДС 20%</span>
+                                        <span>{main.vatStr}</span>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +161,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                         <span>Объем учетных закупок для расчета скидки</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span className="currency-unit-rub">351 000</span>
+                                        <span className="currency-unit-rub">{main.currentCash}</span>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +182,12 @@ class Main extends React.PureComponent<MainProps, MainState> {
                             </div>
                             <div className="block-element discount">
                                 <div className="block-element__chart">
-                                    <CircularProgressbar minValue={15} maxValue={36} value={percentage} text={`${percentage}%`} />
+                                    <CircularProgressbar
+                                        minValue={15}
+                                        maxValue={main.maxDiscount}
+                                        value={main.currentDiscount}
+                                        text={`${main.currentDiscount}`}
+                                    />
                                 </div>
                                 <div className="block-element__info">
                                     <div className="block-element__title">
@@ -212,9 +212,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                 </div>
                                 <div className="block-table__row">
                                     <div className="block-table__element">
-                                        <span>300 000</span>
-                                        <span>—</span>
-                                        <span>1 000 000</span>
+                                        <span className="currency-unit-rub">от 100 000</span>
                                     </div>
                                     <div className="block-table__element">
                                         <span>22%</span>
@@ -225,9 +223,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                 </div>
                                 <div className="block-table__row">
                                     <div className="block-table__element">
-                                        <span>1 300 000</span>
-                                        <span>—</span>
-                                        <span>1 500 000</span>
+                                        <span className="currency-unit-rub">от 400 000</span>
                                     </div>
                                     <div className="block-table__element">
                                         <span>28%</span>
@@ -238,9 +234,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
                                 </div>
                                 <div className="block-table__row">
                                     <div className="block-table__element">
-                                        <span />
-                                        <span />
-                                        <span />
+                                        <span className="currency-unit-rub">от 1000 000</span>
                                     </div>
                                     <div className="block-table__element">
                                         <span>36%</span>
@@ -252,90 +246,95 @@ class Main extends React.PureComponent<MainProps, MainState> {
                             </div>
                         </div>
                     </div>
-                    <div className="main__block seggestions">
-                        <div className="block-title block-title__important">
-                            <span>Важная информация и персональные предложения</span>
+                    {personalSuggestion ? (
+                        <div className="main__block seggestions">
+                            <div className="block-title block-title__important">
+                                <span>Важная информация и персональные предложения</span>
+                            </div>
+                            <div className="block-container">
+                                <div className="block-element">
+                                    <div className="block-element__info">
+                                        <div className="block-element__title">
+                                            <span>10 Августа 2020</span>
+                                        </div>
+                                        <div className="block-element__subtitle">
+                                            <span>Персональное предложение для постоянных партнеров</span>
+                                        </div>
+                                        <div className="block-element__description">
+                                            <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                        </div>
+                                        <div className="block-wrapper">
+                                            <div className="block-element__button">
+                                                <span>Подробнее</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <line y1="12" x2="48.6111" y2="12" />
+                                                    <circle cx="44.4446" cy="12.5" r="12" />
+                                                    <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="block-element">
+                                    <div className="block-element__info">
+                                        <div className="block-element__title">
+                                            <span>10 Августа 2020</span>
+                                        </div>
+                                        <div className="block-element__subtitle">
+                                            <span>Персональное предложение для постоянных партнеров</span>
+                                        </div>
+                                        <div className="block-element__description">
+                                            <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                        </div>
+                                        <div className="block-wrapper">
+                                            <div className="block-element__button">
+                                                <span>Подробнее</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <line y1="12" x2="48.6111" y2="12" />
+                                                    <circle cx="44.4446" cy="12.5" r="12" />
+                                                    <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="block-element">
+                                    <div className="block-element__info">
+                                        <div className="block-element__title">
+                                            <span>10 Августа 2020</span>
+                                        </div>
+                                        <div className="block-element__subtitle">
+                                            <span>Персональное предложение для постоянных партнеров</span>
+                                        </div>
+                                        <div className="block-element__description">
+                                            <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                        </div>
+                                        <div className="block-wrapper">
+                                            <div className="block-element__button">
+                                                <span>Подробнее</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <line y1="12" x2="48.6111" y2="12" />
+                                                    <circle cx="44.4446" cy="12.5" r="12" />
+                                                    <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="block-container">
-                            <div className="block-element">
-                                <div className="block-element__info">
-                                    <div className="block-element__title">
-                                        <span>10 Августа 2020</span>
-                                    </div>
-                                    <div className="block-element__subtitle">
-                                        <span>Персональное предложение для постоянных партнеров</span>
-                                    </div>
-                                    <div className="block-element__description">
-                                        <span>Срок действия вашего персонального предложения подходит к концу</span>
-                                    </div>
-                                    <div className="block-wrapper">
-                                        <div className="block-element__button">
-                                            <span>Подробнее</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg">
-                                                <line y1="12" x2="48.6111" y2="12" />
-                                                <circle cx="44.4446" cy="12.5" r="12" />
-                                                <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="block-element">
-                                <div className="block-element__info">
-                                    <div className="block-element__title">
-                                        <span>10 Августа 2020</span>
-                                    </div>
-                                    <div className="block-element__subtitle">
-                                        <span>Персональное предложение для постоянных партнеров</span>
-                                    </div>
-                                    <div className="block-element__description">
-                                        <span>Срок действия вашего персонального предложения подходит к концу</span>
-                                    </div>
-                                    <div className="block-wrapper">
-                                        <div className="block-element__button">
-                                            <span>Подробнее</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg">
-                                                <line y1="12" x2="48.6111" y2="12" />
-                                                <circle cx="44.4446" cy="12.5" r="12" />
-                                                <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="block-element">
-                                <div className="block-element__info">
-                                    <div className="block-element__title">
-                                        <span>10 Августа 2020</span>
-                                    </div>
-                                    <div className="block-element__subtitle">
-                                        <span>Персональное предложение для постоянных партнеров</span>
-                                    </div>
-                                    <div className="block-element__description">
-                                        <span>Срок действия вашего персонального предложения подходит к концу</span>
-                                    </div>
-                                    <div className="block-wrapper">
-                                        <div className="block-element__button">
-                                            <span>Подробнее</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg">
-                                                <line y1="12" x2="48.6111" y2="12" />
-                                                <circle cx="44.4446" cy="12.5" r="12" />
-                                                <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
+                    ) : (
+                        <div className="main__block seggestions">
+                            <div className="block-title block-title__important">
+                                <span>На данный момент персональные предложения отсутствуют</span>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         );
     }
-}
+    return <Loader />;
+};
 
-const mapStateToProps = (state: PersonalCabinet) => ({
-    main: state.main
-});
-
-export default connect(mapStateToProps, { fetchDataMain })(Main);
+export default MainComponent;

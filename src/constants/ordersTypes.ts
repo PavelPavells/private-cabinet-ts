@@ -10,6 +10,7 @@ export const DATA_LOADING_SUCCESS_ORDERS_TABLE = 'DATA_LOADING_SUCCESS_ORDERS_TA
 /**
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
  */
+
 export interface ResponseStatus {
     code: number;
     result_message: string;

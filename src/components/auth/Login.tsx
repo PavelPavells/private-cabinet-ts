@@ -4,6 +4,8 @@
 import React, { SyntheticEvent, FormEvent } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import md5 from 'md5';
+// import bcrypt from 'bcryptjs';
 import { PersonalCabinet } from '../../store/store';
 
 /**
@@ -95,7 +97,13 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
      */
     private clickForm = () => {
         const { email, pass } = this.state;
+        // const passwordCypher = md5(pass);
+        // bcrypt.genSalt(10, (err, salt) => {
+        //    bcrypt.hash(passwordCypher, salt, (err, hash) => {
+        //        console.log(hash);
         this.props.loginUser(email, pass);
+        //    });
+        // });
     };
 
     /**
@@ -265,11 +273,13 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                     )}
                                 </label>
                             </div>
+                            {/*
                             <div className="auth__password-ask ask">
                                 <a href="/reset" className="ask__password">
                                     Не помню пароль
                                 </a>
                             </div>
+                            */}
                             {email && pass ? (
                                 <div>
                                     <Link to="/">
@@ -287,6 +297,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                             )}
                             <div className="auth__error">{err}</div>
                         </div>
+                        {/*
                         <div className="auth__registration registration">
                             <div className="registration__no-login">Нет логина?</div>
                             <div className="registration__link">
@@ -294,6 +305,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                 &nbsp;или войдите с помощью соцсетей
                             </div>
                         </div>
+                        */}
                     </div>
                     <div className="auth__right right">
                         <div className="right__image image">

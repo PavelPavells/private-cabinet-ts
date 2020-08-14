@@ -7,6 +7,7 @@ import CreatableSelect from 'react-select/creatable';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { PersonalCabinet } from '../../store/store';
+import md5 from 'md5';
 
 /**
  * ********** Импорт экшенов **********
@@ -37,6 +38,7 @@ interface RegisterState {
   readonly name: string,
   readonly surname: string,
   readonly patronymic: string,
+  readonly contactEmail: string,
   readonly phone: string | number,
   readonly companyName: string,
   readonly inn: string,
@@ -55,6 +57,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
       name: "",
       surname: "",
       patronymic: "",
+      contactEmail: "",
       phone: "",
       companyName: "",
       inn: "",
@@ -120,7 +123,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
    * ********** Запись данных в стейт из множественного выбора(Options Tag) **********
    */
   private handleChange = (newValue: any) => {
-   this.setState({ direction: newValue })
+   this.setState({ direction: newValue });
   };
 
   /**
@@ -128,13 +131,16 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
    */
   onSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
+    const password: string = md5(this.state.pass);
+    const repeatPassword: string = md5(this.state.repeatpass);
     const newUser = {
       email: this.state.email,
-      pass: this.state.pass,
-      repeatpass: this.state.repeatpass,
+      pass: password,
+      repeatpass: repeatPassword,
       name: this.state.name,
       surname: this.state.surname,
       patronymic: this.state.patronymic,
+      contactEmail: this.state.contactEmail,
       phone: this.state.phone,
       companyName: this.state.companyName,
       inn: this.state.inn,
@@ -161,7 +167,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
     /**
      * Деструтктуризация данных из локального и глобального стейта
      */
-    const { email, pass, repeatpass, name, surname, patronymic, phone, companyName, inn, legalAdress, webSite, direction } = this.state;
+    const { email, pass, repeatpass, name, surname, patronymic, contactEmail, phone, companyName, inn, legalAdress, webSite, direction } = this.state;
     const { err } = this.props.data;
     
     /**
@@ -307,6 +313,22 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                   {err
                     ? 
                       <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={contactEmail} id="contactEmail" type="text" className="auth__input warning" autoCorrect="off" required />
+                        <label className="auth__label">Контактный email *</label>  
+                      </div>      
+                    :
+                      <div className="auth__field field">
+                        <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={contactEmail} id="contactEmail" type="text" className="auth__input" autoCorrect="off" required />
+                        <label className="auth__label">Контактный email *</label>  
+                      </div>
+                  }
+                </label>
+              </div>
+              <div className="auth__group">
+                <label>
+                  {err
+                    ? 
+                      <div className="auth__field field">
                         <input onChange={this.onChange} onKeyDown={this.onKeyPress} value={phone} id="phone" type="text" className="auth__input warning" autoCorrect="off" required />
                         <label className="auth__label">Контактный телефон *</label>  
                       </div>      
@@ -392,7 +414,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                 </label>
                 <span>Нажимая на кнопку "Зарегистрироваться", я даю<br />{/*<a>*/}согласие на обработку персональных данных{/*</a>*/}</span> {/** Добавить тег <a> */}
               </div>
-              {email && pass && repeatpass && name && surname && phone && companyName && inn && legalAdress && direction
+              {email && pass && repeatpass && name && surname && contactEmail && phone && companyName && inn && legalAdress && direction
                 ? 
                 <div>
                   <Link to="/">

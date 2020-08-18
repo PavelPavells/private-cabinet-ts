@@ -3,12 +3,12 @@
  */
 import axios from 'axios';
 
-const setAuthToken = (token: boolean) => {
-    if (token) {
+const setAuthToken = (userUuid: string) => {
+    if (userUuid) {
         /**
          * Применить авторизационный токен к каждому запросу, если вы вошли в систему
          */
-        axios.defaults.headers.common.Authorization = token;
+        axios.defaults.headers.common.Authorization = userUuid;
     } else {
         /**
          * Удалить авторизационный токен

@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
@@ -19,7 +19,6 @@ import MainComponent from './MainContent/Main/Main';
 import Account from './MainContent/Account/Account';
 import AdminPanel from './MainContent/AdminPanel/AdminPanel';
 import SalePartners from './MainContent/SalePartners/SalePartners';
-import NotFound from '../404/404';
 import PriceList from './MainContent/PriceList/PriceList';
 import Orders from './MainContent/Orders/Orders';
 import Settings from './MainContent/Settings/Settings';
@@ -34,94 +33,35 @@ import Configurator from './MainContent/Configurator/Configurator';
  * */
 import './Layout.scss';
 
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-const Layout = ({ data, logoutUser }) => {
-    useEffect(() => {
-        localStorage.getItem('uuid');
-    }, []);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Layout = () => {
     const { isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    const uuid = localStorage.getItem('uuid');
-    if (!uuid) {
+    if (!isAuthenticated) {
         return <Redirect to="/" />;
     }
     const dashboardContent = (
-        <>
-            <div className="right">
-                <TopNav
-                    // @ts-ignore
-                    exact
-                    // eslint-disable-next-line react/prop-types
-                    agentName={data.agentName}
-                    // eslint-disable-next-line react/prop-types
-                    partnerStatus={data.partnerStatus}
-                    uuid={uuid}
-                    logoutUser={logoutUser}
-                />
-                <div className="main-container">
-                    <SideNav />
-                    <Switch>
-                        <Route path="/dashboard">
-                            <MainComponent uuid={uuid} />
-                        </Route>
-                        <Route
-                            exact
-                            path="/admin-panel"
-                            // @ts-ignore
-                            render={() => <AdminPanel data={uuid} />}
-                        />
-                        <Route
-                            exact
-                            path="/sales"
-                            // @ts-ignore
-                            render={() => <SalePartners data={uuid} />}
-                        />
-                        <Route
-                            exact
-                            path="/account"
-                            // @ts-ignore
-                            render={() => <Account data={uuid} />}
-                        />
-                        <Route path="/price-list">
-                            <PriceList uuid={uuid} />
-                        </Route>
-                        <Route
-                            path="/orders"
-                            // @ts-ignore
-                            render={() => <Orders uuid={uuid} />}
-                        />
-                        <Route
-                            path="/settings"
-                            // @ts-ignore
-                            render={() => <Settings uuid={uuid} />}
-                        />
-                        <Route path="/control" render={() => <Control />} />
-                        <Route path="/notification" render={() => <Notification />} />
-                        <Route
-                            exact
-                            path="/payment"
-                            // @ts-ignore
-                            render={() => <Payment uuid={uuid} />}
-                        />
-                        <Route
-                            exact
-                            path="/shipment"
-                            // @ts-ignore
-                            render={() => <Payment uuid={uuid} />}
-                            // Shipment component
-                        />
-                        <Route
-                            exact
-                            path="/configurator"
-                            // @ts-ignore
-                            render={() => <Configurator uuid={uuid} />}
-                        />
-                        <Route component={NotFound} />
-                    </Switch>
-                </div>
+        <div className="right">
+            <TopNav
+                // @ts-ignore
+                exact
+            />
+            <div className="main-container">
+                <SideNav />
+                <Switch>
+                    <Route path="/dashboard" component={MainComponent} />
+                    <Route path="/admin-panel" component={AdminPanel} />
+                    <Route path="/sales" component={SalePartners} />
+                    <Route path="/account" component={Account} />
+                    <Route path="/price-list" component={PriceList} />
+                    <Route path="/orders" component={Orders} />
+                    <Route path="/settings" component={Settings} />
+                    <Route path="/control" component={Control} />
+                    <Route path="/notification" component={Notification} />
+                    <Route path="/payment" component={Payment} />
+                    <Route path="/shipment" component={Payment} />
+                    <Route path="/configurator" component={Configurator} />
+                </Switch>
             </div>
-        </>
+        </div>
     );
     return (
         <Router>

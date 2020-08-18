@@ -47,9 +47,6 @@ class TopNav extends React.PureComponent<TopNavProps> {
     };
 
     public render() {
-        // const { name } = this.props.auth.user; // {/*company_inn*/}
-        // const partnerStatus = localStorage.getItem('partnerStatus');
-        const agentName = localStorage.getItem('agentName');
         return (
             <nav className="nav">
                 {/* ref={node => (this.node = node)} */}
@@ -62,7 +59,7 @@ class TopNav extends React.PureComponent<TopNavProps> {
                 <div className="nav__right">
                     <div className="right__text">
                         Личный кабинет:
-                        <strong className="text__name">{agentName}</strong>
+                        <strong className="text__name">Стиперенко Ю. А. ИП</strong>
                     </div>
                     <div className="right__info">
                         <div className="info__bell">
@@ -79,7 +76,8 @@ class TopNav extends React.PureComponent<TopNavProps> {
 }
 
 const mapStateToProps = (state: PersonalCabinet) => ({
-    topnav: state.topnav
+    topnav: state.topnav,
+    auth: state.auth
 });
 
 export default connect<{}, {}, TopNavProps>(

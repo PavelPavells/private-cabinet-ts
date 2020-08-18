@@ -1,6 +1,7 @@
 /**
  * ********** Глобальные переменные для асинхронных запросов авторизации **********
  */
+export const USER_ERROR_LOADING = 'USER_ERROR_LOADING';
 export const GET_ERRORS = 'GET_ERRORS';
 export const USER_LOADING = 'USER_LOADING';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -10,9 +11,9 @@ export const NEW_PASSWORD_USER = 'NEW_PASSWORD';
 /**
  * *********** Интерфейсы стейта Авторизации/Регистрации **********
  */
-export interface userDataLogin {
-    email: string;
-    password: string;
+export interface userDataState {
+    login: string;
+    passHash: string;
 }
 
 export interface userResetPassword {
@@ -22,6 +23,11 @@ export interface userResetPassword {
 
 export interface userNewPassword {
     type: typeof NEW_PASSWORD_USER;
+    payload: any;
+}
+
+export interface userErrorLoading {
+    type: typeof USER_ERROR_LOADING;
     payload: any;
 }
 
@@ -38,6 +44,21 @@ export interface AuthState {
     isAuthenticated: boolean;
     user: any;
     loading: boolean;
+    error: null | any;
+}
+
+export interface LoginReq {
+    login: string;
+    passHash: string;
+}
+
+export interface LoginRes {
+    success: string;
+    userUuid: string;
+    partnerUuid: string;
+    agentName: string;
+    err: string;
+    partnerStatus: string;
 }
 
 interface registerUser {
@@ -52,7 +73,7 @@ interface loginUser {
 
 interface setCurrentUser {
     type: typeof SET_CURRENT_USER;
-    payload: any;
+    payload: Object;
 }
 
 interface setUserLoading {
@@ -64,4 +85,12 @@ interface logoutUser {
     history: any;
 }
 
-export type AuthActions = registerUser | loginUser | setCurrentUser | setUserLoading | logoutUser | userResetPassword | userNewPassword;
+export type AuthActions =
+    | registerUser
+    | loginUser
+    | setCurrentUser
+    | setUserLoading
+    | logoutUser
+    | userResetPassword
+    | userNewPassword
+    | userErrorLoading;

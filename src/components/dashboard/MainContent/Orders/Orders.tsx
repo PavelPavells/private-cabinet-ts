@@ -33,9 +33,7 @@ import filterColumn from '../../../../images/filter.svg';
  * */
 import './Orders.scss';
 
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-const OrdersComponent = ({ uuid }) => {
+const OrdersComponent = () => {
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
@@ -43,6 +41,7 @@ const OrdersComponent = ({ uuid }) => {
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
+    const [selectedHeader, setSelectedHeader] = useState(-1);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -50,7 +49,7 @@ const OrdersComponent = ({ uuid }) => {
      * ********** Импорт состояния pricelist из Redux **********
      * */
     const { ordersHeaders, ordersTable, isFetching } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
-
+    const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
      * */
@@ -58,8 +57,15 @@ const OrdersComponent = ({ uuid }) => {
     /**
      * запрос данных с сервера
      * */
+
+    /**
+     * Отправка UUID при запросе данных
+     * */
+    // const userUUid = localStorage.getItem('userUuid');
+
     useEffect(() => {
-        const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
+        // @ts-ignore
+        const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataOrders(request));
     }, []);
 
@@ -67,10 +73,10 @@ const OrdersComponent = ({ uuid }) => {
      * запрос данных с сервера
      * */
 
-    const handleExportDocumentModal = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('buttons--active');
-        setExportModal(!exportModal);
-    };
+    // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
+    //     event.currentTarget.classList.toggle('buttons--active');
+    //     setExportModal(!exportModal);
+    // };
 
     /**
      * Открыть/Закрыть инпуты быстрого поиска
@@ -80,12 +86,12 @@ const OrdersComponent = ({ uuid }) => {
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Активация/Деактивация филтра колонки
-     * */
-    const toggleColumnFilter = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('wrap__index--active');
-    };
+    // /**
+    //  * Активация/Деактивация филтра колонки
+    //  * */
+    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
+    //     event.currentTarget.classList.toggle('wrap__index--active');
+    // };
 
     if (!isFetching && ordersHeaders && ordersTable) {
         return (
@@ -131,47 +137,41 @@ const OrdersComponent = ({ uuid }) => {
                     </header>
                     <main className="orders__table">
                         <div className="orders__frame">
-                            <div className="frame__caption">
-                                {ordersHeaders.map((header: any, i) => {
-                                    if (header.visible) {
-                                        return (
-                                            <div key={header.fieldName} className="caption__wrap">
-                                                <div className="wrap__index" onClick={toggleColumnFilter}>
-                                                    <div className="index__text">{header.displayName}</div>
-                                                    {i === 0 ? (
-                                                        <img src={sortingColumn} alt="" className="index__icon--sorting" />
-                                                    ) : (
-                                                        <img src={filterColumn} alt="" className="index__icon--filtering" />
-                                                    )}
-                                                </div>
-                                                {filterModal ? (
-                                                    <div className="search-wrapper">
-                                                        <input type="text" className="search-input" />
-                                                        <div className="search-icon">
-                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
-                                                        </div>
-                                                    </div>
-                                                ) : null}
-                                            </div>
-                                        );
-                                    }
-                                    return '';
-                                })}
-                            </div>
                             <div className="frame__table">
                                 {ordersHeaders.map((header: any, i: any) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.fieldName} className="table__column">
+                                                <div className="frame__caption">
+                                                    <div
+                                                        className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
+                                                        onClick={() => setSelectedHeader(i)}
+                                                    >
+                                                        <div className="index__text">{header.displayName}</div>
+                                                        {i === 0 ? (
+                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                        ) : (
+                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                        )}
+                                                    </div>
+                                                    {filterModal ? (
+                                                        <div className="search-wrapper">
+                                                            <input type="text" className="search-input" />
+                                                            <div className="search-icon">
+                                                                {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
+                                                </div>
                                                 {ordersTable.map((index: any) => {
                                                     return (
                                                         <div key={index.clientOrderUuid} className="column__item">
-                                                            {i === 0 && (
+                                                            {/* {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
                                                                     // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                                 />
-                                                            )}
+                                                            )} */}
                                                             {index[header.fieldName]}
                                                         </div>
                                                     );

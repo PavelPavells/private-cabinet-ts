@@ -1,14 +1,27 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-// const isEmpty = require("is-empty");
-
-import { AuthState, AuthActions, SET_CURRENT_USER, USER_LOADING, RESET_CURRENT_USER, NEW_PASSWORD_USER } from '../constants/authTypes';
+import {
+    AuthState,
+    AuthActions,
+    SET_CURRENT_USER,
+    USER_LOADING,
+    USER_ERROR_LOADING,
+    RESET_CURRENT_USER,
+    NEW_PASSWORD_USER
+} from '../constants/authTypes';
 
 const initialState: AuthState = {
     isAuthenticated: false,
     user: {},
-    loading: false
+    loading: false,
+    error: ''
+};
+const isEmpty = (payload: any) => {
+    if (payload) {
+        return true;
+    }
+    return false;
 };
 
 /**
@@ -20,7 +33,7 @@ export default function (state = initialState, action: AuthActions): AuthState {
         case SET_CURRENT_USER:
             return {
                 ...state,
-                isAuthenticated: action.payload,
+                isAuthenticated: isEmpty(action.payload),
                 user: action.payload
             };
         case RESET_CURRENT_USER:
@@ -39,6 +52,12 @@ export default function (state = initialState, action: AuthActions): AuthState {
             return {
                 ...state,
                 loading: true
+            };
+        case USER_ERROR_LOADING:
+            return {
+                ...state,
+                isAuthenticated: false,
+                error: action.payload
             };
         default:
             return state;

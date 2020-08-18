@@ -33,9 +33,7 @@ import filterColumn from '../../../../images/filter.svg';
  * */
 import './PriceList.scss';
 
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-const PriceListComponent = ({ uuid }) => {
+const PriceListComponent = () => {
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
@@ -43,6 +41,7 @@ const PriceListComponent = ({ uuid }) => {
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
+    const [selectedHeader, setSelectedHeader] = useState(-1);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -50,6 +49,7 @@ const PriceListComponent = ({ uuid }) => {
      * ********** Импорт состояния pricelist из Redux **********
      * */
     const { headersPriceList, tablePriceList, inputs, isFetching } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
+    const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
@@ -63,21 +63,26 @@ const PriceListComponent = ({ uuid }) => {
     const innerRef = useRef();
 
     /**
+     * Отправка UUID при запросе данных
+     * */
+    // const userUUid = localStorage.getItem('userUuid');
+
+    /**
      * запрос данных с сервера
      * */
     useEffect(() => {
         // @ts-ignore
-        const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
+        const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataPriceList(request));
     }, []);
 
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportDocumentModal = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('buttons--active');
-        setExportModal(!exportModal);
-    };
+    // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
+    //     event.currentTarget.classList.toggle('buttons--active');
+    //     setExportModal(!exportModal);
+    // };
 
     /**
      * Открыть/Закрыть инпуты быстрого поиска
@@ -90,9 +95,11 @@ const PriceListComponent = ({ uuid }) => {
     /**
      * Активайия/Деактивация филтра колонки
      * */
-    const toggleColumnFilter = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('wrap__index--active');
-    };
+    // @ts-ignore
+    // const toggleColumnFilter = (event: React.SyntheticEvent, i: any) => {
+    //     // event.currentTarget.classList.toggle('wrap__index--active');
+    //     console.log(i);
+    // };
 
     /**
      * Клик вне елемента
@@ -113,7 +120,6 @@ const PriceListComponent = ({ uuid }) => {
             };
         });
     };
-
     if (!isFetching && inputs && headersPriceList && tablePriceList) {
         return (
             <section className="main-content">
@@ -158,56 +164,53 @@ const PriceListComponent = ({ uuid }) => {
                     </header>
                     <main className="pricelist__table">
                         <div className="pricelist__frame">
-                            <div className="frame__caption">
-                                {headersPriceList.map((header, i) => {
-                                    if (header.visible) {
-                                        return (
-                                            <div key={header.fieldName} className="caption__wrap">
-                                                <div className="wrap__index" onClick={toggleColumnFilter}>
-                                                    <div className="index__text">{header.displayName}</div>
-                                                    {i === 0 ? (
-                                                        <img src={sortingColumn} alt="" className="index__icon--sorting" />
-                                                    ) : (
-                                                        <img src={filterColumn} alt="" className="index__icon--filtering" />
-                                                    )}
-                                                </div>
-                                                {filterModal ? (
-                                                    <div className="search-wrapper">
-                                                        <input
-                                                            type="text"
-                                                            className="search-input"
-                                                            value={inputs[header.fieldName]}
-                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                                dispatch(
-                                                                    priceListSetInput({ key: header.fieldName, value: event.target.value })
-                                                                );
-                                                            }}
-                                                        />
-                                                        <div className="search-icon">
-                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
-                                                        </div>
-                                                    </div>
-                                                ) : null}
-                                            </div>
-                                        );
-                                    }
-                                    return '';
-                                })}
-                            </div>
                             <div className="frame__table">
                                 {headersPriceList.map((header, i) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.fieldName} className="table__column">
+                                                <div className="frame__caption">
+                                                    <div
+                                                        className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
+                                                        onClick={() => setSelectedHeader(i)}
+                                                    >
+                                                        <div className="index__text">{header.displayName}</div>
+                                                        {i === 0 ? (
+                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                        ) : (
+                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                        )}
+                                                    </div>
+                                                    {filterModal ? (
+                                                        <div className="search-wrapper">
+                                                            <input
+                                                                type="text"
+                                                                className="search-input"
+                                                                value={inputs[header.fieldName]}
+                                                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                                    dispatch(
+                                                                        priceListSetInput({
+                                                                            key: header.fieldName,
+                                                                            value: event.target.value
+                                                                        })
+                                                                    );
+                                                                }}
+                                                            />
+                                                            <div className="search-icon">
+                                                                {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
+                                                </div>
                                                 {tablePriceList.map((index) => {
                                                     return (
                                                         <div key={index.itemPriceUuid} className="column__item">
-                                                            {i === 0 && (
+                                                            {/* {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
                                                                     // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                                 />
-                                                            )}
+                                                            )} */}
                                                             {
                                                                 // @ts-ignore
                                                                 index[header.fieldName]

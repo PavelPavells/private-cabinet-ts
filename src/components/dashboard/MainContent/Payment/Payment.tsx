@@ -38,9 +38,7 @@ import filterColumn from '../../../../images/filter.svg';
  * */
 import './Payment.scss';
 
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-const PaymentComponent = ({ uuid }) => {
+const PaymentComponent = () => {
     // const [startDate, setStartDate] = useState(null);
     // const [endDate, setEndDate] = useState(null);
     const [page] = useState(0);
@@ -50,6 +48,7 @@ const PaymentComponent = ({ uuid }) => {
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
+    const [selectedHeader, setSelectedHeader] = useState(-1);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -57,31 +56,37 @@ const PaymentComponent = ({ uuid }) => {
      * ********** Импорт состояния pricelist из Redux **********
      * */
     const { headersPayment, tablePayment, isFetching } = useSelector((state: PersonalCabinet) => state.payment, shallowEqual);
-
+    const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
      * */
     const dispatch = useDispatch();
 
     /**
+     * Отправка UUID при запросе данных
+     * */
+    // const userUUid = localStorage.getItem('userUuid');
+
+    /**
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid };
+        // @ts-ignore
+        const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataPayment(request));
     }, []);
 
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
-    const handleExportDocumentModal = (event: MouseEvent | any) => {
-        event.currentTarget.classList.toggle('buttons--active');
-        setExportModal(!exportModal);
-        const element = document.getElementsByClassName('buttons__export');
-        if (event.target !== element) {
-            setExportModal(!exportModal);
-        }
-    };
+    // const handleExportDocumentModal = (event: MouseEvent | any) => {
+    //     event.currentTarget.classList.toggle('buttons--active');
+    //     setExportModal(!exportModal);
+    //     const element = document.getElementsByClassName('buttons__export');
+    //     if (event.target !== element) {
+    //         setExportModal(!exportModal);
+    //     }
+    // };
 
     /**
      * Открыть/Закрыть инпуты быстрого поиска
@@ -91,12 +96,12 @@ const PaymentComponent = ({ uuid }) => {
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Активация/Деактивация фильтра колонки
-     * */
-    const toggleColumnFilter = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('wrap__index--active');
-    };
+    // /**
+    //  * Активация/Деактивация фильтра колонки
+    //  * */
+    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
+    //     event.currentTarget.classList.toggle('wrap__index--active');
+    // };
 
     if (!isFetching && headersPayment && tablePayment) {
         return (
@@ -142,54 +147,48 @@ const PaymentComponent = ({ uuid }) => {
                     </header>
                     <main className="payment__table">
                         <div className="payment__frame">
-                            <div className="frame__caption">
-                                {headersPayment.map((header, i) => {
-                                    if (header.visible) {
-                                        return (
-                                            <div key={header.fieldName} className="caption__wrap">
-                                                <div className="wrap__index" onClick={toggleColumnFilter}>
-                                                    <div className="index__text">{header.displayName}</div>
-                                                    {i === 0 ? (
-                                                        <img src={sortingColumn} alt="" className="index__icon--sorting" />
-                                                    ) : (
-                                                        <img src={filterColumn} alt="" className="index__icon--filtering" />
-                                                    )}
-                                                </div>
-                                                {filterModal ? (
-                                                    <div className="search-wrapper">
-                                                        <input
-                                                            type="text"
-                                                            className="search-input"
-                                                            // value={inputs[header.field_name]}
-                                                            // onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                            //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
-                                                            // }}
-                                                        />
-                                                        <div className="search-icon">
-                                                            {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
-                                                        </div>
-                                                    </div>
-                                                ) : null}
-                                            </div>
-                                        );
-                                    }
-                                    return '';
-                                })}
-                            </div>
                             <div className="frame__table">
                                 {headersPayment.map((header, i) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.fieldName} className="table__column">
+                                                <div className="frame__caption">
+                                                    <div
+                                                        className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
+                                                        onClick={() => setSelectedHeader(i)}
+                                                    >
+                                                        <div className="index__text">{header.displayName}</div>
+                                                        {i === 0 ? (
+                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                        ) : (
+                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                        )}
+                                                    </div>
+                                                    {filterModal ? (
+                                                        <div className="search-wrapper">
+                                                            <input
+                                                                type="text"
+                                                                className="search-input"
+                                                                // value={inputs[header.field_name]}
+                                                                // onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                                //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
+                                                                // }}
+                                                            />
+                                                            <div className="search-icon">
+                                                                {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
+                                                </div>
                                                 {tablePayment.map((index) => {
                                                     return (
                                                         <div key={index.cashFlowUuid} className="column__item">
-                                                            {i === 0 && (
+                                                            {/* {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
                                                                     // onClick={() => handleChangePlusItems(index.cashFlowUuid)}
                                                                 />
-                                                            )}
+                                                            )} */}
                                                             {
                                                                 // @ts-ignore
                                                                 index[header.fieldName]

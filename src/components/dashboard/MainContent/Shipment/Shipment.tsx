@@ -38,13 +38,12 @@ import filterColumn from '../../../../images/filter.svg';
  * */
 import './Shipment.scss';
 
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-const ShipmentComponent = ({ uuid }) => {
+const ShipmentComponent = () => {
     // const [startDate, setStartDate] = useState(null);
     // const [endDate, setEndDate] = useState(null);
     const [offset] = useState(0);
     const [size] = useState(30);
+    const [selectedHeader, setSelectedHeader] = useState(-1);
     const [exportModal, setExportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
@@ -52,17 +51,23 @@ const ShipmentComponent = ({ uuid }) => {
      * ********** Импорт состояния shipment из Redux **********
      * */
     const { headersShipment, tableShipment, isFetching } = useSelector((state: PersonalCabinet) => state.shipment, shallowEqual);
-
+    const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
      * */
     const dispatch = useDispatch();
 
     /**
+     * Отправка UUID при запросе данных
+     * */
+    // const userUUid = localStorage.getItem('userUuid');
+
+    /**
      * запрос данных с сервера
      * */
     useEffect(() => {
-        const request: ShipmentListReq = { offset, size, login: uuid };
+        // @ts-ignore
+        const request: ShipmentListReq = { offset, size, login: user };
         dispatch(fetchDataShipment(request));
     }, []);
 
@@ -94,12 +99,12 @@ const ShipmentComponent = ({ uuid }) => {
         console.log(key.pshipment_uuid);
     };
 
-    /**
-     * Активайия/Деактивация филтра колонки
-     * */
-    const toggleColumnFilter = (event: React.SyntheticEvent) => {
-        event.currentTarget.classList.toggle('wrap__index--active');
-    };
+    // /**
+    //  * Активайия/Деактивация филтра колонки
+    //  * */
+    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
+    //     event.currentTarget.classList.toggle('wrap__index--active');
+    // };
 
     if (!isFetching && headersShipment && tableShipment) {
         return (
@@ -148,7 +153,10 @@ const ShipmentComponent = ({ uuid }) => {
                                     if (header.visible) {
                                         return (
                                             <div key={header.field_name} className="caption__wrap">
-                                                <div className="wrap__index" onClick={toggleColumnFilter}>
+                                                <div
+                                                    className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
+                                                    onClick={() => setSelectedHeader(i)}
+                                                >
                                                     <div className="index__text">{header.display_name}</div>
                                                     {i === 0 ? (
                                                         <img src={sortingColumn} alt="" className="index__icon--sorting" />

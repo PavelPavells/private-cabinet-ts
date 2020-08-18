@@ -12,10 +12,10 @@ const Profile: React.FC = () => {
         setDropdown(!dropdown);
     };
 
-    const handleClickOutside = (e: { path?: Array<Element>; [propName: string]: any }) => {
+    const handleClickOutside = (e: Event) => {
         const checkingElement = document.getElementsByClassName('right-info__profile')[0];
-
-        if (!e.path!.includes(checkingElement)) {
+        // @ts-ignore
+        if (!e.path.includes(checkingElement)) {
             const arrow = document.getElementsByClassName('info-list__arrow')[0];
             arrow.classList.remove('toggle-window');
             setDropdown(false);

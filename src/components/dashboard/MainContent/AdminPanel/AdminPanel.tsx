@@ -1,6 +1,10 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 
-const AdminPanel: React.FC = () => {
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
+const AdminPanel: React.FC = ({ uuid }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [id] = useState(uuid);
     return <div className="admin-panel">Admin panel</div>;
 };
 

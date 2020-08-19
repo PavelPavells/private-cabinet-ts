@@ -25,7 +25,7 @@ import Settings from './MainContent/Settings/Settings';
 import Control from './MainContent/Control/Control';
 import Notification from './MainContent/Notification/Notification';
 import Payment from './MainContent/Payment/Payment';
-// import Shipment from './MainContent/Shipment/Shipment';
+import Shipment from './MainContent/Shipment/Shipment';
 import Configurator from './MainContent/Configurator/Configurator';
 
 /**
@@ -57,7 +57,7 @@ const Layout = () => {
                     <Route path="/control" component={Control} />
                     <Route path="/notification" component={Notification} />
                     <Route path="/payment" component={Payment} />
-                    <Route path="/shipment" component={Payment} />
+                    <Route path="/shipment" component={Shipment} />
                     <Route path="/configurator" component={Configurator} />
                 </Switch>
             </div>

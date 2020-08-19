@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
@@ -35,14 +35,14 @@ import './PriceList.scss';
 
 const PriceListComponent = () => {
     const [page] = useState(0);
-    const [limit] = useState(5000);
-    const [sortBy] = useState(null);
-    const [sortDirection] = useState(0);
+    const [limit] = useState(50);
+    const [sortBy, setSortBy] = useState(null);
+    const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
-    const [selectedHeader, setSelectedHeader] = useState(-1);
-    const [exportModal, setExportModal] = useState(false);
+    const [selectedHeader, setSelectedHeader] = useState(1);
+    const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
     /**
@@ -57,17 +57,6 @@ const PriceListComponent = () => {
     const dispatch = useDispatch();
 
     /**
-     * Ref для отлавливания клика вне компонента
-     * */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const innerRef = useRef();
-
-    /**
-     * Отправка UUID при запросе данных
-     * */
-    // const userUUid = localStorage.getItem('userUuid');
-
-    /**
      * запрос данных с сервера
      * */
     useEffect(() => {
@@ -76,6 +65,12 @@ const PriceListComponent = () => {
         dispatch(fetchDataPriceList(request));
     }, []);
 
+    // useEffect(() => {
+    //     if (isFetching) {
+    //         const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
+    //         dispatch(fetchDataPriceList(request));
+    //     }
+    // }, [isFetching]);
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
@@ -93,13 +88,24 @@ const PriceListComponent = () => {
     };
 
     /**
-     * Активайия/Деактивация филтра колонки
+     * Фильтрация по колонкам
      * */
     // @ts-ignore
-    // const toggleColumnFilter = (event: React.SyntheticEvent, i: any) => {
-    //     // event.currentTarget.classList.toggle('wrap__index--active');
-    //     console.log(i);
-    // };
+    const filterOnColumns = async (fieldName) => {
+        setSortBy(fieldName);
+        setSortDirection(+!sortDirection);
+        const filter: PriceListReq = {
+            page,
+            limit,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findValue,
+            findBy,
+            uuid: user
+        };
+        dispatch(fetchDataPriceList(filter));
+    };
 
     /**
      * Клик вне елемента
@@ -120,7 +126,8 @@ const PriceListComponent = () => {
             };
         });
     };
-    if (!isFetching && inputs && headersPriceList && tablePriceList) {
+
+    if (inputs && headersPriceList && tablePriceList) {
         return (
             <section className="main-content">
                 <div className="pricelist">
@@ -172,7 +179,9 @@ const PriceListComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => setSelectedHeader(i)}
+                                                        onClick={() => {
+                                                            filterOnColumns(header.fieldName);
+                                                        }}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (

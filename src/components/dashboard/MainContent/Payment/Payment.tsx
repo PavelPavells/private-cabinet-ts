@@ -43,13 +43,13 @@ const PaymentComponent = () => {
     // const [endDate, setEndDate] = useState(null);
     const [page] = useState(0);
     const [limit] = useState(5000);
-    const [sortBy] = useState(null);
-    const [sortDirection] = useState(0);
+    const [sortBy, setSortBy] = useState(null);
+    const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
-    const [selectedHeader, setSelectedHeader] = useState(-1);
-    const [exportModal, setExportModal] = useState(false);
+    const [selectedHeader, setSelectedHeader] = useState(0);
+    const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
     /**
@@ -76,6 +76,13 @@ const PaymentComponent = () => {
         dispatch(fetchDataPayment(request));
     }, []);
 
+    // useEffect(() => {
+    //     if (isFetching) {
+    //         const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
+    //         dispatch(fetchDataPayment(request));
+    //     }
+    // }, [isFetching]);
+
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
@@ -96,6 +103,27 @@ const PaymentComponent = () => {
         setFilterModal(!filterModal);
     };
 
+    /**
+     * Фильтрация по колонкам
+     * */
+    // @ts-ignore
+    const filterOnColumns = async (fieldName, i) => {
+        setSelectedHeader(i);
+        setSortBy(fieldName);
+        setSortDirection(+!sortDirection);
+        const filter: PaymentListReq = {
+            page,
+            limit,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findValue,
+            findBy,
+            uuid: user
+        };
+        dispatch(fetchDataPayment(filter));
+    };
+
     // /**
     //  * Активация/Деактивация фильтра колонки
     //  * */
@@ -103,7 +131,7 @@ const PaymentComponent = () => {
     //     event.currentTarget.classList.toggle('wrap__index--active');
     // };
 
-    if (!isFetching && headersPayment && tablePayment) {
+    if (headersPayment && tablePayment) {
         return (
             <main className="main-content">
                 <div className="payment">
@@ -155,7 +183,7 @@ const PaymentComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => setSelectedHeader(i)}
+                                                        onClick={() => filterOnColumns(header.fieldName, i)}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (

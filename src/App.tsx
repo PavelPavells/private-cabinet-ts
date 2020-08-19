@@ -80,30 +80,29 @@ if (localStorage.userUuid) {
     // }
 }
 
-class App extends React.PureComponent {
-    public render() {
-        return (
-            <Provider store={store}>
-                <Router>
-                    <div className="App">
-                        <Switch>
-                            <Route exact path="/" component={Login} />
-                            <Route exact path="/register" component={Register} />
-                            {/** "/register/:name/:email" */}
-                            <Route exact path="/reset" component={Reset} />
-                            <Route exact path="/new-password" component={NewPassword} />
-                            <PrivateRoute
-                                // @ts-ignore
-                                exact
-                                path="/dashboard"
-                                component={Layout}
-                            />
-                            <Route component={localStorage.userUuid ? Layout : NotFound} />
-                        </Switch>
-                    </div>
-                </Router>
-            </Provider>
-        );
-    }
-}
+const App = () => {
+    const inviteToken = 'bebb112afed248cd9a4c48fbc1d7b492';
+    return (
+        <Provider store={store}>
+            <Router>
+                <div className="App">
+                    <Switch>
+                        <Route exact path="/" component={Login} />
+                        <Route exact path={`/register/:invitetoken=${inviteToken}`} component={Register} />
+                        <Route exact path="/reset" component={Reset} />
+                        <Route exact path="/new-password" component={NewPassword} />
+                        <PrivateRoute
+                            // @ts-ignore
+                            exact
+                            path="/dashboard"
+                            component={Layout}
+                        />
+                        <Route component={localStorage.userUuid ? Layout : NotFound} />
+                    </Switch>
+                </div>
+            </Router>
+        </Provider>
+    );
+};
+
 export default App;

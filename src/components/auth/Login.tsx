@@ -72,8 +72,8 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
         }
     }
 
-    private onSubmit = (event: SyntheticEvent) => {
-        event.preventDefault();
+    private onSubmit = () => {
+        // event.preventDefault();
         const LoginRequest = {
             login: this.state.login,
             passHash: this.state.passHash
@@ -103,19 +103,6 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
             password.type = 'password';
         }
     };
-
-    /**
-     * ********** Отправка формы кнопкой Enter **********
-     */
-    // private onKeyPress = (event: SyntheticEvent) => {
-    //     // @ts-ignore
-    //     // if (event.key === 'Enter') {
-    //     //     event.preventDefault();
-    //     //     event.stopPropagation();
-    //     //     // @ts-ignore
-    //     //     // this.onSubmit();
-    //     // }
-    // };
 
     public render() {
         /**
@@ -175,20 +162,17 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                     <div className="auth__heading">
                         <h1>Вход</h1>
                     </div>
-                    <div className="auth__forms forms remove__scrollbar">
+                    <form className="auth__forms forms remove__scrollbar">
                         <div className="auth__group">
                             {error !== '' ? (
                                 <div className="auth__field">
                                     <input
                                         onChange={this.onChange}
-                                        // onKeyDown={this.onKeyPress}
                                         value={login}
                                         id="login"
                                         type="text"
                                         className="auth__input warning"
                                         autoCorrect="off"
-                                        // eslint-disable-next-line jsx-a11y/no-autofocus
-                                        autoFocus
                                         required
                                     />
                                     <label className="auth__label">Введите логин</label>
@@ -197,13 +181,11 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                 <div className="auth__field">
                                     <input
                                         onChange={this.onChange}
-                                        // onKeyDown={this.onKeyPress}
                                         value={login}
                                         id="login"
                                         type="text"
                                         className="auth__input"
                                         autoCorrect="off"
-                                        // eslint-disable-next-line jsx-a11y/no-autofocus
                                         autoFocus
                                         required
                                     />
@@ -217,14 +199,11 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            // onKeyDown={this.onKeyPress}
                                             value={passHash}
                                             id="passHash"
                                             type="password"
                                             className="auth__input warning"
                                             autoCorrect="off"
-                                            // eslint-disable-next-line jsx-a11y/no-autofocus
-                                            autoFocus
                                             required
                                         />
                                         <label className="auth__label">Введите пароль</label>
@@ -234,14 +213,11 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            // onKeyDown={this.onKeyPress}
                                             value={passHash}
                                             id="passHash"
                                             type="password"
                                             className="auth__input"
                                             autoCorrect="off"
-                                            // eslint-disable-next-line jsx-a11y/no-autofocus
-                                            autoFocus
                                             required
                                         />
                                         <label className="auth__label">Введите пароль</label>
@@ -273,7 +249,7 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                             </div>
                         )}
                         <div className="auth__error">{error}</div>
-                    </div>
+                    </form>
                     {/*
                         <div className="auth__registration registration">
                             <div className="registration__no-login">Нет логина?</div>

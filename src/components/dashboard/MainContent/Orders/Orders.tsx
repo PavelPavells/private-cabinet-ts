@@ -36,13 +36,13 @@ import './Orders.scss';
 const OrdersComponent = () => {
     const [page] = useState(0);
     const [limit] = useState(5000);
-    const [sortBy] = useState(null);
-    const [sortDirection] = useState(0);
+    const [sortBy, setSortBy] = useState(null);
+    const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
-    const [selectedHeader, setSelectedHeader] = useState(-1);
-    const [exportModal, setExportModal] = useState(false);
+    const [selectedHeader, setSelectedHeader] = useState(0);
+    const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
     /**
@@ -69,6 +69,13 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(request));
     }, []);
 
+    // useEffect(() => {
+    //     if (isFetching) {
+    //         const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
+    //         dispatch(fetchDataOrders(request));
+    //     }
+    // }, [isFetching]);
+
     /**
      * запрос данных с сервера
      * */
@@ -86,6 +93,27 @@ const OrdersComponent = () => {
         setFilterModal(!filterModal);
     };
 
+    /**
+     * Фильтрация по колонкам
+     * */
+    // @ts-ignore
+    const filterOnColumns = async (fieldName, i) => {
+        setSelectedHeader(i);
+        setSortBy(fieldName);
+        setSortDirection(+!sortDirection);
+        const filter: OrdersListReq = {
+            page,
+            limit,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findValue,
+            findBy,
+            uuid: user
+        };
+        dispatch(fetchDataOrders(filter));
+    };
+
     // /**
     //  * Активация/Деактивация филтра колонки
     //  * */
@@ -93,7 +121,7 @@ const OrdersComponent = () => {
     //     event.currentTarget.classList.toggle('wrap__index--active');
     // };
 
-    if (!isFetching && ordersHeaders && ordersTable) {
+    if (ordersHeaders && ordersTable) {
         return (
             <main className="main-content">
                 <div className="orders">
@@ -145,7 +173,7 @@ const OrdersComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => setSelectedHeader(i)}
+                                                        onClick={() => filterOnColumns(header.fieldName, i)}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (

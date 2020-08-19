@@ -16,7 +16,9 @@ import {
     ShipmentListReq,
     ShipmentList,
     ShipmentHeader,
-    ShipmentHeaders
+    ShipmentHeaders,
+    SHIPMENT_SET_INPUT,
+    ShipmentInputs
 } from '../constants/shipmentTypes';
 
 /**
@@ -56,21 +58,35 @@ export const fetchingDataFailure = (error: ResponseStatus): ShipmentActions => (
 });
 
 /**
+ * ********** Экшен для обработки инпутов **********
+ */
+export const shipmentSetInputs = (payload: { key: string; value: string }): ShipmentActions => ({
+    type: SHIPMENT_SET_INPUT,
+    payload
+});
+
+/**
  * ********** Экшен для запроса данных из компонентов **********
  */
 export const fetchDataShipment = (data: ShipmentListReq) => async (dispatch: Dispatch<ShipmentActions>) => {
     dispatch(fetchingDataRequest());
     try {
         await axios
-            .post(`${site}sortBetweenPartnerShipments`, data)
+            .post(`${site}shipment`, data)
             .then((response: AxiosResponse<ShipmentListRes>) => {
-                const filterData = response.data.payload.recordDisplayRules.filter((element: ShipmentHeader) => {
+                const filterData = response.data.payload.displayRules.filter((element: ShipmentHeader) => {
                     if (element.visible) {
                         return element;
                     }
                 });
+                const tempInputs: ShipmentInputs = {};
+                response.data.payload.displayRules.forEach((element) => {
+                    tempInputs[element.fieldName] = '';
+                });
+                // @ts-ignore
+                dispatch(shipmentSetInputs(tempInputs));
                 dispatch(fetchingDataSuccessHeaders(filterData));
-                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet));
+                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
             })
             .catch((error) => {
                 return error;

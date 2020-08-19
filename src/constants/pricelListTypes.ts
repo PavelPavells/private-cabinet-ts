@@ -97,6 +97,11 @@ export interface PriceListRes {
     response: ResponseStatus;
 }
 
+// export interface filterByColumns {
+//     findBy: string | null;
+//     uuid: string;
+// }
+
 /**
  * *********** Интерфейсы стейта Компонента PriceList **********
  */

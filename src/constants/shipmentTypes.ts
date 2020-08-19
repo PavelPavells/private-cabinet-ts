@@ -6,6 +6,8 @@ export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 export const DATA_LOADING_SUCCESS_SHIPMENT_HEADERS = 'DATA_LOADING_SUCCESS_SHIPMENT_HEADERS';
 export const DATA_LOADING_SUCCESS_SHIPMENT_TABLE = 'DATA_LOADING_SUCCESS_SHIPMENT_TABLE';
+export const SHIPMENT_SET_INPUTS = 'SHIPMENT_SET_INPUTS';
+export const SHIPMENT_SET_INPUT = 'SHIPMENT_SET_INPUT';
 
 /**
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
@@ -13,12 +15,12 @@ export const DATA_LOADING_SUCCESS_SHIPMENT_TABLE = 'DATA_LOADING_SUCCESS_SHIPMEN
 export interface ResponseStatus {
     action: string;
     result: 0 | 1;
-    result_message: string;
+    resultMessage: string;
 }
 
 export interface ShipmentHeader {
-    display_name: string;
-    field_name: string;
+    displayName: string;
+    fieldName: string;
     size: number;
     visible: 0 | 1;
 }
@@ -26,51 +28,59 @@ export interface ShipmentHeader {
 export type ShipmentHeaders = Array<ShipmentHeader>;
 
 export interface ShipmentItem {
-    cash_date: string;
-    cash_flow_uuid: string;
-    cash_sum: number;
-    cash_sum_acum: number;
-    cdx_transaction_id: number;
-    currency_str: string;
-    partner_name: string;
-    partner_uuid: string;
-    currency_desc: string;
-    currency_id: number;
+    cashDate: string;
+    cashFlowUuid: string;
+    cashSum: number;
+    shipmentUuid: string;
+    cashSumAcum: number;
+    cdxTransactionId: number;
+    currencyStr: string;
+    partnerName: string;
+    partnerUuid: string;
+    currencyDesc: string;
+    currencyId: number;
     deleted: 0 | 1;
-    deleted_str: string;
-    discount_cash: number;
-    discount_price: number;
-    discount_sum: number;
-    discount_type_name: string;
-    discount_valid_before: string | null;
-    discount_valid_until: string | null;
-    item_article: string | null;
-    item_group: string;
-    item_price_uuid: string;
-    item_short_name: string;
-    item_uuid: string;
-    item_work_name: string;
-    itype_name: string;
-    parent_itype_name: string;
+    deletedStr: string;
+    discountCash: number;
+    discountPrice: number;
+    discountSum: number;
+    discountTypeName: string;
+    discountValidBefore: string | null;
+    discountValidUntil: string | null;
+    itemArticle: string | null;
+    itemGroup: string;
+    itemPriceUuid: string;
+    itemShortName: string;
+    itemUuid: string;
+    itemWorkName: string;
+    itypeName: string;
+    parentItypeName: string;
     price: number;
-    price_type: string;
-    valid_until: string | null;
+    priceType: string;
+    validUntil: string | null;
 }
 
 export type ShipmentList = Array<ShipmentItem>;
 
 export interface ShipmentListReq {
-    offset: number;
-    size: number;
-    login: string;
+    page: number;
+    limit: number;
+    sortBy: null | string;
+    sortDirection: number;
+    groupBy: null | string;
+    findBy: null | string;
+    findValue: null | string;
+    uuid: string;
 }
 
 export interface ShipmentListRes {
     payload: {
         countUUID: number;
         page: number;
-        recordDisplayRules: ShipmentHeaders;
-        recordSet: ShipmentList;
+        displayRules: ShipmentHeaders;
+        recordSet: {
+            content: ShipmentList;
+        };
     };
     response: ResponseStatus;
 }
@@ -83,6 +93,7 @@ export interface ShipmentState {
     errorMessage: string;
     headersShipment: ShipmentHeaders | null;
     tableShipment: ShipmentList | null;
+    inputs: ShipmentInputs;
 }
 
 interface ShipmentRequest {
@@ -104,4 +115,24 @@ interface ShipmentFailure {
     payload: any;
 }
 
-export type ShipmentActions = ShipmentRequest | ShipmentSuccessHeaders | ShipmentSuccessTable | ShipmentFailure;
+export interface ShipmentInputs {
+    [key: string]: string;
+}
+
+interface ShipmentSetInputs {
+    type: typeof SHIPMENT_SET_INPUTS;
+    payload: ShipmentInputs;
+}
+
+interface ShipmentSetInput {
+    type: typeof SHIPMENT_SET_INPUT;
+    payload: { key: string; value: string };
+}
+
+export type ShipmentActions =
+    | ShipmentSetInput
+    | ShipmentSetInputs
+    | ShipmentRequest
+    | ShipmentSuccessHeaders
+    | ShipmentSuccessTable
+    | ShipmentFailure;

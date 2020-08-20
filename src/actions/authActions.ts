@@ -10,15 +10,7 @@ import bcrypt from 'bcryptjs';
 /**
  * ********** Импорт глобальных переменных **********
  */
-import {
-    AuthActions,
-    userDataRegister,
-    GET_ERRORS,
-    USER_ERROR_LOADING,
-    SET_CURRENT_USER,
-    USER_LOADING,
-    LoginReq
-} from '../constants/authTypes';
+import { AuthActions, userDataRegister, USER_ERROR_LOADING, SET_CURRENT_USER, USER_LOADING, LoginReq } from '../constants/authTypes';
 
 /**
  * ********** ПО для установки токена в заголовки при запросах **********
@@ -99,58 +91,52 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
  * ********** Экшен для регистрации нового пользователя **********
  */
 export const resetPassword = (email: string, history?: any) => (dispatch: Dispatch<AuthActions>) => {
-    axios
-        .post(`${site}/reset`, email)
-        .then(() => history.push('/'))
-        .catch((err) =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+    axios.post(`${site}/reset`, email).then(() => history.push('/'));
+    // .catch((err) =>
+    //     // dispatch({
+    //     //     type: GET_ERRORS,
+    //     //     payload: err.response.data
+    //     // })
+    // );
 };
 
 /**
  * ********** Экшен для регистрации нового пользователя **********
  */
 export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
-    axios
-        .post(`${site}/new-password`, password)
-        .then((res) => {
-            // Сохранить пришедший токен в localStorage
+    axios.post(`${site}/new-password`, password).then((res) => {
+        // Сохранить пришедший токен в localStorage
 
-            // Установить токен в localStorage
-            const { token } = res.data;
-            localStorage.setItem('jwtNewPassword', JSON.stringify(token));
-            // Установить токен в заголовок авторизации
-            setAuthToken(token);
-            // Декодировать токен, чтобы получать пользователя
-            // const decoded = jwt_decode(token);
-            // Установить текущего пользователя
-            // @ts-ignore
-            // dispatch(setCurrentUser(decoded));
-        })
-        .catch((err) =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+        // Установить токен в localStorage
+        const { token } = res.data;
+        localStorage.setItem('jwtNewPassword', JSON.stringify(token));
+        // Установить токен в заголовок авторизации
+        setAuthToken(token);
+        // Декодировать токен, чтобы получать пользователя
+        // const decoded = jwt_decode(token);
+        // Установить текущего пользователя
+        // @ts-ignore
+        // dispatch(setCurrentUser(decoded));
+    });
+    // .catch((err) =>
+    //     dispatch({
+    //         type: GET_ERRORS,
+    //         payload: err.response.data
+    //     })
+    // );
 };
 
 /**
  * ********** Экшен для запроса на сброс пароля **********
  */
 export const registerUser = (userData: userDataRegister[], history: any) => (dispatch: Dispatch<AuthActions>) => {
-    axios
-        .post(`${site}/register`, userData)
-        .then(() => history.push('/'))
-        .catch((err) =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+    axios.post(`${site}/register`, userData).then(() => history.push('/'));
+    // .catch((err) =>
+    //     dispatch({
+    //         type: GET_ERRORS,
+    //         payload: err.response.data
+    //     })
+    // );
 };
 
 /**

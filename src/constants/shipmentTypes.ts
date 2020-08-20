@@ -32,12 +32,16 @@ export interface ShipmentItem {
     cashFlowUuid: string;
     cashSum: number;
     shipmentUuid: string;
+    shipmentId: string;
+    shipmentSum: number;
     cashSumAcum: number;
     cdxTransactionId: number;
     currencyStr: string;
     partnerName: string;
     partnerUuid: string;
     currencyDesc: string;
+    contractId: string;
+    currencyName: string;
     currencyId: number;
     deleted: 0 | 1;
     deletedStr: string;
@@ -66,7 +70,7 @@ export interface ShipmentListReq {
     page: number;
     limit: number;
     sortBy: null | string;
-    sortDirection: number;
+    sortDirection: number | undefined;
     groupBy: null | string;
     findBy: null | string;
     findValue: null | string;

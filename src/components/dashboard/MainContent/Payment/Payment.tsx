@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import 'react-dates/initialize';
 // @ts-ignore
@@ -38,12 +38,23 @@ import filterColumn from '../../../../images/filter.svg';
  * */
 import './Payment.scss';
 
+/**
+ * Дополнительный хук для получения предыдущего значения
+ * */
+const usePreviousValue = (data: any) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = data;
+    }, [data]);
+    return ref.current;
+};
+
 const PaymentComponent = () => {
     // const [startDate, setStartDate] = useState(null);
     // const [endDate, setEndDate] = useState(null);
     const [page] = useState(0);
     const [limit] = useState(5000);
-    const [sortBy, setSortBy] = useState(null);
+    const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
@@ -55,7 +66,7 @@ const PaymentComponent = () => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { headersPayment, tablePayment, isFetching } = useSelector((state: PersonalCabinet) => state.payment, shallowEqual);
+    const { headersPayment, tablePayment } = useSelector((state: PersonalCabinet) => state.payment, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
@@ -63,25 +74,17 @@ const PaymentComponent = () => {
     const dispatch = useDispatch();
 
     /**
-     * Отправка UUID при запросе данных
+     * Дополнительный хук для получения предыдущего значения
      * */
-    // const userUUid = localStorage.getItem('userUuid');
+    const prevSortDirection = usePreviousValue(+!sortDirection);
 
     /**
-     * запрос данных с сервера
+     * Запрос данных с сервера
      * */
     useEffect(() => {
-        // @ts-ignore
         const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataPayment(request));
     }, []);
-
-    // useEffect(() => {
-    //     if (isFetching) {
-    //         const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
-    //         dispatch(fetchDataPayment(request));
-    //     }
-    // }, [isFetching]);
 
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
@@ -107,15 +110,13 @@ const PaymentComponent = () => {
      * Фильтрация по колонкам
      * */
     // @ts-ignore
-    const filterOnColumns = async (fieldName, i) => {
-        setSelectedHeader(i);
-        setSortBy(fieldName);
+    const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
         const filter: PaymentListReq = {
             page,
             limit,
-            sortBy,
-            sortDirection,
+            sortBy: fieldName,
+            sortDirection: prevSortDirection,
             groupBy,
             findValue,
             findBy,
@@ -123,13 +124,6 @@ const PaymentComponent = () => {
         };
         dispatch(fetchDataPayment(filter));
     };
-
-    // /**
-    //  * Активация/Деактивация фильтра колонки
-    //  * */
-    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
-    //     event.currentTarget.classList.toggle('wrap__index--active');
-    // };
 
     if (headersPayment && tablePayment) {
         return (
@@ -183,13 +177,16 @@ const PaymentComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => filterOnColumns(header.fieldName, i)}
+                                                        onClick={() => {
+                                                            setSelectedHeader(i);
+                                                            filterOnColumns(header.fieldName);
+                                                        }}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (
-                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                            <div className="index__icon--sorting" />
                                                         ) : (
-                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                            <div className="index__icon--filtering" />
                                                         )}
                                                     </div>
                                                     {filterModal ? (
@@ -217,10 +214,12 @@ const PaymentComponent = () => {
                                                                     // onClick={() => handleChangePlusItems(index.cashFlowUuid)}
                                                                 />
                                                             )} */}
-                                                            {
-                                                                // @ts-ignore
-                                                                index[header.fieldName]
-                                                            }
+                                                            <span>
+                                                                {
+                                                                    // @ts-ignore
+                                                                    index[header.fieldName]
+                                                                }
+                                                            </span>
                                                         </div>
                                                     );
                                                 })}

@@ -75,7 +75,7 @@
                 flex-direction: column;
                 position: sticky;
                 top: 0;
-                max-width: 425px;
+                // max-width: 425px;
                 min-width: 150px;
                 background-color: $white;
 
@@ -97,7 +97,25 @@
 
                     &--active {
                         color: $white;
-                        background: $brandPantonBlue
+                        background: $brandPantonBlue;
+
+                        /* стили для изменения иконки при фильтрации */
+                        .index__icon--sorting {
+                            display: block;
+                            margin-left: 10px;
+                            width: 24px;
+                            height: 14px;
+                            background: url('../../../../images/sorting_column_white.svg')!important;
+                        }
+
+                        /* стили для изменения иконки при фильтрации */
+                        .index__icon--filtering {
+                            display: block;
+                            width: 17px;
+                            height: 14px;
+                            margin-left: 10px;
+                            background: url('../../../../images/filter_white.svg')!important;
+                        }
                     }
 
                     .index__text {
@@ -109,15 +127,17 @@
                     .index__icon--sorting {
                         display: block;
                         margin-left: 10px;
-                        width: 20px;
-                        height: 20px;
+                        width: 24px;
+                        height: 14px;
+                        background: url('../../../../images/sorting_column.svg') no-repeat center;
                     }
 
                     .index__icon--filtering {
                         display: block;
-                        width: 15px;
-                        height: 15px;
+                        width: 17px;
+                        height: 14px;
                         margin-left: 10px;
+                        background: url('../../../../images/filter.svg') no-repeat center;
                     }
 
                     &:hover {
@@ -155,7 +175,7 @@
                         align-items: center;
                         height: 30px;
                         padding: 5px;
-                        max-width: 420px;
+                        // max-width: 420px;
                         min-width: 150px;
                         border-left: 1px solid $brandBorderColor;
                         border-bottom: 1px solid $brandBorderColor;
@@ -163,6 +183,12 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         cursor: default;
+
+                        span {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 50ch;
+                        }
     
                         &:nth-child(odd) {
                             background-color: #f1f1f1;

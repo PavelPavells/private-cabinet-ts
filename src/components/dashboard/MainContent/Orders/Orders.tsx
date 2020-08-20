@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
@@ -25,18 +25,27 @@ import Loader from '../../../../__utils__/Spinner';
  * */
 import Magnifier from '../../../../images/magnifier.svg';
 import Arrow from '../../../../images/arrow_input.svg';
-import sortingColumn from '../../../../images/sorting_column.svg';
-import filterColumn from '../../../../images/filter.svg';
 
 /**
  * ********** Импорт файлов стилей **********
  * */
 import './Orders.scss';
 
+/**
+ * Дополнительный хук для получения предыдущего значения
+ * */
+const usePreviousValue = (data: any) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = data;
+    }, [data]);
+    return ref.current;
+};
+
 const OrdersComponent = () => {
     const [page] = useState(0);
     const [limit] = useState(5000);
-    const [sortBy, setSortBy] = useState(null);
+    const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
@@ -48,37 +57,26 @@ const OrdersComponent = () => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { ordersHeaders, ordersTable, isFetching } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
+    const { ordersHeaders, ordersTable } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
      * */
     const dispatch = useDispatch();
-    /**
-     * запрос данных с сервера
-     * */
 
     /**
-     * Отправка UUID при запросе данных
+     * Дополнительный хук для получения предыдущего значения
      * */
-    // const userUUid = localStorage.getItem('userUuid');
+    const prevSortDirection = usePreviousValue(+!sortDirection);
 
+    /**
+     * Запрос данных с сервера
+     * */
     useEffect(() => {
         // @ts-ignore
         const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataOrders(request));
     }, []);
-
-    // useEffect(() => {
-    //     if (isFetching) {
-    //         const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
-    //         dispatch(fetchDataOrders(request));
-    //     }
-    // }, [isFetching]);
-
-    /**
-     * запрос данных с сервера
-     * */
 
     // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
     //     event.currentTarget.classList.toggle('buttons--active');
@@ -97,15 +95,13 @@ const OrdersComponent = () => {
      * Фильтрация по колонкам
      * */
     // @ts-ignore
-    const filterOnColumns = async (fieldName, i) => {
-        setSelectedHeader(i);
-        setSortBy(fieldName);
+    const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
         const filter: OrdersListReq = {
             page,
             limit,
-            sortBy,
-            sortDirection,
+            sortBy: fieldName,
+            sortDirection: prevSortDirection,
             groupBy,
             findValue,
             findBy,
@@ -113,13 +109,6 @@ const OrdersComponent = () => {
         };
         dispatch(fetchDataOrders(filter));
     };
-
-    // /**
-    //  * Активация/Деактивация филтра колонки
-    //  * */
-    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
-    //     event.currentTarget.classList.toggle('wrap__index--active');
-    // };
 
     if (ordersHeaders && ordersTable) {
         return (
@@ -173,13 +162,16 @@ const OrdersComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => filterOnColumns(header.fieldName, i)}
+                                                        onClick={() => {
+                                                            setSelectedHeader(i);
+                                                            filterOnColumns(header.fieldName);
+                                                        }}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (
-                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                            <div className="index__icon--sorting" />
                                                         ) : (
-                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                            <div className="index__icon--filtering" />
                                                         )}
                                                     </div>
                                                     {filterModal ? (
@@ -200,7 +192,7 @@ const OrdersComponent = () => {
                                                                     // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                                 />
                                                             )} */}
-                                                            {index[header.fieldName]}
+                                                            <span>{index[header.fieldName]}</span>
                                                         </div>
                                                     );
                                                 })}

@@ -55,7 +55,7 @@ export interface PriceListReq {
     page: number;
     limit: number;
     sortBy: null | string;
-    sortDirection: number;
+    sortDirection: number | undefined;
     groupBy: null | string;
     findBy: null | string;
     findValue: null | string;

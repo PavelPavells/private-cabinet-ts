@@ -13,9 +13,11 @@ import {
     MainListReq,
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS,
+    DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS,
     DATA_LOADING_FAILURE,
     ResponseStatus,
-    MainListRes
+    MainListRes,
+    TableList
 } from '../constants/mainTypes';
 
 /**
@@ -39,6 +41,14 @@ export const fetchingDataSuccess = (main: MainList): MainActions => ({
 });
 
 /**
+ * ********** Экшен для добавления данных в стор после запроса **********
+ */
+export const fetchDataDiscountSettings = (discountSettings: TableList): MainActions => ({
+    type: DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS,
+    payload: discountSettings
+});
+
+/**
  * ********** Экшен для обработки ошибки при запросе на сервер **********
  */
 export const fetchingDataFailure = (error: ResponseStatus): MainActions => ({
@@ -54,6 +64,7 @@ export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<Ma
     try {
         await axios.post(`${site}main`, data).then((response: AxiosResponse<MainListRes>) => {
             dispatch(fetchingDataSuccess(response.data.payload.recordSet));
+            dispatch(fetchDataDiscountSettings(response.data.payload.discountSettings));
         });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

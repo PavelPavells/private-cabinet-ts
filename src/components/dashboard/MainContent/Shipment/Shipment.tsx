@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import 'react-dates/initialize';
 // @ts-ignore
@@ -30,18 +30,27 @@ import Loader from '../../../../__utils__/Spinner';
  * */
 import Magnifier from '../../../../images/magnifier.svg';
 import Arrow from '../../../../images/arrow_input.svg';
-import sortingColumn from '../../../../images/sorting_column.svg';
-import filterColumn from '../../../../images/filter.svg';
 
 /**
  * ********** Импорт файлов стилей **********
  * */
 import './Shipment.scss';
 
+/**
+ * Дополнительный хук для получения предыдущего значения
+ * */
+const usePreviousValue = (data: any) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = data;
+    }, [data]);
+    return ref.current;
+};
+
 const ShipmentComponent = () => {
     const [page] = useState(0);
-    const [limit] = useState(50);
-    const [sortBy, setSortBy] = useState(null);
+    const [limit] = useState(5000);
+    const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
@@ -53,7 +62,7 @@ const ShipmentComponent = () => {
     /**
      * ********** Импорт состояния shipment из Redux **********
      * */
-    const { headersShipment, tableShipment, isFetching, inputs } = useSelector((state: PersonalCabinet) => state.shipment, shallowEqual);
+    const { headersShipment, tableShipment, inputs } = useSelector((state: PersonalCabinet) => state.shipment, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
      * Отправка действий для изменения на сервере
@@ -61,20 +70,17 @@ const ShipmentComponent = () => {
     const dispatch = useDispatch();
 
     /**
-     * запрос данных с сервера
+     * Дополнительный хук для получения предыдущего значения
+     * */
+    const prevSortDirection = usePreviousValue(+!sortDirection);
+
+    /**
+     * Запрос данных с сервера
      * */
     useEffect(() => {
-        // @ts-ignore
         const request: ShipmentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataShipment(request));
     }, []);
-
-    // useEffect(() => {
-    //     if (isFetching) {
-    //         const request: ShipmentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
-    //         dispatch(fetchDataShipment(request));
-    //     }
-    // }, [isFetching]);
 
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
@@ -101,15 +107,13 @@ const ShipmentComponent = () => {
      * Фильтрация по колонкам
      * */
     // @ts-ignore
-    const filterOnColumns = async (fieldName, i) => {
-        setSelectedHeader(i);
-        setSortBy(fieldName);
+    const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
         const filter: ShipmentListReq = {
             page,
             limit,
-            sortBy,
-            sortDirection,
+            sortBy: fieldName,
+            sortDirection: prevSortDirection,
             groupBy,
             findValue,
             findBy,
@@ -118,19 +122,6 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(filter));
     };
 
-    /**
-     * Открыть/Закрыть дополнительные поля таблицы при клике на "+"
-     * */
-    // const handleChangePlusItems = (key: any) => {
-    //     console.log(key.pshipment_uuid);
-    // };
-
-    // /**
-    //  * Активайия/Деактивация филтра колонки
-    //  * */
-    // const toggleColumnFilter = (event: React.SyntheticEvent) => {
-    //     event.currentTarget.classList.toggle('wrap__index--active');
-    // };
     if (inputs && headersShipment && tableShipment) {
         return (
             <main className="main-content">
@@ -183,13 +174,16 @@ const ShipmentComponent = () => {
                                                 <div className="frame__caption">
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => filterOnColumns(header.fieldName, i)}
+                                                        onClick={() => {
+                                                            setSelectedHeader(i);
+                                                            filterOnColumns(header.fieldName);
+                                                        }}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (
-                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                            <div className="index__icon--sorting" />
                                                         ) : (
-                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                            <div className="index__icon--filtering" />
                                                         )}
                                                     </div>
                                                     {filterModal ? (
@@ -221,11 +215,13 @@ const ShipmentComponent = () => {
                                                             className="item__icon"
                                                             // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                         />
-                                                    )} */}
-                                                            {
-                                                                // @ts-ignore
-                                                                index[header.fieldName]
-                                                            }
+                                                        )} */}
+                                                            <span>
+                                                                {
+                                                                    // @ts-ignore
+                                                                    index[header.fieldName]
+                                                                }
+                                                            </span>
                                                         </div>
                                                     );
                                                 })}

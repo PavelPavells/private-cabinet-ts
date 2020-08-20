@@ -25,19 +25,28 @@ import Loader from '../../../../__utils__/Spinner';
  * */
 import Magnifier from '../../../../images/magnifier.svg';
 import Arrow from '../../../../images/arrow_input.svg';
-import sortingColumn from '../../../../images/sorting_column.svg';
-import filterColumn from '../../../../images/filter.svg';
 
 /**
  * ********** Импорт файлов стилей **********
  * */
 import './PriceList.scss';
 
+/**
+ * Дополнительный хук для получения предыдущего значения
+ * */
+const usePreviousValue = (data: any) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = data;
+    }, [data]);
+    return ref.current;
+};
+
 const PriceListComponent = () => {
     const [page] = useState(0);
-    const [limit] = useState(50);
-    const [sortBy, setSortBy] = useState(null);
-    const [sortDirection, setSortDirection] = useState(0);
+    const [limit] = useState(10000);
+    const [sortBy] = useState(null);
+    const [sortDirection, setSortDirection] = useState(1);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);
@@ -48,7 +57,7 @@ const PriceListComponent = () => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { headersPriceList, tablePriceList, inputs, isFetching } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
+    const { headersPriceList, tablePriceList, inputs } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
     /**
@@ -57,7 +66,12 @@ const PriceListComponent = () => {
     const dispatch = useDispatch();
 
     /**
-     * запрос данных с сервера
+     * Дополнительный хук для получения предыдущего значения
+     * */
+    const prevSortDirection = usePreviousValue(+!sortDirection);
+
+    /**
+     * Запрос данных с сервера
      * */
     useEffect(() => {
         // @ts-ignore
@@ -65,12 +79,6 @@ const PriceListComponent = () => {
         dispatch(fetchDataPriceList(request));
     }, []);
 
-    // useEffect(() => {
-    //     if (isFetching) {
-    //         const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
-    //         dispatch(fetchDataPriceList(request));
-    //     }
-    // }, [isFetching]);
     /**
      * Открыть/Закрыть модальное окно скачивания таблицы
      * */
@@ -90,41 +98,19 @@ const PriceListComponent = () => {
     /**
      * Фильтрация по колонкам
      * */
-    // @ts-ignore
-    const filterOnColumns = async (fieldName) => {
-        setSortBy(fieldName);
+    const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
         const filter: PriceListReq = {
             page,
             limit,
-            sortBy,
-            sortDirection,
+            sortBy: fieldName,
+            sortDirection: prevSortDirection,
             groupBy,
             findValue,
             findBy,
             uuid: user
         };
         dispatch(fetchDataPriceList(filter));
-    };
-
-    /**
-     * Клик вне елемента
-     * */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const useOutsideHandleClick = (ref: any, callback: any) => {
-        const handleClick = (event: React.SyntheticEvent) => {
-            if (ref.current && !ref.current.contains(event.target)) {
-                callback();
-            }
-        };
-        useEffect(() => {
-            // @ts-ignore
-            document.addEventListener('click', handleClick);
-            return () => {
-                // @ts-ignore
-                document.removeEventListener('click', handleClick);
-            };
-        });
     };
 
     if (inputs && headersPriceList && tablePriceList) {
@@ -180,14 +166,15 @@ const PriceListComponent = () => {
                                                     <div
                                                         className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
                                                         onClick={() => {
+                                                            setSelectedHeader(i);
                                                             filterOnColumns(header.fieldName);
                                                         }}
                                                     >
                                                         <div className="index__text">{header.displayName}</div>
                                                         {i === 0 ? (
-                                                            <img src={sortingColumn} alt="" className="index__icon--sorting" />
+                                                            <div className="index__icon--sorting" />
                                                         ) : (
-                                                            <img src={filterColumn} alt="" className="index__icon--filtering" />
+                                                            <div className="index__icon--filtering" />
                                                         )}
                                                     </div>
                                                     {filterModal ? (
@@ -220,10 +207,12 @@ const PriceListComponent = () => {
                                                                     // onClick={() => handleChangePlusItems(index.item_price_uuid)}
                                                                 />
                                                             )} */}
-                                                            {
-                                                                // @ts-ignore
-                                                                index[header.fieldName]
-                                                            }
+                                                            <span>
+                                                                {
+                                                                    // @ts-ignore
+                                                                    index[header.fieldName]
+                                                                }
+                                                            </span>
                                                         </div>
                                                     );
                                                 })}

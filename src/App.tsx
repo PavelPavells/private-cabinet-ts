@@ -81,14 +81,15 @@ if (localStorage.userUuid) {
 }
 
 const App = () => {
-    const inviteToken = 'bebb112afed248cd9a4c48fbc1d7b492';
+    const param = new URLSearchParams(window.location.search);
+    const invitetoken = param.get('invitetoken');
     return (
         <Provider store={store}>
             <Router>
                 <div className="App">
                     <Switch>
                         <Route exact path="/" component={Login} />
-                        <Route exact path={`/register/:invitetoken=${inviteToken}`} component={Register} />
+                        <Route exact path={`/register?invitetoken=${invitetoken}`} component={Register} />
                         <Route exact path="/reset" component={Reset} />
                         <Route exact path="/new-password" component={NewPassword} />
                         <PrivateRoute

@@ -20,15 +20,6 @@ import { registerUser } from '../../actions/authActions';
 import './Auth.scss';
 
 /**
- * ********** Интерфейс пропсов компонента Login **********
- */
-interface RegisterProps {
-    readonly registerUser: () => void;
-    readonly data: any;
-    readonly errors: any;
-}
-
-/**
  * ********** Интерфейс локального стейта компонента Login **********
  */
 interface RegisterState {
@@ -45,9 +36,10 @@ interface RegisterState {
     readonly legalAdress: string;
     readonly webSite: string;
     readonly direction: string;
+    readonly confidiency: boolean;
 }
 
-class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>> {
+class Register extends React.PureComponent<Partial<RegisterState>> {
     state: RegisterState = {
         email: '',
         pass: '',
@@ -61,6 +53,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
         inn: '',
         legalAdress: '',
         webSite: '',
+        confidiency: false,
         direction: 'Направление деятельности'
     };
 
@@ -161,6 +154,11 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
         }
     };
 
+    handleClickCheckbox = () => {
+        // eslint-disable-next-line react/no-access-state-in-setstate
+        this.setState({ confidiency: !this.state.confidiency });
+    };
+
     render() {
         /**
          * Деструтктуризация данных из локального и глобального стейта
@@ -178,7 +176,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
             inn,
             legalAdress,
             webSite,
-            direction
+            direction,
+            confidiency
         } = this.state;
 
         // @ts-ignore
@@ -254,7 +253,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                                         className="auth__input"
                                         required
                                     />
-                                    <label className="auth__label">Введите логин</label>
+                                    <label className="auth__label">Придумайте логин</label>
                                 </div>
                             </label>
                         </div>
@@ -609,13 +608,24 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                         </div>
                         <div className="auth__password-ask ask__register">
                             <label>
-                                <input type="checkbox" />
+                                <input
+                                    type="checkbox"
+                                    onClick={this.handleClickCheckbox}
+                                    // @ts-ignore
+                                    value={this.state.confidiency}
+                                />
                             </label>
                             <span>
                                 Нажимая на кнопку &quot;Зарегистрироваться&quot;, я даю
                                 <br />
                                 {/* <a> */}
-                                согласие на обработку персональных данных
+                                <a
+                                    href="https://resources.carddex.ru/public/team_carddex/conf_policy_team_carddex.pdf"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    согласие на обработку персональных данных
+                                </a>
                                 {/* </a> */}
                             </span>
                         </div>
@@ -629,7 +639,8 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                         companyName &&
                         inn &&
                         legalAdress &&
-                        direction ? (
+                        direction &&
+                        confidiency ? (
                             <div>
                                 <Link to="/">
                                     <button onClick={this.onSubmit} type="submit" className="auth__button">
@@ -650,7 +661,7 @@ class Register extends React.PureComponent<RegisterProps, Partial<RegisterState>
                         <div className="registration__no-login">Уже зарегистрированы?</div>
                         <div className="registration__link">
                             <Link to="/">Авторизуйтесь</Link>
-                            &nbsp;&nbsp;или войдите с помощью соцсетей
+                            {/* &nbsp;&nbsp;или войдите с помощью соцсетей */}
                         </div>
                     </div>
                 </div>

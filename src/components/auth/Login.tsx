@@ -1,7 +1,7 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { SyntheticEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
@@ -23,15 +23,6 @@ import './Auth.scss';
 import '../../fonts/fonts.scss';
 
 /**
- * ********** Интерфейс пропсов компонента Login **********
- */
-interface LoginProps {
-    readonly loginUser: (data: any) => void;
-    readonly data: any;
-    readonly errors: any;
-}
-
-/**
  * ********** Интерфейс локального стейта компонента Login **********
  */
 interface LoginState {
@@ -40,7 +31,7 @@ interface LoginState {
     readonly errors: any;
 }
 
-class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
+class Login extends React.PureComponent<Partial<LoginState>> {
     state: LoginState = {
         login: '',
         passHash: '',
@@ -73,7 +64,6 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
     }
 
     private onSubmit = () => {
-        // event.preventDefault();
         const LoginRequest = {
             login: this.state.login,
             passHash: this.state.passHash
@@ -259,6 +249,16 @@ class Login extends React.PureComponent<LoginProps, Partial<LoginState>> {
                             </div>
                         </div>
                         */}
+
+                    <div className="auth__password-ask">
+                        <a
+                            href="https://resources.carddex.ru/public/team_carddex/conf_policy_team_carddex.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Политика конфиденциальности
+                        </a>
+                    </div>
                 </div>
                 <div className="auth__right right">
                     <div className="right__image image">

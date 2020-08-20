@@ -33,7 +33,7 @@ const MainComponent = () => {
     /**
      * ********** Импорт состояния pricelist из Redux **********
      * */
-    const { main, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
+    const { main, table, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
     /**
@@ -55,7 +55,12 @@ const MainComponent = () => {
         dispatch(fetchDataMain(request));
     }, []);
 
-    if (!isFetching && main) {
+    if (!isFetching && main && table) {
+        // eslint-disable-next-line no-lone-blocks
+        {
+            // eslint-disable-next-line no-unused-expressions
+            main ? typeof main.currentDiscount : null;
+        }
         return (
             <div className="main-content">
                 <div className="main">
@@ -110,7 +115,7 @@ const MainComponent = () => {
                                         <span>Зарегистрированный торговый партнер</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span>с 11 августа 2020</span>
+                                        <span>{main.registrationDate}</span>
                                     </div>
                                 </div>
                             </div>
@@ -132,9 +137,15 @@ const MainComponent = () => {
                                         <span>Персональный менеджер</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span className="subtitle__item">Иванов Иван</span>
-                                        <span className="subtitle__item">Тел.: 8(499) 64-333-69 доб. 111</span>
-                                        <span className="subtitle__item">E-mail: ivanov.ii@carddex.ru</span>
+                                        <span className="subtitle__item">{main.leadManagerName}</span>
+                                        <span className="subtitle__item">
+                                            Тел.:&nbsp; &nbsp;
+                                            {main.leadManagerPhone}
+                                        </span>
+                                        <span className="subtitle__item">
+                                            E-mail:&nbsp; &nbsp;
+                                            {main.leadManagerEmail}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +180,6 @@ const MainComponent = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="block-table">
                                 <div className="block-table__row header">
                                     <div className="block-table__element">
@@ -182,43 +192,30 @@ const MainComponent = () => {
                                         <span>Условия получения скидки</span>
                                     </div>
                                 </div>
-                                <div className="block-table__row">
-                                    <div className="block-table__element">
-                                        <span className="currency-unit-rub">от 100 000</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span>22%</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span>Выполнено</span>
-                                    </div>
-                                </div>
-                                <div className="block-table__row">
-                                    <div className="block-table__element">
-                                        <span className="currency-unit-rub">от 400 000</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span>28%</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span className="currency-unit-rub">Закупка от 649 001</span>
-                                    </div>
-                                </div>
-                                <div className="block-table__row">
-                                    <div className="block-table__element">
-                                        <span className="currency-unit-rub">от 1000 000</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span>36%</span>
-                                    </div>
-                                    <div className="block-table__element">
-                                        <span className="currency-unit-rub">Закупка от 2 649 001</span>
-                                    </div>
-                                </div>
+                                {table.map((index) => {
+                                    return (
+                                        <div key={index.rowNum} className="block-table__row">
+                                            <div className="block-table__element">
+                                                <span className="currency-unit-rub">{index.volume}</span>
+                                            </div>
+                                            <div className="block-table__element">
+                                                <span>{index.discountSum}</span>
+                                            </div>
+                                            <div className="block-table__element">
+                                                <span>{index.conditions === 0 ? 'Выполнено' : 'Не выполнено'}</span>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                             <div className="block-element discount">
                                 <div className="block-element__chart">
-                                    <CircularProgressbar minValue={15} maxValue={main.maxDiscount} value={22} text={`${22}%`} />
+                                    <CircularProgressbar
+                                        minValue={15}
+                                        maxValue={33}
+                                        value={Number(main.currentDiscount)}
+                                        text={`${main.currentDiscount}%`}
+                                    />
                                 </div>
                                 <div className="block-element__info">
                                     <div className="block-element__title">

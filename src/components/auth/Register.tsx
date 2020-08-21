@@ -1,7 +1,7 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { SyntheticEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 // @ts-ignore
 import CreatableSelect from 'react-select/creatable';
 import { Link, withRouter } from 'react-router-dom';
@@ -71,6 +71,10 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
     //    this.setState({ errors: nextProps.errors });
     //  }
     // }
+    componentDidMount() {
+        // @ts-ignore
+        this.props.registerUser();
+    }
 
     /**
      * ********** Запись данных в стейт из инпутов **********
@@ -119,8 +123,8 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
     /**
      * ********** Отпрака формы Регистрации **********
      */
-    onSubmit = (event: SyntheticEvent) => {
-        event.preventDefault();
+    onSubmit = () => {
+        // event.preventDefault();
         const password: string = md5(this.state.pass);
         const repeatPassword: string = md5(this.state.repeatpass);
         const newUser = {
@@ -145,14 +149,14 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
     /**
      * ********** Отправка формы кнопкой Enter **********
      */
-    private onKeyPress = (event: SyntheticEvent) => {
-        // @ts-ignore
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            event.stopPropagation();
-            this.onSubmit(event);
-        }
-    };
+    // private onKeyPress = (event: SyntheticEvent) => {
+    //     // @ts-ignore
+    //     if (event.key === 'Enter') {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //         this.onSubmit(event);
+    //     }
+    // };
 
     handleClickCheckbox = () => {
         // eslint-disable-next-line react/no-access-state-in-setstate
@@ -244,15 +248,7 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                         <div className="auth__group">
                             <label>
                                 <div className="auth__field">
-                                    <input
-                                        onChange={this.onChange}
-                                        onKeyDown={this.onKeyPress}
-                                        value={email}
-                                        id="email"
-                                        type="text"
-                                        className="auth__input"
-                                        required
-                                    />
+                                    <input onChange={this.onChange} value={email} id="email" type="text" className="auth__input" required />
                                     <label className="auth__label">Придумайте логин</label>
                                 </div>
                             </label>
@@ -263,7 +259,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={pass}
                                             id="pass"
                                             type="password"
@@ -278,7 +273,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={pass}
                                             id="pass"
                                             type="password"
@@ -298,7 +292,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={repeatpass}
                                             id="repeatpass"
                                             type="password"
@@ -313,7 +306,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={repeatpass}
                                             id="repeatpass"
                                             type="password"
@@ -333,7 +325,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={name}
                                             id="name"
                                             type="text"
@@ -347,7 +338,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={name}
                                             id="name"
                                             type="text"
@@ -366,7 +356,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={surname}
                                             id="surname"
                                             type="text"
@@ -380,7 +369,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={surname}
                                             id="surname"
                                             type="text"
@@ -398,7 +386,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                 <div className="auth__field field">
                                     <input
                                         onChange={this.onChange}
-                                        onKeyDown={this.onKeyPress}
                                         value={patronymic}
                                         id="patronymic"
                                         type="text"
@@ -416,7 +403,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={contactEmail}
                                             id="contactEmail"
                                             type="text"
@@ -430,7 +416,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={contactEmail}
                                             id="contactEmail"
                                             type="text"
@@ -449,7 +434,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={phone}
                                             id="phone"
                                             type="text"
@@ -463,7 +447,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={phone}
                                             id="phone"
                                             type="text"
@@ -482,7 +465,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={companyName}
                                             id="companyName"
                                             type="text"
@@ -496,7 +478,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={companyName}
                                             id="companyName"
                                             type="text"
@@ -515,7 +496,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={inn}
                                             id="inn"
                                             type="text"
@@ -529,7 +509,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={inn}
                                             id="inn"
                                             type="text"
@@ -548,7 +527,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={legalAdress}
                                             id="legalAdress"
                                             type="text"
@@ -562,7 +540,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                     <div className="auth__field field">
                                         <input
                                             onChange={this.onChange}
-                                            onKeyDown={this.onKeyPress}
                                             value={legalAdress}
                                             id="legalAdress"
                                             type="text"
@@ -580,7 +557,6 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                                 <div className="auth__field field">
                                     <input
                                         onChange={this.onChange}
-                                        onKeyDown={this.onKeyPress}
                                         value={webSite}
                                         id="webSite"
                                         type="text"
@@ -642,11 +618,11 @@ class Register extends React.PureComponent<Partial<RegisterState>> {
                         direction &&
                         confidiency ? (
                             <div>
-                                <Link to="/">
+                                <div>
                                     <button onClick={this.onSubmit} type="submit" className="auth__button">
                                         Зарегистрироваться
                                     </button>
-                                </Link>
+                                </div>
                             </div>
                         ) : (
                             <div>

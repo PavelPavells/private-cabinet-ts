@@ -110,6 +110,12 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(filter));
     };
 
+    // const handleChangePlusItems = (item: string) => {
+    //     console.log(item);
+    // };
+
+    console.log(ordersTable);
+
     if (ordersHeaders && ordersTable) {
         return (
             <main className="main-content">
@@ -189,7 +195,7 @@ const OrdersComponent = () => {
                                                             {/* {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
-                                                                    // onClick={() => handleChangePlusItems(index.item_price_uuid)}
+                                                                    onClick={() => handleChangePlusItems(index.clientOrderUuid)}
                                                                 />
                                                             )} */}
                                                             <span>{index[header.fieldName]}</span>

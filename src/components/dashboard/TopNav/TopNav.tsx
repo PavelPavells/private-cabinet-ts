@@ -2,56 +2,42 @@
  * ********** Импорт зависимостей **********
  */
 import React from 'react';
-import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
+import { shallowEqual, useSelector } from 'react-redux';
 import { PersonalCabinet } from '../../../store/store';
 
 import Profile from './Profile/Profile';
 
 /**
- * ********** Импорт экшенов **********
- */
-import { logoutUser } from '../../../actions/authActions';
+ * ********** Импорт LOADER из __UTILS__ **********
+ * */
+import Loader from '../../../__utils__/Spinner';
 
 /**
  * ********** Импорт стилей **********
  */
 import './TopNav.scss';
 
-/**
- * ********** Интерфейс пропсов компонента Login **********
- */
-interface TopNavProps {
-    node: any;
-    logoutUser: () => void;
-    sideNav: Element | null;
-}
-
-class TopNav extends React.PureComponent<TopNavProps> {
-    // public componentDidMount() {
-    //   document.addEventListener("mousedown", this.handleClick, false);
-    // };
-
-    // public componentWillUnmount() {
-    //   document.removeEventListener("mousedown", this.handleClick, false);
-    // }
-
-    // private handleContactClick = () => {
-    //  this.setState({ openContactUs: !this.state.openContactUs });
-    // };
-
-    // Show Side Nav
-    private toggleMenu = () => {
+const TopNav = () => {
+    /**
+     * ********** Импорт состояния из Redux **********
+     * */
+    const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
+    const partner = localStorage.getItem('partnerName');
+    // @ts-ignore
+    const partnerName = partner.replace(/['"«»]/g, '');
+    /**
+     * Клик по бургеру для Открытия/Закрытия бокового меню
+     * */
+    const toggleMenu = () => {
         const sideNav: Element | any = document.querySelector('.right');
         sideNav.classList.toggle('invisible');
     };
-
-    public render() {
+    if (isAuthenticated && user) {
         return (
             <nav className="nav">
                 {/* ref={node => (this.node = node)} */}
                 <div className="nav__left">
-                    <i onClick={this.toggleMenu} className="material-icons left__hamburger">
+                    <i onClick={toggleMenu} className="material-icons left__hamburger">
                         menu
                     </i>
                     <div className="left__logo" />
@@ -59,7 +45,7 @@ class TopNav extends React.PureComponent<TopNavProps> {
                 <div className="nav__right">
                     <div className="right__text">
                         Личный кабинет:
-                        <strong className="text__name">Стиперенко Ю. А. ИП</strong>
+                        <strong className="text__name">{partnerName}</strong>
                     </div>
                     <div className="right__info">
                         <div className="info__bell">
@@ -73,26 +59,7 @@ class TopNav extends React.PureComponent<TopNavProps> {
             </nav>
         );
     }
-}
+    return <Loader />;
+};
 
-const mapStateToProps = (state: PersonalCabinet) => ({
-    topnav: state.topnav,
-    auth: state.auth
-});
-
-export default connect<{}, {}, TopNavProps>(
-    // @ts-ignore
-    mapStateToProps,
-    {
-        logoutUser
-    }
-)(TopNav);
-
-// export default connect<{}, {}, TopNavProps>(
-//   //@ts-ignore
-//   mapStateToProps,
-//   {
-//     logoutUser
-//   }
-//   //@ts-ignore
-// )(withRouter(TopNav));
+export default TopNav;

@@ -49,12 +49,6 @@ class SideNav extends React.PureComponent<SideNavProps> {
         elementForRemoveShadow.classList.remove('nav--active');
     };
 
-    // @ts-ignore
-    onLogoutClick = () => {
-        // this.props.logoutUser(this.props.history);
-        window.location.href = '/';
-    };
-
     /**
      * ********** handler обработки клика для раскрытия подменю Главная **********
      */

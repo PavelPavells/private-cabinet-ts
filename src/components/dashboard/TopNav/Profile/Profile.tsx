@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+/**
+ * ********** Импорт экшенов **********
+ * */
+import { logoutUser } from '../../../../actions/authActions';
 
 import './Profile.scss';
 
 const Profile: React.FC = () => {
     const [dropdown, setDropdown] = useState(false);
+
+    /**
+     * Отправка действий для изменения на сервере
+     * */
+    const dispatch = useDispatch();
 
     const handleProfileClick = () => {
         const arrow = document.getElementsByClassName('info-list__arrow')[0];
@@ -30,8 +40,9 @@ const Profile: React.FC = () => {
     }, [dropdown]);
 
     const onLogoutClick = () => {
-        window.location.href = '/';
-        localStorage.clear();
+        // window.location.href = '/';
+        // localStorage.clear();
+        dispatch(logoutUser());
     };
 
     return (

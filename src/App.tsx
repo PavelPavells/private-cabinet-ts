@@ -1,8 +1,8 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 // import axios from 'axios';
 // @ts-ignore
@@ -81,15 +81,37 @@ if (localStorage.userUuid) {
 }
 
 const App = () => {
-    const param = new URLSearchParams(window.location.search);
-    const invitetoken = param.get('invitetoken');
+    const [, setError] = useState('');
+    const [, setQuery] = useState({});
+
+    /**
+     * Хук истории
+     * */
+    const history = useHistory();
+
+    /**
+     * Параметр запроса по юиду
+     * */
+    const params = window.location.search;
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        setQuery(queryParams);
+        if (queryParams.has('error:')) {
+            setError('There was a problem.');
+            queryParams.delete('error');
+            history.replace({
+                search: queryParams.toString()
+            });
+        }
+    }, []);
     return (
         <Provider store={store}>
             <Router>
                 <div className="App">
                     <Switch>
                         <Route exact path="/" component={Login} />
-                        <Route exact path={`/register?invitetoken=${invitetoken}`} component={Register} />
+                        <Route exact path="/register" component={params ? Register : NotFound} />
                         <Route exact path="/reset" component={Reset} />
                         <Route exact path="/new-password" component={NewPassword} />
                         <PrivateRoute

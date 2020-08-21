@@ -55,7 +55,7 @@ const PriceListComponent = () => {
     const [filterModal, setFilterModal] = useState(false);
 
     /**
-     * ********** Импорт состояния pricelist из Redux **********
+     * ********** Импорт состояния из Redux **********
      * */
     const { headersPriceList, tablePriceList, inputs } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);

@@ -40,10 +40,8 @@ const Layout = () => {
     }
     const dashboardContent = (
         <div className="right">
-            <TopNav
-                // @ts-ignore
-                exact
-            />
+            <>{/* @ts-ignore */}</>
+            <TopNav />
             <div className="main-container">
                 <SideNav />
                 <Switch>

@@ -8,12 +8,14 @@ import {
     USER_LOADING,
     USER_ERROR_LOADING,
     RESET_CURRENT_USER,
-    NEW_PASSWORD_USER
+    NEW_PASSWORD_USER,
+    SET_USER_COMPANY_NAME
 } from '../constants/authTypes';
 
 const initialState: AuthState = {
     isAuthenticated: false,
     user: {},
+    partnerName: '',
     loading: false,
     error: ''
 };
@@ -58,6 +60,12 @@ export default function (state = initialState, action: AuthActions): AuthState {
                 ...state,
                 isAuthenticated: false,
                 error: action.payload
+            };
+        case SET_USER_COMPANY_NAME:
+            return {
+                ...state,
+                isAuthenticated: false,
+                partnerName: action.payload
             };
         default:
             return state;

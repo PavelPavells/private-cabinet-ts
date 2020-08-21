@@ -2,6 +2,7 @@
  * ********** Глобальные переменные для асинхронных запросов авторизации **********
  */
 export const USER_ERROR_LOADING = 'USER_ERROR_LOADING';
+export const SET_USER_COMPANY_NAME = 'SET_USER_COMPANY_NAME';
 export const GET_ERRORS = 'GET_ERRORS';
 export const USER_LOADING = 'USER_LOADING';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -31,18 +32,32 @@ export interface userErrorLoading {
     payload: any;
 }
 
+interface setUserCompanyName {
+    type: typeof SET_USER_COMPANY_NAME;
+    payload: string;
+}
+
 export interface userDataRegister {
-    name: string;
-    email: string;
     companyName: string;
-    companyInn: string;
-    contactPerson: string;
-    companyPhone: string | number;
+    contactEmail: string;
+    direction: object;
+    email: string;
+    inn: string;
+    legalAdress: string;
+    name: string;
+    pass: string;
+    patronymic: string;
+    phone: string;
+    repeatpass: string;
+    surname: string;
+    webSite: string;
+    confidiency: boolean;
 }
 
 export interface AuthState {
     isAuthenticated: boolean;
     user: any;
+    partnerName: string;
     loading: boolean;
     error: null | any;
 }
@@ -56,9 +71,14 @@ export interface LoginRes {
     success: string;
     userUuid: string;
     partnerUuid: string;
+    userName: string;
+    partnerName: string;
+    description: string;
+    adminStr: string;
+    creationDate: string;
     agentName: string;
     err: string;
-    partnerStatus: string;
+    errorMessage: string;
 }
 
 interface registerUser {
@@ -93,4 +113,5 @@ export type AuthActions =
     | logoutUser
     | userResetPassword
     | userNewPassword
-    | userErrorLoading;
+    | userErrorLoading
+    | setUserCompanyName;

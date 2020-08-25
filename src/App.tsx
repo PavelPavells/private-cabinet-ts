@@ -1,9 +1,9 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider, shallowEqual, useSelector, useDispatch } from 'react-redux';
 // import axios from 'axios';
 // @ts-ignore
 // eslint-disable-next-line camelcase
@@ -11,17 +11,12 @@ import { Provider } from 'react-redux';
 
 /** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
 import setAuthToken from './__utils__/setAuthToken';
-import { setCurrentUser } from './actions/authActions';
+import { setCurrentUser, getAccessRegister } from './actions/authActions';
 
 /**
  * ********** Импорт глобального сосотояния **********
  */
-import store from './store/store';
-
-/**
- * ********** Импорт глобальной переменной переключения между Продакшн/Девелоп **********
- */
-// import site from './constants/Global';
+import store, { PersonalCabinet } from './store/store';
 
 /**
  * ********** Импорт компонентов **********
@@ -33,7 +28,6 @@ import NewPassword from './components/auth/NewPassword';
 import Layout from './components/dashboard/Layout';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import NotFound from './components/404/404';
-// import NotFound from './components/500/500';
 
 /**
  * ********** Импорт стилей **********
@@ -43,12 +37,12 @@ import './App.scss';
 /**
  * ********** Проверка на cуществование токена в localStorage **********
  */
-if (localStorage.userUuid) {
+if (localStorage.registerUuid) {
     /**
      * ********** Установить токен авторизации в заголовки **********
      */
-    const userUuid = JSON.parse(localStorage.userUuid);
-    setAuthToken(userUuid);
+    const registerUuid = JSON.parse(localStorage.registerUuid);
+    setAuthToken(registerUuid);
 
     /**
      * ********** Декодировать токен, чтобы получать пользователя **********
@@ -59,7 +53,7 @@ if (localStorage.userUuid) {
      * ********** Установить пользователя и поле isAuthenticated для Приватного Роута **********
      */
     // @ts-ignore
-    store.dispatch(setCurrentUser(userUuid));
+    store.dispatch(setCurrentUser(registerUuid));
 
     /**
      * ********** Проверка токена на истекшость по времени(Устанавливается в Бэкенде) **********
@@ -81,37 +75,32 @@ if (localStorage.userUuid) {
 }
 
 const App = () => {
-    const [, setError] = useState('');
-    const [, setQuery] = useState({});
-
+    const { errorResult } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     /**
-     * Хук истории
+     * Хук отправки действия в Store
      * */
-    const history = useHistory();
-
+    const dispatch = useDispatch();
     /**
      * Параметр запроса по юиду
      * */
-    const params = window.location.search;
+    const params = window.location.search.split('=')[1];
 
     useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
-        setQuery(queryParams);
-        if (queryParams.has('error:')) {
-            setError('There was a problem.');
-            queryParams.delete('error');
-            history.replace({
-                search: queryParams.toString()
-            });
+        if (params) {
+            dispatch(getAccessRegister(window.location.search.split('=')[1]));
         }
+        localStorage.removeItem('userUuid');
+        localStorage.removeItem('jwtNewPassword');
+        localStorage.removeItem('uuid');
     }, []);
+
     return (
         <Provider store={store}>
             <Router>
                 <div className="App">
                     <Switch>
                         <Route exact path="/" component={Login} />
-                        <Route exact path="/register" component={params ? Register : NotFound} />
+                        <Route exact path="/register" component={errorResult.code === 0 ? Register : NotFound} />
                         <Route exact path="/reset" component={Reset} />
                         <Route exact path="/new-password" component={NewPassword} />
                         <PrivateRoute
@@ -128,4 +117,12 @@ const App = () => {
     );
 };
 
-export default App;
+const AppWrapper = () => {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
+};
+
+export default AppWrapper;

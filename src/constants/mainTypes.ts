@@ -27,6 +27,7 @@ export interface MainItem {
     minDiscount: number;
     maxDiscount: number;
     leadManagerName: string;
+    accountFullName: string;
     leadManagerPhone: string;
     leadManagerEmail: string;
 }

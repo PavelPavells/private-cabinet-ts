@@ -114,8 +114,6 @@ const OrdersComponent = () => {
     //     console.log(item);
     // };
 
-    console.log(ordersTable);
-
     if (ordersHeaders && ordersTable) {
         return (
             <main className="main-content">

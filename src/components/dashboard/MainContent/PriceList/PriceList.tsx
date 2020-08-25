@@ -44,9 +44,9 @@ const usePreviousValue = (data: any) => {
 
 const PriceListComponent = () => {
     const [page] = useState(0);
-    const [limit] = useState(10000);
+    const [limit] = useState(500);
     const [sortBy] = useState(null);
-    const [sortDirection, setSortDirection] = useState(1);
+    const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
     const [findValue] = useState(null);

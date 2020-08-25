@@ -127,7 +127,7 @@ const ShipmentComponent = () => {
             <main className="main-content">
                 <div className="shipment">
                     <header className="shipment__heading">
-                        <div className="heading__text">Прайс-лист продукции CARDDEX</div>
+                        <div className="heading__text">Отгрузки продукции CARDDEX</div>
                         <div className="heading__buttons">
                             <div className="buttons buttons__filter" onClick={togglerHideShowQuicSearchInput}>
                                 Быстрый фильтр

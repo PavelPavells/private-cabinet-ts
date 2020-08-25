@@ -19,7 +19,11 @@ import {
     LoginReq,
     GET_ERRORS,
     SET_USER_COMPANY_NAME,
-    LoginRes
+    LoginRes,
+    ErrorPageData,
+    CHANGE_ERROR_NAME,
+    CHANGE_USER_DATA_ERROR_REGISTER,
+    GET_ERROR_REGISTER
 } from '../constants/authTypes';
 
 /**
@@ -72,6 +76,30 @@ export const setUserCompanyName = (company: string): AuthActions => {
 };
 
 /**
+ * ********** Экшен для обработки ошибки **********
+ */
+export const changeErrorName = (result: any): AuthActions => ({
+    type: CHANGE_ERROR_NAME,
+    payload: result
+});
+
+/**
+ * ********** Экшен для обработки ошибки **********
+ */
+export const changeUserDataErrorRegister = (data: any): AuthActions => ({
+    type: CHANGE_USER_DATA_ERROR_REGISTER,
+    payload: data
+});
+
+/**
+ * ********** Экшен для обработки ошибки **********
+ */
+export const getErrorRegister = (data: any): AuthActions => ({
+    type: GET_ERROR_REGISTER,
+    payload: data
+});
+
+/**
  * ********** Экшен для логина существующего пользователя **********
  */
 export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions>) => {
@@ -85,11 +113,9 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
                 .post(`${site}login`, { login, passHash })
                 .then((response: AxiosResponse<LoginRes>) => {
                     const { partnerUuid, partnerName } = response.data;
-
                     // Установить токен в localStorage
-                    localStorage.setItem('userUuid', JSON.stringify(partnerUuid));
+                    localStorage.setItem('registerUuid', JSON.stringify(partnerUuid));
                     localStorage.setItem('partnerName', JSON.stringify(partnerName));
-
                     // Установить токен в заголовок авторизации
                     setAuthToken(partnerUuid);
                     dispatch(setUserCompanyName(partnerName));
@@ -128,7 +154,7 @@ export const resetPassword = (email: string, history?: any) => (dispatch: Dispat
 };
 
 /**
- * ********** Экшен для регистрации нового пользователя **********
+ * ********** Экшен для запроса на сброс пароля **********
  */
 export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
     axios
@@ -156,51 +182,70 @@ export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActio
 };
 
 /**
+ * ********** Экшен для доступа на регистрацию **********
+ */
+// @ts-ignore
+export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
+    await axios
+        .get(`${site}auth/singup/checkinvitecode?invitecode=${uuid}&appuuid=23423443543534543`)
+        .then((response: AxiosResponse<ErrorPageData>) => {
+            dispatch(changeErrorName(response.data.result));
+            dispatch(changeUserDataErrorRegister(response.data.payload));
+        })
+        .catch((err: any) => {
+            return err;
+        });
+};
+
+/**
  * ********** Экшен для запроса на сброс пароля **********
+
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const registerUser = (userData: userDataRegister, history: any) => (dispatch: Dispatch<AuthActions>) => {
     try {
-        const { pass, repeatpass } = userData;
+        const { pass } = userData;
         const passCypher = md5(pass);
-        const repeatPassCypher = md5(repeatpass);
         const {
+            invitecode,
+            appUuid,
+            login,
+            firstname,
+            lastname,
+            secondname,
             email,
-            name,
-            surname,
-            patronymic,
-            contactEmail,
             phone,
-            companyName,
+            company,
             inn,
-            legalAdress,
-            webSite,
-            confidiency,
-            direction
+            address,
+            website,
+            business,
+            agreement
         } = userData;
         axios
-            .post(`${site}register`, {
+            .post(`${site}auth/singup/register`, {
+                invitecode,
+                appUuid,
+                login,
+                pass: passCypher,
+                firstname,
+                lastname,
+                secondname,
                 email,
-                passCypher,
-                repeatPassCypher,
-                name,
-                surname,
-                patronymic,
-                contactEmail,
                 phone,
-                companyName,
+                company,
                 inn,
-                legalAdress,
-                webSite,
-                confidiency,
-                direction
+                address,
+                website,
+                business,
+                agreement
             })
-            .then(() => history.push('/register'));
+            .then((response) => {
+                dispatch(getErrorRegister(response.data));
+            });
+        // .then(() => history.push('/register'));
     } catch (error) {
-        // dispatch({
-        //     type: GET_ERRORS,
-        //     payload: error.response
-        // });
+        return error;
     }
 };
 

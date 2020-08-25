@@ -156,9 +156,24 @@
                     display: flex;
                     flex-direction: column;
 
-                    &:nth-child(4),
-                    &:nth-child(5) {
+                    &:nth-child(1) {
+                        flex: 2;
+                    }
+
+                    &:nth-child(2) {
+                        flex: 4;
+                    }
+
+                    
+                    &:nth-child(3) {
                         .column__item {
+                            justify-content: flex-end;
+                        }
+                    }
+
+                    &:nth-child(4) {
+                        .column__item {
+                            min-width: 200px;
                             justify-content: flex-end;
                         }
                     }

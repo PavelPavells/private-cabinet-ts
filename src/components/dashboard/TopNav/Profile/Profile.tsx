@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+// import Loader from '../../../../__utils__/Spinner';
 
 /**
  * ********** Импорт экшенов **********
@@ -7,9 +8,16 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../../actions/authActions';
 
 import './Profile.scss';
+// import { PersonalCabinet } from '../../../../store/store';
 
 const Profile: React.FC = () => {
     const [dropdown, setDropdown] = useState(false);
+    /**
+     * Имя зарегистрировавшегося пользователя
+     * */
+    const fullName = localStorage.getItem('partnerName');
+    // @ts-ignore
+    const accountFullName = fullName.replace(/['"«»]/g, '');
 
     /**
      * Отправка действий для изменения на сервере
@@ -44,7 +52,6 @@ const Profile: React.FC = () => {
         // localStorage.clear();
         dispatch(logoutUser());
     };
-
     return (
         <div className="right-info__profile">
             <div className="profile">
@@ -52,7 +59,7 @@ const Profile: React.FC = () => {
             </div>
             <div onClick={handleProfileClick} className="right-info__list info-list">
                 <div className="info-list__text">
-                    <div className="name">Иванов И.И.</div>
+                    <div className="name">{accountFullName}</div>
                     <div className="role">Администратор</div>
                 </div>
                 <div className="info-list__arrow" />

@@ -22,6 +22,7 @@ const TopNav = () => {
      * ********** Импорт состояния из Redux **********
      * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
+    const { main } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const partner = localStorage.getItem('partnerName');
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');

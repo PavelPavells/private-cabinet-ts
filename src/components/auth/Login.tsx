@@ -163,6 +163,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         type="text"
                                         className="auth__input warning"
                                         autoCorrect="off"
+                                        minLength={4}
+                                        maxLength={8}
                                         required
                                     />
                                     <label className="auth__label">Введите логин</label>
@@ -176,6 +178,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         type="text"
                                         className="auth__input"
                                         autoCorrect="off"
+                                        minLength={4}
+                                        maxLength={8}
                                         autoFocus
                                         required
                                     />
@@ -194,6 +198,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input warning"
                                             autoCorrect="off"
+                                            minLength={4}
+                                            maxLength={8}
                                             required
                                         />
                                         <label className="auth__label">Введите пароль</label>
@@ -208,6 +214,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input"
                                             autoCorrect="off"
+                                            minLength={4}
+                                            maxLength={8}
                                             required
                                         />
                                         <label className="auth__label">Введите пароль</label>

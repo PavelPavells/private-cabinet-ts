@@ -9,13 +9,35 @@ import {
     USER_ERROR_LOADING,
     RESET_CURRENT_USER,
     NEW_PASSWORD_USER,
+    CHANGE_USER_DATA_ERROR_REGISTER,
+    CHANGE_ERROR_NAME,
+    GET_ERROR_REGISTER,
     SET_USER_COMPANY_NAME
 } from '../constants/authTypes';
 
 const initialState: AuthState = {
     isAuthenticated: false,
     user: {},
+    errorResult: {
+        code: 4,
+        message: 'Ошибка 404',
+        action: null
+    },
+    errorRegisterResult: {
+        code: 0,
+        message: '',
+        action: null
+    },
+    invitePayload: {
+        inviteCode: '',
+        inCode: '',
+        expired: 0,
+        alreadyUsed: 0,
+        regEmail: '',
+        isValid: 0
+    },
     partnerName: '',
+    accountFullName: '',
     loading: false,
     error: ''
 };
@@ -66,6 +88,23 @@ export default function (state = initialState, action: AuthActions): AuthState {
                 ...state,
                 isAuthenticated: false,
                 partnerName: action.payload
+            };
+        case CHANGE_USER_DATA_ERROR_REGISTER:
+            return {
+                ...state,
+                isAuthenticated: false,
+                invitePayload: action.payload
+            };
+        case CHANGE_ERROR_NAME:
+            return {
+                ...state,
+                isAuthenticated: false,
+                errorResult: action.payload
+            };
+        case GET_ERROR_REGISTER:
+            return {
+                ...state,
+                errorRegisterResult: action.payload
             };
         default:
             return state;

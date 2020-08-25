@@ -161,8 +161,7 @@ input {
 	}
 
 	&__error {
-		padding: 10px 0;
-		color: $brandPantonRed;
+		padding: 10px 0px 30px 0px;
 	}
 
 	&__back {
@@ -227,6 +226,14 @@ input {
 
 .warning {
 	border-bottom: 1px solid $brandPantonRed !important;
+}
+
+.unsuccess {
+	color: $brandPantonRed
+}
+
+.success {
+	color: $brandPantonBlue;
 }
 
 .remove__scrollbar {

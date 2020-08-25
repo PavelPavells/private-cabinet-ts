@@ -65,6 +65,8 @@ export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<Ma
         await axios.post(`${site}main`, data).then((response: AxiosResponse<MainListRes>) => {
             dispatch(fetchingDataSuccess(response.data.payload.recordSet));
             dispatch(fetchDataDiscountSettings(response.data.payload.discountSettings));
+            const { accountFullName } = response.data.payload.recordSet;
+            localStorage.setItem('accountFullName', JSON.stringify(accountFullName));
         });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

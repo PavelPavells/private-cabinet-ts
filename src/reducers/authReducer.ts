@@ -8,6 +8,7 @@ import {
     USER_LOADING,
     USER_ERROR_LOADING,
     RESET_CURRENT_USER,
+    DATA_LOADING_REQUEST,
     NEW_PASSWORD_USER,
     CHANGE_USER_DATA_ERROR_REGISTER,
     CHANGE_ERROR_NAME,
@@ -16,6 +17,7 @@ import {
 } from '../constants/authTypes';
 
 const initialState: AuthState = {
+    isFetching: false,
     isAuthenticated: false,
     user: {},
     errorResult: {
@@ -24,7 +26,7 @@ const initialState: AuthState = {
         action: null
     },
     errorRegisterResult: {
-        code: 0,
+        code: 1,
         message: '',
         action: null
     },
@@ -34,7 +36,7 @@ const initialState: AuthState = {
         expired: 0,
         alreadyUsed: 0,
         regEmail: '',
-        isValid: 0
+        isValid: null
     },
     partnerName: '',
     accountFullName: '',
@@ -54,6 +56,11 @@ const isEmpty = (payload: any) => {
 // eslint-disable-next-line func-names
 export default function (state = initialState, action: AuthActions): AuthState {
     switch (action.type) {
+        case DATA_LOADING_REQUEST:
+            return {
+                ...state,
+                isFetching: true
+            };
         case SET_CURRENT_USER:
             return {
                 ...state,
@@ -92,18 +99,21 @@ export default function (state = initialState, action: AuthActions): AuthState {
         case CHANGE_USER_DATA_ERROR_REGISTER:
             return {
                 ...state,
+                isFetching: false,
                 isAuthenticated: false,
                 invitePayload: action.payload
             };
         case CHANGE_ERROR_NAME:
             return {
                 ...state,
+                isFetching: false,
                 isAuthenticated: false,
                 errorResult: action.payload
             };
         case GET_ERROR_REGISTER:
             return {
                 ...state,
+                isFetching: false,
                 errorRegisterResult: action.payload
             };
         default:

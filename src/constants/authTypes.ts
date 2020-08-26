@@ -4,6 +4,7 @@
 export const USER_ERROR_LOADING = 'USER_ERROR_LOADING';
 export const SET_USER_COMPANY_NAME = 'SET_USER_COMPANY_NAME';
 export const GET_ERRORS = 'GET_ERRORS';
+export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const USER_LOADING = 'USER_LOADING';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const RESET_CURRENT_USER = 'RESET_CURRENT_USER';
@@ -75,10 +76,11 @@ export interface userDataErrorRegister {
     expired: number;
     alreadyUsed: number;
     regEmail: string;
-    isValid: number;
+    isValid: number | null;
 }
 
 export interface AuthState {
+    isFetching: boolean;
     isAuthenticated: boolean;
     user: any;
     errorResult: ResponseStatus;
@@ -112,6 +114,10 @@ export interface LoginRes {
     agentName: string;
     err: string;
     errorMessage: string;
+}
+
+interface LoginRequest {
+    type: typeof DATA_LOADING_REQUEST;
 }
 
 interface registerUser {
@@ -154,6 +160,7 @@ interface getErrorRegister {
 }
 
 export type AuthActions =
+    | LoginRequest
     | getErrorRegister
     | changeErrorCode
     | changeErrorName

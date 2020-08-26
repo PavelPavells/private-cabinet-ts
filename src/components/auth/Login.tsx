@@ -1,7 +1,7 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { FormEvent } from 'react';
+import React, { FormEvent, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
@@ -63,7 +63,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
         }
     }
 
-    private onSubmit = () => {
+    private onSubmit = (event: SyntheticEvent) => {
+        event.preventDefault();
         const LoginRequest = {
             login: this.state.login,
             passHash: this.state.passHash
@@ -152,7 +153,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                     <div className="auth__heading">
                         <h1>Вход</h1>
                     </div>
-                    <form className="auth__forms forms remove__scrollbar">
+                    <form className="auth__forms forms remove__scrollbar" onSubmit={this.onSubmit}>
                         <div className="auth__group">
                             {error !== '' ? (
                                 <div className="auth__field">
@@ -167,7 +168,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         maxLength={8}
                                         required
                                     />
-                                    <label className="auth__label">Введите логин</label>
+                                    <label className={login ? 'auth__label active' : 'auth__label'}>Введите логин</label>
                                 </div>
                             ) : (
                                 <div className="auth__field">
@@ -183,7 +184,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         autoFocus
                                         required
                                     />
-                                    <label className="auth__label">Введите логин</label>
+                                    <label className={login ? 'auth__label active' : 'auth__label'}>Введите логин</label>
                                 </div>
                             )}
                         </div>
@@ -202,7 +203,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             maxLength={8}
                                             required
                                         />
-                                        <label className="auth__label">Введите пароль</label>
+                                        <label className={passHash ? 'auth__label active' : 'auth__label'}>Введите пароль</label>
                                         <div onClick={this.showOrHidePassword} className="inaccess" />
                                     </div>
                                 ) : (
@@ -218,7 +219,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             maxLength={8}
                                             required
                                         />
-                                        <label className="auth__label">Введите пароль</label>
+                                        <label className={passHash ? 'auth__label active' : 'auth__label'}>Введите пароль</label>
                                         <div onClick={this.showOrHidePassword} className="inaccess" />
                                     </div>
                                 )}
@@ -233,11 +234,11 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                             */}
                         {login && passHash ? (
                             <div>
-                                <Link to="/">
-                                    <button onClick={this.onSubmit} type="submit" className="auth__button">
+                                <div>
+                                    <button type="submit" className="auth__button">
                                         Войти
                                     </button>
-                                </Link>
+                                </div>
                             </div>
                         ) : (
                             <div>
@@ -246,7 +247,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                 </button>
                             </div>
                         )}
-                        <div className="auth__error">{error}</div>
+                        {error !== '' ? <div className="auth__error unsuccess">{error}</div> : null}
                     </form>
                     {/*
                         <div className="auth__registration registration">

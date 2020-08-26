@@ -109,7 +109,7 @@ const App = () => {
                             path="/dashboard"
                             component={Layout}
                         />
-                        <Route component={localStorage.userUuid ? Layout : NotFound} />
+                        <Route component={localStorage.registerUuid ? Layout : NotFound} />
                     </Switch>
                 </div>
             </Router>

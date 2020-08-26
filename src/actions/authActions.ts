@@ -16,6 +16,7 @@ import {
     USER_ERROR_LOADING,
     SET_CURRENT_USER,
     USER_LOADING,
+    DATA_LOADING_REQUEST,
     LoginReq,
     GET_ERRORS,
     SET_USER_COMPANY_NAME,
@@ -35,6 +36,15 @@ import setAuthToken from '../__utils__/setAuthToken';
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
  */
 import site from '../constants/Global';
+
+/**
+ * ********** Экшен для установки текущего пользователя **********
+ */
+export const dataLoadingRequest = (): AuthActions => {
+    return {
+        type: DATA_LOADING_REQUEST
+    };
+};
 
 /**
  * ********** Экшен для установки текущего пользователя **********
@@ -186,6 +196,7 @@ export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActio
  */
 // @ts-ignore
 export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
+    dispatch(dataLoadingRequest());
     await axios
         .get(`${site}auth/singup/checkinvitecode?invitecode=${uuid}&appuuid=23423443543534543`)
         .then((response: AxiosResponse<ErrorPageData>) => {

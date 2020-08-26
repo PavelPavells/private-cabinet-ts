@@ -233,7 +233,7 @@ input {
 }
 
 .success {
-	color: $brandPantonBlue;
+	color: $brandPantonGreen;
 }
 
 .remove__scrollbar {
@@ -250,6 +250,7 @@ input {
 	height: 20px;
 	margin-bottom: 10px;
 	background: url('../../images/eye-inaccess.svg') no-repeat center;
+	// z-index: 10000;
 	cursor: pointer;
 }
 

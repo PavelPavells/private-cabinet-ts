@@ -15,7 +15,7 @@ const NotFound = () => {
         return (
             <div className="error">
                 <div className="error__image" />
-                <div className="error__header">Доступ к ресурсу отклонен</div>
+                <div className="error__header">Ошибка</div>
                 {!isFetching && errorResult.code === 4 ? (
                     <div>
                         <div className="error__description">Запрошенная вами страница не найдена</div>

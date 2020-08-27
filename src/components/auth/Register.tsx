@@ -4,6 +4,8 @@
 import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 // @ts-ignore
+import NumberFormat from 'react-number-format';
+// @ts-ignore
 import CreatableSelect from 'react-select/creatable';
 import { Link } from 'react-router-dom';
 import { PersonalCabinet } from '../../store/store';
@@ -18,10 +20,7 @@ import { registerUser, getAccessRegister } from '../../actions/authActions';
  */
 import './Auth.scss';
 
-import Loader from '../../__utils__/Spinner';
-import { constants } from 'buffer';
-import { Console } from 'console';
-import NotFound from '../404/404';
+// import Loader from '../../__utils__/Spinner';
 
 /**
  * ********** Интерфейс локального стейта компонента Login **********
@@ -44,7 +43,7 @@ const Register = () => {
     const [website, setWebsite] = useState('');
     const [business, setBusiness] = useState('Торговая компания');
     const [agreement, setAgreement] = useState(0);
-    const [successRegister, setSuccessRegister] = useState(null);
+    // const [successRegister, setSuccessRegister] = useState(null);
 
     /**
      * ********** Импорт состояния из Redux **********
@@ -117,7 +116,9 @@ const Register = () => {
             business,
             agreement
         };
-        dispatch(registerUser(newUser, window.history));
+        if (agreement && pass === repeatpass) {
+            dispatch(registerUser(newUser, window.history));
+        }
     };
 
     /**
@@ -141,6 +142,17 @@ const Register = () => {
         { value: 'Пользователь системы СКУД', label: 'Пользователь системы СКУД' }
     ];
 
+    // if (errorRegisterResult.code === 0) {
+    //     return (
+    //         <>
+    //             <p>Ваша учетная запись успешно зарегистрирована.</p>
+    //             <p>
+    //                 После проверки введенных данных, нашими сотрудниками, на указанный вами адрес электронной почты будет отправлено письмо
+    //                 с подтверждением регистрации
+    //             </p>
+    //         </>
+    //     );
+    // }
     return (
         /**
          * Компонента Регистрация
@@ -199,8 +211,8 @@ const Register = () => {
                                         id="login"
                                         type="text"
                                         className="auth__input warning"
-                                        minLength={5}
-                                        maxLength={50}
+                                        minLength={1}
+                                        maxLength={255}
                                         required
                                     />
                                     <label className={login ? 'auth__label active' : 'auth__label'}>Придумайте логин *</label>
@@ -213,8 +225,8 @@ const Register = () => {
                                         id="login"
                                         type="text"
                                         className="auth__input"
-                                        minLength={5}
-                                        maxLength={50}
+                                        minLength={1}
+                                        maxLength={255}
                                         required
                                     />
                                     <label className={login ? 'auth__label active' : 'auth__label'}>Придумайте логин *</label>
@@ -222,85 +234,105 @@ const Register = () => {
                             )}
                         </label>
                     </div>
-                    <div className="auth__group">
+                    <div className="auth__group" style={{ height: '60px' }}>
                         <label>
-                            {errorRegisterResult.code === 4 ? (
-                                <div className="auth__field field">
-                                    <input
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPass(event.target.value)}
-                                        value={pass}
-                                        id="pass"
-                                        type="password"
-                                        className="auth__input warning"
-                                        autoCorrect="off"
-                                        minLength={8}
-                                        maxLength={15}
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        title="Пароль должен содержать минимум 8 символов и включать хотя бы 1 букву и одну цифру"
-                                        required
-                                    />
-                                    <label className="auth__label">Придумайте пароль *</label>
-                                    <div onClick={showOrHidePassword} className="inaccess" />
-                                </div>
+                            {pass !== repeatpass ? (
+                                <>
+                                    <div className="auth__field field">
+                                        <input
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPass(event.target.value)}
+                                            value={pass}
+                                            id="pass"
+                                            type="password"
+                                            className="auth__input warning"
+                                            autoCorrect="off"
+                                            minLength={7}
+                                            maxLength={255}
+                                            pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                            required
+                                        />
+                                        <label className="auth__label">Придумайте пароль *</label>
+                                        <div onClick={showOrHidePassword} className="inaccess" />
+                                    </div>
+                                    <div style={{ color: 'grey', fontSize: '12px' }}>
+                                        Поле должно содержать минимум 8 знаков, цифры и буквы *
+                                    </div>
+                                </>
                             ) : (
-                                <div className="auth__field field">
-                                    <input
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPass(event.target.value)}
-                                        value={pass}
-                                        id="pass"
-                                        type="password"
-                                        className="auth__input"
-                                        autoCorrect="off"
-                                        minLength={8}
-                                        maxLength={15}
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        title="Пароль должен содержать минимум 8 символов и включать хотя бы 1 букву и одну цифру"
-                                        required
-                                    />
-                                    <label className="auth__label">Придумайте пароль *</label>
-                                    <div onClick={showOrHidePassword} className="inaccess" />
-                                </div>
+                                <>
+                                    <div className="auth__field field">
+                                        <input
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPass(event.target.value)}
+                                            value={pass}
+                                            id="pass"
+                                            type="password"
+                                            className="auth__input"
+                                            autoCorrect="off"
+                                            minLength={7}
+                                            maxLength={255}
+                                            pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                            required
+                                        />
+                                        <label className="auth__label">Придумайте пароль *</label>
+                                        <div onClick={showOrHidePassword} className="inaccess" />
+                                    </div>
+                                    <div style={{ color: 'grey', fontSize: '12px' }}>
+                                        Поле должно содержать минимум 8 знаков, цифры и буквы *
+                                    </div>
+                                </>
                             )}
                         </label>
                     </div>
-                    <div className="auth__group">
+                    <div className="auth__group" style={{ height: '60px' }}>
                         <label>
-                            {errorRegisterResult.code === 4 ? (
-                                <div className="auth__field field">
-                                    <input
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatpass(event.target.value)}
-                                        value={repeatpass}
-                                        id="repeatpass"
-                                        type="password"
-                                        className="auth__input warning"
-                                        autoCorrect="off"
-                                        minLength={8}
-                                        maxLength={15}
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        title="Пароль должен содержать минимум 8 символов и включать хотя бы 1 букву и одну цифру"
-                                        required
-                                    />
-                                    <label className="auth__label">Повторите пароль *</label>
-                                    <div onClick={showOrHidePasswordRepeat} className="inaccess" />
-                                </div>
+                            {pass !== repeatpass ? (
+                                <>
+                                    <div className="auth__field field">
+                                        <input
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatpass(event.target.value)}
+                                            value={repeatpass}
+                                            id="repeatpass"
+                                            type="password"
+                                            className="auth__input warning"
+                                            autoCorrect="off"
+                                            minLength={7}
+                                            maxLength={255}
+                                            pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                            required
+                                        />
+                                        <label className="auth__label">Повторите пароль *</label>
+                                        <div onClick={showOrHidePasswordRepeat} className="inaccess" />
+                                    </div>
+                                    <div style={{ color: 'grey', fontSize: '12px' }}>
+                                        Поле должно содержать минимум 8 знаков, цифры и буквы *
+                                    </div>
+                                </>
                             ) : (
-                                <div className="auth__field field">
-                                    <input
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatpass(event.target.value)}
-                                        value={repeatpass}
-                                        id="repeatpass"
-                                        type="password"
-                                        className="auth__input"
-                                        autoCorrect="off"
-                                        minLength={8}
-                                        maxLength={15}
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        title="Пароль должен содержать минимум 8 символов и включать хотя бы 1 букву и одну цифру"
-                                        required
-                                    />
-                                    <label className="auth__label">Повторите пароль *</label>
-                                    <div onClick={showOrHidePasswordRepeat} className="inaccess" />
-                                </div>
+                                <>
+                                    <div className="auth__field field">
+                                        <input
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatpass(event.target.value)}
+                                            value={repeatpass}
+                                            id="repeatpass"
+                                            type="password"
+                                            className="auth__input"
+                                            autoCorrect="off"
+                                            minLength={7}
+                                            maxLength={255}
+                                            pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                            required
+                                        />
+                                        <label className="auth__label">Повторите пароль *</label>
+                                        <div onClick={showOrHidePasswordRepeat} className="inaccess" />
+                                    </div>
+                                    <div style={{ color: 'grey', fontSize: '12px' }}>
+                                        Поле должно содержать минимум 8 знаков, цифры и буквы *
+                                    </div>
+                                </>
                             )}
                         </label>
                     </div>
@@ -316,7 +348,9 @@ const Register = () => {
                                         className="auth__input warning"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Имя *</label>
@@ -331,7 +365,9 @@ const Register = () => {
                                         className="auth__input"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Имя *</label>
@@ -351,7 +387,9 @@ const Register = () => {
                                         className="auth__input warning"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Фамилия *</label>
@@ -366,7 +404,9 @@ const Register = () => {
                                         className="auth__input"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Фамилия *</label>
@@ -383,8 +423,11 @@ const Register = () => {
                                     id="secondname"
                                     type="text"
                                     className="auth__input"
+                                    minLength={1}
+                                    maxLength={255}
                                     autoCorrect="off"
-                                    required
+                                    // pattern="^[?!,.A-Za-zА-Яа-яёЁ\s\-]+$"
+                                    // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                 />
                                 <label className="auth__label">Отчество</label>
                             </div>
@@ -402,9 +445,9 @@ const Register = () => {
                                         className="auth__input warning"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={30}
-                                        pattern="[^ @]*@[^ @]*"
-                                        title="Ваш E-mail должен содержать @"
+                                        maxLength={255}
+                                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                        title="Ваш E-mail должен содержать @ и минимум одну точку"
                                         required
                                     />
                                     <label className={email ? 'auth__label active' : 'auth__label'}>Контактный email *</label>
@@ -419,9 +462,9 @@ const Register = () => {
                                         className="auth__input"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={30}
-                                        pattern="[^ @]*@[^ @]*"
-                                        title="Ваш E-mail должен содержать @"
+                                        maxLength={255}
+                                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                        title="Ваш E-mail должен содержать @ и минимум одну точку"
                                         required
                                     />
                                     <label className={email ? 'auth__label active' : 'auth__label'}>Контактный email *</label>
@@ -431,35 +474,39 @@ const Register = () => {
                     </div>
                     <div className="auth__group">
                         <label>
-                            {errorRegisterResult.code === 4 ? (
+                            {errorRegisterResult.code === 4 && phone.length < 7 ? (
                                 <div className="auth__field field">
-                                    <input
+                                    <NumberFormat
                                         onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
                                         value={phone}
                                         id="phone"
                                         type="tel"
                                         className="auth__input warning"
-                                        autoCorrect="off"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                        title="Формат: 999-999-9999"
+                                        format="+7(###)###-##-##"
+                                        minLength={7}
+                                        pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+                                        title="Поле заполнено неверно"
+                                        mask="_"
                                         required
                                     />
-                                    <label className="auth__label">Контактный телефон *</label>
+                                    <label className={phone ? 'auth__label active' : 'auth__label'}>Контактный телефон *</label>
                                 </div>
                             ) : (
                                 <div className="auth__field field">
-                                    <input
+                                    <NumberFormat
                                         onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
                                         value={phone}
                                         id="phone"
                                         type="tel"
                                         className="auth__input"
-                                        autoCorrect="off"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                        title="Формат: 999-999-9999"
+                                        format="+7(###)###-##-##"
+                                        minLength={7}
+                                        pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+                                        title="Поле заполнено неверно"
+                                        mask="_"
                                         required
                                     />
-                                    <label className="auth__label">Контактный телефон *</label>
+                                    <label className={phone ? 'auth__label active' : 'auth__label'}>Контактный телефон *</label>
                                 </div>
                             )}
                         </label>
@@ -476,7 +523,9 @@ const Register = () => {
                                         className="auth__input warning"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern='^[?!,.\"A-Za-zА-Яа-яёЁ0-9\s]+$'
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Полное наименование компании *</label>
@@ -491,7 +540,9 @@ const Register = () => {
                                         className="auth__input"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern='^[?!,.\"A-Za-zА-Яа-яёЁ0-9\s]+$'
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Полное наименование компании *</label>
@@ -513,7 +564,7 @@ const Register = () => {
                                         minLength={10}
                                         maxLength={12}
                                         pattern="[0-9]{10,12}"
-                                        title="ИНН должен содержать числа"
+                                        title="Поле должно содержать минимум 10 символов"
                                         required
                                     />
                                     <label className="auth__label">ИНН *</label>
@@ -530,7 +581,7 @@ const Register = () => {
                                         minLength={10}
                                         maxLength={12}
                                         pattern="[0-9]{10,12}"
-                                        title="ИНН должен содержать числа"
+                                        title="Поле должно содержать минимум 10 цифр"
                                         required
                                     />
                                     <label className="auth__label">ИНН *</label>
@@ -550,7 +601,9 @@ const Register = () => {
                                         className="auth__input warning"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ0-9\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Юридический адрес *</label>
@@ -565,7 +618,9 @@ const Register = () => {
                                         className="auth__input"
                                         autoCorrect="off"
                                         minLength={1}
-                                        maxLength={20}
+                                        maxLength={255}
+                                        // pattern="^[?!,.A-Za-zА-Яа-яёЁ0-9\s\-]+$"
+                                        // title="Поле должно содержать только латинские и кириллические символы в любом регистре"
                                         required
                                     />
                                     <label className="auth__label">Юридический адрес *</label>
@@ -583,7 +638,6 @@ const Register = () => {
                                     type="text"
                                     className="auth__input"
                                     autoCorrect="off"
-                                    required
                                 />
                                 <label className="auth__label">Адрес web-сайта</label>
                             </div>
@@ -630,7 +684,8 @@ const Register = () => {
                     inn &&
                     address &&
                     business &&
-                    agreement ? (
+                    agreement &&
+                    pass === repeatpass ? (
                         <div>
                             <div>
                                 <button type="submit" className="auth__button">
@@ -646,7 +701,17 @@ const Register = () => {
                         </div>
                     )}
                     <div className="auth__error">
-                        <div className="success">{errorRegisterResult.code === 0 ? 'Вы успешно зарегистрировались' : null}</div>
+                        <div className="success">
+                            {errorRegisterResult.code === 0 ? (
+                                <>
+                                    <p>Ваша учетная запись успешно зарегистрирована.</p>
+                                    <p>
+                                        После проверки введенных данных, нашими сотрудниками, на указанный вами адрес электронной почты
+                                        будет отправлено письмо с подтверждением регистрации
+                                    </p>
+                                </>
+                            ) : null}
+                        </div>
                         <div className="unsuccess">{errorRegisterResult.code === 4 ? errorRegisterResult.message : null}</div>
                         <div className="unsuccess">{errorRegisterResult.code === 5 ? errorRegisterResult.message : null}</div>
                         <div className="unsuccess">{errorRegisterResult.code === 6 ? errorRegisterResult.message : null}</div>

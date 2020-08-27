@@ -70,7 +70,7 @@ input {
 		margin: 10px 0;
 
 		.auth__field {
-			height: 56px;
+			height: 60px;
 			display: flex;
 			flex-direction: column-reverse;
 			position: relative;
@@ -250,12 +250,13 @@ input {
 	height: 20px;
 	margin-bottom: 10px;
 	background: url('../../images/eye-inaccess.svg') no-repeat center;
-	// z-index: 10000;
+	z-index: 1000;
 	cursor: pointer;
 }
 
 .access {
 	background: url('../../images/eye-access.svg') no-repeat center;
+	z-index: 1001;
 }
 
 .inaccessible {

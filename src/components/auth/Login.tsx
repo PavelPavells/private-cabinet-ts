@@ -2,9 +2,11 @@
  * ********** Импорт зависимостей **********
  */
 import React, { FormEvent, SyntheticEvent } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
+// import Button from '@atlaskit/button';
+// import Form, { CheckboxField, ErrorMessage, Field, FormFooter } from '@atlaskit/form';
+// import TextField from '@atlaskit/textfield';
 
 /**
  * ********** Импорт экшенов **********
@@ -85,7 +87,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
      * ********** Скрыть/Отобразить Пароль **********
      */
     private showOrHidePassword = () => {
-        const password: HTMLElement | any = document.getElementById('pass');
+        const password: HTMLElement | any = document.getElementById('passHash');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
         access.classList.toggle('access');
         if (password.type === 'password') {
@@ -164,8 +166,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         type="text"
                                         className="auth__input warning"
                                         autoCorrect="off"
-                                        minLength={4}
-                                        maxLength={8}
+                                        minLength={1}
+                                        maxLength={255}
                                         required
                                     />
                                     <label className={login ? 'auth__label active' : 'auth__label'}>Введите логин</label>
@@ -179,8 +181,8 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         type="text"
                                         className="auth__input"
                                         autoCorrect="off"
-                                        minLength={4}
-                                        maxLength={8}
+                                        minLength={1}
+                                        maxLength={255}
                                         autoFocus
                                         required
                                     />
@@ -199,8 +201,10 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input warning"
                                             autoCorrect="off"
-                                            minLength={4}
-                                            maxLength={8}
+                                            minLength={7}
+                                            maxLength={255}
+                                            // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            // title="Поле должно содержать минимум 8 знаков, цифры и буквы"
                                             required
                                         />
                                         <label className={passHash ? 'auth__label active' : 'auth__label'}>Введите пароль</label>
@@ -215,8 +219,10 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input"
                                             autoCorrect="off"
-                                            minLength={4}
-                                            maxLength={8}
+                                            minLength={7}
+                                            maxLength={255}
+                                            // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                            // title="Поле должно содержать минимум 8 знаков, цифры и буквы"
                                             required
                                         />
                                         <label className={passHash ? 'auth__label active' : 'auth__label'}>Введите пароль</label>

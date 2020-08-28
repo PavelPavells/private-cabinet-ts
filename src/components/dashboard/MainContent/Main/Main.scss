@@ -173,10 +173,12 @@
             .block-table__element {
                 &:nth-child(1) {
                     flex: 1 35%;
+                    justify-content: flex-end;
                 }
 
                 &:nth-child(2) {
                     flex: 1 15%;
+                    justify-content: flex-end;
                 }
 
                 &:nth-child(3) {
@@ -195,6 +197,16 @@
             &:nth-child(2n) {
                 border-left: 1px solid $brandBackground;
                 border-right: 1px solid $brandBackground;
+            }
+
+            .sale-conditions {
+                display: flex;
+                
+                .performed {
+                    width: 14px;
+                    height: auto;
+                    margin-left: 10px;
+                }
             }
         }
     }
@@ -308,13 +320,13 @@
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    stroke: $brandPantonBlue !important;
+    stroke: $brandPantonGreen !important;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
 
 .CircularProgressbar .CircularProgressbar-text {
-    fill: $brandPantonBlue !important;
+    fill: $brandPantonBlack !important;
     font-size: 20px;
     // dominant-baseline: middle;
     text-anchor: middle;

@@ -32,14 +32,14 @@ const NewPassword = () => {
 
     const onSubmit = () => {
         const passwords: any = { newPass, repeatNewPass };
-        dispatch(newPassword(passwords));
+        // dispatch(newPassword(passwords));
     };
 
     /**
      * ********** Скрыть/Отобразить Пароль **********
      */
     const showOrHidePassword = () => {
-        const password: HTMLElement | any = document.getElementById('pass');
+        const password: HTMLElement | any = document.getElementById('newPass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
         access.classList.toggle('access');
         if (password.type === 'password') {
@@ -53,7 +53,7 @@ const NewPassword = () => {
      * ********** Скрыть/Отобразить Пароль **********
      */
     const showOrHidePasswordRepeat = () => {
-        const password: HTMLElement | any = document.getElementById('repeatPass');
+        const password: HTMLElement | any = document.getElementById('repeatNewPass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
         access.classList.toggle('access');
         if (password.type === 'password') {
@@ -112,7 +112,7 @@ const NewPassword = () => {
                 <h1 className="auth__heading">
                     <h1>Новый пароль</h1>
                 </h1>
-                <form className="auth__forms forms" style={{ overflow: 'hidden' }}>
+                <form className="auth__forms forms" onSubmit={onSubmit} style={{ overflow: 'hidden' }}>
                     <div className="auth__group">
                         <label>
                             {error ? (
@@ -179,16 +179,14 @@ const NewPassword = () => {
                     </div>
                     {newPass && repeatNewPass ? (
                         <div>
-                            <Link to="/">
-                                <button onClick={onSubmit} type="submit" className="auth__button">
-                                    Сбросить
-                                </button>
-                            </Link>
+                            <button type="submit" className="auth__button">
+                                Изменить пароль
+                            </button>
                         </div>
                     ) : (
                         <div>
                             <button type="submit" className="auth__button inaccessible">
-                                Войти
+                                Изменить пароль
                             </button>
                         </div>
                     )}

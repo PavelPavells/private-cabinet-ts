@@ -1,42 +1,8 @@
-/**
- * ********** Импорт зависимостей **********
- */
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { PersonalCabinet } from '../../store/store';
 
-/**
- * ********** Импорт экшенов **********
- */
-import { resetPassword } from '../../actions/authActions';
-
-/**
- * ********** Импорт стилей **********
- */
-import './Auth.scss';
-
-const Reset = () => {
-    const [email, setEmail] = useState('');
-
-    /**
-     * ********** Импорт состояния pricelist из Redux **********
-     * */
-    const { error } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-
-    /**
-     * Отправка действий для изменения на сервере
-     * */
-    const dispatch = useDispatch();
-
-    const onSubmit = () => {
-        dispatch(resetPassword(email));
-    };
-
+const SuccessRegister = () => {
     return (
-        /**
-         * Компонент Reset
-         */
         <div className="auth">
             <div className="auth__left left">
                 <div className="auth__logo">
@@ -77,47 +43,23 @@ const Reset = () => {
                     <div className="auth__text">Личный кабинет партнера</div>
                 </div>
                 <div className="auth__heading">
-                    <h1>Восстановить пароль</h1>
+                    <h1>Регистрация</h1>
                 </div>
-                <div className="auth__necessary">Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
-                <form className="auth__forms forms" onSubmit={onSubmit}>
-                    <div className="auth__group">
-                        <label>
-                            <div className="auth__field field">
-                                <input
-                                    onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-                                    value={email}
-                                    id="email"
-                                    type="text"
-                                    className="auth__input"
-                                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                                    title="Ваш E-mail должен содержать @ и минимум одну точку"
-                                    autoFocus
-                                    required
-                                />
-                                <label className="auth__label">Введите e-mail</label>
-                            </div>
-                        </label>
+                <div className="success">
+                    <p style={{ marginBottom: '10px' }}>Вы успешно зарегистрировались.</p>
+                    <p>
+                        На указанный адрес электронной почты отправлена
+                        <br />
+                        информация о регистрации.
+                    </p>
+                </div>
+                <div className="auth__registration registration" style={{ marginTop: '40px' }}>
+                    <div className="registration__no-login">Уже зарегистрированы?</div>
+                    <div className="registration__link">
+                        <Link to="/">Авторизуйтесь</Link>
+                        {/* &nbsp;&nbsp;или войдите с помощью соцсетей */}
                     </div>
-                    {email ? (
-                        <div>
-                            <button type="submit" className="auth__button">
-                                Восстановить
-                            </button>
-                        </div>
-                    ) : (
-                        <div>
-                            <button type="submit" className="auth__button inaccessible">
-                                Восстановить
-                            </button>
-                        </div>
-                    )}
-                    <div className="auth__error">{error}</div>
-                    <Link className="auth__back back" to="/">
-                        <div className="back__arrow" />
-                        Вернуться к авторизации
-                    </Link>
-                </form>
+                </div>
             </div>
             <div className="auth__right right">
                 <div className="right__image image">
@@ -128,4 +70,4 @@ const Reset = () => {
     );
 };
 
-export default Reset;
+export default SuccessRegister;

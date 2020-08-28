@@ -18,13 +18,13 @@ import {
     USER_LOADING,
     DATA_LOADING_REQUEST,
     LoginReq,
-    GET_ERRORS,
     SET_USER_COMPANY_NAME,
     LoginRes,
     ErrorPageData,
     CHANGE_ERROR_NAME,
     CHANGE_USER_DATA_ERROR_REGISTER,
-    GET_ERROR_REGISTER
+    GET_ERROR_REGISTER,
+    GET_DATA_BUSINESS
 } from '../constants/authTypes';
 
 /**
@@ -110,6 +110,14 @@ export const getErrorRegister = (data: any): AuthActions => ({
 });
 
 /**
+ * ********** Экшен для обработки данных на странице Регистрация в поле "Вид деятельности" **********
+ */
+export const dataRegisterBusinessTypes = (data: any): AuthActions => ({
+    type: GET_DATA_BUSINESS,
+    payload: data
+});
+
+/**
  * ********** Экшен для логина существующего пользователя **********
  */
 export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions>) => {
@@ -122,10 +130,12 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
             axios
                 .post(`${site}login`, { login, passHash })
                 .then((response: AxiosResponse<LoginRes>) => {
-                    const { partnerUuid, partnerName } = response.data;
+                    const { partnerUuid, partnerName, accountFullName, adminStr } = response.data;
                     // Установить токен в localStorage
                     localStorage.setItem('registerUuid', JSON.stringify(partnerUuid));
                     localStorage.setItem('partnerName', JSON.stringify(partnerName));
+                    localStorage.setItem('accountFullName', JSON.stringify(accountFullName));
+                    localStorage.setItem('adminStr', JSON.stringify(adminStr));
                     // Установить токен в заголовок авторизации
                     setAuthToken(partnerUuid);
                     dispatch(setUserCompanyName(partnerName));
@@ -149,49 +159,6 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
 };
 
 /**
- * ********** Экшен для регистрации нового пользователя **********
- */
-export const resetPassword = (email: string, history?: any) => (dispatch: Dispatch<AuthActions>) => {
-    axios
-        .post(`${site}/reset`, email)
-        .then(() => history.push('/'))
-        .catch((err) =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
-};
-
-/**
- * ********** Экшен для запроса на сброс пароля **********
- */
-export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
-    axios
-        .post(`${site}/new-password`, password)
-        .then((response: AxiosResponse) => {
-            // Сохранить пришедший токен в localStorage
-
-            // Установить токен в localStorage
-            const { token } = response.data;
-            localStorage.setItem('jwtNewPassword', JSON.stringify(token));
-            // Установить токен в заголовок авторизации
-            setAuthToken(token);
-            // Декодировать токен, чтобы получать пользователя
-            // const decoded = jwt_decode(token);
-            // Установить текущего пользователя
-            // @ts-ignore
-            // dispatch(setCurrentUser(decoded));
-        })
-        .catch((err) =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
-};
-
-/**
  * ********** Экшен для доступа на регистрацию **********
  */
 // @ts-ignore
@@ -202,6 +169,7 @@ export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
         .then((response: AxiosResponse<ErrorPageData>) => {
             dispatch(changeErrorName(response.data.result));
             dispatch(changeUserDataErrorRegister(response.data.payload));
+            dispatch(dataRegisterBusinessTypes(response.data.businessTypes));
         })
         .catch((err: any) => {
             return err;
@@ -212,8 +180,7 @@ export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
  * ********** Экшен для запроса на сброс пароля **********
 
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const registerUser = (userData: userDataRegister, history: any) => (dispatch: Dispatch<AuthActions>) => {
+export const registerUser = (userData: userDataRegister) => (dispatch: Dispatch<AuthActions>) => {
     try {
         const { pass } = userData;
         const passCypher = md5(pass);
@@ -252,9 +219,49 @@ export const registerUser = (userData: userDataRegister, history: any) => (dispa
                 agreement
             })
             .then((response) => {
+                // console.log(response.data);
                 dispatch(getErrorRegister(response.data));
             });
         // .then(() => history.push('/register'));
+    } catch (error) {
+        return error;
+    }
+};
+
+/**
+ * ********** Экшен для регистрации нового пользователя **********
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const resetPassword = (email: string, history?: any) => (dispatch: Dispatch<AuthActions>) => {
+    try {
+        axios.post(`${site}/reset`, email);
+        // .then(() => history.push('/reset'))
+        // .then((response) => response.data);
+    } catch (error) {
+        return error;
+    }
+};
+
+/**
+ * ********** Экшен для запроса на сброс пароля **********
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
+    try {
+        axios.post(`${site}/new-password`, password).then((response: AxiosResponse) => {
+            // Сохранить пришедший токен в localStorage
+
+            // Установить токен в localStorage
+            const { token } = response.data;
+            localStorage.setItem('jwtNewPassword', JSON.stringify(token));
+            // Установить токен в заголовок авторизации
+            setAuthToken(token);
+            // Декодировать токен, чтобы получать пользователя
+            // const decoded = jwt_decode(token);
+            // Установить текущего пользователя
+            // @ts-ignore
+            // dispatch(setCurrentUser(decoded));
+        });
     } catch (error) {
         return error;
     }

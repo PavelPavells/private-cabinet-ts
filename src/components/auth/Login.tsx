@@ -201,7 +201,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input warning"
                                             autoCorrect="off"
-                                            minLength={7}
+                                            minLength={8}
                                             maxLength={255}
                                             // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
                                             // title="Поле должно содержать минимум 8 знаков, цифры и буквы"
@@ -219,7 +219,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             type="password"
                                             className="auth__input"
                                             autoCorrect="off"
-                                            minLength={7}
+                                            minLength={8}
                                             maxLength={255}
                                             // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
                                             // title="Поле должно содержать минимум 8 знаков, цифры и буквы"
@@ -231,13 +231,11 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                 )}
                             </label>
                         </div>
-                        {/*
-                            <div className="auth__password-ask ask">
-                                <a href="/reset" className="ask__password">
-                                    Не помню пароль
-                                </a>
-                            </div>
-                            */}
+                        <div className="auth__password-ask ask">
+                            <a href="/reset" className="ask__password">
+                                Не помню пароль
+                            </a>
+                        </div>
                         {login && passHash ? (
                             <div>
                                 <div>

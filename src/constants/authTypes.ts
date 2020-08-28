@@ -12,6 +12,8 @@ export const NEW_PASSWORD_USER = 'NEW_PASSWORD';
 export const CHANGE_ERROR_NAME = 'CHANGE_ERROR_NAME';
 export const CHANGE_USER_DATA_ERROR_REGISTER = 'CHANGE_USER_DATA_ERROR_REGISTER';
 export const GET_ERROR_REGISTER = 'GET_ERROR_REGISTER';
+export const CHANGE_EMAIL_ADDRESS = 'CHANGE_EMAIL_ADDRESS';
+export const GET_DATA_BUSINESS = 'GET_DATA_BUSINESS';
 
 /**
  * *********** Интерфейсы стейта Авторизации/Регистрации **********
@@ -79,6 +81,11 @@ export interface userDataErrorRegister {
     isValid: number | null;
 }
 
+export interface dataRegisterBusinessTypes {
+    partnerBusinessTypeUuid: string;
+    partnerBusinessTypeName: string;
+}
+
 export interface AuthState {
     isFetching: boolean;
     isAuthenticated: boolean;
@@ -86,6 +93,7 @@ export interface AuthState {
     errorResult: ResponseStatus;
     errorRegisterResult: any;
     invitePayload: userDataErrorRegister;
+    businessTypes: dataRegisterBusinessTypes;
     partnerName: string;
     accountFullName: string;
     loading: boolean;
@@ -95,6 +103,11 @@ export interface AuthState {
 export interface ErrorPageData {
     result: ResponseStatus;
     payload: userDataErrorRegister;
+    businessTypes: dataRegisterBusinessTypes;
+}
+
+export interface RegisterPageData {
+    result: ResponseStatus;
 }
 
 export interface LoginReq {
@@ -112,6 +125,7 @@ export interface LoginRes {
     adminStr: string;
     creationDate: string;
     agentName: string;
+    accountFullName: string;
     err: string;
     errorMessage: string;
 }
@@ -159,12 +173,23 @@ interface getErrorRegister {
     payload: any;
 }
 
+// interface changeEmailAdress {
+//     type: typeof CHANGE_EMAIL_ADDRESS;
+//     payload: any;
+// }
+
+interface registerBusinessTypes {
+    type: typeof GET_DATA_BUSINESS;
+    payload: dataRegisterBusinessTypes;
+}
+
 export type AuthActions =
     | LoginRequest
     | getErrorRegister
     | changeErrorCode
     | changeErrorName
     | registerUser
+    | registerBusinessTypes
     | loginUser
     | setCurrentUser
     | setUserLoading

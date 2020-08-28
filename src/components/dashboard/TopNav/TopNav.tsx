@@ -33,7 +33,7 @@ const TopNav = () => {
         const sideNav: Element | any = document.querySelector('.right');
         sideNav.classList.toggle('invisible');
     };
-    if (isAuthenticated && user) {
+    if (isAuthenticated && user && main) {
         return (
             <nav className="nav">
                 {/* ref={node => (this.node = node)} */}

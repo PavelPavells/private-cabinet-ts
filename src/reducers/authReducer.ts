@@ -13,6 +13,7 @@ import {
     CHANGE_USER_DATA_ERROR_REGISTER,
     CHANGE_ERROR_NAME,
     GET_ERROR_REGISTER,
+    GET_DATA_BUSINESS,
     SET_USER_COMPANY_NAME
 } from '../constants/authTypes';
 
@@ -37,6 +38,10 @@ const initialState: AuthState = {
         alreadyUsed: 0,
         regEmail: '',
         isValid: null
+    },
+    businessTypes: {
+        partnerBusinessTypeUuid: '',
+        partnerBusinessTypeName: ''
     },
     partnerName: '',
     accountFullName: '',
@@ -115,6 +120,12 @@ export default function (state = initialState, action: AuthActions): AuthState {
                 ...state,
                 isFetching: false,
                 errorRegisterResult: action.payload
+            };
+        case GET_DATA_BUSINESS:
+            return {
+                ...state,
+                isFetching: false,
+                businessTypes: action.payload
             };
         default:
             return state;

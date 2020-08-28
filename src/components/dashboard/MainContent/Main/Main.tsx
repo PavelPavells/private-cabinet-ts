@@ -202,7 +202,23 @@ const MainComponent = () => {
                                                 <span>{index.discountSum}</span>
                                             </div>
                                             <div className="block-table__element">
-                                                <span>{index.conditions === 0 ? 'Выполнено' : 'Не выполнено'}</span>
+                                                {index.conditions === 0 ? (
+                                                    <div className="sale-conditions">
+                                                        <span>Выполнено</span>
+                                                        <div className="performed">
+                                                            <svg viewBox="0 0 14 10">
+                                                                <path
+                                                                    d="M12.885 0a.951.951 0 00-.654.29C9.87 2.658 7.343 5.369 4.984 7.76L1.617 4.988A.951.951 0 10.413 6.452l4.043 3.33a.951.951 0 001.279-.06c2.556-2.562 5.33-5.563 7.848-8.086A.951.951 0 0012.885 0z"
+                                                                    fill="#20CD32"
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="sale-conditions">
+                                                        <span>Не выполнено</span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     );

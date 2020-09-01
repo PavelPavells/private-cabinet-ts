@@ -3,13 +3,13 @@
  */
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector, /* useDispatch, */ shallowEqual } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
 
 /**
  * ********** Импорт экшенов **********
  */
-import { newPassword } from '../../actions/authActions';
+// import { newPassword } from '../../actions/authActions';
 
 /**
  * ********** Импорт стилей **********
@@ -28,7 +28,7 @@ const NewPassword = () => {
     /**
      * Отправка действий для изменения на сервере
      * */
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const onSubmit = () => {
         const passwords: any = { newPass, repeatNewPass };

@@ -109,7 +109,8 @@ class SideNav extends React.PureComponent<SideNavProps> {
                                     <div className="font-block-hover" />
                                 </li>
                             </NavLink>
-                            {/* <NavLink exact activeClassName="active-page" to="/admin-panel" className="sub-link">
+                            {/*
+                            <NavLink exact to="/dashboard" className="sub-link">
                                 <li className="subparagraph">
                                     <div className="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -119,12 +120,13 @@ class SideNav extends React.PureComponent<SideNavProps> {
                                         </svg>
                                     </div>
                                     <div className="list-name">
-                                        Административная панель
+                                        Новости
                                         <div className="list-name__icon" />
                                     </div>
                                     <div className="font-block-hover" />
                                 </li>
-                            </NavLink> */}
+                            </NavLink>
+                            */}
                         </div>
                     </div>
                     <NavLink exact activeClassName="active-page" to="/price-list" className="nav-link">
@@ -175,8 +177,7 @@ class SideNav extends React.PureComponent<SideNavProps> {
                             <div className="font-block-hover">Отгрузки</div>
                         </li>
                     </NavLink>
-                    {/*
-                    <NavLink exact activeClassName="active-page" to="/account" className="nav-link">
+                    {/* <NavLink exact activeClassName="active-page" to="/profile" className="nav-link">
                         <li className="font">
                             <div className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
@@ -186,7 +187,7 @@ class SideNav extends React.PureComponent<SideNavProps> {
                             <div className="list-name">Профиль</div>
                             <div className="font-block-hover">Профиль</div>
                         </li>
-                    </NavLink>
+                    </NavLink> 
                     <NavLink exact activeClassName="active-page" to="/settings" className="nav-link">
                         <li className="font">
                             <div className="icon">
@@ -197,49 +198,36 @@ class SideNav extends React.PureComponent<SideNavProps> {
                             <div className="list-name">Настройки</div>
                             <div className="font-block-hover">Настройки</div>
                         </li>
-                    </NavLink>
+                    </NavLink> */}
                     <div className="nav-link">
-                        <div className="font" onClick={this.handleClickMainSubmenu}>
+                        <NavLink to="/profile" className="font" onClick={this.handleClickMainSubmenu}>
                             <div className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
-                                    <path
-                                        className="cls-1"
-                                        d="M21.08,17.7H18.64a3.15,3.15,0,0,0-6.12,0H.92a1,1,0,0,0,0,1.91H12.52a3.15,3.15,0,0,0,6.12,0h2.44a1,1,0,0,0,0-1.91Z"
-                                    />
-                                    <path
-                                        className="cls-1"
-                                        d="M21.08,2.39H18.64a3.15,3.15,0,0,0-6.12,0H.92a.94.94,0,0,0-.92,1,.94.94,0,0,0,.92,1H12.52a3.15,3.15,0,0,0,6.12,0h2.44a.94.94,0,0,0,.92-1A.94.94,0,0,0,21.08,2.39Z"
-                                    />
-                                    <path
-                                        className="cls-1"
-                                        d="M21.08,10H9.48A3.22,3.22,0,0,0,6.42,7.65,3.22,3.22,0,0,0,3.36,10H.92A1,1,0,0,0,.92,12H3.36a3.23,3.23,0,0,0,3.06,2.39A3.22,3.22,0,0,0,9.48,12H21.08a1,1,0,0,0,0-1.91Z"
-                                    />
+                                    <path d="M21.4824 8.49506L19.7915 8.12747C19.6444 7.67731 19.4623 7.23822 19.2473 6.81525L20.1834 5.35918C20.3506 5.09901 20.3138 4.75745 20.0953 4.53891L17.4611 1.90472C17.2426 1.68619 16.901 1.64943 16.6408 1.8166L15.1848 2.75269C14.7618 2.53767 14.3227 2.35556 13.8725 2.20853L13.5049 0.517639C13.4393 0.215515 13.1718 0 12.8626 0H9.13741C8.82823 0 8.56068 0.215515 8.49506 0.517639L8.12747 2.20853C7.67731 2.35556 7.23822 2.53767 6.81525 2.75269L5.35918 1.8166C5.09901 1.64943 4.75745 1.68619 4.53891 1.90472L1.90472 4.53891C1.68619 4.75745 1.64943 5.09901 1.8166 5.35918L2.75269 6.81525C2.53767 7.23822 2.35556 7.67731 2.20853 8.12747L0.517639 8.49506C0.215515 8.56085 0 8.82823 0 9.13741V12.8626C0 13.1718 0.215515 13.4391 0.517639 13.5049L2.20853 13.8725C2.35556 14.3227 2.53767 14.7618 2.75269 15.1848L1.8166 16.6408C1.64943 16.901 1.68619 17.2426 1.90472 17.4611L4.53891 20.0953C4.75745 20.3138 5.09901 20.3506 5.35918 20.1834L6.81525 19.2473C7.23822 19.4623 7.67731 19.6444 8.12747 19.7915L8.49506 21.4824C8.56068 21.7845 8.82823 22 9.13741 22H12.8626C13.1718 22 13.4393 21.7845 13.5049 21.4824L13.8725 19.7915C14.3227 19.6444 14.7618 19.4623 15.1848 19.2473L16.6408 20.1834C16.901 20.3506 17.2426 20.314 17.4611 20.0953L20.0953 17.4611C20.3138 17.2426 20.3506 16.901 20.1834 16.6408L19.2473 15.1848C19.4623 14.7618 19.6444 14.3227 19.7915 13.8725L21.4824 13.5049C21.7845 13.4391 22 13.1718 22 12.8626V9.13741C22 8.82823 21.7845 8.56085 21.4824 8.49506ZM14.9442 11C14.9442 13.1748 13.1748 14.9442 11 14.9442C8.82521 14.9442 7.05577 13.1748 7.05577 11C7.05577 8.82521 8.82521 7.05577 11 7.05577C13.1748 7.05577 14.9442 8.82521 14.9442 11Z" />
                                 </svg>
                             </div>
                             <div className="list-name">
-                                Управление
+                                Настройки
                                 <div className="list-name__icon" />
                             </div>
                             <div className="font-block-hover">Управление</div>
-                        </div>
+                        </NavLink>
                         <div className="submenu">
-                            <NavLink exact activeClassName="active-page" to="/control" className="sub-link">
+                            <NavLink exact activeClassName="active-page" to="/profile" className="sub-link">
                                 <li className="subparagraph">
                                     <div className="icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14.44">
-                                            <path
-                                                className="cls-1"
-                                                d="M15,6.19a3,3,0,0,0,3-3.09,3,3,0,1,0-6,0A3,3,0,0,0,15,6.19Zm-8,0a3,3,0,0,0,3-3.09A3,3,0,0,0,7,0,3,3,0,0,0,4,3.09,3,3,0,0,0,7,6.19ZM7,8.25c-2.33,0-7,1.21-7,3.61v2.58H14V11.86C14,9.46,9.33,8.25,7,8.25Zm8,0c-.29,0-.62,0-1,.05a4.38,4.38,0,0,1,2,3.56v2.58h6V11.86C22,9.46,17.33,8.25,15,8.25Z"
-                                            />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <path d="M11 0C7.68786 0 5.00166 2.5696 5.00166 5.7387V6.6957C5.00166 9.8659 7.68786 12.4344 11.0022 12.4344C14.3165 12.4344 17.0027 9.8659 17.0027 6.6957V5.7387C17.0016 2.5696 14.3154 0 11 0ZM11 15.3043C6.99266 15.3043 1.85236 17.3767 0.373961 19.2159C-0.540139 20.3533 0.329961 22 1.82816 22H20.1718C21.67 22 22.5401 20.3533 21.626 19.217C20.1476 17.3778 15.0051 15.3043 11 15.3043Z" />
                                         </svg>
                                     </div>
                                     <div className="list-name">
-                                        Пользователи
+                                        Профиль
                                         <div className="list-name__icon" />
                                     </div>
                                     <div className="font-block-hover">Главная</div>
                                 </li>
                             </NavLink>
+                            {/*
                             <NavLink exact activeClassName="active-page" to="/notification" className="sub-link">
                                 <li className="subparagraph">
                                     <div className="icon">
@@ -257,9 +245,9 @@ class SideNav extends React.PureComponent<SideNavProps> {
                                     <div className="font-block-hover">Главная</div>
                                 </li>
                             </NavLink>
+                            */}
                         </div>
                     </div>
-                    */}
                     <NavLink exact activeClassName="active-page" to="/configurator" className="nav-link">
                         <li className="font">
                             <div className="icon">

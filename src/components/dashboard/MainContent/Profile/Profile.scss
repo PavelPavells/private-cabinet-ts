@@ -1,0 +1,221 @@
+@import "../../../../styles/base.scss";
+
+.main-content {
+    height: calc(100vh - 70px - 20px - 20px);
+    flex: 2 100%;
+    flex-direction: column;
+    position: sticky;
+    top: calc(70px + 20px);
+    margin: 0 17px 0 20px;
+    transition: all 0.5s ease 0s;
+    font-family: "Gotham Pro Regular";
+    font-size: 14px;
+    color: $brandPantonGrey;
+    overflow: auto;
+}
+// .width {
+//     height: calc(100vh - 70px)!important;
+//     top: 70px;
+//     margin: 0 1px 0 2px!important;
+//     overflow-x: hidden;
+//     background: $white;
+// }
+
+/**
+ * ********** Стили компонента Профиль **********
+ */
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // width: 927px;
+    padding: 0 17px 0 0px;
+    // background-color: #ffffff;
+
+    .profile__header {
+        width: 99%;
+        // margin-top: 31px;
+        margin-left: 37px;
+        font-size: 20px;
+        line-height: 40px;
+        font-family: $font-regular;
+    }
+
+    .profile__main {
+        display: flex;
+        flex-direction: column;
+        width: 927px;
+        background-color: $white;
+
+        .main__user {
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 35px;
+            margin: 37px;
+            border-bottom: 1px solid $brandBackground;
+
+            .user__photo {
+                display: flex;
+                width: 159px;
+                height: 159px;
+                margin-right: 30px;
+                border-radius: 50%;
+                background: url('../../../../images/profile_avatar.svg') no-repeat center;
+                background-color: $brandBackground;
+
+                &:hover {
+                    width: 159px;
+                    height: 159px;
+                    background: url('../../../../images/change_avatar_pensil.svg') $brandPantonSubText no-repeat center;
+                }
+            }
+
+            .photo__change {
+                display: flex;
+                position: absolute;
+                left: 5px;
+                bottom: -60px;
+                width: 150px;
+                // height: 90px;
+                background-color: $white;
+                // border: 1px solid $brandBorderColor;
+                box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+                z-index: 1000;
+
+                .change__list {
+                    width: 100%;
+                }
+
+                .change__list > li {
+                    width: 100%;
+                    font-size: 12px;
+                    padding: 7px 10px;
+
+                    &:hover {
+                        background-color: $brandBackground;
+                    }
+                }
+            }
+
+            .user__info {
+                display: flex;
+                flex-direction: column;
+
+                .info__status {
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    color: $brandPantonSubText;
+                }
+
+                .info__name {
+                    margin-bottom: 20px;
+                    font-size: 16px;
+                    color: $brandPantonGrey;
+                }
+
+                .info__data {
+                    font-size: 14px;
+                    color: $brandPantonSubText;
+                }
+            }
+        }
+
+        .main__inputs {
+            display: flex;
+            flex-direction: column;
+            // margin: 0 50px;
+
+            .forms__wrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 28px;
+                margin: 0 50px;
+                
+                &:nth-child(2),
+                &:nth-child(4) {
+                    border-bottom: 1px solid $brandBackground;
+                }
+                &:nth-child(3) {
+                    padding-top: 40px;
+                }
+
+                .forms__field {
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    width: 48%;
+                    font-size: 16px;
+
+                    .field__input {
+                        padding: 4px 0;
+                        border-bottom: 1px solid $brandBorderColor;
+                    }
+
+                    .field__label {
+                        // position: absolute;
+                        font-size: 14px;
+
+                        &.active {
+                            position: relative;
+                            top: 0;
+                            font-size: 12px;
+                            color: $brandPantonSubText;
+                        }
+                    }
+                }
+            }
+
+            .forms__notifications {
+                display: flex;
+                flex-direction: column;
+                margin: 40px 50px 30px 50px;
+
+                .notifications__wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding-bottom: 10px;
+
+                    input[type="checkbox"] {
+                        width: 16px;
+				        height: 16px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            .forms__button {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                padding: 20px 0px;
+                background-color: $brandBackground;
+
+                .button {
+                    width: 196px;
+                    height: 30px;
+                    border-radius: 30px;
+                    background-color: $brandPantonBlue;
+                    color: $white;
+                    font-family: $font-regular;
+                    border: 1px solid transparent;
+    
+                    &:hover {
+                        // width: 196px;
+                        // height: 30px;
+                        // border-radius: 30px;
+                        // background-color: $white;
+                        // color: $brandPantonBlue;
+                        // font-family: $font-regular;
+                        // border: 1px solid $brandPantonBlue;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,7 @@ const setAuthToken = (userUuid: string) => {
         /**
          * Применить авторизационный токен к каждому запросу, если вы вошли в систему
          */
-        axios.defaults.headers.common.Authorization = userUuid;
+        axios.defaults.headers.common.Authorization = `Basic ${userUuid}`;
     } else {
         /**
          * Удалить авторизационный токен

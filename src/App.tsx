@@ -11,7 +11,7 @@ import { Provider, shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
 import setAuthToken from './__utils__/setAuthToken';
-import { setCurrentUser, getAccessRegister } from './actions/authActions';
+import { setCurrentUser, getAccessRegister, logoutUser } from './actions/authActions';
 
 /**
  * ********** Импорт глобального сосотояния **********
@@ -52,26 +52,24 @@ if (localStorage.registerUuid) {
     /**
      * ********** Установить пользователя и поле isAuthenticated для Приватного Роута **********
      */
-    // @ts-ignore
     store.dispatch(setCurrentUser(registerUuid));
 
+    const partnerName = localStorage.getItem('partnerName');
+    const accountFullName = localStorage.getItem('accountFullName');
+    const adminStr = localStorage.getItem('adminStr');
     /**
      * ********** Проверка токена на истекшость по времени(Устанавливается в Бэкенде) **********
      */
     // const currentTime = Date.now() / 1000; // в миллисекундах
     // @ts-ignore
     // if (decoded.exp < currentTime) {
-    //     /**
-    //      * ********** Логаут пользователя **********
-    //      */
-    //     // @ts-ignore
-    //     store.dispatch(logoutUser()); /** uncommented */
-
-    //     /**
-    //      * ********** Редирект на страницу Логина **********
-    //      */
-    //     window.location.href = './';
-    // }
+    if (!partnerName || !accountFullName || !adminStr) {
+        /**
+         * ********** Логаут пользователя **********
+         */
+        store.dispatch(logoutUser());
+        window.location.href = './';
+    }
 }
 
 const App = () => {

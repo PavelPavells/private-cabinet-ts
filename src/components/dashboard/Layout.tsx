@@ -16,7 +16,7 @@ import { PersonalCabinet } from '../../store/store';
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
 import MainComponent from './MainContent/Main/Main';
-import Account from './MainContent/Account/Account';
+import Account from './MainContent/Profile/Profile';
 import AdminPanel from './MainContent/AdminPanel/AdminPanel';
 import SalePartners from './MainContent/SalePartners/SalePartners';
 import PriceList from './MainContent/PriceList/PriceList';
@@ -48,7 +48,7 @@ const Layout = () => {
                     <Route path="/dashboard" component={MainComponent} />
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />
-                    <Route path="/account" component={Account} />
+                    <Route path="/profile" component={Account} />
                     <Route path="/price-list" component={PriceList} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/settings" component={Settings} />

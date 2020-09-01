@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './404.scss';
 import { shallowEqual, useSelector } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
@@ -8,15 +8,15 @@ import Loader from '../../__utils__/Spinner';
 
 const NotFound = () => {
     const { errorResult, isFetching } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // console.log(errorResult);
-    // console.log(errorRegisterResult);
-    // console.log(invitePayload);
     if (!isFetching) {
         return (
             <div className="error">
                 <div className="error__image" />
                 <div className="error__header">Ошибка</div>
-                {!isFetching && errorResult.code === 4 ? (
+                <div>
+                    <div className="error__code">{errorResult.message}</div>
+                </div>
+                {/* {!isFetching && errorResult.code === 4 ? (
                     <div>
                         <div className="error__description">Запрошенная вами страница не найдена</div>
                         <div className="error__code">{errorResult.message}</div>
@@ -30,11 +30,7 @@ const NotFound = () => {
                             </a>
                         </div>
                     </div>
-                ) : (
-                    <div>
-                        <div className="error__code">{errorResult.message}</div>
-                    </div>
-                )}
+                ) : null} */}
             </div>
         );
     }

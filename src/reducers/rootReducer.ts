@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import errorReducer from './errorReducer';
 import authReducer from './authReducer';
-import accountReducer from './accountReducer';
+import profileReducer from './profileReducer';
 import controlReducer from './controlReducer';
 import mainReducer from './mainReducer';
 import paymentReducer from './paymentReducer';
@@ -15,7 +15,7 @@ import webAppReducer from './webAppReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    account: accountReducer,
+    profile: profileReducer,
     control: controlReducer,
     main: mainReducer,
     payment: paymentReducer,

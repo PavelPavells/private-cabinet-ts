@@ -51,7 +51,6 @@ const Register = () => {
     const [website, setWebsite] = useState('');
     const [business, setBusiness] = useState('Торговая компания');
     const [agreement, setAgreement] = useState(0);
-    // const [successRegister, setSuccessRegister] = useState(null);
 
     /**
      * ********** Импорт состояния из Redux **********

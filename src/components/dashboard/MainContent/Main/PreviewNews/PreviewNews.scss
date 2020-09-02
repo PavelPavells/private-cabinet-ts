@@ -1,0 +1,53 @@
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/reset.scss';
+
+.preview__news {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    .news__icon {
+        width: 90px;
+        height: 90px;
+        margin-right: 30px;
+        background: $brandBackground;
+    }
+
+    .news__info {
+        display: flex;
+        flex: 2 1;
+        flex-direction: column;
+
+        .info__title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+
+            .offer {
+                margin-right: 20px;
+                padding: 5px;
+                color: $white;
+                background-color: $brandPantonBlue;
+            }
+
+            .date {
+                color: $brandPantonSubText;
+            }
+        }
+
+        .info__subtitle {
+            margin: 0px 0px 12px;
+            font-size: 16px;
+        }
+
+        .info__description {
+            color: $brandPantonSubText;
+        }
+    }
+
+    .news__button > svg {
+        fill: transparent;
+        stroke: $brandPantonBlue;
+    }
+}

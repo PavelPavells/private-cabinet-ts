@@ -1,0 +1,29 @@
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/reset.scss';
+
+.company__news {
+    display: flex;
+    width: 100%;
+
+    .news__info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .info__title {
+            border-bottom: 1px solid $brandPantonFonts;
+            padding: 10px 0;
+            margin-bottom: 0px;
+            color: $brandPantonBlack; 
+            
+            .title__icon {
+                margin: 20px;
+            }
+
+            .title__date {
+                color: $brandPantonBlue;
+                margin-right: 19px;
+            }
+        }
+    }
+}

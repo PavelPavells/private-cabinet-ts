@@ -1,13 +1,13 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 
 /**
  * ********** Импорт экшенов **********
  */
-import { fetchDataAccount } from '../../../../actions/profileActions';
+// import { fetchDataAccount } from '../../../../actions/profileActions';
 
 /**
  * Импорт Лоадера из утилит
@@ -21,14 +21,14 @@ import './Profile.scss';
 import { PersonalCabinet } from '../../../../store/store';
 
 const Profile = () => {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const [repeatpass, setRepeatpass] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [secondname, setSecondname] = useState('');
-    const [phone, setPhone] = useState('');
-    const [agreement, setAgreement] = useState(0);
+    // const [email, setEmail] = useState('');
+    // const [pass, setPass] = useState('');
+    // const [repeatpass, setRepeatpass] = useState('');
+    // const [firstname, setFirstname] = useState('');
+    // const [lastname, setLastname] = useState('');
+    // const [secondname, setSecondname] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [agreement, setAgreement] = useState(0);
     const [changeAvatar, setChangeAvatar] = useState(false);
 
     /**

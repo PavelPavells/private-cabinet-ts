@@ -16,6 +16,7 @@ import { PersonalCabinet } from '../../store/store';
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
 import MainComponent from './MainContent/Main/Main';
+import News from './MainContent/News/News';
 import Account from './MainContent/Profile/Profile';
 import AdminPanel from './MainContent/AdminPanel/AdminPanel';
 import SalePartners from './MainContent/SalePartners/SalePartners';
@@ -46,6 +47,7 @@ const Layout = () => {
                 <SideNav />
                 <Switch>
                     <Route path="/dashboard" component={MainComponent} />
+                    <Route path="/news" component={News} />
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />
                     <Route path="/profile" component={Account} />

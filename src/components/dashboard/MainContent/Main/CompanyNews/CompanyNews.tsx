@@ -48,6 +48,7 @@ const CompanyNews = () => {
                     <span className="title__date">28.10.2020</span>
                     <span className="title__info">Разработка первой электронной платы для устройств бесконтактно</span>
                 </li>
+                {/*
                 <li className="info__title">
                     <span className="title__icon">
                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +96,7 @@ const CompanyNews = () => {
                     </span>
                     <span className="title__date">28.10.2020</span>
                     <span className="title__info">Разработка первой электронной платы для устройств бесконтактно</span>
-                </li>
+                </li> */}
             </ul>
         </div>
     );

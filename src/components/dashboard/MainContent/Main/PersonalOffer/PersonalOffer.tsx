@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import './PersonalOffer.scss';
 
 const PersonalOffer = () => {
-    const [personalSuggestion] = useState(true);
+    const [personalSuggestion] = useState(false);
     return (
         <>
             {personalSuggestion ? (
@@ -18,17 +18,17 @@ const PersonalOffer = () => {
                         <span>Персональные предложения</span>
                     </div>
                     <div className="block-container">
-                        <div className="block-element">
+                        <div className="block-element personal-offer">
                             <div className="block-element__info">
                                 <div className="block-element__title">
                                     <span className="offer">Перс. предложения</span>
                                     <span className="date">10 Августа 2020</span>
                                 </div>
                                 <div className="block-element__subtitle">
-                                    <span>Персональное предложение для постоянных партнеров</span>
+                                    <span>CARDDEX снова работает в штатном режиме</span>
                                 </div>
                                 <div className="block-element__description">
-                                    <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                    <span>Информируем, что наше производство работает в штатном режиме</span>
                                 </div>
                                 <div className="block-wrapper">
                                     <div className="block-element__button">
@@ -57,10 +57,10 @@ const PersonalOffer = () => {
                                     <span className="date">10 Августа 2020</span>
                                 </div>
                                 <div className="block-element__subtitle">
-                                    <span>Персональное предложение для постоянных партнеров</span>
+                                    <span>CARDDEX снова работает в штатном режиме</span>
                                 </div>
                                 <div className="block-element__description">
-                                    <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                    <span>Информируем, что наше производство работает в штатном режиме</span>
                                 </div>
                                 <div className="block-wrapper">
                                     <div className="block-element__button">
@@ -89,10 +89,10 @@ const PersonalOffer = () => {
                                     <span className="date">10 Августа 2020</span>
                                 </div>
                                 <div className="block-element__subtitle">
-                                    <span>Персональное предложение для постоянных партнеров</span>
+                                    <span>CARDDEX снова работает в штатном режиме</span>
                                 </div>
                                 <div className="block-element__description">
-                                    <span>Срок действия вашего персонального предложения подходит к концу</span>
+                                    <span>Информируем, что наше производство работает в штатном режиме</span>
                                 </div>
                                 <div className="block-wrapper">
                                     <div className="block-element__button">
@@ -115,7 +115,7 @@ const PersonalOffer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="more__offers">Все предложения</div>
+                    {/* <div className="more__offers">Все предложения</div> */}
                 </div>
             ) : (
                 <div className="main__block seggestions">

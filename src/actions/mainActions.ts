@@ -11,10 +11,14 @@ import {
     MainActions,
     MainList,
     MainListReq,
+    NewsList,
+    OffersList,
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS,
-    DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS,
     DATA_LOADING_FAILURE,
+    DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS,
+    DATA_LOADING_NEWS,
+    DATA_LOADING_OFFERS,
     ResponseStatus,
     MainListRes,
     TableList
@@ -57,6 +61,22 @@ export const fetchingDataFailure = (error: ResponseStatus): MainActions => ({
 });
 
 /**
+ * ********** Экшен для обработки новостей **********
+ */
+export const fetchDataNews = (news: NewsList): MainActions => ({
+    type: DATA_LOADING_NEWS,
+    payload: news
+});
+
+/**
+ * ********** Экшен для обработки предложений **********
+ */
+export const fetchDataOffers = (offers: OffersList): MainActions => ({
+    type: DATA_LOADING_OFFERS,
+    payload: offers
+});
+
+/**
  * ********** Экшен для запроса данных из компонентов **********
  */
 export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<MainActions>) => {
@@ -65,6 +85,8 @@ export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<Ma
         await axios.post(`${site}main`, data).then((response: AxiosResponse<MainListRes>) => {
             dispatch(fetchingDataSuccess(response.data.payload.recordSet));
             dispatch(fetchDataDiscountSettings(response.data.payload.discountSettings));
+            // dispatch(fetchDataNews(response.data.payload.news));
+            // dispatch(fetchDataOffers(response.data.payload.offers));
         });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

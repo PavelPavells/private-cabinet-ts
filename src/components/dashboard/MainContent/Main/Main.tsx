@@ -37,9 +37,9 @@ import PersonalOffer from './PersonalOffer/PersonalOffer';
 
 const MainComponent = () => {
     /**
-     * ********** Импорт состояния pricelist из Redux **********
+     * ********** Импорт состояния из Redux **********
      * */
-    const { main, table, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
+    const { isFetching, main, table, news, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
     /**
@@ -51,17 +51,16 @@ const MainComponent = () => {
      * запрос данных с сервера
      * */
     useEffect(() => {
-        // @ts-ignore
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));
     }, []);
 
-    if (!isFetching && main && table) {
+    if (!isFetching && user && main && table) {
         // eslint-disable-next-line no-lone-blocks
-        {
-            // eslint-disable-next-line no-unused-expressions
-            main ? typeof main.currentDiscount : null;
-        }
+        // {
+        //     // eslint-disable-next-line no-unused-expressions
+        //     main ? typeof main.currentDiscount : null;
+        // }
         return (
             <div className="main-content">
                 <div className="main">
@@ -70,18 +69,21 @@ const MainComponent = () => {
                             <span>Актуальные новости</span>
                         </div>
                         <div className="block-container">
-                            <div className="block-element" style={{ padding: '15px' }}>
+                            <div className="block-element">
                                 <PreviewNews />
                             </div>
-                            <div className="block-element" style={{ padding: '0px' }}>
+                            <div className="block-element">
                                 <CompanyNews />
                             </div>
+                            {/*
                             <div className="block-element" style={{ padding: '15px' }}>
                                 <PreviewNews />
                             </div>
+                            */}
                         </div>
                     </div>
                     <div className="more__offers">Все новости</div>
+                    {/*
                     <div className="main__block data">
                         <div className="block-title">
                             <span>Данные о компании</span>
@@ -139,10 +141,11 @@ const MainComponent = () => {
                             </div>
                         </div>
                     </div>
+                    */}
                     <div className="main__block status">
-                        <div className="block-title">
+                        {/* <div className="block-title">
                             <span>Статус</span>
-                        </div>
+                        </div> */}
                         <div className="block-container">
                             <div className="block-element">
                                 <div className="block-element__icon">

@@ -182,13 +182,14 @@
                     display: flex;
                     align-items: center;
                     overflow: hidden;
-                    margin-right: 20px;
+                    // margin-right: 20px;
                     color: #1d68d9;
                     transition: all .2s ease-in-out;
                 }
 
                 &:hover {
                     border-bottom: 1px solid $brandPantonBlue;
+
                     div {
                         display: flex;
                         max-width: 100px;

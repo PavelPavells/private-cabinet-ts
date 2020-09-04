@@ -85,8 +85,8 @@ export const fetchDataMain = (data: MainListReq) => async (dispatch: Dispatch<Ma
         await axios.post(`${site}main`, data).then((response: AxiosResponse<MainListRes>) => {
             dispatch(fetchingDataSuccess(response.data.payload.recordSet));
             dispatch(fetchDataDiscountSettings(response.data.payload.discountSettings));
-            // dispatch(fetchDataNews(response.data.payload.news));
-            // dispatch(fetchDataOffers(response.data.payload.offers));
+            dispatch(fetchDataNews(response.data.payload.news));
+            dispatch(fetchDataOffers(response.data.payload.offers));
         });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

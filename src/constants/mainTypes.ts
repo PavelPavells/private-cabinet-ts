@@ -44,20 +44,22 @@ export interface TableItem {
 export type TableList = TableItem[];
 
 interface NewsItem {
+    id: number;
     newTopic: string;
     newBody: string;
     newDate: string;
 }
 
-export type NewsList = NewsItem;
+export type NewsList = Array<NewsItem>;
 
 interface OfferItem {
+    id: number;
     offerTopic: string;
     offerBody: string;
     offerDate: string;
 }
 
-export type OffersList = OfferItem;
+export type OffersList = Array<OfferItem>;
 
 export interface MainListReq {
     uuid: string;

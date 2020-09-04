@@ -4,3 +4,40 @@
 // .personal-offer {
 //     padding-bottom: 0!important;
 // }
+
+.block-wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border: 1px solid transparent;
+    
+    .wrapper__left {
+        display: flex;
+    }
+
+    .block-element__button:nth-child(2) {
+        margin-right: 20px;
+    }
+
+    .wrapper__more {
+        max-width: 0;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-left: 20px;
+        color: $brandPantonBlue;
+        transition: all .2s ease-in-out;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border-bottom: 1px solid $brandPantonBlue;
+
+        .wrapper__more {
+            display: flex;
+            max-width: 100px;
+            margin-right: 20px;
+            color: $brandPantonBlue;
+        }
+    }
+}

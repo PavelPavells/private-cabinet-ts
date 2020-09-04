@@ -18,7 +18,7 @@ const initialState: MainState = {
     main: null,
     table: null,
     news: null,
-    offers: null
+    offers: []
 };
 
 /**

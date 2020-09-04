@@ -12,9 +12,13 @@
 
         .info__title {
             border-bottom: 1px solid $brandPantonFonts;
-            padding: 10px 0;
+            padding: 12px 0;
             margin-bottom: 0px;
-            color: $brandPantonBlack; 
+            color: $brandPantonBlack;
+
+            &:hover {
+                cursor: pointer;
+            }
             
             .title__icon {
                 margin: 20px;
@@ -24,6 +28,10 @@
                 color: $brandPantonBlue;
                 margin-right: 19px;
             }
+
+            // .title__info {
+               // white-space: nowrap;
+            // }
         }
     }
 }

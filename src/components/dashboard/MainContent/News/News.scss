@@ -1,23 +1,210 @@
 @import "../../../../styles/base.scss";
 
-/** ********** NEWS STYLES **********/
-.news-item {
-    border-bottom: 2px solid $brandPantonGrey;
-    margin: 20px;
-    padding: 40px;
-    background-color: #FFFFFF;
+
+.main-content {
+    height: calc(100vh - 70px - 20px - 20px);
+    flex: 2 100%;
+    flex-direction: column;
+    position: sticky;
+    top: calc(70px + 20px);
+    margin: 0 17px 0 20px;
+    transition: all 0.5s ease 0s;
+    font-family: "Gotham Pro Regular";
+    font-size: 14px;
+    color: $brandPantonGrey;
+    overflow: auto;
 }
-.image {
-    width: 200px;
-    height: 150px;
-}
-.btn {
-    width: 15em;
-    height: 3em;
-    background-color: $brandPantonBlue;
-    border-radius: 7px;
-    border: 0;
-    color: #FFFFFF;
-    font-size: 15px;
-    font-weight: $medium;
+
+/** ********** Стили компонента новости **********/
+
+.news {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // padding: 0 17px 0 17px;
+
+    .news__title {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .news__subtitle {
+        width: 100%;
+        margin: 30px 0;
+        font-size: 16px;
+    }
+
+    .news__actual {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+
+        .actual__block {
+            display: flex;
+            flex-direction: row;
+            width: 49%;
+            min-width: 500px;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+
+            .block__icon {
+                width: 110px;
+                height: 80px;
+                margin-right: 20px;
+                background: url('../../../../images/test_photo_news.png') no-repeat center;
+                // background-size: contain;
+                background-color: $brandPantonFonts;
+            }
+
+            .block__info {
+                display: flex;
+                flex-direction: column;
+                flex: 2 1;
+                height: 100%;
+                justify-content: space-between;
+                // padding: 15px 0;
+
+                .info__title {
+                    display: flex;
+                    align-items: center;
+
+                    .offer {
+                        margin-right: 10px;
+                        padding: 5px;
+                        color: $white;
+                        background-color: $brandPantonBlue;
+                    }
+
+                    .date {
+                        color: $brandPantonSubText;
+                    }
+                }
+                .info__subtitle {
+                    font-size: 16px;
+                    color: $brandPantonBlack;
+                }
+
+                .info__description {
+                    font-size: 12px;
+                    color: $brandPantonSubText;
+                }
+            }
+
+            .block__button {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .block__button > svg {
+                fill: transparent;
+                stroke: $brandPantonBlue;
+            }
+        }
+    }
+
+    .news__list {
+        display: flex;
+        //justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        // border: 1px solid green;
+
+        .list__block {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            max-width: 350px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+
+
+            .block__image {
+                display: flex;
+                position: relative;
+                width: 350px;
+                height: 180px;
+                background: url('../../../../images/test_photo_news.png') no-repeat center;
+                // background-size: contain;
+                background-color: $brandPantonFonts;
+
+                .image__block--news {
+                    display: flex;
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    padding: 5px;
+                    color: $white;
+                    background-color: $brandPantonBlue;
+                    z-index: 1000;
+                }
+            }
+
+            .block__date {
+                margin: 20px 0 20px 10px;
+                font-size: 14px;
+                color: $brandPantonSubText;
+            }
+
+            .block__text {
+                margin:0 0 10px 10px;
+                font-size: 16px;
+                color: $brandPantonBlack;
+            }
+
+            .block__subtext {
+                margin:0 0 10px 10px;
+                font-size: 14px;
+                color: $brandPantonSubText;
+            }
+
+            .block__button {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid transparent;
+                padding: 20px 0 10px 10px;
+
+                &:hover {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                div {
+                    max-width: 0;
+                    display: flex;
+                    align-items: center;
+                    overflow: hidden;
+                    // margin-right: 20px;
+                    color: #1d68d9;
+                    transition: all .2s ease-in-out;
+                }
+
+                &:hover {
+                    border-bottom: 1px solid $brandPantonBlue;
+
+                    div {
+                        display: flex;
+                        max-width: 100px;
+                        margin-right: 20px;
+                        color: $brandPantonBlue;
+                    }
+                }
+
+                svg {
+                    margin-top: 4px;
+                    fill: transparent;
+                    stroke: $brandPantonBlue;
+                }
+
+            }
+        }
+    }
 }

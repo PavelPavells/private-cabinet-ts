@@ -1,16 +1,20 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-import { PersonalCabinet } from '../../../store/store';
+import React, { useState, SyntheticEvent } from 'react';
+// import { shallowEqual, useSelector } from 'react-redux';
+// import { PersonalCabinet } from '../../../store/store';
 
+/**
+ * Импорт компонентов
+ */
 import Profile from './Profile/Profile';
+import ModalAlert from './ModalAlert/ModalAlert';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
  * */
-import Loader from '../../../__utils__/Spinner';
+// import Loader from '../../../__utils__/Spinner';
 
 /**
  * ********** Импорт стилей **********
@@ -18,6 +22,7 @@ import Loader from '../../../__utils__/Spinner';
 import './TopNav.scss';
 
 const TopNav = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const partner = localStorage.getItem('partnerName');
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');
@@ -27,6 +32,31 @@ const TopNav = () => {
     const toggleMenu = () => {
         const sideNav: Element | any = document.querySelector('.right');
         sideNav.classList.toggle('invisible');
+    };
+
+    // const handleClickOutside = (event: Event) => {
+    //     const checkingElement = document.getElementsByClassName('alert')[0];
+    //     // @ts-ignore
+    //     if (!event.path.includes(checkingElement)) {
+    //         // const arrow = document.getElementsByClassName('info-list__arrow')[0];
+    //         // arrow.classList.remove('toggle-window');
+    //         setIsOpen(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     document.addEventListener('click', handleClickOutside, false);
+    //     return () => {
+    //         document.removeEventListener('click', handleClickOutside, false);
+    //     };
+    // }, [isOpen]);
+
+    /**
+     * Клик для Открытия/Закрытия модалки уведомлений
+     * */
+    const onChangeIsOpen = (event: SyntheticEvent) => {
+        event.stopPropagation();
+        setIsOpen(!isOpen);
     };
     return (
         <nav className="nav">
@@ -43,9 +73,10 @@ const TopNav = () => {
                 </div>
                 <div className="right__info">
                     <div className="info__bell">
-                        <div className="bell__icon notifications">
+                        <div onClick={onChangeIsOpen} className="bell__icon notifications">
                             <div className="notifications__number">5</div>
                         </div>
+                        {isOpen ? <ModalAlert /> : null}
                     </div>
                     <Profile />
                 </div>

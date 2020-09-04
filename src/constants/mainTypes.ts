@@ -5,6 +5,8 @@ export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 export const DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS = 'DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS';
+export const DATA_LOADING_NEWS = 'DATA_LOADING_NEWS';
+export const DATA_LOADING_OFFERS = 'DATA_LOADING_OFFERS';
 
 /**
  * *********** Интерфейсы стейта Компонента Main **********
@@ -41,6 +43,24 @@ export interface TableItem {
 }
 export type TableList = TableItem[];
 
+interface NewsItem {
+    id: number;
+    newTopic: string;
+    newBody: string;
+    newDate: string;
+}
+
+export type NewsList = Array<NewsItem>;
+
+interface OfferItem {
+    id: number;
+    offerTopic: string;
+    offerBody: string;
+    offerDate: string;
+}
+
+export type OffersList = Array<OfferItem>;
+
 export interface MainListReq {
     uuid: string;
 }
@@ -49,6 +69,8 @@ export interface MainListRes {
     payload: {
         recordSet: MainList;
         discountSettings: TableList;
+        news: NewsList;
+        offers: OffersList;
     };
 }
 
@@ -57,6 +79,8 @@ export interface MainState {
     errorMessage: string;
     main: MainList | null;
     table: TableList | null;
+    news: NewsList | null;
+    offers: OffersList | null;
 }
 
 interface MainRequest {
@@ -78,4 +102,14 @@ interface MainFailure {
     payload: any;
 }
 
-export type MainActions = MainRequest | MainSuccess | MainSuccessDiscount | MainFailure;
+interface MainDataNews {
+    type: typeof DATA_LOADING_NEWS;
+    payload: NewsList;
+}
+
+interface MainDataOffers {
+    type: typeof DATA_LOADING_OFFERS;
+    payload: OffersList;
+}
+
+export type MainActions = MainRequest | MainSuccess | MainSuccessDiscount | MainDataNews | MainDataOffers | MainFailure;

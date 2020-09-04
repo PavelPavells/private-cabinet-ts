@@ -1,86 +1,115 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { ROOT_URL } from "../../../../actions/newsActions";
-import moment from "moment";
-import "./News.scss";
-class News extends Component {
-  //constructor() {
-  //  super();
-    state = {
-      articles: [],
-      isLoading: false
-    };
-  //}
-  componentDidMount() {
-    this.setState({
-        isLoading: true, 
-        articles: []
-    })
-    fetch(ROOT_URL)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ isLoading: false, articles: [data] });
-      })
-      .catch(err => console.log(err));
-  }
-  render() {
-    const { articles, isLoading } = this.state;
-    //const { isLoading, data } = this.state;
-    //const { news } = this.props;
-    //console.log(news);
-    //console.log(isFetching)
-    //if(news.data.length === 0 || news.isFetching) {
-    //  return <Loader />
-    //}
-    return (
-      <div className="main-content">
-        <h1>Новости</h1>
-        <div className="container">
-          {isLoading && <h3>Загружаю...</h3>}
-          {articles.map(newsItem => {
-            // @ts-ignore
-            return newsItem.articles.map((item, i) => {
-              return (
-                <div key={i} className="news-item">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <img src={item.urlToImage} className="image" alt="" />
+/**
+ * ********** Импорт основных библиотек из NPM **********
+ * */
+import React, { useEffect } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+
+/**
+ * ********** Импорт экшенов **********
+ * */
+// import { fetchDataNews } from '../../../../actions/newsActions';
+
+/**
+ * ********** Импорт типа store **********
+ * */
+import { PersonalCabinet } from '../../../../store/store';
+import { MainListReq } from '../../../../constants/mainTypes';
+import { fetchDataMain } from '../../../../actions/mainActions';
+
+/**
+ * ********** Импорт файлов стилей **********
+ * */
+import './News.scss';
+
+/**
+ * ********** Импорт LOADER из __UTILS__ **********
+ * */
+import Loader from '../../../../__utils__/Spinner';
+
+const News = () => {
+    /**
+     * ********** Импорт состояния из Redux **********
+     * */
+    const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
+    const { news, offers, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
+
+    /**
+     * Отправка действий для изменения на сервере
+     * */
+    const dispatch = useDispatch();
+
+    /**
+     * запрос данных с сервера
+     * */
+    useEffect(() => {
+        const request: MainListReq = { uuid: user };
+        dispatch(fetchDataMain(request));
+    }, []);
+
+    if (!isFetching && news && offers && user) {
+        return (
+            <div className="main-content">
+                <div className="news">
+                    <div className="news__title">Новости</div>
+                    <div className="news__subtitle">Актуальные</div>
+                    <div className="news__actual">
+                        {news.map((index) => {
+                            return (
+                                // eslint-disable-next-line react/no-array-index-key
+                                <div key={index.id} className="actual__block">
+                                    <div className="block__icon" />
+                                    <div className="block__info">
+                                        <div className="info__title">
+                                            <span className="offer">Новости</span>
+                                            <span className="date">{index.newDate}</span>
+                                        </div>
+                                        <div className="info__subtitle">
+                                            <span>{index.newTopic}</span>
+                                        </div>
+                                        <div className="info__description">
+                                            <span>{index.newBody}</span>
+                                        </div>
+                                    </div>
+                                    <div className="block__button">
+                                        <svg width="57" height="25" xmlns="http://www.w3.org/2000/svg">
+                                            <line y1="12" x2="48.6111" y2="12" />
+                                            <circle cx="44.4446" cy="12.5" r="12" />
+                                            <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                    <div className="col-sm-9">
-                      <h4>{item.title}</h4>
-                      <p>{item.source.name}</p>
-                      <p>
-                        {moment.utc(item.publishedAt).format("MMM DD YYYY")}
-                      </p>
-                      <p>{item.description}</p>
-                      <a href={item.url}>
-                        <button className="btn btn-primary">
-                          Подробнее...
-                        </button>
-                      </a>
+                    <div className="news__subtitle">Все новости</div>
+                    <div className="news__list">
+                        {offers.map((index) => {
+                            return (
+                                // eslint-disable-next-line react/no-array-index-key
+                                <div key={index.id} className="list__block">
+                                    <div className="block__image">
+                                        <div className="image__block--news">Новости</div>
+                                    </div>
+                                    <div className="block__date">{index.offerDate}</div>
+                                    <div className="block__text">CARDDEX снова работает в штатном режиме</div>
+                                    <div className="block__subtext">Информируем, что наше производство работаетв штатном режиме</div>
+                                    <div className="block__button">
+                                        <div>Подробнее</div>
+                                        <svg width="57" height="25" xmlns="http://www.w3.org/2000/svg">
+                                            <line y1="12" x2="48.6111" y2="12" />
+                                            <circle cx="44.4446" cy="12.5" r="12" />
+                                            <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                  </div>
                 </div>
-              );
-            });
-          })}
-        </div>
-      </div>
-    );
-  }
-}
-// @ts-ignore
-News.propTypes = {
-  articles: PropTypes.array,
-  security: PropTypes.object.isRequired
+            </div>
+        );
+    }
+    return <Loader />;
 };
-// @ts-ignore
-const mapStateToProps = state => ({
-   articles: state.articles,
-   security: state.security
-})
-export default connect(
- mapStateToProps,
- null                                // { getNews }
-)(News);
+
+export default News;

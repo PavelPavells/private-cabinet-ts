@@ -57,13 +57,14 @@ if (localStorage.registerUuid) {
     const partnerName = localStorage.getItem('partnerName');
     const accountFullName = localStorage.getItem('accountFullName');
     const adminStr = localStorage.getItem('adminStr');
+    const partnerType = localStorage.getItem('partnerType');
     /**
      * ********** Проверка токена на истекшость по времени(Устанавливается в Бэкенде) **********
      */
     // const currentTime = Date.now() / 1000; // в миллисекундах
     // @ts-ignore
     // if (decoded.exp < currentTime) {
-    if (!partnerName || !accountFullName || !adminStr) {
+    if (!partnerName || !accountFullName || !adminStr || !partnerType) {
         /**
          * ********** Логаут пользователя **********
          */

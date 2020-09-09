@@ -123,6 +123,7 @@ export interface LoginRes {
     partnerName: string;
     description: string;
     adminStr: string;
+    partnerType: string;
     creationDate: string;
     agentName: string;
     accountFullName: string;

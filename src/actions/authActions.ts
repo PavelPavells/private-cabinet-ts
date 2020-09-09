@@ -130,12 +130,13 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
             axios
                 .post(`${site}login`, { login, passHash })
                 .then((response: AxiosResponse<LoginRes>) => {
-                    const { partnerUuid, partnerName, accountFullName, adminStr } = response.data;
+                    const { partnerUuid, partnerName, accountFullName, adminStr, partnerType } = response.data;
                     // Установить токен в localStorage
                     localStorage.setItem('registerUuid', JSON.stringify(partnerUuid));
                     localStorage.setItem('partnerName', JSON.stringify(partnerName));
                     localStorage.setItem('accountFullName', JSON.stringify(accountFullName));
                     localStorage.setItem('adminStr', JSON.stringify(adminStr));
+                    localStorage.setItem('partnerType', JSON.stringify(partnerType));
                     // Установить токен в заголовок авторизации
                     setAuthToken(partnerUuid);
                     dispatch(setUserCompanyName(partnerName));

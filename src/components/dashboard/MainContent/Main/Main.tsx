@@ -34,6 +34,7 @@ import Loader from '../../../../__utils__/Spinner';
 import PreviewNews from './PreviewNews/PreviewNews';
 import CompanyNews from './CompanyNews/CompanyNews';
 import PersonalOffer from './PersonalOffer/PersonalOffer';
+import WindowPushAlert from './WindowPushAlert/WIndowPushAlert';
 
 const MainComponent = () => {
     /**
@@ -60,9 +61,9 @@ const MainComponent = () => {
             <div className="main-content">
                 <div className="main">
                     <div className="main__block news">
-                        <div className="block-title">
+                        {/* <div className="block-title">
                             <span>Актуальные новости</span>
-                        </div>
+                        </div> */}
                         <div className="block-container">
                             <PreviewNews />
                             <div className="block-element">
@@ -146,7 +147,7 @@ const MainComponent = () => {
                                         />
                                     </svg>
                                 </div>
-                                <div className="block-element__info">
+                                <div className="block-element__info info">
                                     <div className="block-element__title">
                                         <span>Персональный менеджер</span>
                                     </div>
@@ -162,6 +163,31 @@ const MainComponent = () => {
                                         </span>
                                     </div>
                                 </div>
+                                <div className="block-element__submit">
+                                    <div className="button">
+                                        <div>Связаться</div>
+                                        <div className="icon">
+                                            <svg width="22" height="22" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.631 0C17.1536 0 21.631 4.47738 21.631 10C21.631 15.5226 17.1536 20 11.631 20C9.56595 20 7.56519 19.3664 5.87742 18.1767L0.58001 18.5991C0.149958 18.6322 -0.13632 18.1723 0.066619 17.8039L2.33139 13.6783C1.87081 12.5129 1.63097 11.2533 1.63097 10C1.63097 4.47738 6.10835 0 11.631 0V0ZM11.631 1.07768C6.70381 1.07768 2.70864 5.07284 2.70864 10C2.70864 11.2005 2.94212 12.3767 3.41225 13.4818C3.48287 13.6325 3.4835 13.8139 3.39762 13.971L1.4891 17.4477L5.98811 17.0889C6.11217 17.08 6.2394 17.113 6.34755 17.1919C7.88455 18.3218 9.72372 18.9223 11.631 18.9223C16.5581 18.9223 20.5533 14.9272 20.5533 10C20.5533 5.07284 16.5581 1.07768 11.631 1.07768Z" />
+                                                <path
+                                                    fillRule="evenodd"
+                                                    clipRule="evenodd"
+                                                    d="M15.6116 8.76709C16.2923 8.76709 16.8445 9.31929 16.8445 9.99999C16.8445 10.6807 16.2923 11.2329 15.6116 11.2329C14.9309 11.2329 14.3787 10.6807 14.3787 9.99999C14.3787 9.31929 14.9309 8.76709 15.6116 8.76709Z"
+                                                />
+                                                <path
+                                                    fillRule="evenodd"
+                                                    clipRule="evenodd"
+                                                    d="M11.6309 8.76709C12.3116 8.76709 12.8638 9.31929 12.8638 9.99999C12.8638 10.6807 12.3116 11.2329 11.6309 11.2329C10.9501 11.2329 10.3979 10.6807 10.3979 9.99999C10.3979 9.31929 10.9501 8.76709 11.6309 8.76709Z"
+                                                />
+                                                <path
+                                                    fillRule="evenodd"
+                                                    clipRule="evenodd"
+                                                    d="M7.65049 8.76709C8.33119 8.76709 8.88339 9.31929 8.88339 9.99999C8.88339 10.6807 8.33119 11.2329 7.65049 11.2329C6.96978 11.2329 6.41759 10.6807 6.41759 9.99999C6.41759 9.31929 6.96978 8.76709 7.65049 8.76709Z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="block-element">
                                 <div className="block-element__icon">
@@ -174,13 +200,24 @@ const MainComponent = () => {
                                 </div>
                                 <div className="block-element__info">
                                     <div className="block-element__title">
-                                        <span>Объем учетных закупок для расчета скидки</span>
+                                        <span className="title__link">Объем учетных закупок для расчета скидки</span>
                                     </div>
                                     <div className="block-element__subtitle">
                                         <span className="currency-unit-rub">{main.currentCash}</span>
                                     </div>
+                                    <Link to="/payment" className="block-element__link">
+                                        <div className="link__more">Подробнее</div>
+                                        <div className="block-element__button">
+                                            <svg width="57" height="25" xmlns="http://www.w3.org/2000/svg">
+                                                <line y1="12" x2="48.6111" y2="12" />
+                                                <circle cx="44.4446" cy="12.5" r="12" />
+                                                <path d="M41.3936 4.86133L48.7592 12.227L41.3936 19.5927" />
+                                            </svg>
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
+                            <WindowPushAlert />
                             <div className="block-table">
                                 <div className="block-table__row header">
                                     <div className="block-table__element">
@@ -239,7 +276,7 @@ const MainComponent = () => {
                                         <span>Текущая скидка от CARDDEX</span>
                                     </div>
                                     <div className="block-element__subtitle">
-                                        <span className="currency-unit-rub">Размер скидки партнера может отличаться</span>
+                                        {/* <span className="currency-unit-rub">Размер скидки партнера может отличаться</span> */}
                                     </div>
                                 </div>
                             </div>

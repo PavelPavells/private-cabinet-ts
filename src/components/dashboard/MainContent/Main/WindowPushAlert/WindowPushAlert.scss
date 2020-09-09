@@ -1,0 +1,128 @@
+@import '../../../../../styles/base.scss';
+@import '../../../../../styles/reset.scss';
+
+.wrapper-push {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    float: right;
+    bottom: 0px;
+    right: 0px;
+    background: hsla(0, 0%, 0%, 0.5)!important;
+    width: calc(100% - 100px);
+    height: calc(100% - 70px);
+    z-index: 1000;
+    transition: all 0.25s ease 0s;
+
+    &.spread {
+        width: calc(100% - 360px);
+    }
+}
+.push {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 350px;
+    background-color: $white;
+    z-index: 1001;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+
+    .push__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: 100%;
+
+        .header__close {
+            display: block;
+            text-align: right;
+            justify-content: flex-end;
+            margin: 20px 20px 0 0;
+            width: 20px;
+            height: 20px;
+            background: url('../../../../../images/close_push_modal.svg') no-repeat center;
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .header__text {
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+            font-family: $font-regular;
+        }
+
+    }
+
+    .push__main {
+        display: flex;
+
+        .main__form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 30px;
+
+            .form__input {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: 10px 10px 10px 40px;
+
+                .input__text {
+                    margin-left: 10px;
+                    font-size: 14px;
+                    font-family: $font-regular;
+                }
+            }
+
+            .form__button {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin: 20px 0;
+
+                .button__text {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 196px;
+                    height: 30px;
+                    font-size: 14px;
+                    padding: 15px 55px;
+                    color: $brandPantonBlue;
+                    border: 1px solid $brandPantonBlue;
+                    border-radius: 15px;
+
+                    &:hover {
+                        color: $white;
+                        background-color: $brandPantonBlue;
+                        cursor: pointer;
+                    }
+                }
+
+                .button__icon {
+                    width: 20px;
+                    height: 20px;
+                    background: url('../../../../../images/close_push_modal.svg') no-repeat center;
+                }
+            }
+        }
+    }
+
+    .push__footer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 40px;
+        color: $brandPantonBlue;
+        font-size: 14px;
+        font-family: $font-regular;
+    }
+}

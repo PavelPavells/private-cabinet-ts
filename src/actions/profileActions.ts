@@ -45,13 +45,11 @@ export const fetchDataAccount = (data: ProfileActions) => async (dispatch: Dispa
     try {
         await axios
             .post(`${site}`, data)
-            // eslint-disable-next-line no-shadow
-            .then((data) => {
-                dispatch(fetchingDataSuccess(data));
+            .then((response) => {
+                dispatch(fetchingDataSuccess(response));
             })
             .catch((error) => {
-                // eslint-disable-next-line no-console
-                console.log(error);
+                return error;
             });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

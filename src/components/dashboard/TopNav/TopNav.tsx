@@ -26,12 +26,20 @@ const TopNav = () => {
     const partner = localStorage.getItem('partnerName');
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');
+
+    const type = localStorage.getItem('partnerType');
+    // @ts-ignore
+    const partnerType = type.replace(/['"«»]/g, '');
     /**
      * Клик по бургеру для Открытия/Закрытия бокового меню
      * */
     const toggleMenu = () => {
         const sideNav: Element | any = document.querySelector('.right');
         sideNav.classList.toggle('invisible');
+        const push: Element | any = document.querySelector('.wrapper-push');
+        if (push) {
+            push.classList.toggle('spread');
+        }
     };
 
     // const handleClickOutside = (event: Event) => {
@@ -68,7 +76,7 @@ const TopNav = () => {
             </div>
             <div className="nav__right">
                 <div className="right__text">
-                    Личный кабинет:
+                    {`${partnerType}:`}
                     <strong className="text__name">{partnerName}</strong>
                 </div>
                 <div className="right__info">

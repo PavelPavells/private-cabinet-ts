@@ -10,11 +10,27 @@
         flex-direction: column;
         width: 100%;
 
-        .info__title {
+        div {
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 41px;
+            overflow: hidden;
             border-bottom: 1px solid $brandPantonFonts;
-            padding: 12px 0;
+        }
+
+        .info__title {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            position: absolute;
+            width: 1000px;
+            // padding: 12px 0;
             margin-bottom: 0px;
             color: $brandPantonBlack;
+            // white-space: nowrap;
+            // text-overflow: ellipsis;
+            // overflow: hidden;
 
             &:hover {
                 cursor: pointer;

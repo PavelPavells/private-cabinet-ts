@@ -31,7 +31,7 @@ const News = () => {
      * ********** Импорт состояния из Redux **********
      * */
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    const { news, offers, isFetching } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
+    const { isFetching, news, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере

@@ -40,7 +40,7 @@ const Layout = () => {
         return <Redirect to="/" />;
     }
     const dashboardContent = (
-        <div className="right">
+        <div className="right invisible">
             <>{/* @ts-ignore */}</>
             <TopNav />
             <div className="main-container">

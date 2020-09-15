@@ -353,7 +353,9 @@
             .button {
                 display: flex;
                 align-items: center;
-                padding: 10% 20%;
+                justify-content: center;
+                width: 196px;
+                height: 30px;
                 color: $brandPantonBlue;
                 border: 1px solid $brandPantonBlue;
                 border-radius: 30px;

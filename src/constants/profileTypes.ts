@@ -8,10 +8,58 @@ export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 /**
  * *********** Интерфейсы стейта Компонента Profile **********
  */
+
+export interface ResponseStatus {
+    code: number;
+    message: string;
+    action: any;
+}
+
+export interface ProfileReq {
+    uuid: string;
+}
+
+export interface ProfileData {
+    dbUserUuid: string;
+    partnerUuid: string;
+    fullName: string;
+    registerDate: string;
+    accountLogin: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    secondName: string;
+    poisition: string;
+    phone: string;
+    partnerName: string;
+    isAdmin: number;
+    isAdminStr: string;
+    partnerTypeStr: string;
+}
+
+export interface ProfileRegisterData {
+    partnerAccountRegUuid: string;
+    registerDate: string;
+    accountLogin: string;
+    accountPsw: string;
+    fullName: string;
+    phone: string | null;
+    email: string;
+    firstName: string;
+    secondName: string;
+    lastName: string;
+}
+
+export interface ProfileRes {
+    payload: {
+        recordSet: ProfileData;
+    };
+}
+
 export interface ProfileState {
     isFetching: boolean;
     errorMessage: string;
-    data: any;
+    profile: ProfileRes;
 }
 
 interface ProfileRequest {
@@ -20,7 +68,7 @@ interface ProfileRequest {
 
 interface ProfileSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: ProfileState[];
+    payload: ProfileRes;
 }
 
 interface ProfileFailure {

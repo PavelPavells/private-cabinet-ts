@@ -241,8 +241,12 @@
     }
 
     & > .buttons, & > * > .buttons {
-        display: block;
-        padding: 10px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 196px;
+        height: 44px;
+        // text-align: center;    
         margin-right: 14px;
         white-space: nowrap;
         border: 1px solid $brandPantonBlue;

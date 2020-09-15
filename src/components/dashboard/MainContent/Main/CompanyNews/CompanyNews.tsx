@@ -30,7 +30,7 @@ const CompanyNews = () => {
                 <ul className="news__info">
                     {news.map((index) => {
                         return (
-                            <div>
+                            <div key={index.id}>
                                 <li className="info__title">
                                     <span className="title__icon">
                                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">

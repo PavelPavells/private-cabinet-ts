@@ -80,7 +80,7 @@ const Reset = () => {
                     <h1>Восстановить пароль</h1>
                 </div>
                 <div className="auth__necessary">Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
-                <form className="auth__forms forms" onSubmit={onSubmit}>
+                <form className="auth__forms forms">
                     <div className="auth__group">
                         <label>
                             <div className="auth__field field">
@@ -101,15 +101,11 @@ const Reset = () => {
                     </div>
                     {email ? (
                         <div>
-                            <button type="submit" className="auth__button">
-                                Восстановить
-                            </button>
+                            <div className="auth__button">Восстановить</div>
                         </div>
                     ) : (
                         <div>
-                            <button type="submit" className="auth__button inaccessible">
-                                Восстановить
-                            </button>
+                            <div className="auth__button inaccessible">Восстановить</div>
                         </div>
                     )}
                     <div className="auth__error">{error}</div>

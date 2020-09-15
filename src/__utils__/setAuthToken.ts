@@ -3,12 +3,12 @@
  */
 import axios from 'axios';
 
-const setAuthToken = (userUuid: string) => {
+const setAuthToken = (userUuid: string, partnerUuid: string) => {
     if (userUuid) {
         /**
          * Применить авторизационный токен к каждому запросу, если вы вошли в систему
          */
-        axios.defaults.headers.common.Authorization = `Basic ${userUuid}`;
+        axios.defaults.headers.common.Authorization = `Bearer ${userUuid}&${partnerUuid}`;
     } else {
         /**
          * Удалить авторизационный токен

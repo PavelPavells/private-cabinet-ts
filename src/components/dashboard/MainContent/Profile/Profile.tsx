@@ -1,13 +1,19 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { useState, useEffect } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
 /**
  * ********** Импорт экшенов **********
  */
-// import { fetchDataAccount } from '../../../../actions/profileActions';
+import { fetchDataAccount, changeProfilePassword } from '../../../../actions/profileActions';
+
+/**
+ * Импорт Компонентов
+ * */
+import ChangeRegisterData from './ChangeRegisterData/ChangeRegisterData';
+import ChangeRegisterPassword from './ChangeRegisterPassword/ChangeRegisterPassword';
 
 /**
  * Импорт Лоадера из утилит
@@ -21,45 +27,51 @@ import './Profile.scss';
 import { PersonalCabinet } from '../../../../store/store';
 
 const Profile = () => {
-    // const [email, setEmail] = useState('');
-    // const [pass, setPass] = useState('');
-    // const [repeatpass, setRepeatpass] = useState('');
-    // const [firstname, setFirstname] = useState('');
-    // const [lastname, setLastname] = useState('');
-    // const [secondname, setSecondname] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [agreement, setAgreement] = useState(0);
     const [changeAvatar, setChangeAvatar] = useState(false);
+
+    const [tabOne, setTabOne] = useState(true);
+    const [tabTwo, setTabTwo] = useState(false);
+
+    const [tabOpen, setTabOpen] = useState(true);
 
     /**
      * ********** Импорт состояния из Redux **********
      * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { profile } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
+    const { isFetching, profile } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
      * */
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        // if (window.location.search) {
-        //     getAccessRegister(window.location.search.split('=')[1]);
-        // }
+        const useruuid: string | null = localStorage.getItem('userUuid');
+        // @ts-ignore
+        const userUuid = useruuid.replace(/['"«»]/g, '');
+        // @ts-ignore
+        dispatch(fetchDataAccount({ uuid: userUuid }));
     }, []);
 
-    /** ********** CHANGE DATA FOR REIGSTER ACCOUNT ********** */
-    // @ts-ignore
-    // onChange = (e) => {
-    //     this.setState({ [e.target.id]: e.target.value });
-    // };
+    const handleChangeTabsOne = () => {
+        const elemTabOne = document.getElementsByClassName('nav__data')[0];
+        elemTabOne.classList.add('choosing__tabs');
+        const elemTabTwo = document.getElementsByClassName('nav__password')[0];
+        elemTabTwo.classList.remove('choosing__tabs');
+        setTabOne(true);
+        setTabTwo(false);
+    };
 
-    /** ********** RESPONSE DATA FOR LOGIN ACCOUNT ********** */
-    // @ts-ignore
-    // onSubmit = () => {
+    const handleChangeTabsTwo = () => {
+        const elemTabTwo = document.getElementsByClassName('nav__password')[0];
+        elemTabTwo.classList.add('choosing__tabs');
+        const elemTabOne = document.getElementsByClassName('nav__data')[0];
+        elemTabOne.classList.remove('choosing__tabs');
+        setTabOne(false);
+        setTabTwo(true);
+    };
 
-    // };
-    if (user && isAuthenticated) {
+    if (user && isAuthenticated && profile && !isFetching) {
         return (
             <div className="main-content width">
                 <div className="profile">
@@ -80,69 +92,30 @@ const Profile = () => {
                             ) : null}
                             <div className="user__info">
                                 <div className="info__status">Пользователь</div>
-                                <div className="info__name">Харитоновская Инга Ивановна</div>
-                                <div className="info__data">Дата регистрации: 20.08.2020</div>
+                                <div className="info__name">
+                                    {
+                                        // @ts-ignore
+                                        profile.partnerName
+                                    }
+                                </div>
+                                <div className="info__data">
+                                    Дата регистрации:
+                                    {
+                                        // @ts-ignore
+                                        profile.registerDate
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div className="main__inputs">
-                            <form className="inputs__forms">
-                                <div className="forms__wrapper">
-                                    <div className="forms__field">
-                                        <label className="field__label">Ваше ФИО</label>
-                                        <input className="field__input" />
-                                    </div>
-                                    <div className="forms__field">
-                                        <label className="field__label">Телефон</label>
-                                        <input className="field__input" />
-                                    </div>
-                                </div>
-                                <div className="forms__wrapper">
-                                    <div className="forms__field">
-                                        <label className="field__label">E-mail</label>
-                                        <input className="field__input" />
-                                    </div>
-                                    <div className="forms__field">
-                                        <label className="field__label">Должность</label>
-                                        <input className="field__input" />
-                                    </div>
-                                </div>
-                                <div className="forms__wrapper">
-                                    <div className="forms__field">
-                                        <label className="field__label">Пароль</label>
-                                        <input className="field__input" />
-                                    </div>
-                                </div>
-                                <div className="forms__wrapper">
-                                    <div className="forms__field">
-                                        <label className="field__label">Новый пароль</label>
-                                        <input className="field__input" />
-                                    </div>
-                                    <div className="forms__field">
-                                        <label className="field__label">Подтвердите пароль</label>
-                                        <input className="field__input" />
-                                    </div>
-                                </div>
-                                <div className="forms__notifications">
-                                    <div className="notifications__wrapper">
-                                        <input type="checkbox" id="offer_news" className="wrapper__news" />
-                                        <label htmlFor="offer_news">Отправлять уведомления о новостях</label>
-                                    </div>
-                                    <div className="notifications__wrapper">
-                                        <input type="checkbox" id="personal_offer" className="wrapper__offer" />
-                                        <label htmlFor="personal_offer">Отправлять уведомления о персональных предложения</label>
-                                    </div>
-                                    <div className="notifications__wrapper">
-                                        <input type="checkbox" id="private_cabinet" className="wrapper__updates" />
-                                        <label htmlFor="private_cabinet">Отправлять важную информацию об обновлениях Кабинета</label>
-                                    </div>
-                                </div>
-                                <div className="forms__button">
-                                    <button type="submit" className="button">
-                                        Сохранить
-                                    </button>
-                                </div>
-                            </form>
+                        <div className="main__nav">
+                            <div className="nav__data choosing__tabs" onClick={handleChangeTabsOne}>
+                                Данные
+                            </div>
+                            <div className="nav__password" onClick={handleChangeTabsTwo}>
+                                Сменить пароль
+                            </div>
                         </div>
+                        {tabOne ? <ChangeRegisterData /> : <ChangeRegisterPassword />}
                     </div>
                 </div>
             </div>

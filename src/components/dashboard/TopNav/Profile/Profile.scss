@@ -83,11 +83,13 @@
         }
 
         &__logout {
-            width: 100px;
+            width: 196px;
+            height: 30px;        
             padding: 5px 25px;
             // margin-top: 10px;
             //margin-left: 56%;
             border-radius: 20px;
+            text-align: center;
             color: $white;
             background-color: $brandPantonBlue;
         }

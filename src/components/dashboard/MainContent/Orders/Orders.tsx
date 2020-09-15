@@ -3,6 +3,9 @@
  * */
 import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+// @ts-ignore
+import CsvDownload from 'react-json-to-csv';
+// import { CSVLink, CSVDownload } from 'react-csv';
 
 /**
  * ********** Импорт экшенов **********
@@ -125,11 +128,19 @@ const OrdersComponent = () => {
                                 Быстрый фильтр
                             </div>
                             <div className="buttons-wrapper">
-                                {/*
-                                <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
-                                    Экспортировать документ
+                                <div style={{ border: '1px solid #1d68d9', padding: '13px 18px', borderRadius: '40px' }} className="">
+                                    <CsvDownload
+                                        data={ordersTable}
+                                        style={{
+                                            cursor: 'pointer',
+                                            backgroundColor: '#fff',
+                                            color: '#1d68d9',
+                                            fontFamily: 'Gotham Pro Regular'
+                                        }}
+                                    >
+                                        Экспортировать документ
+                                    </CsvDownload>
                                 </div>
-                                */}
                             </div>
                             <div className="search-wrapper">
                                 <input type="text" className="search-input" placeholder="Быстрый поиск" />

@@ -13,6 +13,7 @@ export const CHANGE_ERROR_NAME = 'CHANGE_ERROR_NAME';
 export const CHANGE_USER_DATA_ERROR_REGISTER = 'CHANGE_USER_DATA_ERROR_REGISTER';
 export const GET_ERROR_REGISTER = 'GET_ERROR_REGISTER';
 export const CHANGE_EMAIL_ADDRESS = 'CHANGE_EMAIL_ADDRESS';
+export const CHANGE_PASSWORD_ADDRESS = 'CHANGE_PASSWORD_ADDRESS';
 export const GET_DATA_BUSINESS = 'GET_DATA_BUSINESS';
 
 /**
@@ -91,7 +92,9 @@ export interface AuthState {
     isAuthenticated: boolean;
     user: any;
     errorResult: ResponseStatus;
-    errorRegisterResult: any;
+    errorRegisterResult: ResponseStatus;
+    errorResetResult: ResponseStatus;
+    errorNewPassworResult: ResponseStatus;
     invitePayload: userDataErrorRegister;
     businessTypes: dataRegisterBusinessTypes;
     partnerName: string;
@@ -116,19 +119,36 @@ export interface LoginReq {
 }
 
 export interface LoginRes {
-    success: string;
-    userUuid: string;
-    partnerUuid: string;
-    userName: string;
-    partnerName: string;
-    description: string;
-    adminStr: string;
-    partnerType: string;
-    creationDate: string;
-    agentName: string;
-    accountFullName: string;
-    err: string;
-    errorMessage: string;
+    result: ResponseStatus;
+    payload: {
+        recordSet: {
+            fullName: string;
+            registerDate: string;
+            accountLogin: string;
+            email: string;
+            firstName: string;
+            lastName: string;
+            secondName: string;
+            position: string;
+            phone: string;
+            isAdmin: number;
+            isAdminStr: string;
+            partnerTypeStr: string;
+            success: string;
+            userUuid: string;
+            partnerUuid: string;
+            userName: string;
+            partnerName: string;
+            description: string;
+            adminStr: string;
+            partnerType: string;
+            creationDate: string;
+            agentName: string;
+            accountFullName: string;
+            err: string;
+            errorMessage: string;
+        };
+    };
 }
 
 interface LoginRequest {
@@ -174,10 +194,15 @@ interface getErrorRegister {
     payload: any;
 }
 
-// interface changeEmailAdress {
-//     type: typeof CHANGE_EMAIL_ADDRESS;
-//     payload: any;
-// }
+interface emailForChangePasswordRegister {
+    type: typeof CHANGE_EMAIL_ADDRESS;
+    payload: any;
+}
+
+interface changePasswordRegister {
+    type: typeof CHANGE_PASSWORD_ADDRESS;
+    payload: any;
+}
 
 interface registerBusinessTypes {
     type: typeof GET_DATA_BUSINESS;
@@ -189,6 +214,8 @@ export type AuthActions =
     | getErrorRegister
     | changeErrorCode
     | changeErrorName
+    | emailForChangePasswordRegister
+    | changePasswordRegister
     | registerUser
     | registerBusinessTypes
     | loginUser

@@ -31,6 +31,16 @@ const initialState: AuthState = {
         message: '',
         action: null
     },
+    errorResetResult: {
+        code: 0,
+        message: '',
+        action: null
+    },
+    errorNewPassworResult: {
+        code: 0,
+        message: '',
+        action: null
+    },
     invitePayload: {
         inviteCode: '',
         inCode: '',

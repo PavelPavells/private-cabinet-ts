@@ -14,7 +14,7 @@ const WindowAlertPush = () => {
         checkboxTwo: false,
         checkboxThree: false
     });
-    const [close, setClose] = useState(true);
+    const [close, setClose] = useState(false);
 
     /**
      * Деструктуризация локального стейта
@@ -60,7 +60,9 @@ const WindowAlertPush = () => {
                                         onChange={handleChangeInputs}
                                         className="form__checkbox"
                                     />
-                                    <p className="input__text">Не отправлять уведомления о новостях</p>
+                                    <label htmlFor="checkboxOne" className="input__text">
+                                        Не отправлять уведомления о новостях
+                                    </label>
                                 </div>
                                 <div className="form__input">
                                     <input
@@ -71,7 +73,9 @@ const WindowAlertPush = () => {
                                         onChange={handleChangeInputs}
                                         className="form__checkbox"
                                     />
-                                    <p className="input__text">Не отправлять уведомления о персональных предложения</p>
+                                    <label htmlFor="checkboxTwo" className="input__text">
+                                        Не отправлять уведомления о персональных предложения
+                                    </label>
                                 </div>
                                 <div className="form__input">
                                     <input
@@ -82,7 +86,9 @@ const WindowAlertPush = () => {
                                         onChange={handleChangeInputs}
                                         className="form__checkbox"
                                     />
-                                    <p className="input__text">Не отправлять важную информацию об обновлениях Кабинета</p>
+                                    <label htmlFor="checkboxThree" className="input__text">
+                                        Не отправлять важную информацию об обновлениях Кабинета
+                                    </label>
                                 </div>
                                 <button className="form__button">
                                     <div className="button__text">Принять</div>

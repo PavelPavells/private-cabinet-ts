@@ -27,9 +27,9 @@ const TopNav = () => {
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');
 
-    const type = localStorage.getItem('partnerType');
+    const type = localStorage.getItem('partnerTypeStr');
     // @ts-ignore
-    const partnerType = type.replace(/['"«»]/g, '');
+    const partnerTypeStr = type.replace(/['"«»]/g, '');
     /**
      * Клик по бургеру для Открытия/Закрытия бокового меню
      * */
@@ -76,7 +76,7 @@ const TopNav = () => {
             </div>
             <div className="nav__right">
                 <div className="right__text">
-                    {`${partnerType}:`}
+                    {`${partnerTypeStr}:`}
                     <strong className="text__name">{partnerName}</strong>
                 </div>
                 <div className="right__info">

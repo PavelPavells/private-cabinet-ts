@@ -37,12 +37,13 @@ import './App.scss';
 /**
  * ********** Проверка на cуществование токена в localStorage **********
  */
-if (localStorage.registerUuid) {
+if (localStorage.partnerUuid) {
     /**
      * ********** Установить токен авторизации в заголовки **********
      */
-    const registerUuid = JSON.parse(localStorage.registerUuid);
-    setAuthToken(registerUuid);
+    const partnerUuid = JSON.parse(localStorage.partnerUuid);
+    const userUuid = JSON.parse(localStorage.userUuid);
+    setAuthToken(partnerUuid, userUuid);
 
     /**
      * ********** Декодировать токен, чтобы получать пользователя **********
@@ -52,19 +53,20 @@ if (localStorage.registerUuid) {
     /**
      * ********** Установить пользователя и поле isAuthenticated для Приватного Роута **********
      */
-    store.dispatch(setCurrentUser(registerUuid));
+    store.dispatch(setCurrentUser(partnerUuid));
 
     const partnerName = localStorage.getItem('partnerName');
     const accountFullName = localStorage.getItem('accountFullName');
     const adminStr = localStorage.getItem('adminStr');
-    const partnerType = localStorage.getItem('partnerType');
+    const partnerTypeStr = localStorage.getItem('partnerTypeStr');
+    const userUuidString = localStorage.getItem('userUuid');
     /**
      * ********** Проверка токена на истекшость по времени(Устанавливается в Бэкенде) **********
      */
     // const currentTime = Date.now() / 1000; // в миллисекундах
     // @ts-ignore
     // if (decoded.exp < currentTime) {
-    if (!partnerName || !accountFullName || !adminStr || !partnerType) {
+    if (!partnerName || !accountFullName || !adminStr || !partnerTypeStr || !userUuidString) {
         /**
          * ********** Логаут пользователя **********
          */
@@ -88,7 +90,7 @@ const App = () => {
         if (params) {
             dispatch(getAccessRegister(window.location.search.split('=')[1]));
         }
-        localStorage.removeItem('userUuid');
+        localStorage.removeItem('registerUuid');
         localStorage.removeItem('jwtNewPassword');
         localStorage.removeItem('uuid');
     }, []);
@@ -101,14 +103,14 @@ const App = () => {
                         <Route exact path="/" component={Login} />
                         <Route exact path="/register" component={errorResult.code === 0 ? Register : NotFound} />
                         <Route exact path="/reset" component={Reset} />
-                        <Route exact path="/new-password" component={NewPassword} />
+                        <Route exact path="/new-password" component={errorResult.code === 0 ? NewPassword : NotFound} />
                         <PrivateRoute
                             // @ts-ignore
                             exact
                             path="/dashboard"
                             component={Layout}
                         />
-                        <Route component={localStorage.registerUuid ? Layout : NotFound} />
+                        <Route component={localStorage.partnerUuid ? Layout : NotFound} />
                     </Switch>
                 </div>
             </Router>

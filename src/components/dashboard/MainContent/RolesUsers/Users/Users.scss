@@ -1,0 +1,177 @@
+@import '../../../../../styles/reset.scss';
+@import '../../../../../styles/base.scss';
+
+.main__utilizer {
+    display: flex;
+    flex-direction: column;
+
+    .utilizer__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        .header__input {
+            display: flex;
+            align-items: flex-end;
+            flex: 1;
+
+            .input {
+                flex: 1;
+                height: 35px;
+                background: url('../../../../../images/search.svg') right no-repeat;
+                border-bottom: 1px solid #EFEFEF
+            }
+
+            ::placeholder {
+                font-family: $font-regular;
+                font-size: 14px;
+                color: $brandPantonSubText;
+            }
+        }
+
+        .header__button {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+
+            .button {
+                display: flex;
+                align-items: center;
+                padding: 15px 55px;
+                border-radius: 30px;
+                border: 1px solid $brandPantonBlue;
+
+                .button__text {
+                    font-family: $font-regular;
+                    font-size: 14px;
+                    color: $brandPantonBlue;
+                }
+
+                .button__icon {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 20px;
+                    background: url('../../../../../images/add_users_roles.svg') no-repeat center;
+                    background-size: contain
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .utilizer__employments {
+        display: flex;
+        flex-direction: column;
+
+        .employments__header {
+            display: flex;
+            flex-direction: row;
+            margin: 30px 0 10px 0;
+
+            .header__text {
+                display: flex;
+                flex: 1;
+                font-size: 14px;
+                color: $brandPantonSubText;
+                font-family: $font-regular;
+
+                & > span {
+                    margin-left: 110px
+                }
+            }
+
+        }
+
+        .employments__block {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+
+            .block__left {
+                display: flex;
+                flex-direction: row;
+                flex: 1;
+
+                .left__photo {
+                    width: 50px;
+                    height: 50px;
+                    margin: 15px 30px;
+                    border-radius: 50%;
+                    background: url('../../../../../images/profile-photo.png') no-repeat center;
+                    background-size: contain;
+                }
+
+                .left__info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .info__name {
+                        padding-bottom: 10px;
+                        font-size: 14px;
+                        color: $brandPantonBlack;
+                    }
+
+                    .info__email {
+                        font-size: 12px;
+                        color: $brandPantonSubText;
+                    }
+                }
+            }
+
+            .block__right {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex: 1;
+
+                .right__post {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .post {
+                        margin: 10px;
+                        padding: 5px;
+                        color: $brandPantonSubText;
+                        background-color: #EFEFEF;
+                    }
+                }
+
+                .right__options {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 30px;
+                
+                    .change {
+                        width: 25px;
+                        height: 25px;
+                        background: url('../../../../../images/usersRoles/change_users_or_role.svg') no-repeat center;
+                        background-size: contain;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+    
+                    .close {
+                        margin-left: 20px;
+                        width: 15px;
+                        height: 15px;
+                        background: url('../../../../../images/usersRoles/delete_users_roles.svg') no-repeat center;
+                        background-size: contain;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,6 +5,7 @@ import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import 'react-dates/initialize';
 // @ts-ignore
+import CsvDownload from 'react-json-to-csv';
 // import { DateRangePicker } from 'react-dates';
 // import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ru';
@@ -133,11 +134,19 @@ const ShipmentComponent = () => {
                                 Быстрый фильтр
                             </div>
                             <div className="buttons-wrapper">
-                                {/*
-                        <div className="buttons buttons__export" onClick={handleExportDocumentModal}>
-                            Экспортировать документ
-                        </div>
-                        */}
+                                <div style={{ border: '1px solid #1d68d9', padding: '13px 18px', borderRadius: '40px' }} className="">
+                                    <CsvDownload
+                                        data={tableShipment}
+                                        style={{
+                                            cursor: 'pointer',
+                                            backgroundColor: '#fff',
+                                            color: '#1d68d9',
+                                            fontFamily: 'Gotham Pro Regular'
+                                        }}
+                                    >
+                                        Экспортировать документ
+                                    </CsvDownload>
+                                </div>
                             </div>
                             <div className="search-wrapper">
                                 <input type="text" className="search-input" placeholder="Быстрый поиск" />

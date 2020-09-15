@@ -53,9 +53,8 @@
             position: relative;
             flex-direction: row;
             align-items: center;
-            padding-bottom: 35px;
-            margin: 37px;
-            border-bottom: 1px solid $brandBackground;
+            // padding-bottom: 35px;
+            margin: 37px 37px 0 37px;
 
             .user__photo {
                 display: flex;
@@ -123,98 +122,34 @@
             }
         }
 
-        .main__inputs {
+        .main__nav {
             display: flex;
-            flex-direction: column;
-            // margin: 0 50px;
+            margin: 30px 50px;
+            border-bottom: 1px solid $brandBackground;
 
-            .forms__wrapper {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                padding-bottom: 20px;
-                margin: 0 50px;
-                
-                &:nth-child(2),
-                &:nth-child(4) {
-                    border-bottom: 1px solid $brandBackground;
-                }
-                &:nth-child(3) {
-                    padding-top: 40px;
-                }
+            .nav__data {
+                padding: 10px 20px;
+                font-size: 16px;
+                border-bottom: 1px solid transparent;
 
-                .forms__field {
-                    display: flex;
-                    flex-direction: column;
-                    position: relative;
-                    width: 48%;
-                    font-size: 16px;
-
-                    .field__input {
-                        padding: 4px 0;
-                        border-bottom: 1px solid $brandBorderColor;
-                    }
-
-                    .field__label {
-                        // position: absolute;
-                        font-size: 14px;
-
-                        &.active {
-                            position: relative;
-                            top: 0;
-                            font-size: 12px;
-                            color: $brandPantonSubText;
-                        }
-                    }
+                &:hover {
+                    cursor: pointer;
                 }
             }
 
-            .forms__notifications {
-                display: flex;
-                flex-direction: column;
-                margin: 40px 50px 30px 50px;
+            .nav__password {
+                padding: 10px 20px;
+                font-size: 16px;
+                border-bottom: 1px solid transparent;
 
-                .notifications__wrapper {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    padding-bottom: 10px;
-
-                    input[type="checkbox"] {
-                        width: 16px;
-				        height: 16px;
-                        margin-right: 10px;
-                    }
+                &:hover {
+                    cursor: pointer;
                 }
             }
 
-            .forms__button {
-                display: flex;
-                width: 100%;
-                justify-content: center;
-                padding: 20px 0px;
-                background-color: $brandBackground;
-
-                .button {
-                    width: 196px;
-                    height: 30px;
-                    border-radius: 30px;
-                    background-color: $brandPantonBlue;
-                    color: $white;
-                    font-family: $font-regular;
-                    border: 1px solid transparent;
-    
-                    &:hover {
-                        // width: 196px;
-                        // height: 30px;
-                        // border-radius: 30px;
-                        // background-color: $white;
-                        // color: $brandPantonBlue;
-                        // font-family: $font-regular;
-                        // border: 1px solid $brandPantonBlue;
-                        cursor: pointer;
-                    }
-                }
+            .choosing__tabs {
+                color: $brandPantonBlue;
+                border-bottom: 1px solid $brandPantonBlue;
             }
         }
     }

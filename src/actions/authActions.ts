@@ -126,26 +126,29 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
     const passwordCypher = md5(passHash);
     bcrypt.genSalt(10, (error: any, salt: any) => {
         // eslint-disable-next-line no-shadow
-        bcrypt.hash(passwordCypher, salt, (error: any, passHash: any) => {
+        bcrypt.hash(passwordCypher, salt, (error: any, passHash: string) => {
             axios
                 .post(`${site}login`, { login, passHash })
                 .then((response: AxiosResponse<LoginRes>) => {
-                    const { partnerUuid, partnerName, accountFullName, adminStr, partnerType } = response.data;
-                    // Установить токен в localStorage
-                    localStorage.setItem('registerUuid', JSON.stringify(partnerUuid));
+                    // Если ошибка при логине
+                    const { message } = response.data.result;
+
+                    if (message) {
+                        dispatch(setErrorLoading(message));
+                    }
+
+                    const { partnerUuid, partnerName, fullName, isAdminStr, partnerTypeStr, userUuid } = response.data.payload.recordSet;
+                    // Установить данные в localStorage
+                    localStorage.setItem('partnerUuid', JSON.stringify(partnerUuid));
+                    localStorage.setItem('userUuid', JSON.stringify(userUuid));
                     localStorage.setItem('partnerName', JSON.stringify(partnerName));
-                    localStorage.setItem('accountFullName', JSON.stringify(accountFullName));
-                    localStorage.setItem('adminStr', JSON.stringify(adminStr));
-                    localStorage.setItem('partnerType', JSON.stringify(partnerType));
+                    localStorage.setItem('accountFullName', JSON.stringify(fullName));
+                    localStorage.setItem('adminStr', JSON.stringify(isAdminStr));
+                    localStorage.setItem('partnerTypeStr', JSON.stringify(partnerTypeStr));
                     // Установить токен в заголовок авторизации
-                    setAuthToken(partnerUuid);
+                    setAuthToken(partnerUuid, userUuid);
                     dispatch(setUserCompanyName(partnerName));
 
-                    // Если ошибка при логине
-                    const { err } = response.data;
-
-                    // eslint-disable-next-line no-unused-expressions
-                    err ? dispatch(setErrorLoading(err)) : null;
                     // Декодировать токен, чтобы получать пользователя
                     // const decoded = jwt_decode(token);
                     // Установить текущего пользователя
@@ -167,6 +170,23 @@ export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
     dispatch(dataLoadingRequest());
     await axios
         .get(`${site}auth/singup/checkinvitecode?invitecode=${uuid}&appuuid=23423443543534543`)
+        .then((response: AxiosResponse<ErrorPageData>) => {
+            dispatch(changeErrorName(response.data.result));
+            dispatch(changeUserDataErrorRegister(response.data.payload));
+            dispatch(dataRegisterBusinessTypes(response.data.businessTypes));
+        })
+        .catch((err: any) => {
+            return err;
+        });
+};
+
+/**
+ * ********** Экшен для доступа на сброс пароля **********
+ */
+export const getAccessNewPassword = (uuid: any) => async (dispatch: Dispatch<any>) => {
+    dispatch(dataLoadingRequest());
+    await axios
+        .get(`${site}auth/newpassword?resetcode=${uuid}`)
         .then((response: AxiosResponse<ErrorPageData>) => {
             dispatch(changeErrorName(response.data.result));
             dispatch(changeUserDataErrorRegister(response.data.payload));
@@ -256,7 +276,7 @@ export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActio
             const { token } = response.data;
             localStorage.setItem('jwtNewPassword', JSON.stringify(token));
             // Установить токен в заголовок авторизации
-            setAuthToken(token);
+            // setAuthToken(token);
             // Декодировать токен, чтобы получать пользователя
             // const decoded = jwt_decode(token);
             // Установить текущего пользователя

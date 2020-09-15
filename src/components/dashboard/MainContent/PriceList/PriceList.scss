@@ -267,13 +267,14 @@
         border: 1px solid $brandPantonBlue;
         color: $brandPantonBlue;
         border-radius: 40px;
+        font-family: $font-regular;
         cursor: pointer;
         transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
         &:hover,
         &--active {
-            background-color: $brandPantonBlue;
-            color: $white;
+            background-color: $brandPantonBlue!important;
+            color: $white!important;
             cursor: pointer;
         }
     }

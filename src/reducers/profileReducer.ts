@@ -6,7 +6,8 @@ import { ProfileActions, ProfileState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCES
 const initialState: ProfileState = {
     isFetching: false,
     errorMessage: '',
-    data: []
+    // @ts-ignore
+    profile: []
 };
 
 /**
@@ -23,7 +24,7 @@ export default function profileReducer(state = initialState, action: ProfileActi
             return {
                 ...state,
                 isFetching: false,
-                data: action.payload
+                profile: action.payload
             };
         case DATA_LOADING_FAILURE:
             return {

@@ -34,7 +34,7 @@ import Loader from '../../../../__utils__/Spinner';
 import PreviewNews from './PreviewNews/PreviewNews';
 import CompanyNews from './CompanyNews/CompanyNews';
 import PersonalOffer from './PersonalOffer/PersonalOffer';
-import WindowPushAlert from './WindowPushAlert/WIndowPushAlert';
+// import WindowPushAlert from './WindowPushAlert/WIndowPushAlert';
 
 const MainComponent = () => {
     /**
@@ -217,7 +217,7 @@ const MainComponent = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <WindowPushAlert />
+                            {/* <WindowPushAlert /> */}
                             <div className="block-table">
                                 <div className="block-table__row header">
                                     <div className="block-table__element">

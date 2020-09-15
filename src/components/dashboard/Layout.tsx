@@ -18,6 +18,7 @@ import TopNav from './TopNav/TopNav';
 import MainComponent from './MainContent/Main/Main';
 import News from './MainContent/News/News';
 import Account from './MainContent/Profile/Profile';
+import RolesUsers from './MainContent/RolesUsers/RolesUsers';
 import AdminPanel from './MainContent/AdminPanel/AdminPanel';
 import SalePartners from './MainContent/SalePartners/SalePartners';
 import PriceList from './MainContent/PriceList/PriceList';
@@ -51,6 +52,7 @@ const Layout = () => {
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />
                     <Route path="/profile" component={Account} />
+                    <Route path="/users-and-roles" component={RolesUsers} />
                     <Route path="/price-list" component={PriceList} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/settings" component={Settings} />

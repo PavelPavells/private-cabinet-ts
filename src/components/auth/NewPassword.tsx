@@ -31,7 +31,7 @@ const NewPassword = () => {
     // const dispatch = useDispatch();
 
     const onSubmit = () => {
-        const passwords: any = { newPass, repeatNewPass };
+        const passwords = { newPass, repeatNewPass };
         // dispatch(newPassword(passwords));
     };
 
@@ -110,7 +110,7 @@ const NewPassword = () => {
                     <div className="auth__text">Личный кабинет партнера</div>
                 </div>
                 <h1 className="auth__heading">
-                    <h1>Новый пароль</h1>
+                    <h1>Создать новый пароль</h1>
                 </h1>
                 <form className="auth__forms forms" onSubmit={onSubmit} style={{ overflow: 'hidden' }}>
                     <div className="auth__group">

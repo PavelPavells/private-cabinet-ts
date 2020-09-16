@@ -3,6 +3,7 @@
  * */
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
@@ -64,7 +65,9 @@ const Users = () => {
                     </div>
                     <div className="header__button">
                         <button type="button" className="button">
-                            <div className="button__text">Новый пользователь</div>
+                            <Link to="/add-users" className="button__text">
+                                Новый пользователь
+                            </Link>
                             <div className="button__icon" />
                         </button>
                     </div>
@@ -90,7 +93,7 @@ const Users = () => {
                                 <div className="post">Менеджер снабжения</div>
                             </div>
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-users" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -109,7 +112,7 @@ const Users = () => {
                                 <div className="post">Менеджер по продажам</div>
                             </div>
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-users" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -128,7 +131,7 @@ const Users = () => {
                                 <div className="post">Администратор</div>
                             </div>
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-users" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -147,7 +150,7 @@ const Users = () => {
                                 <div className="post">Менеджер снабжения</div>
                             </div>
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-users" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -166,7 +169,7 @@ const Users = () => {
                                 <div className="post">Менеджер по продажам</div>
                             </div>
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-users" className="change" />
                                 <div className="close" />
                             </div>
                         </div>

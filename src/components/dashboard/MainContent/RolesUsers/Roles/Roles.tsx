@@ -3,6 +3,7 @@
  * */
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
@@ -61,7 +62,9 @@ const Roles = () => {
                     </div>
                     <div className="header__button">
                         <button type="button" className="button">
-                            <div className="button__text">Добавить роль</div>
+                            <Link to="/add-role" className="button__text">
+                                Добавить роль
+                            </Link>
                             <div className="button__icon" />
                         </button>
                     </div>
@@ -77,7 +80,7 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-role" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -93,7 +96,7 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-role" className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -109,7 +112,7 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <div className="change" />
+                                <Link to="/edit-role" className="change" />
                                 <div className="close" />
                             </div>
                         </div>

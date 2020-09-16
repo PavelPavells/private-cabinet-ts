@@ -199,7 +199,7 @@ const ChangeRegisterData = () => {
                     </div>
                 </div>
                 <div className="forms__button">
-                    <div className="button">Сохранить</div>
+                    <div className="button">Добавить</div>
                 </div>
             </div>
         </div>

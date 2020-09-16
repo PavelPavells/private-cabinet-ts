@@ -1,0 +1,145 @@
+@import '../../../../../../styles/reset.scss';
+@import '../../../../../../styles/base.scss';
+
+.add__users {
+    display: flex;
+    flex-direction: column;
+    // margin: 0 50px;
+
+    .inputs__forms {
+        padding-top: 15px;
+        margin: 0 150px;
+        background-color: $white;
+    }
+
+    .forms__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        color: $brandPantonBlack;
+        font-size: 16px;
+        font-family: $font-regular;
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            background: url('../../../../../../images/addUsersRole/close_add_role_window.svg') no-repeat center;
+            background-size: contain;
+        }
+    }
+
+    .forms__subheader {
+        // padding-top: 30px;
+        padding-left: 30px;
+        margin-bottom: 30px;
+        color: $brandPantonBlack;
+        font-size: 16px;
+        font-family: $font-regular;
+    }
+
+    .forms__wrapper {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 30px;
+        // margin: 0 50px;
+        
+        //&:nth-child(2),
+        //&:nth-child(4) {
+            // border-bottom: 1px solid $brandBackground;
+        //}
+        //&:nth-child(3) {
+            // padding-top: 40px;
+        //}
+
+        .forms__field {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            width: 48%;
+            height: 60px;
+            font-size: 16px;
+
+            .field__input {
+                font-size: 14px;
+                line-height: 18px;
+                padding: 10px 0;
+                z-index: 1000;
+                padding: 4px 0;
+                border-bottom: 1px solid $brandBorderColor;
+            }
+
+            .field__label {
+                position: absolute;
+                top: 20px;
+                font-size: 14px;
+                line-height: 18px;
+                color: $brandPantonText;
+                transition: all 0.3s ease-out;
+
+                &.active {
+                    position: absolute;
+                    top: 0px;
+                    font-size: 12px;
+                    color: $brandPantonSubText;
+                }
+            }
+        }
+    }
+
+    .forms__notifications {
+        display: flex;
+        flex-direction: column;
+        padding: 30px 0 30px 30px;
+        // margin: 40px 50px 30px 50px;
+
+        .notifications__wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 10px;
+
+            input[type="checkbox"] {
+                width: 16px;
+                height: 16px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .forms__button {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 20px 0px;
+        background-color: $brandBackground;
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 196px;
+            height: 30px;                
+            border-radius: 30px;
+            // background-color: $brandPantonBlue;
+            color: $brandPantonBlue;
+            font-family: $font-regular;
+            border: 1px solid $brandPantonBlue;
+
+            &:hover {
+                // width: 196px;
+                // height: 30px;
+                // border-radius: 30px;
+                // background-color: $white;
+                // color: $brandPantonBlue;
+                // font-family: $font-regular;
+                // border: 1px solid $brandPantonBlue;
+                cursor: pointer;
+            }
+        }
+    }
+}

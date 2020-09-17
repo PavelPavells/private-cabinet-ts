@@ -1,9 +1,9 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
@@ -30,9 +30,12 @@ import './AddUsers.scss';
 // eslint-disable-next-line import/order
 import NumberFormat from 'react-number-format';
 
-const AddUsers = () => {
-    const [tabOne, setTabOne] = useState(true);
-    const [tabTwo, setTabTwo] = useState(false);
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
+const AddUsers = ({ addUser, setAddUser }) => {
+    // const [tabOne, setTabOne] = useState(true);
+    // const [tabTwo, setTabTwo] = useState(false);
+    // const [closeAddUserWindow, setCloseAddUserWindow] = useState(false);
 
     /**
      * ********** Импорт состояния из Redux **********
@@ -43,7 +46,13 @@ const AddUsers = () => {
     /**
      * Отправка действий для изменения на сервере
      * */
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     if (closeAddUser) {
+    //         setCloseAddUserWindow(true);
+    //     }
+    // }, [closeAddUser]);
 
     // useEffect(() => {
     //     const useruuid: string | null = localStorage.getItem('userUuid');
@@ -75,138 +84,147 @@ const AddUsers = () => {
         }
     };
 
-    return (
-        <div className="main-content">
-            <div className="add__users">
-                <div className="forms__header">
-                    <span>Новый пользователь</span>
-                    <Link to="/users-and-roles" className="header__icon">
-                        <div className="icon" />
-                    </Link>
-                </div>
-                <div className="inputs__forms">
-                    <div className="forms__wrapper">
-                        <div className="forms__field">
-                            <input
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setLogin(event.target.value)}
-                                type="text"
-                                name="login"
-                                // value={login}
-                                className="field__input"
-                                required
-                            />
-                            <label className="field__label">ФИО</label>
+    const handleChangeCloseWindow = () => {
+        setAddUser(false);
+    };
+
+    if (isAuthenticated && user) {
+        return (
+            <>
+                {addUser ? (
+                    <div className="add__users">
+                        <div onClick={handleChangeCloseWindow} className="forms__header">
+                            <span>Новый пользователь</span>
+                            <div className="header__icon">
+                                <div className="icon" />
+                            </div>
                         </div>
-                        <div className="forms__field">
-                            <label className="field__label">Телефон</label>
-                            <NumberFormat
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
-                                // value={phone}
-                                id="phone"
-                                type="tel"
-                                className="field__input"
-                                format="+7(###)###-##-##"
-                                minLength={7}
-                                pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
-                                title="Поле заполнено неверно"
-                                mask="_"
-                                required
-                            />
+                        <div className="inputs__forms">
+                            <div className="forms__wrapper">
+                                <div className="forms__field">
+                                    <input
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLogin(event.target.value)}
+                                        type="text"
+                                        name="login"
+                                        // value={login}
+                                        className="field__input"
+                                        required
+                                    />
+                                    <label className="field__label">ФИО</label>
+                                </div>
+                                <div className="forms__field">
+                                    <label className="field__label">Телефон</label>
+                                    <NumberFormat
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
+                                        // value={phone}
+                                        id="phone"
+                                        type="tel"
+                                        className="field__input"
+                                        format="+7(###)###-##-##"
+                                        minLength={7}
+                                        pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+                                        title="Поле заполнено неверно"
+                                        mask="_"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="forms__wrapper">
+                                <div className="forms__field">
+                                    <label className="field__label">E-mail</label>
+                                    <input
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                                        type="text"
+                                        name="email"
+                                        // value={email}
+                                        className="field__input"
+                                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                        title="Ваш E-mail должен содержать @ и минимум одну точку"
+                                        required
+                                    />
+                                </div>
+                                <div className="forms__field">
+                                    <label className="field__label">Должность</label>
+                                    <input
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                                        type="text"
+                                        name="lastName"
+                                        // value={lastName}
+                                        className="field__input"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="forms__wrapper">
+                                <div className="forms__field">
+                                    <label className="field__label">Пароль</label>
+                                    <input
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setNewPass(event.target.value)}
+                                        type="password"
+                                        id="passNew"
+                                        name="newPass"
+                                        // value={newPass}
+                                        className="field__input"
+                                        minLength={8}
+                                        maxLength={255}
+                                        pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                        title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                        required
+                                    />
+                                    <div onClick={showOrHidePasswordNew} className="inaccess" />
+                                </div>
+                                <div className="forms__field">
+                                    <label className="field__label">Подтвердите новый пароль</label>
+                                    <input
+                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatPass(event.target.value)}
+                                        // value={repeatPass}
+                                        id="passRepeat"
+                                        name="repeatPass"
+                                        type="password"
+                                        className="field__input"
+                                        minLength={8}
+                                        maxLength={255}
+                                        pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
+                                        title="Поле должно содержать минимум 8 знаков, цифры и буквы"
+                                        required
+                                    />
+                                    <div onClick={showOrHidePasswordRepeat} className="inaccess" />
+                                </div>
+                            </div>
+                            <div className="forms__notifications">
+                                <div className="notifications__wrapper">
+                                    <input
+                                        name="checkboxOne"
+                                        type="checkbox"
+                                        id="checkboxOne"
+                                        // onChange={() => setCheckboxOne(!checkboxOne)}
+                                        // checked={checkboxOne}
+                                        className="wrapper__news"
+                                    />
+                                    <label htmlFor="checkboxOne">Отправить пользователю приглашение на электронную почту</label>
+                                </div>
+                                <div className="notifications__wrapper">
+                                    <input
+                                        name="checkboxTwo"
+                                        type="checkbox"
+                                        id="checkboxTwo"
+                                        // onChange={() => setCheckboxTwo(!checkboxTwo)}
+                                        // checked={checkboxTwo}
+                                        className="wrapper__offer"
+                                    />
+                                    <label htmlFor="checkboxTwo">Сбросить пароль при первом входе</label>
+                                </div>
+                            </div>
+                            <div className="forms__button">
+                                <div className="button">Добавить</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="forms__wrapper">
-                        <div className="forms__field">
-                            <label className="field__label">E-mail</label>
-                            <input
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-                                type="text"
-                                name="email"
-                                // value={email}
-                                className="field__input"
-                                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                                title="Ваш E-mail должен содержать @ и минимум одну точку"
-                                required
-                            />
-                        </div>
-                        <div className="forms__field">
-                            <label className="field__label">Должность</label>
-                            <input
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
-                                type="text"
-                                name="lastName"
-                                // value={lastName}
-                                className="field__input"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="forms__wrapper">
-                        <div className="forms__field">
-                            <label className="field__label">Пароль</label>
-                            <input
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setNewPass(event.target.value)}
-                                type="password"
-                                id="passNew"
-                                name="newPass"
-                                // value={newPass}
-                                className="field__input"
-                                minLength={8}
-                                maxLength={255}
-                                pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
-                                title="Поле должно содержать минимум 8 знаков, цифры и буквы"
-                                required
-                            />
-                            <div onClick={showOrHidePasswordNew} className="inaccess" />
-                        </div>
-                        <div className="forms__field">
-                            <label className="field__label">Подтвердите новый пароль</label>
-                            <input
-                                // onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatPass(event.target.value)}
-                                // value={repeatPass}
-                                id="passRepeat"
-                                name="repeatPass"
-                                type="password"
-                                className="field__input"
-                                minLength={8}
-                                maxLength={255}
-                                pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
-                                title="Поле должно содержать минимум 8 знаков, цифры и буквы"
-                                required
-                            />
-                            <div onClick={showOrHidePasswordRepeat} className="inaccess" />
-                        </div>
-                    </div>
-                    <div className="forms__notifications">
-                        <div className="notifications__wrapper">
-                            <input
-                                name="checkboxOne"
-                                type="checkbox"
-                                id="checkboxOne"
-                                // onChange={() => setCheckboxOne(!checkboxOne)}
-                                // checked={checkboxOne}
-                                className="wrapper__news"
-                            />
-                            <label htmlFor="checkboxOne">Отправить пользователю приглашение на электронную почту</label>
-                        </div>
-                        <div className="notifications__wrapper">
-                            <input
-                                name="checkboxTwo"
-                                type="checkbox"
-                                id="checkboxTwo"
-                                // onChange={() => setCheckboxTwo(!checkboxTwo)}
-                                // checked={checkboxTwo}
-                                className="wrapper__offer"
-                            />
-                            <label htmlFor="checkboxTwo">Сбросить пароль при первом входе</label>
-                        </div>
-                    </div>
-                    <div className="forms__button">
-                        <div className="button">Добавить</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+                ) : null}
+            </>
+        );
+    }
+    return <Loader />;
 };
 
 export default AddUsers;

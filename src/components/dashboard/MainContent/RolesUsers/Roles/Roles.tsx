@@ -1,9 +1,9 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
@@ -19,8 +19,8 @@ import { PersonalCabinet } from '../../../../../store/store';
 /**
  * Импорт компонентов
  * */
-// import Roles from './Roles/Roles';
-// import Users from './Users/Users';
+import AddRoles from './AddRoles/AddRoles';
+import EditRoles from './EditRoles/EditRoles';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -34,6 +34,11 @@ import Loader from '../../../../../__utils__/Spinner';
 import './Roles.scss';
 
 const Roles = () => {
+    const [addRole, setAddRole] = useState(false);
+    const [editRole, setEditRole] = useState(false);
+    const [closeAddRole, setCloseAddRole] = useState(false);
+    const [closeEditRole, setCloseEditRole] = useState(false);
+
     /**
      * ********** Импорт состояния из Redux **********
      * */
@@ -43,15 +48,17 @@ const Roles = () => {
     /**
      * Отправка действий для изменения на сервере
      * */
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const useruuid: string | null = localStorage.getItem('userUuid');
-    //     // @ts-ignore
-    //     const userUuid = useruuid.replace(/['"«»]/g, '');
-    //     // @ts-ignore
-    //     dispatch(fetchDataRolesUsers({ uuid: userUuid }));
-    // }, []);
+    const handleChangeAddRole = () => {
+        setAddRole(!addRole);
+        setCloseAddRole(!closeAddRole);
+    };
+
+    const handleChangeEditRole = () => {
+        setEditRole(!editRole);
+        setCloseEditRole(!closeEditRole);
+    };
 
     if (isAuthenticated && user) {
         return (
@@ -61,14 +68,13 @@ const Roles = () => {
                         <input type="text" className="input" placeholder="Поиск по ролям пользователей" />
                     </div>
                     <div className="header__button">
-                        <button type="button" className="button">
-                            <Link to="/add-role" className="button__text">
-                                Добавить роль
-                            </Link>
+                        <button onClick={handleChangeAddRole} type="button" className="button">
+                            <div className="button__text">Добавить роль</div>
                             <div className="button__icon" />
                         </button>
                     </div>
                 </header>
+                {addRole ? <AddRoles addRoles={addRole} setAddRole={setAddRole} /> : null}
                 <main className="role__employments">
                     <div className="employments__block">
                         <div className="block__left">
@@ -80,11 +86,12 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <Link to="/edit-role" className="change" />
+                                <div onClick={handleChangeEditRole} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
                     </div>
+                    {editRole ? <EditRoles editRoles={editRole} setEditRoles={setEditRole} /> : null}
                     {/** DELETE BELOW */}
                     <div className="employments__block">
                         <div className="block__left">
@@ -96,7 +103,7 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <Link to="/edit-role" className="change" />
+                                <div onClick={handleChangeEditRole} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -112,7 +119,7 @@ const Roles = () => {
                         </div>
                         <div className="block__right">
                             <div className="right__options">
-                                <Link to="/edit-role" className="change" />
+                                <div onClick={handleChangeEditRole} className="change" />
                                 <div className="close" />
                             </div>
                         </div>

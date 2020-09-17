@@ -1,9 +1,9 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
@@ -19,8 +19,8 @@ import { PersonalCabinet } from '../../../../../store/store';
 /**
  * Импорт компонентов
  * */
-// import Roles from './Roles/Roles';
-// import Users from './Users/Users';
+import AddUsers from './AddUsers/AddUsers';
+import EditUsers from './EditUsers/EditUsers';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -34,8 +34,10 @@ import Loader from '../../../../../__utils__/Spinner';
 import './Users.scss';
 
 const Users = () => {
-    const [tabOne, setTabOne] = useState(true);
-    const [tabTwo, setTabTwo] = useState(false);
+    const [addUser, setAddUser] = useState(false);
+    const [editUser, setEditUser] = useState(false);
+    const [closeAddUser, setCloseAddUser] = useState(false);
+    const [closeEditUser, setCloseEditUser] = useState(false);
 
     /**
      * ********** Импорт состояния из Redux **********
@@ -46,15 +48,17 @@ const Users = () => {
     /**
      * Отправка действий для изменения на сервере
      * */
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const useruuid: string | null = localStorage.getItem('userUuid');
-    //     // @ts-ignore
-    //     const userUuid = useruuid.replace(/['"«»]/g, '');
-    //     // @ts-ignore
-    //     dispatch(fetchDataRolesUsers({ uuid: userUuid }));
-    // }, []);
+    const handleChangeAddUser = () => {
+        setAddUser(!addUser);
+        setCloseAddUser(!closeAddUser);
+    };
+
+    const handleChangeEditUser = () => {
+        setEditUser(!editUser);
+        setCloseEditUser(!closeEditUser);
+    };
 
     if (isAuthenticated && user) {
         return (
@@ -64,14 +68,13 @@ const Users = () => {
                         <input type="text" className="input" placeholder="Поиск по пользователям" />
                     </div>
                     <div className="header__button">
-                        <button type="button" className="button">
-                            <Link to="/add-users" className="button__text">
-                                Новый пользователь
-                            </Link>
+                        <button onClick={handleChangeAddUser} type="button" className="button">
+                            <div className="button__text">Новый пользователь</div>
                             <div className="button__icon" />
                         </button>
                     </div>
                 </header>
+                {addUser ? <AddUsers addUser={addUser} setAddUser={setAddUser} /> : null}
                 <main className="utilizer__employments">
                     <header className="employments__header">
                         <div className="header__text">
@@ -93,11 +96,12 @@ const Users = () => {
                                 <div className="post">Менеджер снабжения</div>
                             </div>
                             <div className="right__options">
-                                <Link to="/edit-users" className="change" />
+                                <div onClick={handleChangeEditUser} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
                     </div>
+                    {editUser ? <EditUsers editUser={editUser} setEditUser={setEditUser} /> : null}
                     {/** DELETE */}
                     <div className="employments__block">
                         <div className="block__left">
@@ -112,7 +116,7 @@ const Users = () => {
                                 <div className="post">Менеджер по продажам</div>
                             </div>
                             <div className="right__options">
-                                <Link to="/edit-users" className="change" />
+                                <div onClick={handleChangeEditUser} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -131,7 +135,7 @@ const Users = () => {
                                 <div className="post">Администратор</div>
                             </div>
                             <div className="right__options">
-                                <Link to="/edit-users" className="change" />
+                                <div onClick={handleChangeEditUser} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -150,7 +154,7 @@ const Users = () => {
                                 <div className="post">Менеджер снабжения</div>
                             </div>
                             <div className="right__options">
-                                <Link to="/edit-users" className="change" />
+                                <div onClick={handleChangeEditUser} className="change" />
                                 <div className="close" />
                             </div>
                         </div>
@@ -169,7 +173,7 @@ const Users = () => {
                                 <div className="post">Менеджер по продажам</div>
                             </div>
                             <div className="right__options">
-                                <Link to="/edit-users" className="change" />
+                                <div onClick={handleChangeEditUser} className="change" />
                                 <div className="close" />
                             </div>
                         </div>

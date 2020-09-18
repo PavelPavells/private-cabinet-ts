@@ -39,14 +39,13 @@ export interface EditRoleItem {
 export type EditRole = Array<EditRoleItem>;
 
 export interface EditRoleReq {
-    page: number;
-    limit: number;
-    sortBy: null | string;
-    sortDirection: number | undefined;
-    groupBy: null | string;
-    findBy: null | string;
-    findValue: null | string;
-    uuid: string;
+    role: string;
+    id: string;
+    description: string;
+    checkboxOne: boolean;
+    checkboxTwo: boolean;
+    checkboxThree: boolean;
+    checkboxFour: boolean;
 }
 
 export interface EditRoleRes {
@@ -89,8 +88,8 @@ export interface EditRoleRes {
 export interface EditRoleState {
     isFetching: boolean;
     errorMessage: string;
-    addUser: EditRole | null;
-    inputs: EditRoleInputs;
+    editRole: EditRole | null;
+    // inputs: EditRoleInputs;
 }
 
 interface EditRoleRequest {
@@ -99,7 +98,7 @@ interface EditRoleRequest {
 
 interface EditRoleSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: EditRoleState[];
+    payload: EditRole;
 }
 
 interface EditRoleFailure {

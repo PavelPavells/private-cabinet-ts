@@ -43,7 +43,7 @@ const Roles = () => {
      * ********** Импорт состояния из Redux **********
      * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
+    // const { isFetching, role } = useSelector((state: PersonalCabinet) => state.role, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере

@@ -39,14 +39,14 @@ export interface EditUserItem {
 export type EditUser = Array<EditUserItem>;
 
 export interface EditUserReq {
-    page: number;
-    limit: number;
-    sortBy: null | string;
-    sortDirection: number | undefined;
-    groupBy: null | string;
-    findBy: null | string;
-    findValue: null | string;
-    uuid: string;
+    fullName: string;
+    phone: string;
+    email: string;
+    post: string;
+    pass: string;
+    repeatPass: string;
+    checkboxOne: boolean;
+    checkboxTwo: boolean;
 }
 
 export interface EditUserRes {
@@ -89,8 +89,8 @@ export interface EditUserRes {
 export interface EditUserState {
     isFetching: boolean;
     errorMessage: string;
-    addUser: EditUser | null;
-    inputs: EditUserInputs;
+    editUser: EditUser | null;
+    // inputs: EditUserInputs;
 }
 
 interface EditUserRequest {
@@ -99,7 +99,7 @@ interface EditUserRequest {
 
 interface EditUserSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: EditUserState[];
+    payload: EditUser;
 }
 
 interface EditUserFailure {

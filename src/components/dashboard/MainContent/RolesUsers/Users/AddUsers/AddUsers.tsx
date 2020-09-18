@@ -1,20 +1,20 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import React, { useEffect, SyntheticEvent, useState, ChangeEvent } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
  * */
-// import { fetchDataRolesUsers } from '../../../../actions/rolesUsersActions';
+import { fetchDataAddUser } from '../../../../../../actions/userActions/addUserActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../../../store/store';
-// import { RolesUserReq } from '../../../../constants/RolesUsersTypes';
+import { AddUserReq } from '../../../../../../constants/userTypes/addUser';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -24,7 +24,7 @@ import Loader from '../../../../../../__utils__/Spinner';
 /**
  * ********** Импорт файлов стилей **********
  * */
-
+import '../../../../../../styles/input-checkbox.scss';
 import './AddUsers.scss';
 
 // eslint-disable-next-line import/order
@@ -33,34 +33,42 @@ import NumberFormat from 'react-number-format';
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const AddUsers = ({ addUser, setAddUser }) => {
-    // const [tabOne, setTabOne] = useState(true);
-    // const [tabTwo, setTabTwo] = useState(false);
-    // const [closeAddUserWindow, setCloseAddUserWindow] = useState(false);
+    const [fullName, setFullName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [post, setPost] = useState('');
+    const [pass, setPass] = useState('');
+    const [repeatPass, setRepeatPass] = useState('');
+    const [checkboxOne, setCheckboxOne] = useState(false);
+    const [checkboxTwo, setCheckboxTwo] = useState(false);
 
     /**
      * ********** Импорт состояния из Redux **********
      * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
+    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.addUser, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
      * */
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (closeAddUser) {
-    //         setCloseAddUserWindow(true);
-    //     }
-    // }, [closeAddUser]);
+    useEffect(() => {});
 
-    // useEffect(() => {
-    //     const useruuid: string | null = localStorage.getItem('userUuid');
-    //     // @ts-ignore
-    //     const userUuid = useruuid.replace(/['"«»]/g, '');
-    //     // @ts-ignore
-    //     dispatch(fetchDataRolesUsers({ uuid: userUuid }));
-    // }, []);
+    const handleSubmitAddRoles = (event: SyntheticEvent) => {
+        event.preventDefault();
+        const addUserRequest: AddUserReq = {
+            fullName,
+            phone,
+            email,
+            post,
+            pass,
+            repeatPass,
+            checkboxOne,
+            checkboxTwo
+        };
+        dispatch(fetchDataAddUser(addUserRequest));
+    };
 
     const showOrHidePasswordNew = () => {
         const password: HTMLElement | any = document.getElementById('passNew');
@@ -103,10 +111,10 @@ const AddUsers = ({ addUser, setAddUser }) => {
                             <div className="forms__wrapper">
                                 <div className="forms__field">
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLogin(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value)}
                                         type="text"
                                         name="login"
-                                        // value={login}
+                                        value={fullName}
                                         className="field__input"
                                         required
                                     />
@@ -115,8 +123,8 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                 <div className="forms__field">
                                     <label className="field__label">Телефон</label>
                                     <NumberFormat
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
-                                        // value={phone}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}
+                                        value={phone}
                                         id="phone"
                                         type="tel"
                                         className="field__input"
@@ -133,10 +141,10 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                 <div className="forms__field">
                                     <label className="field__label">E-mail</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                                         type="text"
                                         name="email"
-                                        // value={email}
+                                        value={email}
                                         className="field__input"
                                         pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                                         title="Ваш E-mail должен содержать @ и минимум одну точку"
@@ -146,10 +154,10 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                 <div className="forms__field">
                                     <label className="field__label">Должность</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPost(event.target.value)}
                                         type="text"
                                         name="lastName"
-                                        // value={lastName}
+                                        value={post}
                                         className="field__input"
                                         required
                                     />
@@ -159,11 +167,11 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                 <div className="forms__field">
                                     <label className="field__label">Пароль</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setNewPass(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPass(event.target.value)}
                                         type="password"
                                         id="passNew"
                                         name="newPass"
-                                        // value={newPass}
+                                        value={pass}
                                         className="field__input"
                                         minLength={8}
                                         maxLength={255}
@@ -176,8 +184,8 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                 <div className="forms__field">
                                     <label className="field__label">Подтвердите новый пароль</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatPass(event.target.value)}
-                                        // value={repeatPass}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setRepeatPass(event.target.value)}
+                                        value={repeatPass}
                                         id="passRepeat"
                                         name="repeatPass"
                                         type="password"
@@ -197,9 +205,9 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                         name="checkboxOne"
                                         type="checkbox"
                                         id="checkboxOne"
-                                        // onChange={() => setCheckboxOne(!checkboxOne)}
-                                        // checked={checkboxOne}
-                                        className="wrapper__news"
+                                        onChange={() => setCheckboxOne(!checkboxOne)}
+                                        checked={checkboxOne}
+                                        className="wrapper__news switch"
                                     />
                                     <label htmlFor="checkboxOne">Отправить пользователю приглашение на электронную почту</label>
                                 </div>
@@ -208,9 +216,9 @@ const AddUsers = ({ addUser, setAddUser }) => {
                                         name="checkboxTwo"
                                         type="checkbox"
                                         id="checkboxTwo"
-                                        // onChange={() => setCheckboxTwo(!checkboxTwo)}
-                                        // checked={checkboxTwo}
-                                        className="wrapper__offer"
+                                        onChange={() => setCheckboxTwo(!checkboxTwo)}
+                                        checked={checkboxTwo}
+                                        className="wrapper__offer switch"
                                     />
                                     <label htmlFor="checkboxTwo">Сбросить пароль при первом входе</label>
                                 </div>

@@ -49,7 +49,7 @@ export interface RoleReq {
     uuid: string;
 }
 
-export interface AddRoleRes {
+export interface RoleRes {
     payload: {
         recordSet: {
             content: Role;
@@ -86,11 +86,11 @@ export interface AddRoleRes {
 /**
  * *********** Интерфейсы стейта Компонента Roles **********
  */
-export interface AddRoleState {
+export interface RoleState {
     isFetching: boolean;
     errorMessage: string;
-    addUser: Role | null;
-    inputs: RoleInputs;
+    role: Role | null;
+    // inputs: RoleInputs;
 }
 
 interface RoleRequest {
@@ -99,7 +99,7 @@ interface RoleRequest {
 
 interface RoleSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: AddRoleState[];
+    payload: Role;
 }
 
 interface RoleFailure {

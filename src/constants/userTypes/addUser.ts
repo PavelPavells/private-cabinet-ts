@@ -39,14 +39,14 @@ export interface AddUserItem {
 export type AddUser = Array<AddUserItem>;
 
 export interface AddUserReq {
-    page: number;
-    limit: number;
-    sortBy: null | string;
-    sortDirection: number | undefined;
-    groupBy: null | string;
-    findBy: null | string;
-    findValue: null | string;
-    uuid: string;
+    fullName: string;
+    phone: string;
+    email: string;
+    post: string;
+    pass: string;
+    repeatPass: string;
+    checkboxOne: boolean;
+    checkboxTwo: boolean;
 }
 
 export interface AddUserRes {
@@ -90,7 +90,7 @@ export interface AddUserState {
     isFetching: boolean;
     errorMessage: string;
     addUser: AddUser | null;
-    inputs: AddUserInputs;
+    // inputs: AddUserInputs;
 }
 
 interface AddUserRequest {
@@ -99,7 +99,7 @@ interface AddUserRequest {
 
 interface AddUserSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: AddUserState[];
+    payload: AddUser;
 }
 
 interface AddUserFailure {

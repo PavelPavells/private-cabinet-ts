@@ -1,20 +1,20 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import React, { useEffect, SyntheticEvent, useState, ChangeEvent } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
 /**
  * ********** Импорт экшенов **********
  * */
-// import { fetchDataRolesUsers } from '../../../../actions/rolesUsersActions';
+import { fetchDataEditRole } from '../../../../../../actions/roleActions/editRoleActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../../../store/store';
-// import { RolesUserReq } from '../../../../constants/RolesUsersTypes';
+import { EditRoleReq } from '../../../../../../constants/roleTypes/editRole';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -24,25 +24,46 @@ import Loader from '../../../../../../__utils__/Spinner';
 /**
  * ********** Импорт файлов стилей **********
  * */
-
+import '../../../../../../styles/input-checkbox.scss';
 import './EditRoles.scss';
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const EditRoles = ({ editRoles, setEditRoles }) => {
-    // const [tabOne, setTabOne] = useState(true);
-    // const [tabTwo, setTabTwo] = useState(false);
+    const [role, setRole] = useState('');
+    const [id, setId] = useState('');
+    const [description, setDescription] = useState('');
+    const [checkboxOne, setCheckboxOne] = useState(false);
+    const [checkboxTwo, setCheckboxTwo] = useState(false);
+    const [checkboxThree, setCheckboxThree] = useState(false);
+    const [checkboxFour, setCheckboxFour] = useState(false);
 
     /**
      * ********** Импорт состояния из Redux **********
      * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
+    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.editRole, shallowEqual);
 
     /**
      * Отправка действий для изменения на сервере
      * */
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+    useEffect(() => {});
+
+    const handleSubmitAddRoles = (event: SyntheticEvent) => {
+        event.preventDefault();
+        const editRolesRequest: EditRoleReq = {
+            role,
+            id,
+            description,
+            checkboxOne,
+            checkboxTwo,
+            checkboxThree,
+            checkboxFour
+        };
+        dispatch(fetchDataEditRole(editRolesRequest));
+    };
 
     const handleChangeCloseWindow = () => {
         setEditRoles(false);
@@ -66,10 +87,10 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                             <div className="forms__wrapper">
                                 <div className="forms__field">
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLogin(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setRole(event.target.value)}
                                         type="text"
                                         name="login"
-                                        // value={login}
+                                        value={role}
                                         className="field__input"
                                         required
                                     />
@@ -78,10 +99,10 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                 <div className="forms__field">
                                     <label className="field__label">Роль ID</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setId(event.target.value)}
                                         type="text"
                                         name="email"
-                                        // value={email}
+                                        value={id}
                                         className="field__input"
                                         pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                                         title="Ваш E-mail должен содержать @ и минимум одну точку"
@@ -93,10 +114,10 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                 <div className="forms__field" style={{ width: '100%' }}>
                                     <label className="field__label">Описание роли</label>
                                     <input
-                                        // onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
                                         type="text"
                                         name="lastName"
-                                        // value={lastName}
+                                        value={description}
                                         className="field__input"
                                         required
                                     />
@@ -109,9 +130,9 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                         name="checkboxOne"
                                         type="checkbox"
                                         id="checkboxOne"
-                                        // onChange={() => setCheckboxOne(!checkboxOne)}
-                                        // checked={checkboxOne}
-                                        className="wrapper__news"
+                                        onChange={() => setCheckboxOne(!checkboxOne)}
+                                        checked={checkboxOne}
+                                        className="wrapper__news switch"
                                     />
                                     <label htmlFor="checkboxOne">Разрешить использовать конфигуратор</label>
                                 </div>
@@ -120,9 +141,9 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                         name="checkboxTwo"
                                         type="checkbox"
                                         id="checkboxTwo"
-                                        // onChange={() => setCheckboxTwo(!checkboxTwo)}
-                                        // checked={checkboxTwo}
-                                        className="wrapper__offer"
+                                        onChange={() => setCheckboxTwo(!checkboxTwo)}
+                                        checked={checkboxTwo}
+                                        className="wrapper__offer switch"
                                     />
                                     <label htmlFor="checkboxTwo">Разрешить редактировать профиль</label>
                                 </div>
@@ -131,9 +152,9 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                         name="checkboxThree"
                                         type="checkbox"
                                         id="checkboxThree"
-                                        // onChange={() => setCheckboxThree(!checkboxThree)}
-                                        // checked={checkboxThree}
-                                        className="wrapper__updates"
+                                        onChange={() => setCheckboxThree(!checkboxThree)}
+                                        checked={checkboxThree}
+                                        className="wrapper__updates switch"
                                     />
                                     <label htmlFor="checkboxThree">Разрешить экспортировать продукцию Carddex</label>
                                 </div>
@@ -142,9 +163,9 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
                                         name="checkboxFour"
                                         type="checkbox"
                                         id="checkboxFour"
-                                        // onChange={() => setCheckboxFour(!checkboxFour)}
-                                        // checked={checkboxFour}
-                                        className="wrapper__updates"
+                                        onChange={() => setCheckboxFour(!checkboxFour)}
+                                        checked={checkboxFour}
+                                        className="wrapper__updates switch"
                                     />
                                     <label htmlFor="checkboxFour">Разрешить просматривать историю компании</label>
                                 </div>

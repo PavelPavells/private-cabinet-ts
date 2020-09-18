@@ -49,7 +49,7 @@ export interface UserReq {
     uuid: string;
 }
 
-export interface AddUserRes {
+export interface UserRes {
     payload: {
         recordSet: {
             content: User;
@@ -86,11 +86,11 @@ export interface AddUserRes {
 /**
  * *********** Интерфейсы стейта Компонента Users **********
  */
-export interface AddUserState {
+export interface UserState {
     isFetching: boolean;
     errorMessage: string;
-    addUser: User | null;
-    inputs: UserInputs;
+    user: User | null;
+    // inputs: UserInputs;
 }
 
 interface UserRequest {
@@ -99,7 +99,7 @@ interface UserRequest {
 
 interface UserSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: AddUserState[];
+    payload: User;
 }
 
 interface UserFailure {

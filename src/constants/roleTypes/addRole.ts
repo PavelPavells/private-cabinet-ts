@@ -11,7 +11,7 @@ export interface ResponseStatus {
     action: string;
 }
 
-export interface AddRoleItem {
+interface AddRoleItem {
     currencyDesc: string;
     currencyId: number;
     deleted: 0 | 1;
@@ -36,17 +36,16 @@ export interface AddRoleItem {
     validUntil: string | null;
 }
 
-export type AddRole = Array<AddRoleItem>;
+export type AddRole = AddRoleItem;
 
 export interface AddRoleReq {
-    page: number;
-    limit: number;
-    sortBy: null | string;
-    sortDirection: number | undefined;
-    groupBy: null | string;
-    findBy: null | string;
-    findValue: null | string;
-    uuid: string;
+    role: string;
+    id: string;
+    description: string;
+    checkboxOne: boolean;
+    checkboxTwo: boolean;
+    checkboxThree: boolean;
+    checkboxFour: boolean;
 }
 
 export interface AddRoleRes {
@@ -89,8 +88,8 @@ export interface AddRoleRes {
 export interface AddRoleState {
     isFetching: boolean;
     errorMessage: string;
-    addUser: AddRole | null;
-    inputs: AddRoleInputs;
+    addRole: AddRole | null;
+    // inputs: AddRoleInputs;
 }
 
 interface AddRoleRequest {
@@ -99,7 +98,7 @@ interface AddRoleRequest {
 
 interface AddRoleSuccess {
     type: typeof DATA_LOADING_SUCCESS;
-    payload: AddRoleState[];
+    payload: AddRole;
 }
 
 interface AddRoleFailure {

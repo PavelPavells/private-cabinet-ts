@@ -307,6 +307,7 @@
     .block-element {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         padding: 30px;
         background: $white;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
@@ -349,6 +350,7 @@
         &__submit {
             // flex: 1;
             display: flex;
+            margin: 20px 0;
 
             .button {
                 display: flex;

@@ -4,6 +4,7 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Draggable from 'react-draggable';
 
 /**
  * ********** Импорт типов **********
@@ -13,6 +14,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт основных основных компонентов **********
  * */
+import Chat from './MainContent/Chat/Chat';
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
 import MainComponent from './MainContent/Main/Main';
@@ -57,10 +59,6 @@ const Layout = () => {
                     <Route path="/sales" component={SalePartners} />
                     <Route path="/profile" component={Account} />
                     <Route path="/users-and-roles" component={RolesUsers} />
-                    {/* <Route path="/add-role" component={AddRoles} />
-                    <Route path="/edit-role" component={EditRoles} />
-                    <Route path="/add-users" component={AddUsers} />
-                    <Route path="/edit-users" component={EditUsers} /> */}
                     <Route path="/price-list" component={PriceList} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/settings" component={Settings} />
@@ -70,6 +68,12 @@ const Layout = () => {
                     <Route path="/shipment" component={Shipment} />
                     <Route path="/configurator" component={Configurator} />
                 </Switch>
+                <div className="wrapper__chat">
+                    {/** @ts-ignore */}
+                    <Draggable>
+                        <Chat />
+                    </Draggable>
+                </div>
             </div>
         </div>
     );

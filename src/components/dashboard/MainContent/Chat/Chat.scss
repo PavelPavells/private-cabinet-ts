@@ -1,0 +1,94 @@
+@import '../../../../styles/base.scss';
+@import '../../../../styles/reset.scss';
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid $brandBorderColor;
+    background-color: $white;
+    z-index: 100000;
+
+    .chat__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+
+        .header__left {
+            display: flex;
+            flex: 2;
+
+            .left__photo {
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+                border: 1px solid $brandBorderColor;
+                border-radius: 50%;
+            }
+
+            .left__text {
+                display: flex;
+                flex-direction: column;
+
+                .text__name {
+                    font-size: 16px;
+                    color: $brandPantonBlack;
+                }
+
+                .text__status {
+                    font-size: 14px;
+                    color: $brandBorderColor;
+                }
+            }
+        }
+
+        .header__right {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            flex: 1;
+            height: 100%;
+
+            .right__rollup {
+                width: 20px;
+                height: 20px;
+                margin-right: 20px;
+                background: url('../../../../images/chat/rollup_chat.svg') no-repeat center;
+                background-size: contain;
+            }
+
+            .right__close {
+                width: 20px;
+                height: 20px;
+                background: url('../../../../images/chat/close_chat.svg') no-repeat center;
+                background-size: contain;
+            }
+        }
+    }
+
+    .chat__window {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 5;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    .chat__footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+}

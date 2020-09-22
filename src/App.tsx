@@ -70,6 +70,7 @@ if (localStorage.partnerUuid) {
         /**
          * ********** Логаут пользователя **********
          */
+        // @ts-ignore
         store.dispatch(logoutUser());
         window.location.href = './';
     }

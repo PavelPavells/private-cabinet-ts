@@ -10,6 +10,7 @@ import addUserReducer from './userReducers/addUserReducer';
 import editUserReducer from './userReducers/editUserReducer';
 import controlReducer from './controlReducer';
 import mainReducer from './mainReducer';
+import messagesReducer from './chatReducers/messagesReducer';
 import paymentReducer from './paymentReducer';
 import priceListReducer from './priceListReducer';
 import ordersReducer from './ordersReducer';
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
     editUser: editUserReducer,
     control: controlReducer,
     main: mainReducer,
+    message: messagesReducer,
     payment: paymentReducer,
     pricelist: priceListReducer,
     orders: ordersReducer,

@@ -70,7 +70,14 @@ const Layout = () => {
                 </Switch>
                 <div className="wrapper__chat">
                     {/** @ts-ignore */}
-                    <Draggable>
+                    <Draggable
+                        bounds={{
+                            top: window.innerHeight / 2,
+                            left: window.innerWidth / 1.5,
+                            right: 0,
+                            bottom: 0
+                        }}
+                    >
                         <Chat />
                     </Draggable>
                 </div>

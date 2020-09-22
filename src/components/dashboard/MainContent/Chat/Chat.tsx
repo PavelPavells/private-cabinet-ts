@@ -1,19 +1,24 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, SyntheticEvent } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import React, { useState, SyntheticEvent, ChangeEvent, useLayoutEffect } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import Draggable from 'react-draggable';
 /**
  * ********** Импорт экшенов **********
  * */
-// import { fetchDataChat } from '../../../../actions/chatActions';
+import { addMessage, ChatRequestData } from '../../../../actions/chatActions/chatActions';
+
+/**
+ * ********** Импорт комопнентов **********
+ */
+import Message from './Message/Message';
 
 /**
  * ********** Импорт типов **********
  * */
-// import { PersonalCabinet } from '../../../../store/store';
+import { PersonalCabinet } from '../../../../store/store';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -28,16 +33,42 @@ import './Chat.scss';
 
 const Chat = () => {
     const [isOpen, setIsOpen] = useState(true);
-
+    const [msg, addMessages] = useState('');
     const handleChangeIsOpenChat = (event: SyntheticEvent) => {
         event.preventDefault();
         setIsOpen(!isOpen);
     };
-    const elem = document.querySelector('body');
-    // @ts-ignore
-    console.log(elem.clientHeight);
+
+    const { message } = useSelector((state: PersonalCabinet) => state.message, shallowEqual);
+
+    /**
+     * Отправка действий для изменения на сервере
+     * */
+    const dispatch = useDispatch();
+
+    useLayoutEffect(() => {
+        dispatch(ChatRequestData());
+    }, []);
+
+    const sendMessage = (event: any) => {
+        if (event.key === 'Enter' || event.type === 'click') {
+            if (msg !== '') {
+                dispatch(addMessage(msg));
+            }
+            addMessages('');
+        }
+    };
+
+    // console.log(message);
     return (
-        <Draggable bounds={{ top: -600, left: -1000, right: 0, bottom: 0 }}>
+        <Draggable
+            bounds={{
+                top: -window.innerHeight / 1.5,
+                left: -window.innerWidth / 1.5,
+                right: 0,
+                bottom: 0
+            }}
+        >
             {isOpen ? (
                 <div className="chat">
                     <div className="chat__header">
@@ -50,18 +81,38 @@ const Chat = () => {
                         </div>
                         <div className="header__right">
                             <div className="right__rollup" />
-                            <div className="right__close" />
+                            <div onClick={handleChangeIsOpenChat} className="right__close" />
                         </div>
                     </div>
-                    <div className="chat__window">WINDOW</div>
+                    <div className="chat__window">
+                        <>
+                            {
+                                // @ts-ignore
+                                message &&
+                                    message.map((msgs: any) => {
+                                        return <Message key={msgs.id} msgs={msgs} />;
+                                    })
+                            }
+                        </>
+                    </div>
                     <div className="chat__footer">
-                        <input type="text" className="footer__input" />
-                        <button type="submit" className="footer__button">
-                            Отправить
+                        <div className="footer__add">+</div>
+                        <input
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
+                            onKeyPress={sendMessage}
+                            value={msg}
+                            type="text"
+                            className="footer__input"
+                            placeholder="Введите ваше сообщение..."
+                        />
+                        <button onClick={sendMessage} type="submit" className="footer__btn">
+                            <div className="button__image" />
                         </button>
                     </div>
                 </div>
-            ) : null}
+            ) : (
+                <span />
+            )}
         </Draggable>
     );
 };

@@ -4,8 +4,8 @@
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
 export const CHAT_DATA_LOADING_REQUEST = 'CHAT_DATA_LOADING_REQUEST';
-// export const ADD_USER = 'ADD_USER';
-// export const USERS_LIST = 'USERS_LIST';
+export const ADD_USER = 'ADD_USER';
+export const USERS_LIST = 'USERS_LIST';
 
 /**
  * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********

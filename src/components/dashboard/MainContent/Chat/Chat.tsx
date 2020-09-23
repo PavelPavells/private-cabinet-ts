@@ -24,6 +24,7 @@ import { PersonalCabinet } from '../../../../store/store';
  * ********** Импорт LOADER из __UTILS__ **********
  * */
 // import Loader from '../../../../__utils__/Spinner';
+import Fade from '../../../../__utils__/Fade/Fade';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -32,7 +33,7 @@ import { PersonalCabinet } from '../../../../store/store';
 import './Chat.scss';
 
 const Chat = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [msg, addMessages] = useState('');
     const handleChangeIsOpenChat = (event: SyntheticEvent) => {
         event.preventDefault();
@@ -59,7 +60,6 @@ const Chat = () => {
         }
     };
 
-    // console.log(message);
     return (
         <Draggable
             bounds={{
@@ -69,50 +69,62 @@ const Chat = () => {
                 bottom: 0
             }}
         >
-            {isOpen ? (
-                <div className="chat">
-                    <div className="chat__header">
-                        <div className="header__left">
-                            <div className="left__photo" />
-                            <div className="left__text">
-                                <div className="text__name">Фесенко Лидия</div>
-                                <div className="text__status">online</div>
+            <div>
+                <Fade show={isOpen}>
+                    <div className="chat">
+                        <div className="chat__header">
+                            <div className="header__left">
+                                <div className="left__photo" />
+                                <div className="left__text">
+                                    <div className="text__name">Фесенко Лидия</div>
+                                    <div>
+                                        {message.length ? (
+                                            <div className="text__status green">online</div>
+                                        ) : (
+                                            <div className="text__status">offline</div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="header__right">
+                                <div onClick={handleChangeIsOpenChat} className="right__rollup" />
+                                {/* <div className="right__close" /> */}
                             </div>
                         </div>
-                        <div className="header__right">
-                            <div className="right__rollup" />
-                            <div onClick={handleChangeIsOpenChat} className="right__close" />
-                        </div>
-                    </div>
-                    <div className="chat__window">
-                        <>
-                            {
-                                // @ts-ignore
-                                message &&
+                        <div className="chat__window">
+                            <>
+                                {message &&
                                     message.map((msgs: any) => {
                                         return <Message key={msgs.id} msgs={msgs} />;
-                                    })
-                            }
-                        </>
+                                    })}
+                            </>
+                        </div>
+                        <div className="chat__footer">
+                            <div className="footer__add">+</div>
+                            <input
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
+                                onKeyPress={sendMessage}
+                                value={msg}
+                                type="text"
+                                className="footer__input"
+                                autoFocus
+                                placeholder="Введите ваше сообщение..."
+                            />
+                            <button onClick={sendMessage} type="submit" className="footer__btn">
+                                <div className="button__image" />
+                            </button>
+                        </div>
                     </div>
-                    <div className="chat__footer">
-                        <div className="footer__add">+</div>
-                        <input
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
-                            onKeyPress={sendMessage}
-                            value={msg}
-                            type="text"
-                            className="footer__input"
-                            placeholder="Введите ваше сообщение..."
-                        />
-                        <button onClick={sendMessage} type="submit" className="footer__btn">
-                            <div className="button__image" />
-                        </button>
+                </Fade>
+                <Fade show={!isOpen}>
+                    <div className="chat__rollup">
+                        <div className="rollup__status">
+                            <span>2</span>
+                        </div>
+                        <div onClick={handleChangeIsOpenChat} className="rollup__image" />
                     </div>
-                </div>
-            ) : (
-                <span />
-            )}
+                </Fade>
+            </div>
         </Draggable>
     );
 };

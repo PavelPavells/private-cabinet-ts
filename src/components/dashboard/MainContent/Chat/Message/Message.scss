@@ -1,24 +1,60 @@
 @import '../../../../../styles/base.scss';
 @import '../../../../../styles/reset.scss';
 
-.message {
+.wrap__message {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 170px;
-    padding: 10px;
+    align-items: flex-end;
     margin: 10px;
-    border-radius: 10px 10px 0px 10px;
-    color: $white;
-    background-color: $brandPantonBlue;
-    word-wrap: break-word;
 
-    .message__time {
+    .message {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-end;
-        padding: 5px;
-        font-size: 10px;
+        width: auto;
+        max-width: 170px;
+        padding: 10px;
+        // margin: 10px;
+        border-radius: 10px 10px 0px 10px;
+        color: $white;
+        background-color: $brandPantonBlue;
+        word-wrap: break-word;
+    
+        .message__time {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding: 5px;
+            font-size: 10px;
+        }
+    }
+
+    .message__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        .message__more {
+            display: block;
+            width: 4px;
+            height: 28px;
+            margin-left: auto;
+            background: url('../../../../../images/chat/dots.svg') no-repeat center;
+            background-size: contain;
+
+            &:hover {
+                cursor: pointer;
+            };
+        }
+
+        .message__photo {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-left: 20px;
+            background: url('../../../../../images/profile-photo.png') no-repeat center;
+            background-size: contain;
+            border-radius: 50%;
+        }
     }
 }

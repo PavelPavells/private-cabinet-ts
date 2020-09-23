@@ -3,8 +3,10 @@ import { ADD_MESSAGE, MESSAGE_RECEIVED, ChatActions, ChatState } from '../../con
 const initialState: ChatState = {
     isFetching: false,
     message: [],
+    // users: [],
     errorMessage: ''
 };
+
 export default function messagesReducer(state = initialState, action: ChatActions): ChatState {
     switch (action.type) {
         case ADD_MESSAGE:
@@ -35,7 +37,7 @@ export default function messagesReducer(state = initialState, action: ChatAction
     }
 }
 
-// export function users(state = [], action) {
+// export function usersReducer(state = [], action) {
 //     switch (action.type) {
 //         case ADD_USER:
 //             return state.concat([{ name: action.name, id: action.id }]);

@@ -32,3 +32,19 @@ export const messageReceived = (message: string): ChatActions => ({
     message,
     time: getTime()
 });
+
+// export const addUser = (name: string): ChatActions => ({
+//     type: types.ADD_USER,
+//     id: nextUserId++,
+//     name
+// });
+
+// export const usersList = (users: any): ChatActions => ({
+//     type: types.USERS_LIST,
+//     users
+// });
+
+// export const login = (name: string): ChatActions => ({
+//     type: types.LOGIN,
+//     name
+// });

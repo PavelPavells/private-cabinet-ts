@@ -1,0 +1,29 @@
+@import "../../styles/base.scss";
+
+#popover {
+    position: relative;
+    height: 100%;
+}
+
+.popover__message {
+    position: absolute;
+    top: 0;
+    background-color: $brandPantonBlue;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    animation-name: popover;
+    animation-duration: 0.1s;
+}
+
+@keyframes popover {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

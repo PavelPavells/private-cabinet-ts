@@ -19,9 +19,10 @@ import { PersonalCabinet } from '../../../../store/store';
 import { OrdersListReq } from '../../../../constants/ordersTypes';
 
 /**
- * ********** Импорт LOADER из __UTILS__ **********
+ * ********** Импорт utils **********
  * */
 import Loader from '../../../../__utils__/Spinner';
+import Popover from '../../../../__utils__/tablePopover/tablePopover';
 
 /**
  * ********** импорт лого (лупа) для поля ввода **********
@@ -168,56 +169,60 @@ const OrdersComponent = () => {
                         ) : null}
                     </header>
                     <main className="orders__table">
-                        <div className="orders__frame">
-                            <div className="frame__table">
-                                {ordersHeaders.map((header: any, i: any) => {
-                                    if (header.visible) {
-                                        return (
-                                            <div key={header.fieldName} className="table__column">
-                                                <div className="frame__caption">
-                                                    <div
-                                                        className={selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'}
-                                                        onClick={() => {
-                                                            setSelectedHeader(i);
-                                                            filterOnColumns(header.fieldName);
-                                                        }}
-                                                    >
-                                                        <div className="index__text">{header.displayName}</div>
-                                                        {i === 0 ? (
-                                                            <div className="index__icon--sorting" />
-                                                        ) : (
-                                                            <div className="index__icon--filtering" />
-                                                        )}
-                                                    </div>
-                                                    {filterModal ? (
-                                                        <div className="search-wrapper">
-                                                            <input type="text" className="search-input" />
-                                                            <div className="search-icon">
-                                                                {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
-                                                            </div>
+                        <Popover>
+                            <div className="orders__frame">
+                                <div className="frame__table">
+                                    {ordersHeaders.map((header: any, i: any) => {
+                                        if (header.visible) {
+                                            return (
+                                                <div key={header.fieldName} className="table__column">
+                                                    <div className="frame__caption">
+                                                        <div
+                                                            className={
+                                                                selectedHeader === i ? 'wrap__index wrap__index--active' : 'wrap__index'
+                                                            }
+                                                            onClick={() => {
+                                                                setSelectedHeader(i);
+                                                                filterOnColumns(header.fieldName);
+                                                            }}
+                                                        >
+                                                            <div className="index__text">{header.displayName}</div>
+                                                            {i === 0 ? (
+                                                                <div className="index__icon--sorting" />
+                                                            ) : (
+                                                                <div className="index__icon--filtering" />
+                                                            )}
                                                         </div>
-                                                    ) : null}
-                                                </div>
-                                                {ordersTable.map((index: any) => {
-                                                    return (
-                                                        <div key={index.clientOrderUuid} className="column__item">
-                                                            {/* {i === 0 && (
+                                                        {filterModal ? (
+                                                            <div className="search-wrapper">
+                                                                <input type="text" className="search-input" />
+                                                                <div className="search-icon">
+                                                                    {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                                </div>
+                                                            </div>
+                                                        ) : null}
+                                                    </div>
+                                                    {ordersTable.map((index: any) => {
+                                                        return (
+                                                            <div key={index.clientOrderUuid} className="column__item">
+                                                                {/* {i === 0 && (
                                                                 <div
                                                                     className="item__icon"
                                                                     onClick={() => handleChangePlusItems(index.clientOrderUuid)}
                                                                 />
                                                             )} */}
-                                                            <span>{index[header.fieldName]}</span>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        );
-                                    }
-                                    return '';
-                                })}
+                                                                <span>{index[header.fieldName]}</span>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            );
+                                        }
+                                        return '';
+                                    })}
+                                </div>
                             </div>
-                        </div>
+                        </Popover>
                     </main>
                 </div>
             </main>

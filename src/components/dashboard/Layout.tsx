@@ -35,6 +35,7 @@ import Notification from './MainContent/Notification/Notification';
 import Payment from './MainContent/Payment/Payment';
 import Shipment from './MainContent/Shipment/Shipment';
 import Configurator from './MainContent/Configurator/Configurator';
+import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -52,9 +53,12 @@ const Layout = () => {
             <TopNav />
             <div className="main-container">
                 <SideNav />
+                {/* <div className="breadcrumbs">
+                    <Route path="/:path" component={BreadCrumbs} />
+                </div> */}
                 <Switch>
                     <Route path="/dashboard" component={MainComponent} />
-                    <Route path="/news" component={News} />
+                    <Route path="/news/:id?" component={News} />
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />
                     <Route path="/profile" component={Account} />

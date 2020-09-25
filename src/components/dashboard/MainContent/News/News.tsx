@@ -1,13 +1,18 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
  * ********** Импорт экшенов **********
  * */
 // import { fetchDataNews } from '../../../../actions/newsActions';
+
+/**
+ * ********** Импорт типа store **********
+ * */
+import ReadNews from './ReadNews/ReadNews';
 
 /**
  * ********** Импорт типа store **********
@@ -27,6 +32,7 @@ import './News.scss';
 import Loader from '../../../../__utils__/Spinner';
 
 const News = () => {
+    const [openArticle, setOpenArticle] = useState(false);
     /**
      * ********** Импорт состояния из Redux **********
      * */
@@ -46,6 +52,12 @@ const News = () => {
         dispatch(fetchDataMain(request));
     }, []);
 
+    const handleOpenReadArticle = () => {
+        setOpenArticle(!openArticle);
+    };
+
+    // console.log(news);
+    // console.log(offers);
     if (!isFetching && news && offers && user) {
         return (
             <div className="main-content">
@@ -82,6 +94,7 @@ const News = () => {
                         })}
                     </div>
                     <div className="news__subtitle">Все новости</div>
+                    {openArticle ? <ReadNews openArticle={openArticle} handleOpenReadArticle={handleOpenReadArticle} /> : null}
                     <div className="news__list">
                         {offers.map((index) => {
                             return (
@@ -93,7 +106,7 @@ const News = () => {
                                     <div className="block__date">{index.offerDate}</div>
                                     <div className="block__text">CARDDEX снова работает в штатном режиме</div>
                                     <div className="block__subtext">Информируем, что наше производство работаетв штатном режиме</div>
-                                    <div className="block__button">
+                                    <div onClick={handleOpenReadArticle} className="block__button">
                                         <div>Подробнее</div>
                                         <svg width="57" height="25" xmlns="http://www.w3.org/2000/svg">
                                             <line y1="12" x2="48.6111" y2="12" />

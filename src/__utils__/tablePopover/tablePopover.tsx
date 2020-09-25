@@ -9,11 +9,11 @@ const Popover = (props: any) => {
 
     const delayed = useCallback(
         _.debounce((ev: any) => {
-            if (ev.target.textContent.length === 0 || ev.target.textContent.length < 17) {
+            if (ev.target.textContent.length === 0 || ev.target.textContent.length < 20) {
                 setText('');
             }
 
-            if (ev.target.id !== 'popover' && ev.target.textContent.length >= 18 && ev.target.textContent.length < 50) {
+            if (ev.target.id !== 'popover' && ev.target.textContent.length >= 20 && ev.target.textContent.length < 50) {
                 setText(ev.target.textContent);
                 setStyle({ ...style, top: `${ev.pageY + 20}px`, left: `${ev.pageX + 20}px` });
             }

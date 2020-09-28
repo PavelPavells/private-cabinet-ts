@@ -35,7 +35,7 @@ import Notification from './MainContent/Notification/Notification';
 import Payment from './MainContent/Payment/Payment';
 import Shipment from './MainContent/Shipment/Shipment';
 import Configurator from './MainContent/Configurator/Configurator';
-import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
+// import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
 
 /**
  * ********** Импорт файлов стилей **********

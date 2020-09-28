@@ -1,13 +1,18 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 
 /**
  * ********** Импорт типа store **********
  * */
 import { PersonalCabinet } from '../../../../../store/store';
+
+/**
+ * ********** Импорт компонентов **********
+ * */
+import ReadOffer from './ReadOffer/ReadOffer';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -20,11 +25,18 @@ import Loader from '../../../../../__utils__/Spinner';
 import './PersonalOffer.scss';
 
 const PersonalOffer = () => {
+    const [openOffer, setOpenOffer] = useState(false);
+    const [offerId, setOfferId] = useState(0);
     /**
      * ********** Импорт состояния из Redux **********
      * */
     const { isFetching, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
+
+    const handleOpenReadOffer = (id?: any) => {
+        setOpenOffer(!openOffer);
+        setOfferId(id);
+    };
 
     if (!isFetching && offers && user) {
         return (
@@ -38,7 +50,11 @@ const PersonalOffer = () => {
                             {offers.map((index) => {
                                 return (
                                     // eslint-disable-next-line react/no-array-index-key
-                                    <div key={index.id} className="block-element personal-offer">
+                                    <div
+                                        key={index.id}
+                                        onClick={() => handleOpenReadOffer(index.id)}
+                                        className="block-element personal-offer"
+                                    >
                                         <div className="block-element__info">
                                             <div className="block-element__title">
                                                 <span className="offer">Перс. предложения</span>
@@ -81,6 +97,7 @@ const PersonalOffer = () => {
                                     </div>
                                 );
                             })}
+                            {openOffer ? <ReadOffer offer={offers} offerId={offerId} handleOpenReadOffer={handleOpenReadOffer} /> : null}
                         </div>
                         {/* <div className="more__offers">Все предложения</div> */}
                     </div>

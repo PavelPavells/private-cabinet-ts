@@ -134,7 +134,6 @@ const OrdersComponent = () => {
                                         data={ordersTable}
                                         style={{
                                             cursor: 'pointer',
-                                            backgroundColor: '#fff',
                                             color: '#1d68d9',
                                             fontFamily: 'Gotham Pro Regular'
                                         }}

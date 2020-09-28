@@ -144,7 +144,6 @@ const PaymentComponent = () => {
                                         data={tablePayment}
                                         style={{
                                             cursor: 'pointer',
-                                            backgroundColor: '#fff',
                                             color: '#1d68d9',
                                             fontFamily: 'Gotham Pro Regular'
                                         }}

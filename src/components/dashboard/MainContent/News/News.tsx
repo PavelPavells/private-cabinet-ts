@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
@@ -13,6 +13,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
  * ********** Импорт типа store **********
  * */
 import ReadNews from './ReadNews/ReadNews';
+import ReadActualNews from './ReadActualNews/ReadActualNews';
 
 /**
  * ********** Импорт типа store **********
@@ -33,6 +34,9 @@ import Loader from '../../../../__utils__/Spinner';
 
 const News = () => {
     const [openArticle, setOpenArticle] = useState(false);
+    const [openActualArticle, setOpenActualArticle] = useState(false);
+    const [actualArticleId, setActualArticleId] = useState(0);
+    const [articleId, setArticleId] = useState(0);
     /**
      * ********** Импорт состояния из Redux **********
      * */
@@ -45,19 +49,31 @@ const News = () => {
     const dispatch = useDispatch();
 
     /**
+     * хук для обработки динамического роутинга
+     * */
+    // const { id } = useParams();
+
+    /**
      * запрос данных с сервера
      * */
-    useEffect(() => {
+    useLayoutEffect(() => {
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));
     }, []);
 
-    const handleOpenReadArticle = () => {
+    const handleOpenReadActualArticle = (id?: any) => {
+        setOpenActualArticle(!openActualArticle);
+        setActualArticleId(id);
+    };
+
+    const handleOpenReadArticle = (id?: any) => {
         setOpenArticle(!openArticle);
+        setArticleId(id);
     };
 
     // console.log(news);
     // console.log(offers);
+    // console.log(id);
     if (!isFetching && news && offers && user) {
         return (
             <div className="main-content">
@@ -68,7 +84,12 @@ const News = () => {
                         {news.map((index) => {
                             return (
                                 // eslint-disable-next-line react/no-array-index-key
-                                <div key={index.id} className="actual__block">
+                                <div
+                                    // @ts-ignore
+                                    onClick={() => handleOpenReadActualArticle(index.id)}
+                                    key={index.id}
+                                    className="actual__block"
+                                >
                                     <div className="block__icon" />
                                     <div className="block__info">
                                         <div className="info__title">
@@ -92,21 +113,26 @@ const News = () => {
                                 </div>
                             );
                         })}
+                        {openActualArticle ? (
+                            <ReadActualNews
+                                news={news}
+                                actualArticleId={actualArticleId}
+                                handleOpenReadActualArticle={handleOpenReadActualArticle}
+                            />
+                        ) : null}
                     </div>
                     <div className="news__subtitle">Все новости</div>
-                    {openArticle ? <ReadNews openArticle={openArticle} handleOpenReadArticle={handleOpenReadArticle} /> : null}
                     <div className="news__list">
                         {offers.map((index) => {
                             return (
-                                // eslint-disable-next-line react/no-array-index-key
-                                <div key={index.id} className="list__block">
+                                <div onClick={() => handleOpenReadArticle(index.id)} key={index.id} className="list__block">
                                     <div className="block__image">
                                         <div className="image__block--news">Новости</div>
                                     </div>
                                     <div className="block__date">{index.offerDate}</div>
                                     <div className="block__text">CARDDEX снова работает в штатном режиме</div>
                                     <div className="block__subtext">Информируем, что наше производство работаетв штатном режиме</div>
-                                    <div onClick={handleOpenReadArticle} className="block__button">
+                                    <div className="block__button">
                                         <div>Подробнее</div>
                                         <svg width="57" height="25" xmlns="http://www.w3.org/2000/svg">
                                             <line y1="12" x2="48.6111" y2="12" />
@@ -117,6 +143,9 @@ const News = () => {
                                 </div>
                             );
                         })}
+                        {openArticle ? (
+                            <ReadNews offer={offers} articleId={articleId} handleOpenReadArticle={handleOpenReadArticle} />
+                        ) : null}
                     </div>
                 </div>
             </div>

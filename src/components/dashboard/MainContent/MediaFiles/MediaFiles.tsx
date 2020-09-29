@@ -1,8 +1,8 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, SyntheticEvent, ChangeEvent, useLayoutEffect } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+// import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /**
  * ********** Импорт экшенов **********
@@ -12,12 +12,13 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 /**
  * ********** Импорт комопнентов **********
  */
-// import Message from './Message/Message';
+import MediaFilesCategories from './MediaFilesCategories/MediaFilesCategories';
+import MediaFilesFields from './MediaFilesFields/MediaFilesFields';
 
 /**
  * ********** Импорт типов **********
  * */
-import { PersonalCabinet } from '../../../../store/store';
+// import { PersonalCabinet } from '../../../../store/store';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********
@@ -32,7 +33,22 @@ import { PersonalCabinet } from '../../../../store/store';
 import './MediaFiles.scss';
 
 const MediaFiles = () => {
-    return <div className="files">FILES</div>;
+    return (
+        <div className="main-content">
+            <section className="files">
+                <h1 className="files__header">Mедиа-материалы</h1>
+                <h2 className="files__subheader">Выберите категорию:</h2>
+                <main className="files__main">
+                    <div className="main__categories">
+                        <MediaFilesCategories />
+                    </div>
+                    <div className="main__fields">
+                        <MediaFilesFields />
+                    </div>
+                </main>
+            </section>
+        </div>
+    );
 };
 
 export default MediaFiles;

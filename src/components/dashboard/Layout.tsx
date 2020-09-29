@@ -17,7 +17,8 @@ import { PersonalCabinet } from '../../store/store';
 import Chat from './MainContent/Chat/Chat';
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
-import MainComponent from './MainContent/Main/Main';
+import Main from './MainContent/Main/Main';
+import MediaFiles from './MainContent/MediaFiles/MediaFiles';
 import News from './MainContent/News/News';
 import Account from './MainContent/Profile/Profile';
 import RolesUsers from './MainContent/RolesUsers/RolesUsers';
@@ -57,7 +58,8 @@ const Layout = () => {
                     <Route path="/:path" component={BreadCrumbs} />
                 </div> */}
                 <Switch>
-                    <Route path="/dashboard" component={MainComponent} />
+                    <Route path="/dashboard" component={Main} />
+                    <Route path="/media" component={MediaFiles} />
                     <Route path="/news/:id?" component={News} />
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />

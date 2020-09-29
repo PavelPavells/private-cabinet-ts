@@ -1,2 +1,40 @@
 @import '../../../../styles/base.scss';
 @import '../../../../styles/reset.scss';
+
+.files {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    // border: 1px solid green;
+
+    .files__header {
+        font-size: 20px;
+        // border: 1px solid green;
+    }
+
+    .files__subheader {
+        margin: 30px 0 20px 0;
+        font-size: 18px;
+        // border: 1px solid green;
+    }
+
+    .files__main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        // border: 1px solid green;
+
+        .main__categories {
+            display: flex;
+            flex-direction: column;
+            // border: 1px solid red;
+        }
+
+        .main__fields {
+            display: flex;
+            flex-direction: column;
+            background-color: $white;
+            // border: 1px solid red;
+        }
+    }
+}

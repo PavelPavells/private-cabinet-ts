@@ -1,0 +1,35 @@
+@import '../../../../../styles/base.scss';
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+
+    .categories__item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: $white;
+
+        .item__checkbox {
+            margin-right: 10px;
+        }
+
+        .item__text {
+            display: flex;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .item__icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
+
+.choosing__category {
+    color: $brandPantonSubText;
+}

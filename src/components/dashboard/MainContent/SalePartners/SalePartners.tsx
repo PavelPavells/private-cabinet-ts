@@ -1,3 +1,5 @@
+
+// @ts-nocheck
 /** ********** IMPORT LIBRARIES ********** */
 import React, { Component } from "react";
 import PropTypes from "prop-types";

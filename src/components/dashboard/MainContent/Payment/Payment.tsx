@@ -3,7 +3,8 @@
  * */
 import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import 'react-dates/initialize';
+// @ts-ignore
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 // @ts-ignore
 import CsvDownload from 'react-json-to-csv';
 // import { DateRangePicker } from 'react-dates';
@@ -52,8 +53,7 @@ const usePreviousValue = (data: any) => {
 };
 
 const PaymentComponent = () => {
-    // const [startDate, setStartDate] = useState(null);
-    // const [endDate, setEndDate] = useState(null);
+    const [value, onChange] = useState([new Date(), new Date()]);
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
@@ -139,18 +139,9 @@ const PaymentComponent = () => {
                                 Быстрый фильтр
                             </div>
                             <div className="buttons-wrapper">
-                                <div style={{ border: '1px solid #1d68d9', padding: '13px 18px', borderRadius: '40px' }} className="">
-                                    <CsvDownload
-                                        data={tablePayment}
-                                        style={{
-                                            cursor: 'pointer',
-                                            color: '#1d68d9',
-                                            fontFamily: 'Gotham Pro Regular'
-                                        }}
-                                    >
-                                        Экспортировать документ
-                                    </CsvDownload>
-                                </div>
+                                <CsvDownload data={tablePayment} className="button">
+                                    Экспортировать документ
+                                </CsvDownload>
                             </div>
                             <div className="search-wrapper">
                                 <input type="text" className="search-input" placeholder="Быстрый поиск" />
@@ -203,18 +194,23 @@ const PaymentComponent = () => {
                                                             )}
                                                         </div>
                                                         {filterModal ? (
-                                                            <div className="search-wrapper">
-                                                                <input
-                                                                    type="text"
-                                                                    className="search-input"
-                                                                    // value={inputs[header.field_name]}
-                                                                    // onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                                    //    dispatch(priceListSetInput({ key: header.field_name, value: event.target.value }));
-                                                                    // }}
-                                                                />
+                                                            <div className="search-wrapper" style={{ justifyContent: 'center' }}>
+                                                                {i === 0 ? (
+                                                                    <DateTimeRangePicker
+                                                                        disableClock
+                                                                        format="dd.MM"
+                                                                        onChange={onChange}
+                                                                        value={value}
+                                                                    />
+                                                                ) : null}
+                                                                {/*
                                                                 <div className="search-icon">
-                                                                    {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
+                                                                    {/* {i === 0 ? null : <img src={Magnifier} alt="" />} */}
+                                                                {/* {i <= 1 ? null /* <img src={Magnifier} alt="" />  : (
+                                                                        <img src={Arrow} alt="" />
+                                                                    )} 
                                                                 </div>
+                                                                */}
                                                             </div>
                                                         ) : null}
                                                     </div>

@@ -1,10 +1,13 @@
 @import "../../styles/base.scss";
 
-// .wrapper {
-//     display: flex;
-//     justify-content: space-between;
-//     font-family: $code;
-// }
+.wrapper {
+    display: flex;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-between;
+    // font-family: $code;
+}
 
 // .right {
 //     background-color: $brandPantonFonts;
@@ -22,7 +25,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    width: 1px;
+    width: 7px;
 }
 
 /* Handle */

@@ -253,8 +253,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 196px;
-        height: 44px;
+        min-width: 196px;
+        // height: 44px;
         // text-align: center;    
         margin-right: 14px;
         white-space: nowrap;
@@ -309,6 +309,22 @@
     .search-icon {
         width: 20px;
         margin-right: 10px;
+        cursor: pointer;
+    }
+}
+
+.button {
+    display: block;
+    padding: 13px 20px;
+    color: $brandPantonBlue;
+    border: 1px solid $brandPantonBlue;
+    border-radius: 40px;
+    font-family: $font-regular;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+    &:hover {
+        background-color: $brandPantonBlue;
+        color: $white;
         cursor: pointer;
     }
 }

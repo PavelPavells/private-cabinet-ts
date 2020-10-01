@@ -1,9 +1,10 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import 'react-dates/initialize';
+// @ts-ignore
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 // @ts-ignore
 import CsvDownload from 'react-json-to-csv';
 // import { DateRangePicker } from 'react-dates';
@@ -13,7 +14,7 @@ import 'moment/locale/ru';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataShipment, shipmentSetInputs } from '../../../../actions/shipmentActions';
+import { fetchDataShipment } from '../../../../actions/shipmentActions';
 
 /**
  * ********** Импорт типов **********
@@ -31,7 +32,7 @@ import Loader from '../../../../__utils__/Spinner';
  * ********** импорт логотипов для поля ввода **********
  * */
 import Magnifier from '../../../../images/magnifier.svg';
-import Arrow from '../../../../images/arrow_input.svg';
+// import Arrow from '../../../../images/arrow_input.svg';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -50,6 +51,7 @@ const usePreviousValue = (data: any) => {
 };
 
 const ShipmentComponent = () => {
+    const [value, onChange] = useState([new Date(), new Date()]);
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
@@ -135,18 +137,9 @@ const ShipmentComponent = () => {
                                 Быстрый фильтр
                             </div>
                             <div className="buttons-wrapper">
-                                <div style={{ border: '1px solid #1d68d9', padding: '13px 18px', borderRadius: '40px' }} className="">
-                                    <CsvDownload
-                                        data={tableShipment}
-                                        style={{
-                                            cursor: 'pointer',
-                                            color: '#1d68d9',
-                                            fontFamily: 'Gotham Pro Regular'
-                                        }}
-                                    >
-                                        Экспортировать документ
-                                    </CsvDownload>
-                                </div>
+                                <CsvDownload data={tableShipment} className="button">
+                                    Экспортировать документ
+                                </CsvDownload>
                             </div>
                             <div className="search-wrapper">
                                 <input type="text" className="search-input" placeholder="Быстрый поиск" />
@@ -200,22 +193,16 @@ const ShipmentComponent = () => {
                                                         </div>
                                                         {filterModal ? (
                                                             <div className="search-wrapper">
-                                                                <input
-                                                                    type="text"
-                                                                    className="search-input"
-                                                                    value={inputs[header.fieldName]}
-                                                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                                        dispatch(
-                                                                            shipmentSetInputs({
-                                                                                key: header.fieldName,
-                                                                                value: event.target.value
-                                                                            })
-                                                                        );
-                                                                    }}
-                                                                />
-                                                                <div className="search-icon">
-                                                                    {i <= 1 ? <img src={Magnifier} alt="" /> : <img src={Arrow} alt="" />}
-                                                                </div>
+                                                                {i === 0 ? <input type="text" className="search-input" /> : null}
+                                                                {i === 1 ? (
+                                                                    <DateTimeRangePicker
+                                                                        disableClock
+                                                                        format="dd.MM"
+                                                                        onChange={onChange}
+                                                                        value={value}
+                                                                    />
+                                                                ) : null}
+                                                                {i === 0 ? <img src={Magnifier} alt="" /> : null}
                                                             </div>
                                                         ) : null}
                                                     </div>

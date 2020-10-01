@@ -70,7 +70,7 @@ const Roles = () => {
                     <div className="header__button">
                         <button onClick={handleChangeAddRole} type="button" className="button">
                             <div className="button__text">Добавить роль</div>
-                            <div className="button__icon" />
+                            {/* <div className="button__icon" /> */}
                         </button>
                     </div>
                 </header>

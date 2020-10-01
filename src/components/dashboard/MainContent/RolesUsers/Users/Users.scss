@@ -38,7 +38,10 @@
             .button {
                 display: flex;
                 align-items: center;
-                padding: 15px 55px;
+                justify-content: center;
+                min-width: 196px;
+                // height: 30px;
+                padding: 13px 20px; 
                 border-radius: 30px;
                 border: 1px solid $brandPantonBlue;
 
@@ -58,7 +61,12 @@
                 }
 
                 &:hover {
+                    color: $white;
                     cursor: pointer;
+
+                    .button__text {
+                        color: $white;
+                    }
                 }
             }
         }

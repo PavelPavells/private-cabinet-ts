@@ -41,12 +41,19 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 196px;
-        height: 30px;
-        padding: 5px 25px;
+        max-width: 196px;
+        // height: 30px;
+        padding: 13px 20px;
         border-radius: 20px;
         text-align: center;
-        color: #fff;
-        background-color: #1d68d9;
+        color: $brandPantonBlue;
+        border: 1px solid $brandPantonBlue;
+        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+        &:hover {
+            color: $white;
+            background-color: $brandPantonBlue;
+            cursor: pointer;
+        }
     }
 }

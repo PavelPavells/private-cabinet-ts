@@ -5,7 +5,7 @@
     height: calc(100vh - 70px - 20px - 20px);
     flex: 2 100%;
     flex-direction: column;
-    position: sticky;
+    position: relative;
     top: calc(70px + 20px);
     margin: 0 17px 0 20px;
     transition: all 0.5s ease 0s;
@@ -356,8 +356,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 196px;
-                height: 30px;
+                min-width: 196px;
+                // height: 30px;
+                padding: 13px 20px;
                 color: $brandPantonBlue;
                 border: 1px solid $brandPantonBlue;
                 border-radius: 30px;

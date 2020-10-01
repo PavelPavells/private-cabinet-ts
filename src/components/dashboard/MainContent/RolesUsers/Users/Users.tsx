@@ -70,7 +70,7 @@ const Users = () => {
                     <div className="header__button">
                         <button onClick={handleChangeAddUser} type="button" className="button">
                             <div className="button__text">Новый пользователь</div>
-                            <div className="button__icon" />
+                            {/* <div className="button__icon" /> */}
                         </button>
                     </div>
                 </header>

@@ -75,15 +75,9 @@ const Layout = () => {
                     <Route path="/configurator" component={Configurator} />
                 </Switch>
                 <div className="wrapper__chat">
+                    {/* style={{ width: '95vw', height: '95vh', position: 'absolute' }}> */}
                     {/** @ts-ignore */}
-                    <Draggable
-                        bounds={{
-                            top: window.innerHeight / 2,
-                            left: window.innerWidth / 1.5,
-                            right: 0,
-                            bottom: 0
-                        }}
-                    >
+                    <Draggable bounds="parent">
                         <Chat />
                     </Draggable>
                 </div>

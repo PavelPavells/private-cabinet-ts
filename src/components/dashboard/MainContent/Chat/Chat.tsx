@@ -61,71 +61,62 @@ const Chat = () => {
     };
 
     return (
-        <Draggable
-            bounds={{
-                top: -window.innerHeight / 1.5,
-                left: -window.innerWidth / 1.5,
-                right: 0,
-                bottom: 0
-            }}
-        >
-            <div>
-                <Fade show={isOpen}>
-                    <div className="chat">
-                        <div className="chat__header">
-                            <div className="header__left">
-                                <div className="left__photo" />
-                                <div className="left__text">
-                                    <div className="text__name">Фесенко Лидия</div>
-                                    <div>
-                                        {message.length ? (
-                                            <div className="text__status green">online</div>
-                                        ) : (
-                                            <div className="text__status">offline</div>
-                                        )}
-                                    </div>
+        <>
+            <Fade show={isOpen}>
+                <div className="chat">
+                    <div className="chat__header">
+                        <div className="header__left">
+                            <div className="left__photo" />
+                            <div className="left__text">
+                                <div className="text__name">Фесенко Лидия</div>
+                                <div>
+                                    {message.length ? (
+                                        <div className="text__status green">online</div>
+                                    ) : (
+                                        <div className="text__status">offline</div>
+                                    )}
                                 </div>
                             </div>
-                            <div className="header__right">
-                                <div onClick={handleChangeIsOpenChat} className="right__rollup" />
-                                {/* <div className="right__close" /> */}
-                            </div>
                         </div>
-                        <div className="chat__window">
-                            <>
-                                {message &&
-                                    message.map((msgs: any) => {
-                                        return <Message key={msgs.id} msgs={msgs} />;
-                                    })}
-                            </>
-                        </div>
-                        <div className="chat__footer">
-                            <div className="footer__add">+</div>
-                            <input
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
-                                onKeyPress={sendMessage}
-                                value={msg}
-                                type="text"
-                                className="footer__input"
-                                autoFocus
-                                placeholder="Введите ваше сообщение..."
-                            />
-                            <button onClick={sendMessage} type="submit" className="footer__btn">
-                                <div className="button__image" />
-                            </button>
+                        <div className="header__right">
+                            <div onClick={handleChangeIsOpenChat} className="right__rollup" />
+                            {/* <div className="right__close" /> */}
                         </div>
                     </div>
-                </Fade>
-                <Fade show={!isOpen}>
-                    <div className="chat__rollup">
-                        <div className="rollup__status">
-                            <span>2</span>
-                        </div>
-                        <div onClick={handleChangeIsOpenChat} className="rollup__image" />
+                    <div className="chat__window">
+                        <>
+                            {message &&
+                                message.map((msgs: any) => {
+                                    return <Message key={msgs.id} msgs={msgs} />;
+                                })}
+                        </>
                     </div>
-                </Fade>
-            </div>
-        </Draggable>
+                    <div className="chat__footer">
+                        <div className="footer__add">+</div>
+                        <input
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
+                            onKeyPress={sendMessage}
+                            value={msg}
+                            type="text"
+                            className="footer__input"
+                            autoFocus
+                            placeholder="Введите ваше сообщение..."
+                        />
+                        <button onClick={sendMessage} type="submit" className="footer__btn">
+                            <div className="button__image" />
+                        </button>
+                    </div>
+                </div>
+            </Fade>
+            <Fade show={!isOpen}>
+                <div className="chat__rollup">
+                    <div className="rollup__status">
+                        <span>2</span>
+                    </div>
+                    <div onClick={handleChangeIsOpenChat} className="rollup__image" />
+                </div>
+            </Fade>
+        </>
     );
 };
 

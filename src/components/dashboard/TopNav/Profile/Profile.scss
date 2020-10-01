@@ -46,7 +46,7 @@
     }
 
     .dropdown {
-        width: calc(100% - 20px);
+        width: calc(100% - 39px);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -55,21 +55,30 @@
         top: 60px;
         left: 0;
         background-color: $white;
-        padding: 1rem;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
         z-index: 10000;
 
         &__item {
             display: flex;
             align-items: center;
-            margin: 5px;
-            font-size: 14px;
+            width: 100%;
+            // margin: 5px;
+            font-size: 16px;
             color: $brandPantonText;
+            border-left: 1px solid transparent;
+            border-bottom: 1px solid #F1F1F1;
+
+            &:hover {
+                // color: $brandPantonBlue;
+                border-left: 1px solid $brandPantonBlue;
+                cursor: pointer;
+            }
 
             .item__profile {
                 display: block;
                 width: 30px;
                 height: 30px;
-                margin-right: 10px;
+                margin: 10px;
                 background: url('../../../../images/profile-user.svg') no-repeat center;
             }
 
@@ -77,7 +86,7 @@
                 display: block;
                 width: 30px;
                 height: 30px;
-                margin-right: 10px;
+                margin: 20px;
                 background: url('../../../../images/settings-user.svg') no-repeat center;
             }
         }
@@ -86,16 +95,18 @@
             width: 196px;
             height: 30px;        
             padding: 5px 25px;
-            // margin-top: 10px;
-            //margin-left: 56%;
+            margin: 20px 0;
             border-radius: 20px;
             text-align: center;
-            color: $white;
-            background-color: $brandPantonBlue;
-        }
+            color: $brandPantonBlue;
+            border: 1px solid $brandPantonBlue;
 
-        &:hover {
-            cursor: pointer;
+            &:hover {
+                background-color: $brandPantonBlue;
+                color: $white;
+                transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+                cursor: pointer;
+            }
         }
     }
 }

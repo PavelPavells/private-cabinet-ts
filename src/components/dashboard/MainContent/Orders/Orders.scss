@@ -47,7 +47,7 @@
                 }
 
                 .block__button {
-                    padding: 10px 30px;
+                    // padding: 10px 30px;
                     background-color: $white;
                     border-radius: 40px;
                     color: $brandPantonBlue;
@@ -231,3 +231,51 @@
     }
 }
 
+.button {
+    display: block;
+    padding: 13px 20px;
+    color: $brandPantonBlue;
+    border: 1px solid $brandPantonBlue;
+    border-radius: 40px;
+    font-family: $font-regular;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+    &:hover {
+        background-color: $brandPantonBlue;
+        color: $white;
+        cursor: pointer;
+    }
+}
+
+.react-datetimerange-picker {
+    display: flex;
+    // position: inherit;
+
+    &>span {
+        display: block!important;
+        position: absolute;
+        bottom: -12px;
+    }
+}
+
+.react-datetimerange-picker--open {
+    position: none!important;
+}
+
+.react-datetimerange-picker__inputGroup {
+    min-width: 0;
+}
+
+.react-datetimerange-picker__wrapper {
+    border: none;
+}
+
+.react-datetimerange-picker__button svg {
+    stroke-width: 1;
+}
+
+.react-datetimerange-picker__calendar-button {
+    display: none;
+    border: 0;
+    background: transparent;
+}

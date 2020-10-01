@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import Loader from '../../../../__utils__/Spinner';
 
@@ -68,16 +68,14 @@ const Profile: React.FC = () => {
             </div>
             {dropdown ? (
                 <ul className="dropdown">
-                    {/* <Link className="dropdown__item" to="/account">
+                    <NavLink className="dropdown__item" to="/profile">
                         <div className="item__profile" />
                         <div className="item__linck">Профиль пользователя</div>
-                    </Link>
-                    
-                    <Link className="dropdown__item" to="/control">
+                    </NavLink>
+                    {/* <Link className="dropdown__item" to="/control">
                         <div className="item__settings" />
                         <div className="item__linck">Настройки</div>
-                    </Link>
-                    */}
+                    </Link> */}
                     <div className="dropdown__logout" onClick={onLogoutClick}>
                         Выйти
                     </div>

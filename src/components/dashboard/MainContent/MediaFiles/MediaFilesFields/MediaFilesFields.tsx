@@ -11,7 +11,6 @@ import './MediaFilesFields.scss';
 const MediaFilesFields = () => {
     return (
         <div className="fields">
-            <div className="fields__header">Выберите нужные поля:</div>
             <div className="fields__checkboxes">
                 {/*
                 <div className="checkboxes__item">
@@ -78,7 +77,7 @@ const MediaFilesFields = () => {
                     </label>
                 </div>
             </div>
-            <div className="fields__button">Собрать данные</div>
+            <div className="fields__button">Сформировать файлы</div>
         </div>
     );
 };

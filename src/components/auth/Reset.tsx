@@ -80,7 +80,7 @@ const Reset = () => {
                     <h1>Восстановить пароль</h1>
                 </div>
                 <div className="auth__necessary">Введите ваш e-mail и мы пришлем ссылку для восстановления пароля</div>
-                <form className="auth__forms forms">
+                <div className="auth__forms forms">
                     <div className="auth__group">
                         <label>
                             <div className="auth__field field">
@@ -90,7 +90,7 @@ const Reset = () => {
                                     id="email"
                                     type="text"
                                     className="auth__input"
-                                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                    // pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                                     title="Ваш E-mail должен содержать @ и минимум одну точку"
                                     autoFocus
                                     required
@@ -101,11 +101,15 @@ const Reset = () => {
                     </div>
                     {email ? (
                         <div>
-                            <div className="auth__button">Восстановить</div>
+                            <div onClick={onSubmit} className="auth__button">
+                                Восстановить
+                            </div>
                         </div>
                     ) : (
                         <div>
-                            <div className="auth__button inaccessible">Восстановить</div>
+                            <div onClick={onSubmit} className="auth__button inaccessible">
+                                Восстановить
+                            </div>
                         </div>
                     )}
                     <div className="auth__error">{error}</div>
@@ -113,7 +117,7 @@ const Reset = () => {
                         <div className="back__arrow" />
                         Вернуться к авторизации
                     </Link>
-                </form>
+                </div>
             </div>
             <div className="auth__right right">
                 <div className="right__image image">

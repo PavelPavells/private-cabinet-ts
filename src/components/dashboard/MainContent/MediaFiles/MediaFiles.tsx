@@ -37,12 +37,13 @@ const MediaFiles = () => {
         <div className="main-content">
             <section className="files">
                 <h1 className="files__header">Mедиа-материалы</h1>
-                <h2 className="files__subheader">Выберите категорию:</h2>
                 <main className="files__main">
                     <div className="main__categories">
+                        <p className="heading">Выберите категорию:</p>
                         <MediaFilesCategories />
                     </div>
                     <div className="main__fields">
+                        <p className="heading">Выберите нужные поля:</p>
                         <MediaFilesFields />
                     </div>
                 </main>

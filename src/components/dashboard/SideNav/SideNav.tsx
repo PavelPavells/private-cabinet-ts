@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 // import { connect } from 'react-redux';
 // import { PersonalCabinet } from '../../../store/store';
@@ -21,6 +21,18 @@ const SideNav = () => {
     //     const elementForRemoveShadow = document.getElementsByClassName('nav--active')[0];
     //     elementForRemoveShadow.classList.remove('nav--active');
     // };
+
+    // useEffect(() => {
+    //     const isOpenSide = localStorage.getItem('isOpenSide');
+    //     const sideNav: Element | any = document.querySelector('.right');
+    //     console.log('isOpenSide:', isOpenSide);
+    //     if (isOpenSide === 'false') {
+    //         // console.log('typeof isOpenSide:', typeof isOpenSide);
+    //         // console.log()
+    //         sideNav.classList.add('invisible');
+    //     }
+    //     sideNav.classList.remove('invisible');
+    // });
 
     /**
      * ********** handler обработки клика для раскрытия подменю Главная **********
@@ -229,6 +241,7 @@ const SideNav = () => {
                         </NavLink>
                     </div>
                 </div>
+                {/*
                 <NavLink exact activeClassName="active-page" to="/media" className="nav-link">
                     <li className="font">
                         <div className="icon">
@@ -247,6 +260,7 @@ const SideNav = () => {
                         <div className="font-block-hover">Медиа-материалы</div>
                     </li>
                 </NavLink>
+                */}
                 <div className="nav-link">
                     <NavLink to="/profile" className="font" onClick={handleClickMainSubmenu}>
                         <div className="icon">

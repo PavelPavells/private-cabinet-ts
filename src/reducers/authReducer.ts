@@ -15,9 +15,9 @@ import {
     GET_ERROR_REGISTER,
     GET_DATA_BUSINESS,
     SET_USER_COMPANY_NAME
-} from '../constants/authTypes';
+} from '../constants/authTypes/authTypes';
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
     isFetching: false,
     isAuthenticated: false,
     user: {},
@@ -58,7 +58,7 @@ const initialState: AuthState = {
     loading: false,
     error: ''
 };
-const isEmpty = (payload: any) => {
+export const isEmpty = (payload: any) => {
     if (payload) {
         return true;
     }

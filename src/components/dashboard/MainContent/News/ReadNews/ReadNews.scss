@@ -18,8 +18,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 920px;
-    height: 800px;
+    width: 50vw;
+    height: 70vh;
     z-index: 1000;
 
     .read__header {
@@ -43,16 +43,16 @@
 
     .read__photo {
         display: flex;
-        width: 920px;
-        height: 300px;
+        width: 100%;
         flex: 1;
         background-color: $white;
 
         .photo {
+            display: block;
             width: 100%;
             height: 100%;
             background: url('../../../../../images/news/news.png') no-repeat center;
-            background-size: contain;
+            background-size: cover;
         }
     }
 
@@ -72,6 +72,8 @@
         
         .article__text {
             display: flex;
+            height: 34vh;
+            overflow-y: scroll;
             margin: 30px 100px;
             line-height: 26px;
         }

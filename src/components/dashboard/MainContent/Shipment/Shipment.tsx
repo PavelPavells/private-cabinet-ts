@@ -15,6 +15,7 @@ import 'moment/locale/ru';
  * ********** Импорт экшенов **********
  * */
 import { fetchDataShipment } from '../../../../actions/shipmentActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
@@ -84,6 +85,7 @@ const ShipmentComponent = () => {
     useEffect(() => {
         const request: ShipmentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataShipment(request));
+        dispatch(fetchDataNotifications());
     }, []);
 
     /**
@@ -138,7 +140,7 @@ const ShipmentComponent = () => {
                             </div>
                             <div className="buttons-wrapper">
                                 <CsvDownload data={tableShipment} className="button">
-                                    Экспортировать документ
+                                    Экспортировать данные
                                 </CsvDownload>
                             </div>
                             <div className="search-wrapper">

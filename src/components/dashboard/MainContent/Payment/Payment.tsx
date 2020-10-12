@@ -15,6 +15,7 @@ import 'moment/locale/ru';
  * ********** Импорт экшенов **********
  * */
 import { fetchDataPayment } from '../../../../actions/paymentActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
@@ -85,8 +86,8 @@ const PaymentComponent = () => {
      * */
     useEffect(() => {
         const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
-        console.log(user);
         dispatch(fetchDataPayment(request));
+        dispatch(fetchDataNotifications());
     }, []);
 
     /**
@@ -140,7 +141,7 @@ const PaymentComponent = () => {
                             </div>
                             <div className="buttons-wrapper">
                                 <CsvDownload data={tablePayment} className="button">
-                                    Экспортировать документ
+                                    Экспортировать данные
                                 </CsvDownload>
                             </div>
                             <div className="search-wrapper">

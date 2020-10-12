@@ -11,8 +11,7 @@ export const PRICE_LIST_SET_INPUT = 'PRICE_LIST_SET_INPUT';
  */
 export interface ResponseStatus {
     code: number;
-    result_message: string;
-    action: string;
+    message: string;
 }
 
 export interface PriceListHeader {

@@ -14,8 +14,7 @@ export const DATA_LOADING_OFFERS = 'DATA_LOADING_OFFERS';
 
 export interface ResponseStatus {
     code: number;
-    result_message: string;
-    action: string;
+    message: string;
 }
 
 export interface MainItem {

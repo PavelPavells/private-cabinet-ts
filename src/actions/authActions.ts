@@ -25,7 +25,7 @@ import {
     CHANGE_USER_DATA_ERROR_REGISTER,
     GET_ERROR_REGISTER,
     GET_DATA_BUSINESS
-} from '../constants/authTypes';
+} from '../constants/authTypes/authTypes';
 
 /**
  * ********** ПО для установки токена в заголовки при запросах **********
@@ -253,11 +253,11 @@ export const registerUser = (userData: userDataRegister) => (dispatch: Dispatch<
  * ********** Экшен для регистрации нового пользователя **********
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const resetPassword = (email: string, history?: any) => (dispatch: Dispatch<AuthActions>) => {
+export const resetPassword = (email: string) => (dispatch: Dispatch<AuthActions>) => {
     try {
-        axios.post(`${site}/reset`, email);
-        // .then(() => history.push('/reset'))
-        // .then((response) => response.data);
+        axios.post(`${site}resetpassword`, email).then((response) => {
+            console.log(response);
+        });
     } catch (error) {
         return error;
     }

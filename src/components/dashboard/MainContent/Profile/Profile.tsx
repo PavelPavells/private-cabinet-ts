@@ -8,6 +8,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
  * ********** Импорт экшенов **********
  */
 import { fetchDataAccount, changeProfilePassword } from '../../../../actions/profileActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * Импорт Компонентов
@@ -51,6 +52,7 @@ const Profile = () => {
         const userUuid = useruuid.replace(/['"«»]/g, '');
         // @ts-ignore
         dispatch(fetchDataAccount({ uuid: userUuid }));
+        dispatch(fetchDataNotifications());
     }, []);
 
     const handleChangeTabsOne = () => {
@@ -71,6 +73,7 @@ const Profile = () => {
         setTabTwo(true);
     };
 
+    // console.log(profile);
     if (user && isAuthenticated && profile && !isFetching) {
         return (
             <div className="main-content width">
@@ -80,7 +83,7 @@ const Profile = () => {
                     </div>
                     <div className="profile__main">
                         <div className="main__user">
-                            <div onClick={() => setChangeAvatar(!changeAvatar)} className="user__photo" />
+                            <div className="user__photo" />
                             {changeAvatar ? (
                                 <div className="photo__change">
                                     <ul className="change__list">
@@ -95,7 +98,7 @@ const Profile = () => {
                                 <div className="info__name">
                                     {
                                         // @ts-ignore
-                                        profile.partnerName
+                                        profile.fullName
                                     }
                                 </div>
                                 <div className="info__data">

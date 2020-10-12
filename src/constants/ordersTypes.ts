@@ -13,8 +13,7 @@ export const DATA_LOADING_SUCCESS_ORDERS_TABLE = 'DATA_LOADING_SUCCESS_ORDERS_TA
 
 export interface ResponseStatus {
     code: number;
-    result_message: string;
-    action: string;
+    message: string;
 }
 
 export interface OrdersHeader {

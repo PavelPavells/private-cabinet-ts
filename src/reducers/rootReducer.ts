@@ -13,6 +13,7 @@ import mainReducer from './mainReducer';
 import messagesReducer from './chatReducers/messagesReducer';
 import paymentReducer from './paymentReducer';
 import priceListReducer from './priceListReducer';
+import notificationsReducer from './notificationsReducers/notificationsReducer';
 import ordersReducer from './ordersReducer';
 import salePartnersReducer from './salePartnersReducer';
 import shipmentReducer from './shipmentReducer';
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
     shipment: shipmentReducer,
     sidenav: sideNavReducer,
     topnav: topNavReducer,
+    notifications: notificationsReducer,
     app: webAppReducer,
     errors: errorReducer
 });

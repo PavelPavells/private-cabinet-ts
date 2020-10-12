@@ -8,6 +8,8 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
  * ********** Импорт экшенов **********
  * */
 // import { fetchDataNews } from '../../../../actions/newsActions';
+import { fetchDataMain } from '../../../../actions/mainActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типа store **********
@@ -20,7 +22,6 @@ import ReadActualNews from './ReadActualNews/ReadActualNews';
  * */
 import { PersonalCabinet } from '../../../../store/store';
 import { MainListReq } from '../../../../constants/mainTypes';
-import { fetchDataMain } from '../../../../actions/mainActions';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -59,6 +60,7 @@ const News = () => {
     useLayoutEffect(() => {
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));
+        dispatch(fetchDataNotifications());
     }, []);
 
     const handleOpenReadActualArticle = (id?: any) => {

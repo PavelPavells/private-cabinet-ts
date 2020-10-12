@@ -26,6 +26,8 @@
     "bootstrap": "^4.3.1",
     "dates": "^1.1.0",
     "draggable": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "es6-promise": "^4.2.8",
     "formik": "^2.0.8",
     "jwt-decode": "^2.2.0",
@@ -67,6 +69,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@types/eslint": "^7.2.0",
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/prettier": "^2.0.2",
@@ -82,6 +85,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.7",
+    "jest": "^26.5.3",
     "prettier": "^2.0.5"
   }
 }

@@ -12,8 +12,7 @@ export const DATA_LOADING_SUCCESS_PAYMENTS_TABLE = 'DATA_LOADING_SUCCESS_PAYMENT
  */
 export interface ResponseStatus {
     code: string;
-    result_message: string;
-    action: string;
+    message: string;
 }
 
 export interface PaymentHeader {

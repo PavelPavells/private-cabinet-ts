@@ -29,7 +29,9 @@ const ReadNews: React.FC<News> = ({ offer, articleId, handleOpenReadArticle }: N
                 </div>
                 <div className="read__article">
                     <div className="article__header">{offer[articleId - 1] ? offer[articleId - 1].offerTopic : null}</div>
-                    <div className="article__text">{offer[articleId - 1] ? offer[articleId - 1].offerBody : 'Данной новости нет'}</div>
+                    <div className="article__text">
+                        {offer[articleId - 1] ? <p>{offer[articleId - 1].offerBody}</p> : <div>Данной новости нет</div>}
+                    </div>
                 </div>
             </div>
         </div>

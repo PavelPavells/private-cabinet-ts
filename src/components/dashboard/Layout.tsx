@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React from 'react';
+import React, { useState, Suspense, SyntheticEvent } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Draggable from 'react-draggable';
@@ -12,13 +12,41 @@ import Draggable from 'react-draggable';
 import { PersonalCabinet } from '../../store/store';
 
 /**
+ * импорт лоадера
+ */
+import Loader from '../../__utils__/Spinner';
+
+/**
+ * ********** Импорт файлов стилей **********
+ * */
+import './Layout.scss';
+
+/**
  * ********** Импорт основных основных компонентов **********
  * */
+// const Chat = lazy(() => import('./MainContent/Chat/Chat'));
+// const SideNav = lazy(() => import('./SideNav/SideNav'));
+// const TopNav = lazy(() => import('./TopNav/TopNav'));
+// const Main = lazy(() => import('./MainContent/Main/Main'));
+// const MediaFiles = lazy(() => import('./MainContent/MediaFiles/MediaFiles'));
+// const News = lazy(() => import('./MainContent/News/News'));
+// const Account = lazy(() => import('./MainContent/Profile/Profile'));
+// const RolesUsers = lazy(() => import('./MainContent/RolesUsers/RolesUsers'));
+// const AdminPanel = lazy(() => import('./MainContent/AdminPanel/AdminPanel'));
+// const SalePartners = lazy(() => import('./MainContent/SalePartners/SalePartners'));
+// const PriceList = lazy(() => import('./MainContent/PriceList/PriceList'));
+// const Orders = lazy(() => import('./MainContent/Orders/Orders'));
+// const Settings = lazy(() => import('./MainContent/Settings/Settings'));
+// const Control = lazy(() => import('./MainContent/Control/Control'));
+// const Notification = lazy(() => import('./MainContent/Notification/Notification'));
+// const Payment = lazy(() => import('./MainContent/Payment/Payment'));
+// const Shipment = lazy(() => import('./MainContent/Shipment/Shipment'));
+// const Configurator = lazy(() => import('./MainContent/Configurator/Configurator'));
 import Chat from './MainContent/Chat/Chat';
 import SideNav from './SideNav/SideNav';
 import TopNav from './TopNav/TopNav';
 import Main from './MainContent/Main/Main';
-import MediaFiles from './MainContent/MediaFiles/MediaFiles';
+// import MediaFiles from './MainContent/MediaFiles/MediaFiles';
 import News from './MainContent/News/News';
 import Account from './MainContent/Profile/Profile';
 import RolesUsers from './MainContent/RolesUsers/RolesUsers';
@@ -38,16 +66,17 @@ import Shipment from './MainContent/Shipment/Shipment';
 import Configurator from './MainContent/Configurator/Configurator';
 // import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
-import './Layout.scss';
-
 const Layout = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const { isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     if (!isAuthenticated) {
         return <Redirect to="/" />;
     }
+
+    const handleChangeIsOpenChat = (event: SyntheticEvent) => {
+        event.preventDefault();
+        setIsOpen(!isOpen);
+    };
     const dashboardContent = (
         <div className="right invisible">
             <>{/* @ts-ignore */}</>
@@ -58,8 +87,8 @@ const Layout = () => {
                     <Route path="/:path" component={BreadCrumbs} />
                 </div> */}
                 <Switch>
-                    <Route path="/dashboard" component={Main} />
-                    <Route path="/media" component={MediaFiles} />
+                    <Route path="/dashboard" render={() => <Main isOpen={isOpen} setIsOpen={setIsOpen} />} />
+                    {/* <Route path="/media" component={MediaFiles} /> */}
                     <Route path="/news/:id?" component={News} />
                     <Route path="/admin-panel" component={AdminPanel} />
                     <Route path="/sales" component={SalePartners} />
@@ -78,7 +107,7 @@ const Layout = () => {
                     {/* style={{ width: '95vw', height: '95vh', position: 'absolute' }}> */}
                     {/** @ts-ignore */}
                     <Draggable bounds="parent">
-                        <Chat />
+                        <Chat isOpen={isOpen} handleChangeIsOpenChat={handleChangeIsOpenChat} />
                     </Draggable>
                 </div>
             </div>
@@ -86,7 +115,9 @@ const Layout = () => {
     );
     return (
         <Router>
-            <div className="wrapper">{dashboardContent}</div>
+            <Suspense fallback={Loader}>
+                <div className="wrapper">{dashboardContent}</div>
+            </Suspense>
         </Router>
     );
 };

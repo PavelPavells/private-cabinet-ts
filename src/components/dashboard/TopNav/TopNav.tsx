@@ -1,9 +1,14 @@
 /**
  * ********** Импорт зависимостей **********
  */
-import React, { useState, SyntheticEvent } from 'react';
-// import { shallowEqual, useSelector } from 'react-redux';
-// import { PersonalCabinet } from '../../../store/store';
+import React, { useState, SyntheticEvent, useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { PersonalCabinet } from '../../../store/store';
+
+/**
+ * импорт экшенов
+ */
+import { fetchDataNotifications } from '../../../actions/notificationsActions/notificationsActions';
 
 /**
  * Импорт компонентов
@@ -23,6 +28,18 @@ import './TopNav.scss';
 
 const TopNav = () => {
     const [isOpen, setIsOpen] = useState(false);
+    /**
+     * хук смены состояния
+     */
+    const dispatch = useDispatch();
+
+    const { notifications } = useSelector((state: PersonalCabinet) => state.notifications, shallowEqual);
+
+    useEffect(() => {
+        dispatch(fetchDataNotifications());
+    }, []);
+    // const [isOpenSide, setIsOpenSide] = useState(localStorage.getItem('isOpenSide') || false);
+    // const isOpenSide = useRef(true);
     const partner = localStorage.getItem('partnerName');
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');
@@ -36,11 +53,25 @@ const TopNav = () => {
     const toggleMenu = () => {
         const sideNav: Element | any = document.querySelector('.right');
         sideNav.classList.toggle('invisible');
-        const push: Element | any = document.querySelector('.wrapper-push');
-        if (push) {
-            push.classList.toggle('spread');
-        }
+        // @ts-ignore
+        // isOpenSide.current = !isOpenSide.current;
+
+        // @ts-ignore
+        // localStorage.setItem('isOpenSide', isOpenSide.current);
+        // const push: Element | any = document.querySelector('.wrapper-push');
+        // if (push) {
+        //     push.classList.toggle('spread');
+        // }
     };
+
+    // useEffect(() => {
+    //     const stateSideMenu = localStorage.getItem('isOpenSide');
+    //     console.log(stateSideMenu);
+    //     // if (stateSideMenu) {
+    //     //     setIsOpenSide(false);
+    //     //     // setIsOpenSide(stateSideMenu);
+    //     // }
+    // });
 
     // const handleClickOutside = (event: Event) => {
     //     const checkingElement = document.getElementsByClassName('alert')[0];
@@ -82,9 +113,20 @@ const TopNav = () => {
                 <div className="right__info">
                     <div className="info__bell">
                         <div onClick={onChangeIsOpen} className="bell__icon notifications">
-                            <div className="notifications__number">5</div>
+                            {notifications && (
+                                <>
+                                    {notifications.notifications > 0 ? (
+                                        <div className="notifications__number">
+                                            {notifications.notifications > 0 ? notifications.notifications : 1}
+                                        </div>
+                                    ) : null}
+                                </>
+                            )}
                         </div>
-                        {isOpen ? <ModalAlert /> : null}
+                        {isOpen ? (
+                            // @ts-ignore
+                            <ModalAlert notifications={notifications} />
+                        ) : null}
                     </div>
                     <Profile />
                 </div>

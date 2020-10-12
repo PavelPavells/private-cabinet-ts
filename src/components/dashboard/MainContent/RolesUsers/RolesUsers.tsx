@@ -8,6 +8,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
  * ********** Импорт экшенов **********
  * */
 // import { fetchDataRolesUsers } from '../../../../actions/rolesUsersActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
@@ -47,13 +48,14 @@ const RolesUsers = () => {
      * */
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const useruuid: string | null = localStorage.getItem('userUuid');
-    //     // @ts-ignore
-    //     const userUuid = useruuid.replace(/['"«»]/g, '');
-    //     // @ts-ignore
-    //     dispatch(fetchDataRolesUsers({ uuid: userUuid }));
-    // }, []);
+    useEffect(() => {
+        // const useruuid: string | null = localStorage.getItem('userUuid');
+        // // @ts-ignore
+        // const userUuid = useruuid.replace(/['"«»]/g, '');
+        // // @ts-ignore
+        // dispatch(fetchDataRolesUsers({ uuid: userUuid }));
+        dispatch(fetchDataNotifications());
+    }, []);
 
     const handleChangeTabsOne = () => {
         const elemTabOne = document.getElementsByClassName('tab__users')[0];

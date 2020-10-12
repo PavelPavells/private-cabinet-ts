@@ -12,6 +12,7 @@ import CsvDownload from 'react-json-to-csv';
  * ********** Импорт экшенов **********
  * */
 import { fetchDataOrders } from '../../../../actions/ordersActions';
+import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
@@ -82,6 +83,7 @@ const OrdersComponent = () => {
         // @ts-ignore
         const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataOrders(request));
+        dispatch(fetchDataNotifications());
     }, []);
 
     // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
@@ -128,7 +130,7 @@ const OrdersComponent = () => {
                             </div>
                             <div className="buttons-wrapper">
                                 <CsvDownload data={ordersTable} className="button">
-                                    Экспортировать документ
+                                    Экспортировать данные
                                 </CsvDownload>
                             </div>
                             <div className="search-wrapper">

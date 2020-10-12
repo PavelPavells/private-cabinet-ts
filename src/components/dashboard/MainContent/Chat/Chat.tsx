@@ -32,13 +32,19 @@ import Fade from '../../../../__utils__/Fade/Fade';
 
 import './Chat.scss';
 
-const Chat = () => {
-    const [isOpen, setIsOpen] = useState(false);
+interface Chat {
+    isOpen: boolean;
+    handleChangeIsOpenChat: any;
+}
+
+const Chat: React.FC<Chat> = ({ isOpen, handleChangeIsOpenChat }: Chat) => {
+    // const [isOpen, setIsOpen] = useState(false);
     const [msg, addMessages] = useState('');
-    const handleChangeIsOpenChat = (event: SyntheticEvent) => {
-        event.preventDefault();
-        setIsOpen(!isOpen);
-    };
+
+    // const handleChangeIsOpenChat = (event: SyntheticEvent) => {
+    //     event.preventDefault();
+    //     setIsOpen(!isOpen);
+    // };
 
     const { message } = useSelector((state: PersonalCabinet) => state.message, shallowEqual);
 
@@ -109,11 +115,11 @@ const Chat = () => {
                 </div>
             </Fade>
             <Fade show={!isOpen}>
-                <div className="chat__rollup">
+                <div onClick={handleChangeIsOpenChat} className="chat__rollup">
                     <div className="rollup__status">
                         <span>2</span>
                     </div>
-                    <div onClick={handleChangeIsOpenChat} className="rollup__image" />
+                    <div className="rollup__image" />
                 </div>
             </Fade>
         </>

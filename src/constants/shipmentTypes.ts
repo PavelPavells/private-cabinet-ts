@@ -69,6 +69,8 @@ export type ShipmentList = Array<ShipmentItem>;
 export interface ShipmentListReq {
     page: number;
     limit: number;
+    startDate?: string | null;
+    endDate?: string | null;
     sortBy: null | string;
     sortDirection: number | undefined;
     groupBy: null | string;

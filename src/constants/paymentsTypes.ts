@@ -40,6 +40,8 @@ export type PaymentList = Array<PaymentItem>;
 export interface PaymentListReq {
     page: number;
     limit: number;
+    startDate?: null | string;
+    endDate?: null | string;
     sortBy: null | string;
     sortDirection: number | undefined;
     groupBy: null | string;

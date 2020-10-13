@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
@@ -49,14 +49,14 @@ const usePreviousValue = (data: any) => {
 };
 
 const OrdersComponent = () => {
-    const [value, onChange] = useState([new Date(), new Date()]);
+    const [value, setValue] = useState(null);
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
-    const [findValue] = useState(null);
+    const [findValue, setFindValue] = useState('');
     const [selectedHeader, setSelectedHeader] = useState(0);
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
@@ -108,6 +108,10 @@ const OrdersComponent = () => {
         const filter: OrdersListReq = {
             page,
             limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
@@ -116,6 +120,42 @@ const OrdersComponent = () => {
             uuid: user
         };
         dispatch(fetchDataOrders(filter));
+    };
+
+    const sendDateFilter = (fieldName: any) => {
+        const request: OrdersListReq = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy: fieldName,
+            findValue,
+            uuid: user
+        };
+        dispatch(fetchDataOrders(request));
+    };
+
+    const sendDateFilters = () => {
+        const request: OrdersListReq = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy: null,
+            findValue: null,
+            uuid: user
+        };
+        dispatch(fetchDataOrders(request));
     };
 
     if (ordersHeaders && ordersTable) {
@@ -185,16 +225,51 @@ const OrdersComponent = () => {
                                                         </div>
                                                         {filterModal ? (
                                                             <div className="search-wrapper">
-                                                                {i === 0 || i === 2 ? <input type="text" className="search-input" /> : null}
+                                                                {i === 0 ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        className="search-input"
+                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                                            setFindValue(event.target.value)}
+                                                                        onKeyPress={() => sendDateFilter(header.fieldName)}
+                                                                    />
+                                                                ) : null}
                                                                 {i === 1 ? (
                                                                     <DateTimeRangePicker
                                                                         disableClock
                                                                         format="dd.MM"
-                                                                        onChange={onChange}
+                                                                        onChange={setValue}
                                                                         value={value}
                                                                     />
                                                                 ) : null}
-                                                                {i === 0 || i === 2 ? <img src={Magnifier} alt="" /> : null}
+                                                                {i === 2 ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        className="search-input"
+                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                                            setFindValue(event.target.value)}
+                                                                    />
+                                                                ) : null}
+                                                                {i === 0 ? (
+                                                                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                                                                    <img
+                                                                        src={Magnifier}
+                                                                        onClick={() => sendDateFilter(header.fieldName)}
+                                                                        alt=""
+                                                                    />
+                                                                ) : null}
+                                                                {i === 1 ? (
+                                                                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                                                                    <img src={Magnifier} onClick={sendDateFilters} alt="" />
+                                                                ) : null}
+                                                                {i === 2 ? (
+                                                                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                                                                    <img
+                                                                        src={Magnifier}
+                                                                        onClick={() => sendDateFilter(header.fieldName)}
+                                                                        alt=""
+                                                                    />
+                                                                ) : null}
                                                             </div>
                                                         ) : null}
                                                     </div>

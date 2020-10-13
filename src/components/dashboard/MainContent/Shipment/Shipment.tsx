@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
@@ -52,14 +53,14 @@ const usePreviousValue = (data: any) => {
 };
 
 const ShipmentComponent = () => {
-    const [value, onChange] = useState([new Date(), new Date()]);
+    const [value, setValue] = useState(null);
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
-    const [findValue] = useState(null);
+    const [findValue, setFindValue] = useState('');
     const [selectedHeader, setSelectedHeader] = useState(1);
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
@@ -118,6 +119,10 @@ const ShipmentComponent = () => {
         const filter: ShipmentListReq = {
             page,
             limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
@@ -128,6 +133,25 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(filter));
     };
 
+    const sendDateFilter = () => {
+        const request: ShipmentListReq = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy,
+            findValue,
+            uuid: user
+        };
+        dispatch(fetchDataShipment(request));
+    };
+
+    // console.log(findValue);
     if (inputs && headersShipment && tableShipment) {
         return (
             <main className="main-content">
@@ -195,16 +219,26 @@ const ShipmentComponent = () => {
                                                         </div>
                                                         {filterModal ? (
                                                             <div className="search-wrapper">
-                                                                {i === 0 ? <input type="text" className="search-input" /> : null}
+                                                                {i === 0 ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                                            setFindValue(event.target.value)
+                                                                        }
+                                                                        className="search-input"
+                                                                        onKeyPress={sendDateFilter}
+                                                                    />
+                                                                ) : null}
                                                                 {i === 1 ? (
                                                                     <DateTimeRangePicker
                                                                         disableClock
                                                                         format="dd.MM"
-                                                                        onChange={onChange}
+                                                                        onChange={setValue}
                                                                         value={value}
                                                                     />
                                                                 ) : null}
-                                                                {i === 0 ? <img src={Magnifier} alt="" /> : null}
+                                                                {i === 0 ? <img src={Magnifier} onClick={sendDateFilter} alt="" /> : null}
+                                                                {i === 1 ? <img src={Magnifier} onClick={sendDateFilter} alt="" /> : null}
                                                             </div>
                                                         ) : null}
                                                     </div>

@@ -54,7 +54,7 @@ const usePreviousValue = (data: any) => {
 };
 
 const PaymentComponent = () => {
-    const [value, onChange] = useState([new Date(), new Date()]);
+    const [value, setValue] = useState(null);
     const [page] = useState(0);
     const [limit] = useState(5000);
     const [sortBy] = useState(null);
@@ -119,6 +119,10 @@ const PaymentComponent = () => {
         const filter: PaymentListReq = {
             page,
             limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
@@ -127,6 +131,24 @@ const PaymentComponent = () => {
             uuid: user
         };
         dispatch(fetchDataPayment(filter));
+    };
+
+    const sendDateFilter = () => {
+        const request: PaymentListReq = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy,
+            findValue,
+            uuid: user
+        };
+        dispatch(fetchDataPayment(request));
     };
 
     if (headersPayment && tablePayment) {
@@ -200,18 +222,16 @@ const PaymentComponent = () => {
                                                                     <DateTimeRangePicker
                                                                         disableClock
                                                                         format="dd.MM"
-                                                                        onChange={onChange}
+                                                                        onChange={setValue}
                                                                         value={value}
                                                                     />
                                                                 ) : null}
-                                                                {/*
-                                                                <div className="search-icon">
-                                                                    {/* {i === 0 ? null : <img src={Magnifier} alt="" />} */}
-                                                                {/* {i <= 1 ? null /* <img src={Magnifier} alt="" />  : (
+                                                                <div className="search-icon" onClick={sendDateFilter}>
+                                                                    {i === 0 ? <img src={Magnifier} alt="" /> : null}
+                                                                    {/* {i <= 1 ? null /* <img src={Magnifier} alt="" />  : (
                                                                         <img src={Arrow} alt="" />
-                                                                    )} 
+                                                                    )} */}
                                                                 </div>
-                                                                */}
                                                             </div>
                                                         ) : null}
                                                     </div>

@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
@@ -61,7 +61,9 @@ const PaymentComponent = () => {
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
-    const [findValue] = useState(null);
+    const [startSumValue, setStartSumValue] = useState('');
+    const [endSumValue, setEndSumValue] = useState('');
+    const [findValue, setFindValue] = useState('');
     const [selectedHeader, setSelectedHeader] = useState(0);
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
@@ -123,29 +125,57 @@ const PaymentComponent = () => {
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            startSum: startSumValue,
+            endSum: endSumValue,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
             findValue,
-            findBy,
+            findBy: fieldName,
             uuid: user
         };
         dispatch(fetchDataPayment(filter));
     };
 
-    const sendDateFilter = () => {
-        const request: PaymentListReq = {
+    const sendCalendarFilter = () => {
+        const request: any = {
             page,
             limit,
             // @ts-ignore
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
             sortBy,
             sortDirection,
             groupBy,
-            findBy,
-            findValue,
+            findBy: null,
+            findValue: null,
+            uuid: user
+        };
+        dispatch(fetchDataPayment(request));
+    };
+
+    /**
+     * функция обработки полей с фильтрацией от и до
+     */
+    const sendDateFiltersSumValue = () => {
+        const request: any = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy: null,
+            findValue: null,
             uuid: user
         };
         dispatch(fetchDataPayment(request));
@@ -226,11 +256,33 @@ const PaymentComponent = () => {
                                                                         value={value}
                                                                     />
                                                                 ) : null}
-                                                                <div className="search-icon" onClick={sendDateFilter}>
-                                                                    {i === 0 ? <img src={Magnifier} alt="" /> : null}
-                                                                    {/* {i <= 1 ? null /* <img src={Magnifier} alt="" />  : (
-                                                                        <img src={Arrow} alt="" />
-                                                                    )} */}
+                                                                {i === 1 ? (
+                                                                    <div className="wrap__search">
+                                                                        <div className="search__range">от</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setStartSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                        <div className="search__range">до</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEndSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                    </div>
+                                                                ) : null}
+                                                                <div className="search-icon">
+                                                                    {i === 0 ? (
+                                                                        <img src={Magnifier} onClick={sendCalendarFilter} alt="" />
+                                                                    ) : null}
+                                                                    {i === 1 ? (
+                                                                        <img src={Magnifier} onClick={sendDateFiltersSumValue} alt="" />
+                                                                    ) : null}
                                                                 </div>
                                                             </div>
                                                         ) : null}

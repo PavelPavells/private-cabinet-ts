@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  * ********** Импорт основных библиотек из NPM **********
  * */
@@ -55,7 +56,9 @@ const OrdersComponent = () => {
     const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
-    const [findBy] = useState(null);
+    const [findBy, setFindBy] = useState(null);
+    const [startSumValue, setStartSumValue] = useState('');
+    const [endSumValue, setEndSumValue] = useState('');
     const [findValue, setFindValue] = useState('');
     const [selectedHeader, setSelectedHeader] = useState(0);
     const [exportModal] = useState(false);
@@ -112,17 +115,22 @@ const OrdersComponent = () => {
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
             findValue,
-            findBy,
+            findBy: fieldName,
             uuid: user
         };
         dispatch(fetchDataOrders(filter));
     };
 
-    const sendDateFilter = (fieldName: any) => {
+    /**
+     * функция обработки полей с фильтрацией по строкам
+     */
+    const sendFilterInputText = (fieldName: any) => {
         const request: OrdersListReq = {
             page,
             limit,
@@ -130,7 +138,9 @@ const OrdersComponent = () => {
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
-            sortBy,
+            startSum: startSumValue,
+            endSum: endSumValue,
+            sortBy: fieldName,
             sortDirection,
             groupBy,
             findBy: fieldName,
@@ -140,7 +150,10 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(request));
     };
 
-    const sendDateFilters = () => {
+    /**
+     * функция обработки полей с фильтрацией по датам
+     */
+    const sendCalendarFilter = () => {
         const request: OrdersListReq = {
             page,
             limit,
@@ -148,6 +161,31 @@ const OrdersComponent = () => {
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy: null,
+            findValue: null,
+            uuid: user
+        };
+        dispatch(fetchDataOrders(request));
+    };
+
+    /**
+     * функция обработки полей с фильтрацией от и до
+     */
+    const sendDateFiltersSumValue = () => {
+        const request: OrdersListReq = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
             sortBy,
             sortDirection,
             groupBy,
@@ -229,9 +267,9 @@ const OrdersComponent = () => {
                                                                     <input
                                                                         type="text"
                                                                         className="search-input"
-                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                                                            setFindValue(event.target.value)}
-                                                                        onKeyPress={() => sendDateFilter(header.fieldName)}
+                                                                        // eslint-disable-next-line prettier/prettier
+                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFindValue(event.target.value)}
+                                                                        // onKeyPress={() => sendDateFilter(header.fieldName)}
                                                                     />
                                                                 ) : null}
                                                                 {i === 1 ? (
@@ -246,27 +284,69 @@ const OrdersComponent = () => {
                                                                     <input
                                                                         type="text"
                                                                         className="search-input"
-                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                                                            setFindValue(event.target.value)}
+                                                                        // eslint-disable-next-line prettier/prettier
+                                                                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFindValue(event.target.value)}
+                                                                        // onKeyPress={(event) => {
+                                                                        //     if (event.key === 'Enter') {
+                                                                        //         sendDateFilter(header.fieldName);
+                                                                        //     }
+                                                                        // }}
                                                                     />
                                                                 ) : null}
+                                                                {i === 3 ? (
+                                                                    <div className="wrap__search">
+                                                                        <div className="search__range">от</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setStartSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                        <div className="search__range">до</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEndSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                    </div>
+                                                                ) : null}
+                                                                {/** иконки фильтраций */}
                                                                 {i === 0 ? (
                                                                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                                                                     <img
+                                                                        className="search__image"
                                                                         src={Magnifier}
-                                                                        onClick={() => sendDateFilter(header.fieldName)}
+                                                                        onClick={() => sendFilterInputText(header.fieldName)}
                                                                         alt=""
                                                                     />
                                                                 ) : null}
                                                                 {i === 1 ? (
                                                                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                                                                    <img src={Magnifier} onClick={sendDateFilters} alt="" />
+                                                                    <img
+                                                                        className="search__image"
+                                                                        src={Magnifier}
+                                                                        onClick={sendCalendarFilter}
+                                                                        alt=""
+                                                                    />
                                                                 ) : null}
                                                                 {i === 2 ? (
                                                                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                                                                     <img
+                                                                        className="search__image"
                                                                         src={Magnifier}
-                                                                        onClick={() => sendDateFilter(header.fieldName)}
+                                                                        onClick={() => sendFilterInputText(header.fieldName)}
+                                                                        alt=""
+                                                                    />
+                                                                ) : null}
+                                                                {i === 3 ? (
+                                                                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                                                                    <img
+                                                                        className="search__image"
+                                                                        src={Magnifier}
+                                                                        onClick={sendDateFiltersSumValue}
                                                                         alt=""
                                                                     />
                                                                 ) : null}

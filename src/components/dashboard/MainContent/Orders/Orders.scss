@@ -152,6 +152,14 @@
                     }
                    
                 }
+
+                .wrap__search {
+                    display: flex;
+
+                    .search__range {
+                        padding: 0 5px;
+                    }
+                }
             }
 
             .frame__table {

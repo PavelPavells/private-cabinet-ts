@@ -322,6 +322,12 @@
         }
     }
 
+    .search__image {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     .search-icon {
         width: 20px;
         margin-right: 10px;

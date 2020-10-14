@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /**
  * ********** Импорт основных библиотек из NPM **********
@@ -60,6 +61,8 @@ const ShipmentComponent = () => {
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
     const [findBy] = useState(null);
+    const [startSumValue, setStartSumValue] = useState('');
+    const [endSumValue, setEndSumValue] = useState('');
     const [findValue, setFindValue] = useState('');
     const [selectedHeader, setSelectedHeader] = useState(1);
     const [exportModal] = useState(false);
@@ -123,6 +126,9 @@ const ShipmentComponent = () => {
             startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
             // @ts-ignore
             endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            startSum: startSumValue,
+            endSum: endSumValue,
             sortBy: fieldName,
             sortDirection: prevSortDirection,
             groupBy,
@@ -133,7 +139,30 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(filter));
     };
 
-    const sendDateFilter = () => {
+    /**
+     * функция обработки полей с фильтрацией по строкам
+     */
+    const sendFilterInputText = (fieldName: any) => {
+        const request: any = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
+            sortBy: fieldName,
+            sortDirection,
+            groupBy,
+            findBy: fieldName,
+            findValue,
+            uuid: user
+        };
+        dispatch(fetchDataShipment(request));
+    };
+
+    const sendCalendarFilter = () => {
         const request: ShipmentListReq = {
             page,
             limit,
@@ -144,8 +173,31 @@ const ShipmentComponent = () => {
             sortBy,
             sortDirection,
             groupBy,
-            findBy,
-            findValue,
+            findBy: null,
+            findValue: null,
+            uuid: user
+        };
+        dispatch(fetchDataShipment(request));
+    };
+
+    /**
+     * функция обработки полей с фильтрацией от и до
+     */
+    const sendDateFiltersSumValue = () => {
+        const request: any = {
+            page,
+            limit,
+            // @ts-ignore
+            startDate: value ? value[0].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            // @ts-ignore
+            endDate: value ? value[1].toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1') : null,
+            startSum: startSumValue,
+            endSum: endSumValue,
+            sortBy,
+            sortDirection,
+            groupBy,
+            findBy: null,
+            findValue: null,
             uuid: user
         };
         dispatch(fetchDataShipment(request));
@@ -223,10 +275,9 @@ const ShipmentComponent = () => {
                                                                     <input
                                                                         type="text"
                                                                         onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                                                            setFindValue(event.target.value)
-                                                                        }
+                                                                            setFindValue(event.target.value)}
                                                                         className="search-input"
-                                                                        onKeyPress={sendDateFilter}
+                                                                        // onKeyPress={sendDateFilter}
                                                                     />
                                                                 ) : null}
                                                                 {i === 1 ? (
@@ -237,8 +288,39 @@ const ShipmentComponent = () => {
                                                                         value={value}
                                                                     />
                                                                 ) : null}
-                                                                {i === 0 ? <img src={Magnifier} onClick={sendDateFilter} alt="" /> : null}
-                                                                {i === 1 ? <img src={Magnifier} onClick={sendDateFilter} alt="" /> : null}
+                                                                {i === 2 ? (
+                                                                    <div className="wrap__search">
+                                                                        <div className="search__range">от</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setStartSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                        <div className="search__range">до</div>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="search-input"
+                                                                            // eslint-disable-next-line prettier/prettier
+                                                                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEndSumValue(event.target.value)}
+                                                                            style={{ width: '45px', borderBottom: '2px solid #EFEFEF' }}
+                                                                        />
+                                                                    </div>
+                                                                ) : null}
+                                                                {i === 0 ? (
+                                                                    <img
+                                                                        src={Magnifier}
+                                                                        onClick={() => sendFilterInputText(header.fieldName)}
+                                                                        alt=""
+                                                                    />
+                                                                ) : null}
+                                                                {i === 1 ? (
+                                                                    <img src={Magnifier} onClick={sendCalendarFilter} alt="" />
+                                                                ) : null}
+                                                                {i === 2 ? (
+                                                                    <img src={Magnifier} onClick={sendDateFiltersSumValue} alt="" />
+                                                                ) : null}
                                                             </div>
                                                         ) : null}
                                                     </div>

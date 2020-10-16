@@ -10,7 +10,7 @@ import {
     DATA_LOADING_FAILURE
 } from '../constants/paymentsTypes';
 
-const initialState: PaymentState = {
+export const initialState: PaymentState = {
     isFetching: false,
     errorMessage: '',
     headersPayment: null,

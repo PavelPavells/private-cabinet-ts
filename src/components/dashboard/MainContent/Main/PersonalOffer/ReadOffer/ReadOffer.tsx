@@ -11,13 +11,13 @@ import './ReadOffer.scss';
 /**
  * интерфейс пропсов
  */
-interface News {
+interface ReadNews {
     offer: any;
     offerId: number;
     handleOpenReadOffer: () => void;
 }
 
-const ReadNews: React.FC<News> = ({ offer, offerId, handleOpenReadOffer }: News) => {
+const ReadNews: React.FC<ReadNews> = ({ offer, offerId, handleOpenReadOffer }: ReadNews) => {
     return (
         <div className="wrap__read">
             <div className="read">

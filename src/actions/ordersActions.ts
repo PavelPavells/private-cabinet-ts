@@ -66,10 +66,10 @@ export const fetchingDataFailure = (error: ResponseStatus): OrdersActions => ({
 /**
  * ********** Экшен для запроса данных из компонентов **********
  */
-export const fetchDataOrders = (data: OrdersListReq) => async (dispatch: Dispatch<OrdersActions>) => {
+export const fetchDataOrders = (data: OrdersListReq) => (dispatch: Dispatch<OrdersActions>) => {
     dispatch(fetchingDataRequest());
     try {
-        await axios
+        return axios
             .post(`${site}order`, data)
             .then((response: AxiosResponse<OrdersListRes>) => {
                 const filterData = response.data.payload.displayRules.filter((element: OrdersHeader) => {
@@ -80,8 +80,9 @@ export const fetchDataOrders = (data: OrdersListReq) => async (dispatch: Dispatc
                 dispatch(fetchingDataSuccessHeaders(filterData));
                 dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 return error;
+                // return dispatch(fetchingDataFailure(error));
             });
     } catch (error) {
         dispatch(fetchingDataFailure(error));

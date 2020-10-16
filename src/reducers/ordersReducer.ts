@@ -10,7 +10,7 @@ import {
     DATA_LOADING_SUCCESS_ORDERS_TABLE
 } from '../constants/ordersTypes';
 
-const initialState: OrdersState = {
+export const initialState: OrdersState = {
     isFetching: false,
     errorMessage: '',
     ordersHeaders: null,

@@ -32,6 +32,7 @@ const NewPassword = () => {
 
     const onSubmit = () => {
         const passwords = { newPass, repeatNewPass };
+        console.log(passwords);
         // dispatch(newPassword(passwords));
     };
 

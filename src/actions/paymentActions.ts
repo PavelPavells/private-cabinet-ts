@@ -60,7 +60,7 @@ export const fetchingDataFailure = (error: ResponseStatus): PaymentActions => ({
 /**
  * ********** Экшен для запроса данных из компонентов **********
  */
-export const fetchDataPayment = (data: PaymentListReq) => async (dispatch: Dispatch<PaymentActions>) => {
+export const fetchDataPayment = (data: PaymentListReq) => async (dispatch: Dispatch<PaymentActions>): Promise<void> => {
     dispatch(fetchingDataRequest());
     try {
         await axios.post(`${site}cashflow`, data).then((response: AxiosResponse<PaymentListRes>) => {

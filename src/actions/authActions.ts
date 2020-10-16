@@ -255,7 +255,7 @@ export const registerUser = (userData: userDataRegister) => (dispatch: Dispatch<
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const resetPassword = (email: string) => (dispatch: Dispatch<AuthActions>) => {
     try {
-        axios.post(`${site}resetpassword`, email).then((response) => {
+        axios.post(`${site} resetpassword`, email).then((response) => {
             console.log(response);
         });
     } catch (error) {

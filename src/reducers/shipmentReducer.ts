@@ -12,7 +12,7 @@ import {
     SHIPMENT_SET_INPUT
 } from '../constants/shipmentTypes';
 
-const initialState: ShipmentState = {
+export const initialState: ShipmentState = {
     isFetching: false,
     errorMessage: '',
     inputs: {},

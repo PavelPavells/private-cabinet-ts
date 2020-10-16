@@ -286,6 +286,17 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="block-element ">
+                                <div className="block-element__chart" />
+                                <div className="block-element__info">
+                                    <div className="block-element__title">
+                                        <p>Скидка на оборудование 15% для наших партнеров!</p>
+                                    </div>
+                                    <div className="block-element__subtitle">
+                                        {/* <span className="currency-unit-rub">Размер скидки партнера может отличаться</span> */}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <PersonalOffer />

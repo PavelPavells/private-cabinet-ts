@@ -30,6 +30,11 @@ import 'react-circular-progressbar/dist/styles.css';
 import Loader from '../../../../__utils__/Spinner';
 
 /**
+ * Импорт лого
+ */
+import Calendar from '../../../../images/Main/calendar.svg';
+
+/**
  * Импорт компонентов
  */
 import PreviewNews from './PreviewNews/PreviewNews';
@@ -66,7 +71,7 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
         return (
             <div className="main-content">
                 <div className="main">
-                    <div className="main__block news">
+                    <section className="main__block news">
                         {/* <div className="block-title">
                             <span>Актуальные новости</span>
                         </div> */}
@@ -76,7 +81,7 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                 <CompanyNews />
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <Link to="/news" className="more__offers">
                         Все новости
                     </Link>
@@ -139,7 +144,7 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                         </div>
                     </div>
                     */}
-                    <div className="main__block status">
+                    <section className="main__block status">
                         {/* <div className="block-title">
                             <span>Статус</span>
                         </div> */}
@@ -286,19 +291,36 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="block-element ">
-                                <div className="block-element__chart" />
-                                <div className="block-element__info">
-                                    <div className="block-element__title">
-                                        <p>Скидка на оборудование 15% для наших партнеров!</p>
+                            <div className="block-element stock">
+                                <div className="stock__top">Скидка на оборудование 15% для наших партнеров!</div>
+                                <div className="stock__center">
+                                    <div className="center__left">
+                                        <div className="heading">Сумма закупок</div>
+                                        <div className="left__chart" />
+                                        <div className="left__range">
+                                            <div className="range__left">170 000 Р</div>
+                                            <div className="range__right">300 000 Р</div>
+                                        </div>
                                     </div>
-                                    <div className="block-element__subtitle">
-                                        {/* <span className="currency-unit-rub">Размер скидки партнера может отличаться</span> */}
+                                    <div className="center__right">
+                                        <div className="heading">
+                                            Сроки проведения
+                                            <br />
+                                            акции
+                                        </div>
+                                        <div className="right__calendar">
+                                            <img src={Calendar} className="calendar__icon" alt="" />
+                                            <div className="calendar__value">13.10 - 31.10</div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div className="stock__bottom">
+                                    <div className="heading">Ваш депозит составляет</div>
+                                    <div className="bottom__summ">0 Р</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <PersonalOffer />
                 </div>
             </div>

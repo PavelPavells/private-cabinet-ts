@@ -4,6 +4,11 @@
 import React from 'react';
 
 /**
+ * импорт лого, фото
+ */
+import NewsPhoto from '../../../../../images/news.png';
+
+/**
  * импорт стилей
  */
 import './ReadNews.scss';
@@ -19,8 +24,8 @@ interface News {
 
 const ReadNews: React.FC<News> = ({ offer, articleId, handleOpenReadArticle }: News) => {
     return (
-        <div className="wrap__read">
-            <div className="read">
+        <section className="wrap__read">
+            <div className="read__news">
                 <div className="read__header">
                     <div onClick={handleOpenReadArticle} className="image" />
                 </div>
@@ -34,7 +39,7 @@ const ReadNews: React.FC<News> = ({ offer, articleId, handleOpenReadArticle }: N
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

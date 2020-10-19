@@ -88,6 +88,10 @@
                     border-right: 1px solid $brandBorderColor;
                 }
             }
+
+            // .block-element:nth-child(4) {
+
+            // }
             // .block-element:nth-child(1) {
             //     grid-column: auto / span 3;
             // }
@@ -118,6 +122,7 @@
 
         &.seggestions {
             .block-element {
+                max-width: 600px;
                 padding: 0px;
 
                 &__title {
@@ -151,7 +156,8 @@
                 }
 
                 &__info {
-                    width: 100%;
+                    // width: 100%;
+                    // max-width: 500px;
                     margin-right: 0;
                     padding-right: 0;
                 }
@@ -299,6 +305,99 @@
         }
     }
 
+    .stock {
+        display: flex;
+        flex-direction: column;
+
+        .heading {
+            padding-bottom: 20px;
+            font-size: 14px;
+            color: $brandPantonBlue;
+        }
+
+        .stock__top {
+            width: 100%;
+            padding-top: 7px;
+            padding-bottom: 26px;
+            font-size: 16px;
+            color: $brandPantonBlue;
+        }
+
+        .stock__center {
+            display: flex;
+            width: 100%;
+
+            .center__left {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+                padding: 20px;
+                // border: 1px solid green;
+                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+
+                .left__chart {
+                    display: block;
+                    margin-bottom: 16px;
+                    height: 8px;
+                    background-color: $brandPantonGreen;
+                }
+
+                .left__range {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .range__left {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: $brandPantonGreen;
+                    }
+
+                    .range__right {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: $brandPantonGreyText;
+                    }
+                }
+            }
+
+            .center__right {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                margin-left: 15px;
+                padding: 20px;
+                // border: 1px solid green;
+                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+
+                .right__calendar {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 10px;
+
+                    .calendar__icon {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .stock__bottom {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            margin-top: 14px;
+            background-color: $brandBackground;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+
+            .bottom__summ {
+                font-size: 14px;
+                color: $brandPantonGreyText;
+            }
+        }
+    }
+
     .block-wrapper {
         display: flex;
         justify-content: space-between;
@@ -344,6 +443,10 @@
             flex-direction: column;
             padding-right: 30px;
             margin-right: 30px;
+
+            .offer__image {
+                margin: 24px 19px 0 19px;
+            }
         }
     
 
@@ -384,6 +487,8 @@
         }
 
         &__title {
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
             font-size: 14px;
             line-height: 15px;
@@ -396,11 +501,36 @@
                 color: $white;
                 background-color: $brandPantonBlue;
             }
+
+            .text {
+                margin-right: 10px;
+                font-size: 14px;
+                word-wrap: nowrap;
+                font-weight: $bold;
+                color: $brandPantonBlue;
+            }
+
+            .date {
+                display: flex;
+                flex: 1;
+                // width: 60%;
+            }
+
+            .icon {
+                margin-right: 17px;
+            }
         }
 
         &__subtitle {
             display: flex;
             flex-direction: column;
+            font-size: 16px;
+            line-height: 18px;
+        }
+        &__subtitle--offer {
+            margin-left: 18px;
+            padding: 20px 0;
+            color: $brandPantonBlue;
             font-size: 16px;
             line-height: 18px;
         }
@@ -462,6 +592,11 @@
             //     }
 
             // }
+        }
+        &__stock {
+            display: flex;
+            // flex-direction: column;
+            border: 1px solid $brandPantonGreen;
         }
     }
 }

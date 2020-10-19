@@ -15,6 +15,12 @@ import { PersonalCabinet } from '../../../../../store/store';
 import ReadOffer from './ReadOffer/ReadOffer';
 
 /**
+ * импорт лого, фото
+ */
+import Participant from '../../../../../images/personalOffer/participant.svg';
+import OfferPhoto from '../../../../../images/news/news.png';
+
+/**
  * ********** Импорт LOADER из __UTILS__ **********
  * */
 import Loader from '../../../../../__utils__/Spinner';
@@ -59,8 +65,11 @@ const PersonalOffer = () => {
                                             <div className="block-element__title">
                                                 <span className="offer">Перс. предложения</span>
                                                 <span className="date">{index.offerDate}</span>
+                                                <span className="text">ВЫ УЧАСТВУЕТЕ</span>
+                                                <img src={Participant} alt="" className="icon" />
                                             </div>
-                                            <div className="block-element__subtitle">
+                                            <img src={OfferPhoto} alt="" className="offer__image" />
+                                            <div className="block-element__subtitle--offer">
                                                 <span>{index.offerTopic}</span>
                                             </div>
                                             <div className="block-element__description">

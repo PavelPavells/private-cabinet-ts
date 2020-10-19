@@ -4,6 +4,11 @@
 import React from 'react';
 
 /**
+ * импорт лого, фото
+ */
+import NewsPhoto from '../../../../../images/news.png';
+
+/**
  * импорт стилей
  */
 import './ReadActualNews.scss';
@@ -23,7 +28,7 @@ const ReadActualNews: React.FC<News> = ({ news, actualArticleId, handleOpenReadA
             {news.map((idx: any) => {
                 if (idx.id === actualArticleId) {
                     return (
-                        <div key={idx.id} className="read">
+                        <div key={idx.id} className="read__news">
                             <div className="read__header">
                                 <div onClick={handleOpenReadActualArticle} className="image" />
                             </div>

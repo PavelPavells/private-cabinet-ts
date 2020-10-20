@@ -9,7 +9,7 @@ import { PersonalCabinet } from '../../../store/store';
  * импорт экшенов
  */
 import { fetchDataNotifications } from '../../../actions/notificationsActions/notificationsActions';
-
+import { IsOpenSideMenu } from '../../../actions/topNavActions';
 /**
  * Импорт компонентов
  */
@@ -34,12 +34,11 @@ const TopNav = () => {
     const dispatch = useDispatch();
 
     const { notifications } = useSelector((state: PersonalCabinet) => state.notifications, shallowEqual);
+    const { isOpenMenu } = useSelector((state: PersonalCabinet) => state.topnav, shallowEqual);
 
     useEffect(() => {
         dispatch(fetchDataNotifications());
-    }, []);
-    // const [isOpenSide, setIsOpenSide] = useState(localStorage.getItem('isOpenSide') || false);
-    // const isOpenSide = useRef(true);
+    }, [isOpenMenu]);
     const partner = localStorage.getItem('partnerName');
     // @ts-ignore
     const partnerName = partner.replace(/['"«»]/g, '');
@@ -51,17 +50,8 @@ const TopNav = () => {
      * Клик по бургеру для Открытия/Закрытия бокового меню
      * */
     const toggleMenu = () => {
-        const sideNav: Element | any = document.querySelector('.right');
-        sideNav.classList.toggle('invisible');
-        // @ts-ignore
-        // isOpenSide.current = !isOpenSide.current;
-
-        // @ts-ignore
-        // localStorage.setItem('isOpenSide', isOpenSide.current);
-        // const push: Element | any = document.querySelector('.wrapper-push');
-        // if (push) {
-        //     push.classList.toggle('spread');
-        // }
+        dispatch(IsOpenSideMenu(!isOpenMenu));
+        localStorage.setItem('isOpenSide', JSON.stringify(!isOpenMenu));
     };
 
     // useEffect(() => {
@@ -125,7 +115,7 @@ const TopNav = () => {
                         </div>
                         {isOpen ? (
                             // @ts-ignore
-                            <ModalAlert notifications={notifications} />
+                            <ModalAlert isOpen={isOpen} setIsOpen={setIsOpen} />
                         ) : null}
                     </div>
                     <Profile />

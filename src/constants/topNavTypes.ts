@@ -4,14 +4,13 @@
 export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
+export const IS_OPEN_SIDE_MENU = 'IS_OPEN_SIDE_MENU';
 
 /**
  * *********** Интерфейсы стейта Компонента TopNav **********
  */
 export interface TopNavState {
-    isFetching: boolean;
-    errorMessage: string;
-    data: any;
+    isOpenMenu: boolean;
 }
 
 interface TopNavRequest {
@@ -28,4 +27,9 @@ interface TopNavFailure {
     payload: any;
 }
 
-export type TopNavActions = TopNavRequest | TopNavSuccess | TopNavFailure;
+interface IsOpenSideMenu {
+    type: typeof IS_OPEN_SIDE_MENU;
+    payload: boolean;
+}
+
+export type TopNavActions = TopNavRequest | TopNavSuccess | TopNavFailure | IsOpenSideMenu;

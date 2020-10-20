@@ -67,6 +67,7 @@ import Configurator from './MainContent/Configurator/Configurator';
 // import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
 
 const Layout = () => {
+    const { isOpenMenu } = useSelector((state: PersonalCabinet) => state.topnav, shallowEqual);
     const [isOpen, setIsOpen] = useState(false);
     const { isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     if (!isAuthenticated) {
@@ -78,7 +79,7 @@ const Layout = () => {
         setIsOpen(!isOpen);
     };
     const dashboardContent = (
-        <div className="right invisible">
+        <div className={`right ${isOpenMenu ? '' : 'invisible'}`}>
             <>{/* @ts-ignore */}</>
             <TopNav />
             <div className="main-container">

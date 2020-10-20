@@ -68,23 +68,18 @@ export const fetchingDataFailure = (error: ResponseStatus): OrdersActions => ({
  */
 export const fetchDataOrders = (data: OrdersListReq) => (dispatch: Dispatch<OrdersActions>) => {
     dispatch(fetchingDataRequest());
-    try {
-        return axios
-            .post(`${site}order`, data)
-            .then((response: AxiosResponse<OrdersListRes>) => {
-                const filterData = response.data.payload.displayRules.filter((element: OrdersHeader) => {
-                    if (element.visible) {
-                        return element;
-                    }
-                });
-                dispatch(fetchingDataSuccessHeaders(filterData));
-                dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
-            })
-            .catch((error: any) => {
-                return error;
-                // return dispatch(fetchingDataFailure(error));
+    return axios
+        .post(`${site}order`, data)
+        .then((response: AxiosResponse<OrdersListRes>) => {
+            const filterData = response.data.payload.displayRules.filter((element: OrdersHeader) => {
+                if (element.visible) {
+                    return element;
+                }
             });
-    } catch (error) {
-        dispatch(fetchingDataFailure(error));
-    }
+            dispatch(fetchingDataSuccessHeaders(filterData));
+            dispatch(fetchingDataSuccessTable(response.data.payload.recordSet.content));
+        })
+        .catch((error: any) => {
+            dispatch(fetchingDataFailure(error));
+        });
 };

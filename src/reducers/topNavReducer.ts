@@ -1,12 +1,10 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { TopNavActions, TopNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/topNavTypes';
+import { TopNavActions, TopNavState, IS_OPEN_SIDE_MENU } from '../constants/topNavTypes';
 
 const initialState: TopNavState = {
-    isFetching: false,
-    errorMessage: '',
-    data: []
+    isOpenMenu: false
 };
 
 /**
@@ -14,22 +12,10 @@ const initialState: TopNavState = {
  */
 export default function topNavReducer(state = initialState, action: TopNavActions): TopNavState {
     switch (action.type) {
-        case DATA_LOADING_REQUEST:
+        case IS_OPEN_SIDE_MENU:
             return {
                 ...state,
-                isFetching: true
-            };
-        case DATA_LOADING_SUCCESS:
-            return {
-                ...state,
-                isFetching: false,
-                data: action.payload
-            };
-        case DATA_LOADING_FAILURE:
-            return {
-                ...state,
-                isFetching: false,
-                errorMessage: action.payload
+                isOpenMenu: action.payload
             };
         default:
             return state;

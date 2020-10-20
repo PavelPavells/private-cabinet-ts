@@ -294,7 +294,12 @@ export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActio
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const logoutUser = () => (dispatch: Dispatch<AuthActions>) => {
     window.location.href = '/';
-    localStorage.clear();
+    localStorage.removeItem('partnerName');
+    localStorage.removeItem('accountFullName');
+    localStorage.removeItem('adminStr');
+    localStorage.removeItem('partnerTypeStr');
+    localStorage.removeItem('userUuid');
+    localStorage.removeItem('partnerUuid');
     // Удалить токен из localStorage
     // localStorage.clear();
     // Удалить заголовок из будущих запросов

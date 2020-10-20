@@ -236,7 +236,7 @@ const OrdersComponent = () => {
                             </div>
                         ) : null}
                     </header>
-                    <main className="orders__table">
+                    <div className="orders__table">
                         <Popover>
                             <div className="orders__frame">
                                 <div className="frame__table">
@@ -374,7 +374,7 @@ const OrdersComponent = () => {
                                 </div>
                             </div>
                         </Popover>
-                    </main>
+                    </div>
                 </div>
             </main>
         );

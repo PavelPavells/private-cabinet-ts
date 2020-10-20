@@ -2,9 +2,10 @@
  * ********** Импорт основных библиотек из NPM **********
  */
 import React, { useEffect } from 'react';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { PersonalCabinet } from '../../../store/store';
+import { IsOpenSideMenu } from '../../../actions/topNavActions';
+import { PersonalCabinet } from '../../../store/store';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -12,6 +13,7 @@ import { NavLink } from 'react-router-dom';
 import './SideNav.scss';
 
 const SideNav = () => {
+    const dispatch = useDispatch();
     // const addShadowToActiveSubMenu = () => {
     //     const elemenForAddingShadow: HTMLElement | null = document.getElementsByClassName('active-page')[0].parentElement!.parentElement;
     //     elemenForAddingShadow!.classList.add('nav--active');
@@ -22,17 +24,13 @@ const SideNav = () => {
     //     elementForRemoveShadow.classList.remove('nav--active');
     // };
 
-    // useEffect(() => {
-    //     const isOpenSide = localStorage.getItem('isOpenSide');
-    //     const sideNav: Element | any = document.querySelector('.right');
-    //     console.log('isOpenSide:', isOpenSide);
-    //     if (isOpenSide === 'false') {
-    //         // console.log('typeof isOpenSide:', typeof isOpenSide);
-    //         // console.log()
-    //         sideNav.classList.add('invisible');
-    //     }
-    //     sideNav.classList.remove('invisible');
-    // });
+    // const { isOpenMenu } = useSelector((state: PersonalCabinet) => state.topnav, shallowEqual);
+
+    useEffect(() => {
+        const isOpenSide = localStorage.getItem('isOpenSide');
+        const isOpen = isOpenSide === 'true';
+        dispatch(IsOpenSideMenu(isOpen));
+    });
 
     /**
      * ********** handler обработки клика для раскрытия подменю Главная **********

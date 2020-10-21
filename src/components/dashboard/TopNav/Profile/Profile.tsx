@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 /**
  * ********** Импорт экшенов **********
  * */
-import { logoutUser } from '../../../../actions/authActions';
+import { logoutUser } from '../../../../actions/authActions/authActions';
 
 import './Profile.scss';
 // import { PersonalCabinet } from '../../../../store/store';

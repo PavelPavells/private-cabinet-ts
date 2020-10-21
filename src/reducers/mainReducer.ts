@@ -10,7 +10,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_NEWS,
     DATA_LOADING_OFFERS
-} from '../constants/mainTypes';
+} from '../constants/mainTypes/mainTypes';
 
 const initialState: MainState = {
     isFetching: false,

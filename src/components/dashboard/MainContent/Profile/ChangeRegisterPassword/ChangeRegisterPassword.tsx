@@ -7,7 +7,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 /**
  * ********** Импорт экшенов **********
  */
-import { changeProfilePassword } from '../../../../../actions/profileActions';
+import { changeProfilePassword } from '../../../../../actions/profielActions/profileActions';
 
 /**
  * ********** Импорт стилей **********

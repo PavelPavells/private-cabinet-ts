@@ -23,6 +23,7 @@ const Message = ({ id, msgs }: any) => {
             {msgs ? (
                 <div className="wrap__message">
                     <div key={id} ref={messagesEndRef} className="message">
+                        {/** @ts-ignore */}
                         {msgs.message}
                         <div className="message__time">{msgs.time}</div>
                     </div>

@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 //import Loader from "../../../../__utils__/Spinner";
 
 /** ********** IMPORT ACTIONS ********** */
-import { fetchDataWebApp } from "../../../../actions/webAppActions";
+import { fetchDataWebApp } from "../../../../actions/webAppActions/webAppActions";
 
 /** ********** IMPORT STYLES ********** */
 import "./WebApp.scss";

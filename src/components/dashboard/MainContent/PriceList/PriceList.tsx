@@ -7,13 +7,13 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataPriceList, priceListSetInput } from '../../../../actions/priceListActions';
+import { fetchDataPriceList, priceListSetInput } from '../../../../actions/priceListActions/priceListActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { PriceListReq } from '../../../../constants/pricelListTypes';
+import { PriceListReq } from '../../../../constants/priceListTypes/pricelListTypes';
 
 /**
  * ********** Импорт LOADER из __UTILS__ **********

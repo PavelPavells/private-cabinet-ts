@@ -1,7 +1,7 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { ControlActions, ControlState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/controlTypes';
+import { ControlActions, ControlState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/controlTypes/controlTypes';
 
 const initialState: ControlState = {
     isFetching: false,

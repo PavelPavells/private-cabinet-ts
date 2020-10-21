@@ -4,7 +4,22 @@ import { shallow } from 'enzyme';
 import store from '../../../store/store';
 import Orders from '../../../components/dashboard/MainContent/Orders/Orders';
 
+// const setUp = (props = {}) => {
+//     const myComponent = shallow(<Orders {...props} />);
+//     return myComponent;
+// };
+
+// const findByTestAttr = (component, attr) => {
+//     const wrapper = component.find();
+//     return wrapper;
+// };
+
 describe('TESTING <Orders /> Component', () => {
+    // let component: any;
+    // beforeEach(() => {
+    //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    //     component = setUp();
+    // });
     const props: any = {
         isFetching: false,
         errorMessage: '',
@@ -32,14 +47,14 @@ describe('TESTING <Orders /> Component', () => {
         const nextProps: any = {
             ...props,
             ordersHeaders: {
-                ...props.ordersHeaders,
-                ...props.ordersTable,
-                isFetching: true
-            }
+                ...props.ordersHeaders
+            },
+            ordersTable: {
+                ...props.ordersTable
+            },
+            isFetching: true
         };
 
-        console.log(props);
-        console.log(nextProps);
         const OrdersContainer = shallow(
             <Provider store={store}>
                 <Orders {...nextProps} />
@@ -48,6 +63,7 @@ describe('TESTING <Orders /> Component', () => {
 
         it('TESTING render preloader before get data', () => {
             expect(OrdersContainer.find('Loader')).toHaveLength(0);
+            console.log(OrdersContainer.children);
         });
 
         // it('render only one <p>', () => {

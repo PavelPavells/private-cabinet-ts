@@ -4,7 +4,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-import site from '../../constants/Global';
+import site from '../../constants/GlobalSettings/Global';
 
 /**
  * импорт экшенов
@@ -15,7 +15,7 @@ import {
     fetchingDataSuccessTable,
     fetchDataPayment,
     fetchingDataFailure
-} from '../../actions/paymentActions';
+} from '../../actions/paymentActions/paymentActions';
 
 /**
  * импорт переменных
@@ -25,7 +25,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_PAYMENTS_HEADERS,
     DATA_LOADING_SUCCESS_PAYMENTS_TABLE
-} from '../../constants/paymentsTypes';
+} from '../../constants/paymentTypes/paymentsTypes';
 
 /**
  * импорт типов

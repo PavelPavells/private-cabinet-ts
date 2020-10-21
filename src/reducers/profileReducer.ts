@@ -1,7 +1,7 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { ProfileActions, ProfileState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/profileTypes';
+import { ProfileActions, ProfileState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/profileTypes/profileTypes';
 
 const initialState: ProfileState = {
     isFetching: false,

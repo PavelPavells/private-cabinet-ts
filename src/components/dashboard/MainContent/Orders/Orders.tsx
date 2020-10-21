@@ -12,14 +12,14 @@ import CsvDownload from 'react-json-to-csv';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataOrders } from '../../../../actions/ordersActions';
+import { fetchDataOrders } from '../../../../actions/ordersActions/ordersActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { OrdersListReq } from '../../../../constants/ordersTypes';
+import { OrdersListReq } from '../../../../constants/ordersTypes/ordersTypes';
 
 /**
  * ********** Импорт utils **********

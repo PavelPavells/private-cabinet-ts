@@ -7,7 +7,7 @@ import {
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS,
     DATA_LOADING_FAILURE
-} from '../constants/salePartnersTypes';
+} from '../constants/salePartnersTypes/salePartnersTypes';
 
 const initialState: SalePartnersState = {
     isFetching: false,

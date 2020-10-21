@@ -4,7 +4,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-import site from '../../constants/Global';
+import site from '../../constants/GlobalSettings/Global';
 
 /**
  * импорт экшенов
@@ -15,7 +15,7 @@ import {
     fetchingDataSuccessTable,
     fetchDataShipment,
     fetchingDataFailure
-} from '../../actions/shipmentActions';
+} from '../../actions/shipmentActions/shipmentActions';
 
 /**
  * импорт переменных
@@ -25,7 +25,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_SHIPMENT_HEADERS,
     DATA_LOADING_SUCCESS_SHIPMENT_TABLE
-} from '../../constants/shipmentTypes';
+} from '../../constants/shipmentTypes/shipmentTypes';
 
 /**
  * импорт типов

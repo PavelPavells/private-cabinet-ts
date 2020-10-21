@@ -1,15 +1,22 @@
 @import '../../../../../styles/base.scss';
 @import '../../../../../styles/reset.scss';
 
-// .personal-offer {
-//     padding-bottom: 0!important;
-// }
+.personal-offer {
+    // padding-bottom: 0!important;
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 .block-wrapper {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
     border: 1px solid transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
     
     .wrapper__left {
         display: flex;

@@ -9,7 +9,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт экшенов **********
  */
-import { resetPassword } from '../../actions/authActions';
+import { resetPassword } from '../../actions/authActions/authActions';
 
 /**
  * ********** Импорт стилей **********

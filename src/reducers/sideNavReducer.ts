@@ -1,7 +1,7 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { SideNavActions, SideNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/sideNavTypes';
+import { SideNavActions, SideNavState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/sideNavTypes/sideNavTypes';
 
 const initialState: SideNavState = {
     isFetching: false,

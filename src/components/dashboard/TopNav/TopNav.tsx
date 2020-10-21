@@ -9,7 +9,7 @@ import { PersonalCabinet } from '../../../store/store';
  * импорт экшенов
  */
 import { fetchDataNotifications } from '../../../actions/notificationsActions/notificationsActions';
-import { IsOpenSideMenu } from '../../../actions/topNavActions';
+import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
 /**
  * Импорт компонентов
  */

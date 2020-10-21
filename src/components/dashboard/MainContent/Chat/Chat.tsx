@@ -57,7 +57,21 @@ const Chat: React.FC<Chat> = ({ isOpen, handleChangeIsOpenChat }: Chat) => {
         dispatch(ChatRequestData());
     }, []);
 
+    const stringNewLine = (event: any) => {
+        if (event.key === 'Enter' && event.ctrlKey) {
+            const textarea: any = document.querySelector('textarea');
+            const value: any = `${textarea!.value}\n`;
+            addMessage(value);
+        }
+    };
+
     const sendMessage = (event: any) => {
+        // if (event.key === 'Enter' && event.shiftKey) {
+        //     console.log('HELLO');
+        //     const textarea: any = document.querySelector('textarea');
+        //     const value: any = `${textarea!.value}\n`;
+        //     addMessage(value);
+        // }
         if (event.key === 'Enter' || event.type === 'click') {
             if (msg !== '') {
                 dispatch(addMessage(msg));
@@ -99,14 +113,14 @@ const Chat: React.FC<Chat> = ({ isOpen, handleChangeIsOpenChat }: Chat) => {
                     </div>
                     <div className="chat__footer">
                         <div className="footer__add">+</div>
-                        <input
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => addMessages(event.target.value)}
-                            onKeyPress={sendMessage}
+                        <textarea
+                            onChange={(event: ChangeEvent<HTMLTextAreaElement>) => addMessages(event.target.value)}
+                            onKeyDown={stringNewLine}
+                            // onKeyDown={sendMessage}
                             value={msg}
-                            type="text"
-                            className="footer__input"
+                            className="footer__textarea"
                             autoFocus
-                            placeholder="Введите ваше сообщение..."
+                            placeholder="Введите сообщение..."
                         />
                         <button onClick={sendMessage} type="submit" className="footer__btn">
                             <div className="button__image" />

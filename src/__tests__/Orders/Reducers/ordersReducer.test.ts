@@ -11,7 +11,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_ORDERS_HEADERS,
     DATA_LOADING_SUCCESS_ORDERS_TABLE
-} from '../../../constants/ordersTypes';
+} from '../../../constants/ordersTypes/ordersTypes';
 
 /**
  * импорт типов

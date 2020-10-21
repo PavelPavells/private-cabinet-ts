@@ -16,14 +16,14 @@ import 'moment/locale/ru';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataShipment } from '../../../../actions/shipmentActions';
+import { fetchDataShipment } from '../../../../actions/shipmentActions/shipmentActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { ShipmentListReq } from '../../../../constants/shipmentTypes';
+import { ShipmentListReq } from '../../../../constants/shipmentTypes/shipmentTypes';
 
 /**
  * ********** Импорт utils **********

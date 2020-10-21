@@ -7,7 +7,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_PAYMENTS_HEADERS,
     DATA_LOADING_SUCCESS_PAYMENTS_TABLE
-} from '../../constants/paymentsTypes';
+} from '../../constants/paymentTypes/paymentsTypes';
 
 describe('Testing Auth Reducer', () => {
     it('TESTING THE INITIAL STATE', () => {

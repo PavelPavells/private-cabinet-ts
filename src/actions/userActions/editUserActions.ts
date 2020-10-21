@@ -20,7 +20,7 @@ import {
 /**
  * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
  */
-import site from '../../constants/Global';
+import site from '../../constants/GlobalSettings/Global';
 
 /**
  * ********** Экшен для инициализации запроса **********

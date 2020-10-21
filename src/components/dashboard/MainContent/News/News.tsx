@@ -8,7 +8,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
  * ********** Импорт экшенов **********
  * */
 // import { fetchDataNews } from '../../../../actions/newsActions';
-import { fetchDataMain } from '../../../../actions/mainActions';
+import { fetchDataMain } from '../../../../actions/mainActions/mainActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
@@ -21,7 +21,7 @@ import ReadActualNews from './ReadActualNews/ReadActualNews';
  * ********** Импорт типа store **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { MainListReq } from '../../../../constants/mainTypes';
+import { MainListReq } from '../../../../constants/mainTypes/mainTypes';
 
 /**
  * ********** Импорт файлов стилей **********

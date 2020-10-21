@@ -11,7 +11,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт экшенов **********
  */
-import { loginUser } from '../../actions/authActions';
+import { loginUser } from '../../actions/authActions/authActions';
 
 /**
  * ********** Импорт компонентов **********

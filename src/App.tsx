@@ -11,7 +11,7 @@ import { Provider, shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 /** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
 import setAuthToken from './__utils__/setAuthToken';
-import { setCurrentUser, getAccessRegister, logoutUser } from './actions/authActions';
+import { setCurrentUser, getAccessRegister, logoutUser } from './actions/authActions/authActions';
 
 /**
  * ********** Импорт глобального сосотояния **********

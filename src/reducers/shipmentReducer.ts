@@ -10,7 +10,7 @@ import {
     DATA_LOADING_FAILURE,
     SHIPMENT_SET_INPUTS,
     SHIPMENT_SET_INPUT
-} from '../constants/shipmentTypes';
+} from '../constants/shipmentTypes/shipmentTypes';
 
 export const initialState: ShipmentState = {
     isFetching: false,

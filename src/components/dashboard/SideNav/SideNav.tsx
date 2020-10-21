@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { IsOpenSideMenu } from '../../../actions/topNavActions';
+import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
 import { PersonalCabinet } from '../../../store/store';
 
 /**

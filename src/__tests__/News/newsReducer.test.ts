@@ -9,7 +9,7 @@ import {
     DATA_LOADING_NEWS,
     DATA_LOADING_OFFERS,
     DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS
-} from '../../constants/mainTypes';
+} from '../../constants/mainTypes/mainTypes';
 
 describe('Testing Auth Reducer', () => {
     it('TESING DATA_LOADING_REQUEST', () => {

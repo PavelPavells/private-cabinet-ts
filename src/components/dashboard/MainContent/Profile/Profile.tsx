@@ -7,7 +7,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 /**
  * ********** Импорт экшенов **********
  */
-import { fetchDataAccount, changeProfilePassword } from '../../../../actions/profileActions';
+import { fetchDataAccount, changeProfilePassword } from '../../../../actions/profielActions/profileActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**

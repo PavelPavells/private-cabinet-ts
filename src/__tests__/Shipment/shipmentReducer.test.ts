@@ -7,7 +7,7 @@ import {
     DATA_LOADING_FAILURE,
     DATA_LOADING_SUCCESS_SHIPMENT_HEADERS,
     DATA_LOADING_SUCCESS_SHIPMENT_TABLE
-} from '../../constants/shipmentTypes';
+} from '../../constants/shipmentTypes/shipmentTypes';
 
 describe('Testing Auth Reducer', () => {
     it('TESTING THE INITIAL STATE', () => {

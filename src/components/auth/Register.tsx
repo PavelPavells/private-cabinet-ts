@@ -13,7 +13,7 @@ import { PersonalCabinet } from '../../store/store';
 /**
  * ********** Импорт экшенов **********
  */
-import { registerUser, getAccessRegister } from '../../actions/authActions';
+import { registerUser, getAccessRegister } from '../../actions/authActions/authActions';
 
 /**
  * ********** Импорт стилей **********

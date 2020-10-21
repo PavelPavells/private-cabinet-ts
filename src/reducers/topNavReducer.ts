@@ -1,7 +1,7 @@
 /**
  * ********** Импорт глобальных переменных **********
  */
-import { TopNavActions, TopNavState, IS_OPEN_SIDE_MENU } from '../constants/topNavTypes';
+import { TopNavActions, TopNavState, IS_OPEN_SIDE_MENU } from '../constants/topNavTypes/topNavTypes';
 
 const initialState: TopNavState = {
     isOpenMenu: false

@@ -14,14 +14,14 @@ import 'moment/locale/ru';
 /**
  * ********** Импорт экшенов **********
  * */
-import { fetchDataPayment } from '../../../../actions/paymentActions';
+import { fetchDataPayment } from '../../../../actions/paymentActions/paymentActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * ********** Импорт типов **********
  * */
 import { PersonalCabinet } from '../../../../store/store';
-import { PaymentListReq } from '../../../../constants/paymentsTypes';
+import { PaymentListReq } from '../../../../constants/paymentTypes/paymentsTypes';
 
 /**
  * ********** Импорт utils **********

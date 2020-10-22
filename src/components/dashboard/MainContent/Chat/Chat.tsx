@@ -58,24 +58,17 @@ const Chat: React.FC<Chat> = ({ isOpen, handleChangeIsOpenChat }: Chat) => {
     }, []);
 
     const stringNewLine = (event: any) => {
-        if (event.key === 'Enter' && event.ctrlKey) {
+        if (event.key === 'Enter' && event.shiftKey) {
+            // console.log(`EVENT: ${event.shiftKey}`);
             const textarea: any = document.querySelector('textarea');
             const value: any = `${textarea!.value}\n`;
+            // console.log(value);
+            event.preventDefault();
             addMessage(value);
-        }
-    };
-
-    const sendMessage = (event: any) => {
-        // if (event.key === 'Enter' && event.shiftKey) {
-        //     console.log('HELLO');
-        //     const textarea: any = document.querySelector('textarea');
-        //     const value: any = `${textarea!.value}\n`;
-        //     addMessage(value);
-        // }
-        if (event.key === 'Enter' || event.type === 'click') {
-            if (msg !== '') {
-                dispatch(addMessage(msg));
-            }
+        } else if (event.key === 'Enter' || event.type === 'click') {
+            // console.log(`EVENT: ${event.key}`);
+            event.preventDefault();
+            dispatch(addMessage(msg));
             addMessages('');
         }
     };
@@ -115,14 +108,13 @@ const Chat: React.FC<Chat> = ({ isOpen, handleChangeIsOpenChat }: Chat) => {
                         <div className="footer__add">+</div>
                         <textarea
                             onChange={(event: ChangeEvent<HTMLTextAreaElement>) => addMessages(event.target.value)}
-                            onKeyDown={stringNewLine}
-                            // onKeyDown={sendMessage}
+                            onKeyUp={stringNewLine}
                             value={msg}
                             className="footer__textarea"
                             autoFocus
                             placeholder="Введите сообщение..."
                         />
-                        <button onClick={sendMessage} type="submit" className="footer__btn">
+                        <button onClick={stringNewLine} type="submit" className="footer__btn">
                             <div className="button__image" />
                         </button>
                     </div>

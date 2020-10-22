@@ -40,8 +40,14 @@ const PersonalOffer = () => {
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
     const handleOpenReadOffer = (id?: any) => {
-        setOpenOffer(!openOffer);
+        setOpenOffer(true);
         setOfferId(id);
+        // window.location.reload();
+    };
+
+    const handleCloseReadOffer = () => {
+        setOpenOffer(false);
+        window.location.reload();
     };
 
     if (!isFetching && offers && user) {
@@ -106,7 +112,14 @@ const PersonalOffer = () => {
                                     </div>
                                 );
                             })}
-                            {openOffer ? <ReadOffer offer={offers} offerId={offerId} handleOpenReadOffer={handleOpenReadOffer} /> : null}
+                            {openOffer ? (
+                                <ReadOffer
+                                    offer={offers}
+                                    offerId={offerId}
+                                    handleOpenReadOffer={handleOpenReadOffer}
+                                    handleCloseReadOffer={handleCloseReadOffer}
+                                />
+                            ) : null}
                         </div>
                         {/* <div className="more__offers">Все предложения</div> */}
                     </div>

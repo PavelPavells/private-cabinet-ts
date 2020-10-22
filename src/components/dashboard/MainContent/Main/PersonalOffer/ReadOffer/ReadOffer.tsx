@@ -1,7 +1,7 @@
 /**
  * импорт зависимостей из Npm
  */
-import React from 'react';
+import React, { useState } from 'react';
 
 /**
  * импорт лого, фото
@@ -22,9 +22,18 @@ interface ReadOffer {
     offer: any;
     offerId: number;
     handleOpenReadOffer: () => void;
+    handleCloseReadOffer: () => void;
 }
 
-const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer }: ReadOffer) => {
+const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer, handleCloseReadOffer }: ReadOffer) => {
+    const [participate, setParticipate] = useState(false);
+
+    const handleChangeParticipate = () => {
+        setTimeout(() => {
+            setParticipate(!participate);
+        }, 1000);
+    };
+
     return (
         <section className="wrap__read">
             <div className="read__offer">
@@ -33,7 +42,7 @@ const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer }:
                         <div className="left__text">АКЦИЯ</div>
                         <img src={Stock} alt="" className="photo" />
                     </div>
-                    <div onClick={handleOpenReadOffer} className="image" />
+                    <div onClick={handleCloseReadOffer} className="image" />
                 </div>
                 <div className="read__photo">
                     <div className="photo" />
@@ -45,8 +54,9 @@ const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer }:
                 <div className="read__date">
                     <img src={Calendar} alt="" className="date__calendar" />
                     <div className="date__text">
-                        Предложение действует в период
-                        <br />с 13 по 31 октября.
+                        <span>Предложение действует в период</span>
+                        <br />
+                        <span>с 13 по 31 октября.</span>
                     </div>
                 </div>
                 <div className="read__attention">
@@ -62,6 +72,15 @@ const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer }:
                     <div className="attention__right">
                         <div className="photo" />
                     </div>
+                </div>
+                <div className="read__button" onClick={handleChangeParticipate}>
+                    {participate ? (
+                        <div className="text">Теперь вы являетесь участником акции!</div>
+                    ) : (
+                        <button type="submit" className="button__offer">
+                            Подтвердить участие
+                        </button>
+                    )}
                 </div>
             </div>
         </section>

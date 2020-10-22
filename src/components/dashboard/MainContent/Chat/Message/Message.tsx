@@ -18,6 +18,7 @@ const Message = ({ id, msgs }: any) => {
         messagesEndRef.current!.scrollIntoView({ behavior: 'smooth' });
     }, [msgs]);
 
+    // console.log(msgs);
     return (
         <>
             {msgs ? (

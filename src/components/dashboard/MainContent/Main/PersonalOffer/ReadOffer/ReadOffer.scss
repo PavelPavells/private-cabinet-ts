@@ -27,7 +27,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: $white;
-        padding: 30px 30px 5px 30px;
+        padding: 30px 20px 5px 60px;
 
         .left {
             display: flex;
@@ -54,7 +54,7 @@
     .read__photo {
         display: flex;
         height: 200px;
-        padding: 0 30px;
+        padding: 0 60px;
         background-color: $white;
 
         .photo {
@@ -68,16 +68,13 @@
     .read__article {
         display: flex;
         flex-direction: column;
-        flex: 2;
+        // flex: 2;
         background-color: $white;
         z-index: 1000;
 
         .article__header {
             display: flex;
-            margin-top: 50px;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            margin-left: 30px;
+            margin: 30px 60px 20px 60px;
             font-size: 18px;
             color: $brandPantonBlue;
         }
@@ -85,7 +82,7 @@
         .article__text {
             display: flex;
             height: 10vh;
-            margin: 0 30px;
+            margin: 0 60px;
             line-height: 26px;
             // border: 1px solid red;
         }
@@ -93,7 +90,7 @@
 
     .read__date {
         display: flex;
-        margin: 30px;
+        margin: 30px 60px;
         // background-color: $white;
 
         .date__calendar {
@@ -103,7 +100,7 @@
 
     .read__attention {
         display: flex;
-        margin: 0 30px 30px 30px;
+        margin: 0 60px 30px 60px;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
 
         .attention__left {
@@ -142,6 +139,29 @@
                 margin: 20px;
                 border-radius: 8px;
                 background-color: $brandPantonGreyText;
+            }
+        }
+    }
+
+    .read__button {
+        display: flex;
+        padding: 0 60px 40px 60px;
+
+        .text {
+            padding: 15px 0px;
+            font-size: 14px;
+            color: $brandPantonBlue;
+        }
+
+        .button__offer {
+            padding: 15px 38px;
+            border-radius: 30px;
+            background-color: $brandPantonBlue;
+            color: $white;
+            font-family: $font-regular;
+
+            &:hover {
+                cursor: pointer;
             }
         }
     }

@@ -55,6 +55,10 @@ const Profile = () => {
         dispatch(fetchDataNotifications());
     }, []);
 
+    const handleOpenChangePhotoMenu = () => {
+        setChangeAvatar(!changeAvatar);
+    };
+
     const handleChangeTabsOne = () => {
         const elemTabOne = document.getElementsByClassName('nav__data')[0];
         elemTabOne.classList.add('choosing__tabs');
@@ -76,20 +80,22 @@ const Profile = () => {
     // console.log(profile);
     if (user && isAuthenticated && profile && !isFetching) {
         return (
-            <div className="main-content width">
+            <section className="main-content width">
                 <div className="profile">
                     <div className="profile__header">
                         <span>Профиль</span>
                     </div>
                     <div className="profile__main">
                         <div className="main__user">
-                            <div className="user__photo" />
+                            <div className="user__photo">
+                                <div className="photo__pencil" onClick={handleOpenChangePhotoMenu} />
+                            </div>
                             {changeAvatar ? (
                                 <div className="photo__change">
                                     <ul className="change__list">
-                                        <li>Загрузить фото</li>
-                                        <li>Посмотреть фото</li>
-                                        <li>Удалить фото</li>
+                                        <li>Загрузить</li>
+                                        <li>Просмотреть</li>
+                                        <li>Удалить</li>
                                     </ul>
                                 </div>
                             ) : null}
@@ -121,7 +127,7 @@ const Profile = () => {
                         {tabOne ? <ChangeRegisterData /> : <ChangeRegisterPassword />}
                     </div>
                 </div>
-            </div>
+            </section>
         );
     }
     return <Loader />;

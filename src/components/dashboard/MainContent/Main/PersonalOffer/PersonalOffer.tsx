@@ -2,7 +2,17 @@
  * ********** Импорт основных библиотек из NPM **********
  * */
 import React, { useState } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+
+/**
+ * ********** Импорт экшенов **********
+ * */
+import { fetchDataMain } from '../../../../../actions/mainActions/mainActions';
+
+/**
+ * Импорт типов
+ */
+import { MainListReq } from '../../../../../constants/mainTypes/mainTypes';
 
 /**
  * ********** Импорт типа store **********
@@ -39,15 +49,18 @@ const PersonalOffer = () => {
     const { isFetching, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
+    const dispatch = useDispatch();
+
     const handleOpenReadOffer = (id?: any) => {
         setOpenOffer(true);
         setOfferId(id);
-        // window.location.reload();
     };
 
     const handleCloseReadOffer = () => {
         setOpenOffer(false);
-        window.location.reload();
+        // window.location.reload();
+        const request: MainListReq = { uuid: user };
+        dispatch(fetchDataMain(request));
     };
 
     if (!isFetching && offers && user) {
@@ -71,7 +84,7 @@ const PersonalOffer = () => {
                                             <div className="block-element__title">
                                                 <span className="offer">Перс. предложения</span>
                                                 <span className="date">{index.offerDate}</span>
-                                                <span className="text">ВЫ УЧАСТВУЕТЕ</span>
+                                                {/* <span className="text">ВЫ УЧАСТВУЕТЕ</span> */}
                                                 <img src={Participant} alt="" className="icon" />
                                             </div>
                                             <img src={OfferPhoto} alt="" className="offer__image" />
@@ -112,14 +125,7 @@ const PersonalOffer = () => {
                                     </div>
                                 );
                             })}
-                            {openOffer ? (
-                                <ReadOffer
-                                    offer={offers}
-                                    offerId={offerId}
-                                    handleOpenReadOffer={handleOpenReadOffer}
-                                    handleCloseReadOffer={handleCloseReadOffer}
-                                />
-                            ) : null}
+                            {openOffer ? <ReadOffer offer={offers} offerId={offerId} handleCloseReadOffer={handleCloseReadOffer} /> : null}
                         </div>
                         {/* <div className="more__offers">Все предложения</div> */}
                     </div>

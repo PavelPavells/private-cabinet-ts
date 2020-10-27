@@ -32,7 +32,7 @@ import Loader from '../../../../__utils__/Spinner';
 /**
  * Импорт лого
  */
-import Calendar from '../../../../images/Main/calendar.svg';
+// import Calendar from '../../../../images/Main/calendar.svg';
 
 /**
  * Импорт компонентов
@@ -291,7 +291,7 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="block-element stock">
+                            {/* <div className="block-element stock">
                                 <div className="stock__top">Скидка на оборудование 15% для наших партнеров!</div>
                                 <div className="stock__center">
                                     <div className="center__left">
@@ -318,7 +318,7 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                     <div className="heading">Ваш депозит составляет</div>
                                     <div className="bottom__summ">0 Р</div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </section>
                     <PersonalOffer />

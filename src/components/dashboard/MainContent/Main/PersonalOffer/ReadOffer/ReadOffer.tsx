@@ -21,11 +21,10 @@ import './ReadOffer.scss';
 interface ReadOffer {
     offer: any;
     offerId: number;
-    handleOpenReadOffer: () => void;
     handleCloseReadOffer: () => void;
 }
 
-const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleOpenReadOffer, handleCloseReadOffer }: ReadOffer) => {
+const ReadOffer: React.FC<ReadOffer> = ({ offer, offerId, handleCloseReadOffer }: ReadOffer) => {
     const [participate, setParticipate] = useState(false);
 
     const handleChangeParticipate = () => {

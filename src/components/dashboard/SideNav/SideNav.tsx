@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
@@ -60,7 +60,10 @@ const SideNav = () => {
                             <div>Главная</div>
                             <div className="list-name__icon" />
                         </div>
-                        <div className="font-block-hover">Главная</div>
+                        <div className="font-block-hover">
+                            <div className="hover__block">Данные о компании</div>
+                            <div className="hover__block">Новости</div>
+                        </div>
                     </NavLink>
                     <div className="submenu">
                         <NavLink exact activeClassName="active-page" to="/dashboard" className="sub-link">
@@ -191,7 +194,11 @@ const SideNav = () => {
                             История
                             <div className="list-name__icon" />
                         </div>
-                        <div className="font-block-hover">Управление</div>
+                        <div className="font-block-hover">
+                            <div className="hover__block">Заказы</div>
+                            <div className="hover__block">Платежи</div>
+                            <div className="hover__block">Отгрузки</div>
+                        </div>
                     </NavLink>
                     <div className="submenu">
                         <NavLink exact activeClassName="active-page" to="/orders" className="sub-link">
@@ -270,7 +277,10 @@ const SideNav = () => {
                             Настройки
                             <div className="list-name__icon" />
                         </div>
-                        <div className="font-block-hover">Управление</div>
+                        <div className="font-block-hover">
+                            <div className="hover__block">Профиль</div>
+                            <div className="hover__block">Роли и пользователи</div>
+                        </div>
                     </NavLink>
                     <div className="submenu">
                         <NavLink exact activeClassName="active-page" to="/profile" className="sub-link">
@@ -353,4 +363,4 @@ const SideNav = () => {
     );
 };
 
-export default SideNav;
+export default memo(SideNav);

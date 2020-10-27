@@ -86,6 +86,8 @@
                     display: flex;
                     flex-direction: column;
                     border-right: 1px solid $brandBorderColor;
+                    margin-right: 30px;
+                    padding-right: 30px;
                 }
             }
 
@@ -216,7 +218,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        // margin-top: 20px;
         margin-bottom: 40px;
         font-size: 14px;
         color: $brandPantonSubText;
@@ -224,7 +225,6 @@
         &::after {
             content: "\003E";
             min-width: 33px;
-            // height: 13px;
             padding-top: 3px;
             display: flex;
             justify-content: flex-start;
@@ -232,8 +232,6 @@
             margin-left: 10px;
             font-family: serif;
             font-size: 17px;
-            // border: 2px solid $brandPantonBlue;
-            // border-radius: 50%;
         }
     }
 
@@ -332,7 +330,6 @@
                 flex-direction: column;
                 flex: 2;
                 padding: 20px;
-                // border: 1px solid green;
                 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
 
                 .left__chart {
@@ -367,7 +364,6 @@
                 flex: 1;
                 margin-left: 15px;
                 padding: 20px;
-                // border: 1px solid green;
                 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
 
                 .right__calendar {
@@ -406,8 +402,9 @@
     .block-element {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        padding: 30px;
+        padding: 20px;
         background: $white;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
 
@@ -441,8 +438,6 @@
             flex: 2;
             display: flex;
             flex-direction: column;
-            padding-right: 30px;
-            margin-right: 30px;
 
             .offer__image {
                 margin: 24px 19px 0 19px;
@@ -451,7 +446,6 @@
     
 
         &__submit {
-            // flex: 1;
             display: flex;
             margin: 20px 0;
 
@@ -459,8 +453,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                min-width: 196px;
-                // height: 30px;
                 padding: 13px 20px;
                 color: $brandPantonBlue;
                 border: 1px solid $brandPantonBlue;
@@ -513,7 +505,6 @@
             .date {
                 display: flex;
                 flex: 1;
-                // width: 60%;
             }
 
             .icon {
@@ -546,7 +537,6 @@
                 display: flex;
                 align-items: center;
                 overflow: hidden;
-                // margin-right: 20px;
                 color: #1d68d9;
                 transition: all .2s ease-in-out;
             }
@@ -563,39 +553,22 @@
         }
 
         &__button {
-            // height: 49px;
             display: flex;
             align-items: center;
-            // padding: 0 36px;
             font-size: 15px;
             line-height: 14px;
             color: $brandPantonBlue;
-            // border: 1px solid $brandPantonBlue;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
             svg {
-                // width: 40px;
-                // height: 40px;
-                // margin-left: 15px;
                 fill: none;
                 stroke: $brandPantonBlue;
             }
-
-            // &:hover {
-            //     color: $white;
-            //     background: $brandPantonBlue;
-
-            //     svg {
-            //         stroke: $white;
-            //     }
-
-            // }
         }
         &__stock {
             display: flex;
-            // flex-direction: column;
             border: 1px solid $brandPantonGreen;
         }
     }
@@ -623,32 +596,26 @@
 .CircularProgressbar .CircularProgressbar-text {
     fill: $brandPantonBlack !important;
     font-size: 20px;
-    // dominant-baseline: middle;
     text-anchor: middle;
 }
 
-// @media (max-width: 1600px) {
-//     .main {
-//         .status {
-//             .block-container {
-//                 .block-element:nth-child(3) {
-//                     grid-column: auto / span 3;
-//                 }
-
-//                 .block-table:nth-child(4) {
-//                     grid-column: auto / span 6;
-//                 }
-//             }
-
-//             .block-element__chart {
-//                 max-width: 90px;
-//             }
-//         }
-//     }
-// }
-
 @media (max-width: 1400px) {
+    .status .block-container:nth-child(2n) {
+        grid-column: 1 / span 2;
+    }
+}
+
+@media (max-width: 1549px) {
     .main {
+        .status {
+            .block-container {
+                grid-template-columns: repeat(3, 1fr);
+
+                & > *:nth-child(2n-1) {
+                    grid-column: 1 / span 2;
+                }
+            }
+        } 
         .seggestions {
             .block-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -659,19 +626,26 @@
             grid-gap: 20px;
         }
     }
+
+    .news {
+        .block-container {
+
+            grid-template-columns: repeat(3, 1fr)!important;
+
+            & > *:nth-child(2n - 1) {
+                grid-column: 1 / span 2;
+            }
+        }
+    }
 }
 
-// @media (max-width: 1300px) {
-//     .main {
-//         .status {
-//             .block-table {
-//                 grid-column: auto / span 5;
-//             }
-//         }
-
-//         .discount {
-//             display: none;
-//         }
-//     }
-// }
+@media (max-width: 1370px) {
+    .block-element__info {
+        flex-direction: column;
+        border: none!important;
+    }
+    .block-element {
+        justify-content: center!important;
+    }
+}
 

@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { SyntheticEvent, useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+// import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 /**
  * ********** Импорт файлов стилей **********
  * */
-import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
+// import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 
 /**
  * импорт типов
  */
-import { PersonalCabinet } from '../../../../store/store';
+// import { PersonalCabinet } from '../../../../store/store';
 
 /**
  * импорт лого

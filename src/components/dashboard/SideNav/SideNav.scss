@@ -28,9 +28,14 @@
         .nav-link {
             display: block;
             margin: 20px 20px 0 20px;            
-            border: 1px solid $brandBackground;
+            border: 1px solid $brandPantonFonts;
             border-radius: 10px;
             cursor: pointer;
+
+            .font {
+                // border: 1px solid $brandPantonSubText;
+                border-radius: 10px;
+            }
 
             &:last-child {
                 margin-bottom: 20px;
@@ -111,7 +116,14 @@
                 }
 
                 .font-block-hover {
-                    display: none;
+                    width: 0;
+                    visibility: hidden;
+
+                    .hover__block {
+                        text-overflow: clip;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
                 }
             }
 
@@ -197,9 +209,54 @@
     flex: 1 100px;
     min-width: 100px;
 
+    .nav-link {
+        border: none;
+        .font-block-hover {
+            position: absolute;
+            visibility: hidden;
+            left: 0;
+            transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+            .hover__block {
+                display: none;
+            }
+        }
+        &:hover {
+            .font-block-hover {
+                display: flex;
+                flex-direction: column;
+                left: 98px;
+                width: 200px;
+                // top: 90px;
+                height: 60px;
+                visibility: visible;
+                border: 1px solid $brandPantonFonts;
+                // border-left: none;
+                border-radius: 0 10px 10px 0;
+                background-color: $white;
+                z-index: 1000;
+
+                .hover__block {
+                    display: flex;
+                    align-items: center;
+                    // height: 60px;
+                    padding: 35px 0;
+                    color: $brandPantonBlack;
+                    background-color: $white;
+                }
+            }
+        }
+    }
+
     .font {
         padding: 20px;
         border-radius: 10px;
+        border: 1px solid $brandPantonFonts;
+
+        &:hover {
+            border-radius: 10px 0 0 10px;
+            width: 79px;
+        }
 
         .list-name {
             width: 0%;

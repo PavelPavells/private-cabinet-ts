@@ -35,6 +35,7 @@
             .font {
                 // border: 1px solid $brandPantonSubText;
                 border-radius: 10px;
+                color: $brandBackground;
             }
 
             &:last-child {
@@ -42,7 +43,7 @@
             }
 
             & > *:first-child {
-                border-radius: 10px 10px 0 0;
+                border-radius: 10px;
             }
 
             & > *:last-child {
@@ -146,9 +147,6 @@
         // }
 
         .active-page {
-            // .font {
-            //     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
-            // }
 
             .font, .subparagraph {
                 background: $brandPantonBlue !important;
@@ -171,6 +169,16 @@
                     }
                 }
             }
+
+            .hover__block {
+                background: $brandPantonBlue !important;
+            }
+            .hover-block--icon {
+                svg {
+                    fill: $white!important;
+                }
+            }
+            
         }
 
         .submenu {
@@ -210,7 +218,7 @@
     min-width: 100px;
 
     .nav-link {
-        border: none;
+        // border: none;
         .font-block-hover {
             position: absolute;
             visibility: hidden;
@@ -218,31 +226,60 @@
             transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
             .hover__block {
-                display: none;
+                display: none;                
+                transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+            }
+
+            .active-page {
+                background: $brandPantonBlue !important;
+
+                .hover__block--icon {
+                    svg {
+                        fill: $white !important;
+                    }
+                }
+
+                .hover__block--text {
+                    color: $white !important;
+                }
             }
         }
         &:hover {
             .font-block-hover {
                 display: flex;
                 flex-direction: column;
-                left: 98px;
-                width: 200px;
-                // top: 90px;
+                left: 100px;
+                width: 230px;
                 height: 60px;
                 visibility: visible;
-                border: 1px solid $brandPantonFonts;
-                // border-left: none;
-                border-radius: 0 10px 10px 0;
+                // border: 1px solid $brandBackground;
+                // border-radius: 0 10px 10px 0;
                 background-color: $white;
                 z-index: 1000;
 
                 .hover__block {
                     display: flex;
                     align-items: center;
-                    // height: 60px;
-                    padding: 35px 0;
+                    padding: 30px 0;
                     color: $brandPantonBlack;
+                    // border-radius: 0 10px 10px 0;
                     background-color: $white;
+
+                    .hover__block--icon {
+                        width: 18px;
+                        // height: 18px;
+                        margin: 0 20px;
+                        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+                    }
+
+                    .hover__block--text {
+                        color: $brandPantonBlack;
+                        font-size: 14px;
+                    }
+
+                    &:hover {
+                        background-color: $brandBorderColor;
+                    }
                 }
             }
         }
@@ -250,8 +287,9 @@
 
     .font {
         padding: 20px;
-        border-radius: 10px;
-        border: 1px solid $brandPantonFonts;
+        // border-radius: 10px;
+        // border: 1px solid $brandPantonFonts;
+        // transition: all 10.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 
         &:hover {
             border-radius: 10px 0 0 10px;

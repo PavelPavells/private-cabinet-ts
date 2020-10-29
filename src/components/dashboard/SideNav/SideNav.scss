@@ -245,6 +245,7 @@
             }
         }
         &:hover {
+            border: 1px solid transparent;
             .font-block-hover {
                 display: flex;
                 flex-direction: column;
@@ -252,8 +253,8 @@
                 width: 230px;
                 height: 60px;
                 visibility: visible;
-                // border: 1px solid $brandBackground;
-                // border-radius: 0 10px 10px 0;
+                border: 1px solid $brandBackground;
+                border-radius: 0 10px 10px 0;
                 background-color: $white;
                 z-index: 1000;
 

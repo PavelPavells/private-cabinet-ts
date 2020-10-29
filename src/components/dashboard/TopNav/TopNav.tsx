@@ -54,32 +54,6 @@ const TopNav = () => {
         localStorage.setItem('isOpenSide', JSON.stringify(!isOpenMenu));
     };
 
-    // useEffect(() => {
-    //     const stateSideMenu = localStorage.getItem('isOpenSide');
-    //     console.log(stateSideMenu);
-    //     // if (stateSideMenu) {
-    //     //     setIsOpenSide(false);
-    //     //     // setIsOpenSide(stateSideMenu);
-    //     // }
-    // });
-
-    // const handleClickOutside = (event: Event) => {
-    //     const checkingElement = document.getElementsByClassName('alert')[0];
-    //     // @ts-ignore
-    //     if (!event.path.includes(checkingElement)) {
-    //         // const arrow = document.getElementsByClassName('info-list__arrow')[0];
-    //         // arrow.classList.remove('toggle-window');
-    //         setIsOpen(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     document.addEventListener('click', handleClickOutside, false);
-    //     return () => {
-    //         document.removeEventListener('click', handleClickOutside, false);
-    //     };
-    // }, [isOpen]);
-
     /**
      * Клик для Открытия/Закрытия модалки уведомлений
      * */
@@ -113,10 +87,7 @@ const TopNav = () => {
                                 </>
                             )}
                         </div>
-                        {isOpen ? (
-                            // @ts-ignore
-                            <ModalAlert isOpen={isOpen} setIsOpen={setIsOpen} />
-                        ) : null}
+                        {isOpen ? <ModalAlert isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
                     </div>
                     <Profile />
                 </div>

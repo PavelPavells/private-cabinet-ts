@@ -82,7 +82,7 @@ const Layout = () => {
         <div className={`right ${isOpenMenu ? '' : 'invisible'}`}>
             <>{/* @ts-ignore */}</>
             <TopNav />
-            <div className="main-container">
+            <main className="main-container">
                 <SideNav />
                 {/* <div className="breadcrumbs">
                     <Route path="/:path" component={BreadCrumbs} />
@@ -111,7 +111,7 @@ const Layout = () => {
                         <Chat isOpen={isOpen} handleChangeIsOpenChat={handleChangeIsOpenChat} />
                     </Draggable>
                 </div>
-            </div>
+            </main>
         </div>
     );
     return (

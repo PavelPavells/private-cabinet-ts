@@ -62,7 +62,7 @@ const TopNav = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <nav className="nav">
+        <header className="nav">
             <div className="nav__left">
                 <i onClick={toggleMenu} className="material-icons left__hamburger">
                     menu
@@ -92,7 +92,7 @@ const TopNav = () => {
                     <Profile />
                 </div>
             </div>
-        </nav>
+        </header>
     );
 };
 

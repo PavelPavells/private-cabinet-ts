@@ -291,34 +291,6 @@ const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="block-element stock">
-                                <div className="stock__top">Скидка на оборудование 15% для наших партнеров!</div>
-                                <div className="stock__center">
-                                    <div className="center__left">
-                                        <div className="heading">Сумма закупок</div>
-                                        <div className="left__chart" />
-                                        <div className="left__range">
-                                            <div className="range__left">170 000 Р</div>
-                                            <div className="range__right">300 000 Р</div>
-                                        </div>
-                                    </div>
-                                    <div className="center__right">
-                                        <div className="heading">
-                                            Сроки проведения
-                                            <br />
-                                            акции
-                                        </div>
-                                        <div className="right__calendar">
-                                            <img src={Calendar} className="calendar__icon" alt="" />
-                                            <div className="calendar__value">13.10 - 31.10</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="stock__bottom">
-                                    <div className="heading">Ваш депозит составляет</div>
-                                    <div className="bottom__summ">0 Р</div>
-                                </div>
-                            </div> */}
                         </div>
                     </section>
                     <PersonalOffer />

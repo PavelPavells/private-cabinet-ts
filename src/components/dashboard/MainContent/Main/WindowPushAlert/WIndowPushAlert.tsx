@@ -1,7 +1,7 @@
 /**
  * ********** Импорт основных библиотек из NPM **********
  */
-import React, { useState, ChangeEvent, SyntheticEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 /**
  * ********** Импорт файлов стилей **********
@@ -90,7 +90,7 @@ const WindowAlertPush = () => {
                                         Не отправлять важную информацию об обновлениях Кабинета
                                     </label>
                                 </div>
-                                <button className="form__button">
+                                <button type="submit" className="form__button">
                                     <div className="button__text">Принять</div>
                                     {/* <div className="button__icon" /> */}
                                 </button>

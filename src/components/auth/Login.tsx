@@ -275,7 +275,9 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                 </div>
                 <div className="auth__right right">
                     <div className="right__image image">
-                        <div className="image__photo" />
+                        <div className="image__photo">
+                            <div className="photo" />
+                        </div>
                     </div>
                 </div>
             </div>

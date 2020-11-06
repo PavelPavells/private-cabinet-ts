@@ -1,15 +1,9 @@
-/**
- * типы компонента чат
- */
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
 export const CHAT_DATA_LOADING_REQUEST = 'CHAT_DATA_LOADING_REQUEST';
 export const ADD_USER = 'ADD_USER';
 export const USERS_LIST = 'USERS_LIST';
 
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
- */
 export interface ResponseStatus {
     code: number;
     result_message: string;
@@ -63,9 +57,6 @@ export type ChatItems = Array<ChatItem>;
 //     response: ResponseStatus;
 // }
 
-/**
- * *********** Интерфейсы стейта Компонента Roles **********
- */
 export interface ChatState {
     isFetching: boolean;
     errorMessage: string;

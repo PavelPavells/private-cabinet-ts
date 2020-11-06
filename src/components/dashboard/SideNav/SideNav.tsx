@@ -1,23 +1,10 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- */
 import React, { useEffect, Suspense, lazy, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
-
-/**
- * импорт утилит
- */
 import Loader from '../../../__utils__/Spinner';
 
-/**
- * ********** Импорт файлов стилей **********
- */
 import './SideNav.scss';
 
-/**
- * импорт компонентов
- */
 const SideNavMainPart = lazy(() => import('./SideNavMainPart/SideNavMainPart/SideNavMainPart'));
 const SideNavHistoryPart = lazy(() => import('./SideNavHistoryPart/SideNavHistroryPart/SideNavHistoryPart'));
 const SideNavSettingsPart = lazy(() => import('./SideNavSettingsPart/SideNavSettingsPart/SideNavSettingsPart'));

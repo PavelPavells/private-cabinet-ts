@@ -1,11 +1,5 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- */
 import React, { useState, ChangeEvent } from 'react';
 
-/**
- * ********** Импорт файлов стилей **********
- */
 import './WindowPushAlert.scss';
 
 const WindowAlertPush = () => {
@@ -16,22 +10,13 @@ const WindowAlertPush = () => {
     });
     const [close, setClose] = useState(false);
 
-    /**
-     * Деструктуризация локального стейта
-     */
     const { checkboxOne, checkboxTwo, checkboxThree } = alert;
 
-    /**
-     * Обработчик инпутов
-     */
     const handleChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = event.target;
         setAlerts({ ...alert, [name]: checked });
     };
 
-    /**
-     * Обработчик закрытия / открытия окна
-     */
     const handleChangeCloseWindow = () => {
         setClose(!close);
     };

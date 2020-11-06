@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     ShipmentActions,
     ShipmentState,
@@ -20,9 +17,6 @@ export const initialState: ShipmentState = {
     tableShipment: null
 };
 
-/**
- * ********** Редьюсер компонента Shipment **********
- */
 export default function shipmentReducer(state = initialState, action: ShipmentActions): ShipmentState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

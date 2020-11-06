@@ -1,6 +1,3 @@
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер **********
- */
 export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
@@ -9,9 +6,6 @@ export const DATA_LOADING_SUCCESS_SHIPMENT_TABLE = 'DATA_LOADING_SUCCESS_SHIPMEN
 export const SHIPMENT_SET_INPUTS = 'SHIPMENT_SET_INPUTS';
 export const SHIPMENT_SET_INPUT = 'SHIPMENT_SET_INPUT';
 
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
- */
 export interface ResponseStatus {
     action: string;
     result: 0 | 1;
@@ -91,9 +85,6 @@ export interface ShipmentListRes {
     response: ResponseStatus;
 }
 
-/**
- * *********** Интерфейсы стейта Компонента Shipment **********
- */
 export interface ShipmentState {
     isFetching: boolean;
     errorMessage: string;

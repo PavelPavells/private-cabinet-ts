@@ -1,35 +1,12 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
-
-/**
- * ********** Импорт экшенов **********
- * */
 // import { fetchDataRolesUsers } from '../../../../actions/rolesUsersActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../../store/store';
 // import { RolesUserReq } from '../../../../constants/RolesUsersTypes';
-
-/**
- * Импорт компонентов
- * */
 import AddUsers from './AddUsers/AddUsers';
 import EditUsers from './EditUsers/EditUsers';
-
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../../__utils__/Spinner';
-
-/**
- * ********** Импорт файлов стилей **********
- * */
 
 import './Users.scss';
 
@@ -39,15 +16,8 @@ const Users = () => {
     const [closeAddUser, setCloseAddUser] = useState(false);
     const [closeEditUser, setCloseEditUser] = useState(false);
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     // const dispatch = useDispatch();
 
     const handleChangeAddUser = () => {

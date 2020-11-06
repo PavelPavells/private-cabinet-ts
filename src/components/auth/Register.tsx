@@ -1,6 +1,3 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 // @ts-ignore
@@ -9,30 +6,12 @@ import NumberFormat from 'react-number-format';
 import CreatableSelect from 'react-select/creatable';
 import { Link } from 'react-router-dom';
 import { PersonalCabinet } from '../../store/store';
-
-/**
- * ********** Импорт экшенов **********
- */
 import { registerUser, getAccessRegister } from '../../actions/authActions/authActions';
 
-/**
- * ********** Импорт стилей **********
- */
 import './Auth.scss';
 
-/**
- * ********** Импорт компонентов **********
- */
 import SuccessRegister from './successRegister/successRegister';
-
-/**
- * Импорт Лоадера из утилит
- * */
 import Loader from '../../__utils__/Spinner';
-
-/**
- * ********** Интерфейс локального стейта компонента Login **********
- */
 
 const Register = () => {
     const [invitecode, setInviteCode] = useState('');
@@ -52,16 +31,11 @@ const Register = () => {
     const [business, setBusiness] = useState('Торговая компания');
     const [agreement, setAgreement] = useState(0);
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { invitePayload, errorRegisterResult, businessTypes, isFetching } = useSelector(
         (state: PersonalCabinet) => state.auth,
         shallowEqual
     );
-    /**
-     * Отправка действий для изменения на сервере
-     * */
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -76,9 +50,6 @@ const Register = () => {
         setInviteCode(invitePayload.inviteCode);
     }, [invitePayload]);
 
-    /**
-     * ********** Скрыть/Отобразить Пароль **********
-     */
     const showOrHidePassword = () => {
         const password: HTMLElement | any = document.getElementById('pass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
@@ -90,9 +61,6 @@ const Register = () => {
         }
     };
 
-    /**
-     * ********** Скрыть/Отобразить Пароль **********
-     */
     const showOrHidePasswordRepeat = () => {
         const password: HTMLElement | any = document.getElementById('repeatpass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
@@ -104,9 +72,6 @@ const Register = () => {
         }
     };
 
-    /**
-     * ********** Отпрака формы Регистрации **********
-     */
     const onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
         const newUser = {
@@ -131,16 +96,10 @@ const Register = () => {
         }
     };
 
-    /**
-     * ********** Функция для обработки чекбокса пользовательского соглашения **********
-     * */
     const handleClickCheckbox = () => {
         setAgreement(+!agreement);
     };
 
-    /**
-     * ********** Функция для обработки выбора направления деятельности **********
-     * */
     const handleChangeSelect = (value: any) => {
         setBusiness(value.partnerBusinessTypeName);
     };
@@ -151,9 +110,6 @@ const Register = () => {
 
     if (!isFetching && businessTypes) {
         return (
-            /**
-             * Компонента Регистрация
-             */
             <div className="auth">
                 <div className="auth__left left">
                     <div className="auth__logo">

@@ -1,46 +1,22 @@
 /* eslint-disable no-useless-escape */
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 // @ts-ignore
 import CsvDownload from 'react-json-to-csv';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataOrders } from '../../../../actions/ordersActions/ordersActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 import { OrdersListReq } from '../../../../constants/ordersTypes/ordersTypes';
-
-/**
- * ********** Импорт utils **********
- * */
 import Loader from '../../../../__utils__/Spinner';
 import Popover from '../../../../__utils__/tablePopover/tablePopover';
 
-/**
- * ********** импорт лого (лупа) для поля ввода **********
- * */
 import Magnifier from '../../../../images/magnifier.svg';
 // import Arrow from '../../../../images/arrow_input.svg';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Orders.scss';
 
-/**
- * Дополнительный хук для получения предыдущего значения
- * */
 const usePreviousValue = (data: any) => {
     const ref = useRef();
     useEffect(() => {
@@ -56,7 +32,7 @@ const OrdersComponent = () => {
     const [sortBy] = useState(null);
     const [sortDirection, setSortDirection] = useState(0);
     const [groupBy] = useState(null);
-    const [findBy, setFindBy] = useState(null);
+    const [findBy] = useState(null);
     const [startSumValue, setStartSumValue] = useState('');
     const [endSumValue, setEndSumValue] = useState('');
     const [findValue, setFindValue] = useState('');
@@ -64,24 +40,13 @@ const OrdersComponent = () => {
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
-    /**
-     * ********** Импорт состояния pricelist из Redux **********
-     * */
     const { ordersHeaders, ordersTable } = useSelector((state: PersonalCabinet) => state.orders, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    /**
-     * Отправка действий для изменения на сервере
-     * */
+
     const dispatch = useDispatch();
 
-    /**
-     * Дополнительный хук для получения предыдущего значения
-     * */
     const prevSortDirection = usePreviousValue(+!sortDirection);
 
-    /**
-     * Запрос данных с сервера
-     * */
     useEffect(() => {
         // @ts-ignore
         const request: OrdersListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
@@ -89,22 +54,11 @@ const OrdersComponent = () => {
         dispatch(fetchDataNotifications());
     }, []);
 
-    // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
-    //     event.currentTarget.classList.toggle('buttons--active');
-    //     setExportModal(!exportModal);
-    // };
-
-    /**
-     * Открыть/Закрыть инпуты быстрого поиска
-     * */
     const togglerHideShowQuicSearchInput = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('buttons--active');
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Фильтрация по колонкам
-     * */
     // @ts-ignore
     const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
@@ -127,9 +81,6 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(filter));
     };
 
-    /**
-     * функция обработки полей с фильтрацией по строкам
-     */
     const sendFilterInputText = (fieldName: any) => {
         const request: OrdersListReq = {
             page,
@@ -150,9 +101,6 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(request));
     };
 
-    /**
-     * функция обработки полей с фильтрацией по датам
-     */
     const sendCalendarFilter = () => {
         const request: OrdersListReq = {
             page,
@@ -173,9 +121,6 @@ const OrdersComponent = () => {
         dispatch(fetchDataOrders(request));
     };
 
-    /**
-     * функция обработки полей с фильтрацией от и до
-     */
     const sendDateFiltersSumValue = () => {
         const request: OrdersListReq = {
             page,

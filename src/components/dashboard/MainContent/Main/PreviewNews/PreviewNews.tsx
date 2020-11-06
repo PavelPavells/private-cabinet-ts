@@ -1,28 +1,11 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-
-/**
- * ********** Импорт типа store **********
- * */
 import { PersonalCabinet } from '../../../../../store/store';
-
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../../__utils__/Spinner';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './PreviewNews.scss';
 
 const PreviewNews = () => {
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { isFetching, news } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 

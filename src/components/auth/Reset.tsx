@@ -1,32 +1,16 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
-
-/**
- * ********** Импорт экшенов **********
- */
 import { resetPassword } from '../../actions/authActions/authActions';
 
-/**
- * ********** Импорт стилей **********
- */
 import './Auth.scss';
 
 const Reset = () => {
     const [email, setEmail] = useState('');
 
-    /**
-     * ********** Импорт состояния pricelist из Redux **********
-     * */
     const { error } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
     const onSubmit = () => {
@@ -34,9 +18,6 @@ const Reset = () => {
     };
 
     return (
-        /**
-         * Компонент Reset
-         */
         <div className="auth">
             <div className="auth__left left">
                 <div className="auth__logo">

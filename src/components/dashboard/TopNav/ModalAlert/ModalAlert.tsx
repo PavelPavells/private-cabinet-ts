@@ -1,20 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect } from 'react';
 // import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-/**
- * ********** Импорт файлов стилей **********
- * */
 // import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * импорт типов
- */
 // import { PersonalCabinet } from '../../../../store/store';
-
-/**
- * импорт лого
- */
 import One from '../../../../images/ModalAlert/1.svg';
 import Two from '../../../../images/ModalAlert/2.svg';
 import Three from '../../../../images/ModalAlert/3.svg';

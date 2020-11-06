@@ -1,6 +1,3 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider, shallowEqual, useSelector, useDispatch } from 'react-redux';
@@ -8,19 +5,10 @@ import { Provider, shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 // eslint-disable-next-line camelcase
 // import jwt_decode from 'jwt-decode';
-
-/** ********** Импорт вспомогающих компонентов из __UTILS__ ********** */
 import setAuthToken from './__utils__/setAuthToken';
 import { setCurrentUser, getAccessRegister, logoutUser } from './actions/authActions/authActions';
 
-/**
- * ********** Импорт глобального сосотояния **********
- */
 import store, { PersonalCabinet } from './store/store';
-
-/**
- * ********** Импорт компонентов **********
- */
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Reset from './components/auth/Reset';
@@ -29,18 +17,12 @@ import Layout from './components/dashboard/Layout';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import NotFound from './components/404/404';
 
-/**
- * ********** Импорт стилей **********
- */
 import './App.scss';
 
 /**
  * ********** Проверка на cуществование токена в localStorage **********
  */
 if (localStorage.partnerUuid) {
-    /**
-     * ********** Установить токен авторизации в заголовки **********
-     */
     const partnerUuid = JSON.parse(localStorage.partnerUuid);
     const userUuid = JSON.parse(localStorage.userUuid);
     setAuthToken(partnerUuid, userUuid);
@@ -78,13 +60,7 @@ if (localStorage.partnerUuid) {
 
 const App = () => {
     const { errorResult } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    /**
-     * Хук отправки действия в Store
-     * */
     const dispatch = useDispatch();
-    /**
-     * Параметр запроса по юиду
-     * */
     const params = window.location.search.split('=')[1];
 
     useEffect(() => {

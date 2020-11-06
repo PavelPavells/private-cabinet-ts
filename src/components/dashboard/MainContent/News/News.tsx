@@ -1,36 +1,16 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState, useLayoutEffect } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- * */
 // import { fetchDataNews } from '../../../../actions/newsActions';
 import { fetchDataMain } from '../../../../actions/mainActions/mainActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * ********** Импорт типа store **********
- * */
 import ReadNews from './ReadNews/ReadNews';
 import ReadActualNews from './ReadActualNews/ReadActualNews';
 
-/**
- * ********** Импорт типа store **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 import { MainListReq } from '../../../../constants/mainTypes/mainTypes';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './News.scss';
 
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../__utils__/Spinner';
 
 const News = () => {
@@ -38,25 +18,12 @@ const News = () => {
     const [openActualArticle, setOpenActualArticle] = useState(false);
     const [actualArticleId, setActualArticleId] = useState(0);
     const [articleId, setArticleId] = useState(0);
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
+
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     const { isFetching, news, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
-    /**
-     * хук для обработки динамического роутинга
-     * */
-    // const { id } = useParams();
-
-    /**
-     * запрос данных с сервера
-     * */
     useLayoutEffect(() => {
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));
@@ -73,9 +40,6 @@ const News = () => {
         setArticleId(id);
     };
 
-    // console.log(news);
-    // console.log(offers);
-    // console.log(id);
     if (!isFetching && news && offers && user) {
         return (
             <div className="main-content">

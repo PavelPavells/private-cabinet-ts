@@ -1,25 +1,11 @@
-/**
- * import dependencies from npm
- */
 import React from 'react';
 
-/**
- * import styles
- */
 import './MediaFilesFields.scss';
 
 const MediaFilesFields = () => {
     return (
         <div className="fields">
             <div className="fields__checkboxes">
-                {/*
-                <div className="checkboxes__item">
-                    <input type="checkbox" id="first__field" className="item__checkbox" />
-                    <label htmlFor="first__field" className="item__text">
-                        Наименование
-                    </label>
-                </div>
-                */}
                 <div className="checkboxes__item">
                     <input type="checkbox" id="second__field" className="item__checkbox" />
                     <label htmlFor="second__field" className="item__text">

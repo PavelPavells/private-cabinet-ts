@@ -2,9 +2,6 @@ export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
- */
 export interface ResponseStatus {
     code: number;
     result_message: string;
@@ -83,9 +80,6 @@ export interface AddUserRes {
     response: ResponseStatus;
 }
 
-/**
- * *********** Интерфейсы стейта Компонента AddUsers **********
- */
 export interface AddUserState {
     isFetching: boolean;
     errorMessage: string;

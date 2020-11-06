@@ -1,11 +1,5 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React from 'react';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Notification.scss';
 
 const Notification: React.FC = () => {

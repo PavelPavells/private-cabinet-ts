@@ -1,5 +1,4 @@
 // @ts-nocheck
-/** ********** IMPORT LIBRARIES ********** */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,14 +6,9 @@ import 'react-dates/initialize';
 // @ts-ignore
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-
-/** ********** IMPORT LOADER from __UTILS__ ********** */
 import Loader from '../../../../__utils__/Spinner';
-
-/** ********** IMPORT ACTIONS ********** */
 import { fetchDataSalePartners, fetchDataLastPageSalePartners } from '../../../../actions/salePartnersActions/salePartnersActions';
 
-/** ********** IMPORT STYLES ********** */
 import './SalePartners.scss';
 
 class SalePartners extends Component {
@@ -28,7 +22,6 @@ class SalePartners extends Component {
         price: 0
     };
 
-    /** ********** FETCH DATA ACCOUNT ********** */
     componentDidMount() {
         const data = {
             offset: this.state.offset,
@@ -40,7 +33,6 @@ class SalePartners extends Component {
         this.props.fetchDataSalePartners(data);
     }
 
-    /** ********** CHANGE DATES FOR SEARCH ********** */
     // @ts-ignore
     onDatesChange = ({ startDate, endDate }) => {
         this.setState({ startDate, endDate }, () => {
@@ -59,7 +51,6 @@ class SalePartners extends Component {
         });
     };
 
-    /** ********** FIRST PAGE SALE PARTNERS PAGINATION ********** */
     getFirstPage = () => {
         this.setState({ page: 0 });
         const data = {
@@ -76,7 +67,6 @@ class SalePartners extends Component {
         this.props.fetchDataSalePartners(data);
     };
 
-    /** ********** PREVIOUS PAGE SALE PARTNERS PAGINATION ********** */
     getPreviousPage = () => {
         this.setState(
             (prevState) => {
@@ -100,7 +90,6 @@ class SalePartners extends Component {
         );
     };
 
-    /** ********** NEXT PAGE SALE PARTNERS PAGINATION ********** */
     getNextPage = () => {
         // const { payload } = this.props.pricelist.data;
         this.setState(
@@ -126,7 +115,6 @@ class SalePartners extends Component {
         );
     };
 
-    /** ********** LAST PAGE SALE PARTNERS PAGINATION ********** */
     getLastPage = () => {
         console.log('NOT PAGE FIELD');
         // const { payload } = this.props.pricelist.data;
@@ -141,7 +129,6 @@ class SalePartners extends Component {
         //  this.props.fetchDataLastPageSalePartners();
     };
 
-    /** ********** REFRESH DATA FOR SALE PARTNERS TABLE ********** */
     handleRefreshData = () => {
         const data = {
             offset: this.state.page,
@@ -153,7 +140,6 @@ class SalePartners extends Component {
         this.props.fetchDataSalePartners(data);
     };
 
-    /** ********** FILTER FOR VISION DATA IN TABLE ********** */
     // @ts-ignore
     handleOptionFilter = (event) => {
         const elem = event.target.value;
@@ -187,7 +173,6 @@ class SalePartners extends Component {
         }
         return (
             <main className="main-content">
-                {/** ========================== HEADER TABLE ============================== */}
 
                 <header className="wrapper-table__header">
                     <section className="table__header-left">
@@ -233,9 +218,6 @@ class SalePartners extends Component {
                         </form>
                     </section>
                 </header>
-
-                {/** ========================== HEADER MAIN TABLE ============================== */}
-
                 <section className="wrapper-table__main-sales">
                     <section className="wrapper-table__header-sales">
                         {salepartners.data.payload.recordDisplayRules.map(
@@ -254,9 +236,6 @@ class SalePartners extends Component {
                             }
                         )}
                     </section>
-
-                    {/** ========================== DOOR  TABLE ============================== */}
-
                     <section className="wrapper-table__main-categories">
                         <div className="wrapper-itype__name">
                             {salepartners.data.payload.recordSet.map(
@@ -298,12 +277,7 @@ class SalePartners extends Component {
                             )}
                         </div>
                     </section>
-
-                    {/** ========================== ELECTRONIC CONTROL  TABLE ============================== */}
                 </section>
-
-                {/** ========================== FOOTER TABLE ============================== */}
-
                 <footer className="wrapper-table__footer">
                     <section className="wrapper-table__footer-left">
                         <div onClick={this.getFirstPage} className="footer-table__first-page" />

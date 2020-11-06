@@ -1,36 +1,16 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, SyntheticEvent, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { PersonalCabinet } from '../../../store/store';
-
-/**
- * импорт экшенов
- */
 import { fetchDataNotifications } from '../../../actions/notificationsActions/notificationsActions';
 import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
-/**
- * Импорт компонентов
- */
 import Profile from './Profile/Profile';
 import ModalAlert from './ModalAlert/ModalAlert';
 
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
-// import Loader from '../../../__utils__/Spinner';
-
-/**
- * ********** Импорт стилей **********
- */
 import './TopNav.scss';
 
 const TopNav = () => {
     const [isOpen, setIsOpen] = useState(false);
-    /**
-     * хук смены состояния
-     */
+
     const dispatch = useDispatch();
 
     const { notifications } = useSelector((state: PersonalCabinet) => state.notifications, shallowEqual);
@@ -46,17 +26,12 @@ const TopNav = () => {
     const type = localStorage.getItem('partnerTypeStr');
     // @ts-ignore
     const partnerTypeStr = type.replace(/['"«»]/g, '');
-    /**
-     * Клик по бургеру для Открытия/Закрытия бокового меню
-     * */
+
     const toggleMenu = () => {
         dispatch(IsOpenSideMenu(!isOpenMenu));
         localStorage.setItem('isOpenSide', JSON.stringify(!isOpenMenu));
     };
 
-    /**
-     * Клик для Открытия/Закрытия модалки уведомлений
-     * */
     const onChangeIsOpen = (event: SyntheticEvent) => {
         event.stopPropagation();
         setIsOpen(!isOpen);

@@ -1,51 +1,19 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataMain } from '../../../../../actions/mainActions/mainActions';
-
-/**
- * Импорт типов
- */
 import { MainListReq } from '../../../../../constants/mainTypes/mainTypes';
-
-/**
- * ********** Импорт типа store **********
- * */
 import { PersonalCabinet } from '../../../../../store/store';
-
-/**
- * ********** Импорт компонентов **********
- * */
 import ReadOffer from './ReadOffer/ReadOffer';
-
-/**
- * импорт лого, фото
- */
 import Participant from '../../../../../images/personalOffer/participant.svg';
 import OfferPhoto from '../../../../../images/news/news.png';
-
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../../__utils__/Spinner';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './PersonalOffer.scss';
 
 const PersonalOffer = () => {
     const [openOffer, setOpenOffer] = useState(false);
     const [offerId, setOfferId] = useState(0);
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
+
     const { isFetching, offers } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
@@ -58,7 +26,6 @@ const PersonalOffer = () => {
 
     const handleCloseReadOffer = () => {
         setOpenOffer(false);
-        // window.location.reload();
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));
     };

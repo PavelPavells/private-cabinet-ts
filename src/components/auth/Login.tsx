@@ -1,6 +1,3 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { FormEvent, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
@@ -9,25 +6,12 @@ import Logo from '../../images/carddex_logo.svg';
 // import Form, { CheckboxField, ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 // import TextField from '@atlaskit/textfield';
 
-/**
- * ********** Импорт экшенов **********
- */
 import { loginUser } from '../../actions/authActions/authActions';
-
-/**
- * ********** Импорт компонентов **********
- */
 // import Layout from '../dashboard/Layout';
 
-/**
- * ********** Импорт стилей **********
- */
 import './Auth.scss';
 import '../../fonts/fonts.scss';
 
-/**
- * ********** Интерфейс локального стейта компонента Login **********
- */
 interface LoginState {
     readonly login: string;
     readonly passHash: string;
@@ -76,17 +60,11 @@ class Login extends React.PureComponent<Partial<LoginState>> {
         this.props.loginUser(LoginRequest);
     };
 
-    /**
-     * ********** Запись данных в стейт из инпутов **********
-     */
     private onChange = (event: FormEvent<HTMLInputElement>) => {
         const { id, value } = event.currentTarget;
         this.setState({ [id]: value });
     };
 
-    /**
-     * ********** Скрыть/Отобразить Пароль **********
-     */
     private showOrHidePassword = () => {
         const password: HTMLElement | any = document.getElementById('passHash');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
@@ -99,18 +77,11 @@ class Login extends React.PureComponent<Partial<LoginState>> {
     };
 
     public render() {
-        /**
-         * Деструтктуризация данных из локального и глобального стейта
-         */
         const { login, passHash } = this.state;
         // @ts-ignore
         const { error } = this.props.auth;
 
-        // const uuid = localStorage.getItem('uuid');
         return (
-            /**
-             * Компонента Логин
-             */
             <div className="auth">
                 <div className="auth__left left">
                     <div

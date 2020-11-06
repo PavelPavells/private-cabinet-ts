@@ -1,29 +1,10 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- */
 import { fetchDataAccount, changeProfilePassword } from '../../../../actions/profielActions/profileActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * Импорт Компонентов
- * */
 import ChangeRegisterData from './ChangeRegisterData/ChangeRegisterData';
 import ChangeRegisterPassword from './ChangeRegisterPassword/ChangeRegisterPassword';
-
-/**
- * Импорт Лоадера из утилит
- * */
 import Loader from '../../../../__utils__/Spinner';
-
-/**
- * ********** Импорт стилей **********
- */
 import './Profile.scss';
 import { PersonalCabinet } from '../../../../store/store';
 
@@ -33,17 +14,9 @@ const Profile = () => {
     const [tabOne, setTabOne] = useState(true);
     const [tabTwo, setTabTwo] = useState(false);
 
-    const [tabOpen, setTabOpen] = useState(true);
-
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     const { isFetching, profile } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -77,7 +50,6 @@ const Profile = () => {
         setTabTwo(true);
     };
 
-    // console.log(profile);
     if (user && isAuthenticated && profile && !isFetching) {
         return (
             <section className="main-content width">

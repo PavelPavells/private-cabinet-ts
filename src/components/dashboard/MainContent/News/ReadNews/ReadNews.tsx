@@ -1,21 +1,7 @@
-/**
- * импорт зависимостей из Npm
- */
 import React from 'react';
 
-/**
- * импорт лого, фото
- */
-import NewsPhoto from '../../../../../images/news.png';
-
-/**
- * импорт стилей
- */
 import './ReadNews.scss';
 
-/**
- * интерфейс пропсов
- */
 interface News {
     offer: any;
     articleId: number;

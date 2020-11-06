@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     AuthState,
     AuthActions,
@@ -65,9 +62,6 @@ export const isEmpty = (payload: any) => {
     return false;
 };
 
-/**
- * ********** Редьюсер компонента SecuredRoute(Login/Register) **********
- */
 // eslint-disable-next-line func-names
 export default function (state = initialState, action: AuthActions): AuthState {
     switch (action.type) {

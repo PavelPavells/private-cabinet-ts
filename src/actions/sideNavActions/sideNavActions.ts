@@ -1,12 +1,5 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- */
 import axios from 'axios';
 import { Dispatch } from 'react';
-
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     SideNavActions,
     SideNavState,
@@ -14,38 +7,22 @@ import {
     DATA_LOADING_SUCCESS,
     DATA_LOADING_FAILURE
 } from '../../constants/sideNavTypes/sideNavTypes';
-
-/**
- * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
- */
 import site from '../../constants/GlobalSettings/Global';
 
-/**
- * ********** Экшен для инициализации запроса **********
- */
 export const fetchingDataRequest = (): SideNavActions => ({
     type: DATA_LOADING_REQUEST
 });
 
-/**
- * ********** Экшен для добавления данных в стор после запроса **********
- */
 export const fetchingDataSuccess = (data: any): SideNavActions => ({
     type: DATA_LOADING_SUCCESS,
     payload: data.data
 });
 
-/**
- * ********** Экшен для обработки ошибки при запросе на сервер **********
- */
 export const fetchingDataFailure = (error: any): SideNavActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
 });
 
-/**
- * ********** Экшен для запроса данных из компонентов **********
- */
 export const fetchDataSideNav = (data: SideNavState) => async (dispatch: Dispatch<SideNavActions>) => {
     dispatch(fetchingDataRequest());
     try {
@@ -62,8 +39,6 @@ export const fetchDataSideNav = (data: SideNavState) => async (dispatch: Dispatc
     }
 };
 
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW ********** */
 // export const togglePopupWindowTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE })
 
-/** ********** ACTIONS FOR TOGGLE POPUP WINDOW MAIN INFO ********** */
 // export const togglePopupWindowMainInfoTurnstile = () => ({ type: TOGGLE_MODAL_TURNSTILE_MAIN_INFO })

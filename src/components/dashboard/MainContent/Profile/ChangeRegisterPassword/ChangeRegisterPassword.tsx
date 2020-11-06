@@ -1,17 +1,6 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, ChangeEvent } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- */
 import { changeProfilePassword } from '../../../../../actions/profielActions/profileActions';
-
-/**
- * ********** Импорт стилей **********
- */
 import './ChangeRegisterPassword.scss';
 import { PersonalCabinet } from '../../../../../store/store';
 
@@ -20,20 +9,10 @@ const ChangeRegisterPassword = () => {
     const [newPass, setNewPass] = useState('');
     const [repeatPass, setRepeatPass] = useState('');
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
-    // const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
     const { errorMessage } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
-    /**
-     *
-     */
     const showOrHidePasswordOld = () => {
         const password: HTMLElement | any = document.getElementById('passOld');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
@@ -67,7 +46,6 @@ const ChangeRegisterPassword = () => {
         }
     };
 
-    /** ********** RESPONSE DATA FOR LOGIN ACCOUNT ********** */
     // @ts-ignore
     const onSubmit = () => {
         // eslint-disable-next-line no-shadow

@@ -1,18 +1,9 @@
-/**
- * Импорт зависимостей
- */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers/rootReducer';
 
-/**
- * Инициализация состояния приложения
- */
 const initialState = {};
 
-/**
- * Промежуточное ПО для асинхронных запросов
- */
 const middleware = [thunk];
 
 declare global {

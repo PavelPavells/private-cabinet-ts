@@ -1,29 +1,10 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useEffect, SyntheticEvent, useState, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataEditRole } from '../../../../../../actions/roleActions/editRoleActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../../../store/store';
 import { EditRoleReq } from '../../../../../../constants/roleTypes/editRole';
-
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../../../__utils__/Spinner';
-
-/**
- * ********** Импорт файлов стилей **********
- * */
 import '../../../../../../styles/input-checkbox.scss';
 import './EditRoles.scss';
 
@@ -38,15 +19,8 @@ const EditRoles = ({ editRoles, setEditRoles }) => {
     const [checkboxThree, setCheckboxThree] = useState(false);
     const [checkboxFour, setCheckboxFour] = useState(false);
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { user, isAuthenticated } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    // const { isFetching, users } = useSelector((state: PersonalCabinet) => state.editRole, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
     useEffect(() => {});

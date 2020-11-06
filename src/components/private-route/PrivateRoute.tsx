@@ -1,14 +1,8 @@
-/**
- * Импорт зависимостей
- */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { shallowEqual, useSelector } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
 
-/**
- * Интерфейс компонента SecuredRoute
- */
 interface SecuredRouteProps {
     auth: {
         isAuthenticated: boolean;

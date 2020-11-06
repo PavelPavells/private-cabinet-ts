@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS,
@@ -16,9 +13,6 @@ const initialState: UserState = {
     // inputs: {}
 };
 
-/**
- * ********** Редьюсер компонента Role **********
- */
 export default function userReducer(state = initialState, action: UserActions): UserState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

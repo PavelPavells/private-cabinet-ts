@@ -1,6 +1,3 @@
-/**
- * ********** Глобальные переменные для асинхронных запросов авторизации **********
- */
 export const USER_ERROR_LOADING = 'USER_ERROR_LOADING';
 export const SET_USER_COMPANY_NAME = 'SET_USER_COMPANY_NAME';
 export const GET_ERRORS = 'GET_ERRORS';
@@ -15,10 +12,6 @@ export const GET_ERROR_REGISTER = 'GET_ERROR_REGISTER';
 export const CHANGE_EMAIL_ADDRESS = 'CHANGE_EMAIL_ADDRESS';
 export const CHANGE_PASSWORD_ADDRESS = 'CHANGE_PASSWORD_ADDRESS';
 export const GET_DATA_BUSINESS = 'GET_DATA_BUSINESS';
-
-/**
- * *********** Интерфейсы стейта Авторизации/Регистрации **********
- */
 
 export interface ResponseStatus {
     code: number;

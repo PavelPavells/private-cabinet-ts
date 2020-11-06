@@ -4,6 +4,7 @@
 import React, { FormEvent, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
+import Logo from '../../images/carddex_logo.svg';
 // import Button from '@atlaskit/button';
 // import Form, { CheckboxField, ErrorMessage, Field, FormFooter } from '@atlaskit/form';
 // import TextField from '@atlaskit/textfield';
@@ -275,6 +276,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                 </div>
                 <div className="auth__right right">
                     <div className="right__image image">
+                        <img src={Logo} alt="carddex" className="auth__logo" />
                         <div className="image__photo">
                             <div className="photo" />
                         </div>

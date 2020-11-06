@@ -1,17 +1,8 @@
-/**
- * import dependencies from npm
- */
 import React, { useState } from 'react';
 
-/**
- * import images
- */
 import Plus from '../../../../../images/Media/plus.svg';
 import Minus from '../../../../../images/Media/minus.svg';
 
-/**
- * import styles
- */
 import './MediaFilesCategories.scss';
 
 const MediaFilesCategories = () => {

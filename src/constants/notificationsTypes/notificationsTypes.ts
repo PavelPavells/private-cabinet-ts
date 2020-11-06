@@ -1,13 +1,6 @@
-/**
- * типы компонента Notifications
- */
 export const DATA_LOADING_REQUEST_NOTIFICATIONS = 'DATA_LOADING_REQUEST_NOTIFICATIONS';
 export const DATA_LOADING_SUCCESS_NOTIFACTIONS = 'DATA_LOADING_SUCCESS_NOTIFICATIONS';
 export const DATA_LOADING_FAILURE_NOTIFICATIONS = 'DATA_LOADING_FAILURE_NOTIFICATIONS';
-
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
- */
 
 export interface ResponseStatus {
     code: string;

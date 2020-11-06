@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     OrdersActions,
     OrdersState,
@@ -17,9 +14,6 @@ export const initialState: OrdersState = {
     ordersTable: null
 };
 
-/**
- * ********** Редьюсер компонента PriceList **********
- */
 export default function ordersReducer(state = initialState, action: OrdersActions): OrdersState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

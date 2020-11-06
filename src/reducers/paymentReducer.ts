@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     PaymentActions,
     PaymentState,
@@ -17,9 +14,6 @@ export const initialState: PaymentState = {
     tablePayment: null
 };
 
-/**
- * ********** Редьюсер компонента Payment **********
- */
 export default function paymentReducer(state = initialState, action: PaymentActions): PaymentState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

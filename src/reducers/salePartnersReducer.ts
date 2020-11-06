@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     SalePartnersActions,
     SalePartnersState,
@@ -15,9 +12,6 @@ const initialState: SalePartnersState = {
     data: []
 };
 
-/**
- * ********** Редьюсер компонента SalePartners **********
- */
 export default function salePartnersReducer(state = initialState, action: SalePartnersActions): SalePartnersState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

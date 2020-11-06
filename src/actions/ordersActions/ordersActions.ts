@@ -1,12 +1,5 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- */
 import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
-
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     OrdersActions,
     DATA_LOADING_REQUEST,
@@ -25,47 +18,28 @@ import {
     // PriceList,
     // PriceListHeader
 } from '../../constants/ordersTypes/ordersTypes';
-
-/**
- * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
- */
 import site from '../../constants/GlobalSettings/Global';
 import { ResponseStatus } from '../../constants/paymentTypes/paymentsTypes';
 
-/**
- * ********** Экшен для инициализации запроса **********
- */
 export const fetchingDataRequest = (): OrdersActions => ({
     type: DATA_LOADING_REQUEST
 });
 
-/**
- * ********** Экшен для добавления данных в стор после запроса **********
- */
 export const fetchingDataSuccessHeaders = (ordersHeader: OrdersHeaders): OrdersActions => ({
     type: DATA_LOADING_SUCCESS_ORDERS_HEADERS,
     payload: ordersHeader
 });
 
-/**
- * ********** Экшен для добавления данных в стор после запроса **********
- */
 export const fetchingDataSuccessTable = (orders: OrdersList): OrdersActions => ({
     type: DATA_LOADING_SUCCESS_ORDERS_TABLE,
     payload: orders
 });
 
-/**
- * ********** Экшен для обработки ошибки при запросе на сервер **********
- */
 export const fetchingDataFailure = (error: ResponseStatus): OrdersActions => ({
     type: DATA_LOADING_FAILURE,
     payload: error
 });
 
-/**
- * ********** Экшен для запроса данных из компонентов **********
- */
 export const fetchDataOrders = (data: OrdersListReq) => (dispatch: Dispatch<OrdersActions>) => {
     dispatch(fetchingDataRequest());
     return axios

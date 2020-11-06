@@ -3,9 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import Loader from '../../../../__utils__/Spinner';
 
-/**
- * ********** Импорт экшенов **********
- * */
 import { logoutUser } from '../../../../actions/authActions/authActions';
 
 import './Profile.scss';
@@ -13,9 +10,7 @@ import './Profile.scss';
 
 const Profile: React.FC = () => {
     const [dropdown, setDropdown] = useState(false);
-    /**
-     * Имя зарегистрировавшегося пользователя
-     * */
+
     const fullName = localStorage.getItem('accountFullName');
     // @ts-ignore
     const accountFullName = fullName.replace(/['"«»]/g, '');
@@ -23,9 +18,6 @@ const Profile: React.FC = () => {
     // @ts-ignore
     const partnerRole = role.replace(/['"«»]/g, '');
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
     const handleProfileClick = () => {

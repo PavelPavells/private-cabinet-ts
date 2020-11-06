@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     NotificationsActions,
     NotificationsState,
@@ -15,9 +12,6 @@ const initialState: NotificationsState = {
     notifications: null
 };
 
-/**
- * ********** Редьюсер компонента Account **********
- */
 export default function notificationsReducer(state = initialState, action: NotificationsActions): NotificationsState {
     switch (action.type) {
         case DATA_LOADING_REQUEST_NOTIFICATIONS:

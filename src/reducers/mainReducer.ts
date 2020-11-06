@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     MainActions,
     MainState,
@@ -21,9 +18,6 @@ const initialState: MainState = {
     offers: []
 };
 
-/**
- * ********** Редьюсер компонента Main **********
- */
 export default function mainReducer(state = initialState, action: MainActions): MainState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

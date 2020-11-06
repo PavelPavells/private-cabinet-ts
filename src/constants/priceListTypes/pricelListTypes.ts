@@ -6,9 +6,6 @@ export const DATA_LOADING_SUCCESS_PRICE_LIST_TABLE = 'DATA_LOADING_SUCCESS_PRICE
 export const PRICE_LIST_SET_INPUTS = 'PRICE_LIST_SET_INPUTS';
 export const PRICE_LIST_SET_INPUT = 'PRICE_LIST_SET_INPUT';
 
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер, интерфейсы ответов **********
- */
 export interface ResponseStatus {
     code: number;
     message: string;
@@ -101,9 +98,6 @@ export interface PriceListRes {
 //     uuid: string;
 // }
 
-/**
- * *********** Интерфейсы стейта Компонента PriceList **********
- */
 export interface PriceListState {
     isFetching: boolean;
     errorMessage: string;

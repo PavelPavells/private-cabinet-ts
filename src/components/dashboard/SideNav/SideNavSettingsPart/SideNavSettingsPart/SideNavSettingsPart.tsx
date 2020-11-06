@@ -1,15 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-/**
- * импорт компонентов
- */
 import SideNavSettingsPartSubmenu from '../SideNavSettingsPartSubmenu/SideNavSettingsPartSubmenu';
 
 const SideNavSettingsPart = () => {
-    /**
-     * ********** handler обработки клика для раскрытия подменю Главная **********
-     */
     const handleClickMainSubmenu = (event: React.SyntheticEvent) => {
         const mainSubMenuElem: Element = event.currentTarget.parentElement!.getElementsByClassName('submenu')[0];
         const mainSubMenuHandler: Element = event.currentTarget.getElementsByClassName('list-name__icon')[0];

@@ -1,8 +1,5 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
@@ -12,39 +9,18 @@ import CsvDownload from 'react-json-to-csv';
 // import { DateRangePicker } from 'react-dates';
 // import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ru';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataShipment } from '../../../../actions/shipmentActions/shipmentActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 import { ShipmentListReq } from '../../../../constants/shipmentTypes/shipmentTypes';
-
-/**
- * ********** Импорт utils **********
- * */
 import Popover from '../../../../__utils__/tablePopover/tablePopover';
 import Loader from '../../../../__utils__/Spinner';
 
-/**
- * ********** импорт логотипов для поля ввода **********
- * */
 import Magnifier from '../../../../images/magnifier.svg';
 // import Arrow from '../../../../images/arrow_input.svg';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Shipment.scss';
 
-/**
- * Дополнительный хук для получения предыдущего значения
- * */
 const usePreviousValue = (data: any) => {
     const ref = useRef();
     useEffect(() => {
@@ -68,54 +44,24 @@ const ShipmentComponent = () => {
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
-    /**
-     * ********** Импорт состояния shipment из Redux **********
-     * */
     const { headersShipment, tableShipment, inputs } = useSelector((state: PersonalCabinet) => state.shipment, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    /**
-     * Отправка действий для изменения на сервере
-     * */
+
     const dispatch = useDispatch();
 
-    /**
-     * Дополнительный хук для получения предыдущего значения
-     * */
     const prevSortDirection = usePreviousValue(+!sortDirection);
 
-    /**
-     * Запрос данных с сервера
-     * */
     useEffect(() => {
         const request: ShipmentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataShipment(request));
         dispatch(fetchDataNotifications());
     }, []);
 
-    /**
-     * Открыть/Закрыть модальное окно скачивания таблицы
-     * */
-
-    // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
-    // event.currentTarget.classList.toggle('buttons--active');
-    // setExportModal(!exportModal);
-    // const element = document.getElementsByClassName('buttons__export');
-    // if (event.target !== element) {
-    //    setExportModal(false);
-    // }
-    // };
-
-    /**
-     * Открыть/Закрыть инпуты быстрого поиска
-     * */
     const togglerHideShowQuicSearchInput = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('buttons--active');
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Фильтрация по колонкам
-     * */
     // @ts-ignore
     const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
@@ -139,9 +85,6 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(filter));
     };
 
-    /**
-     * функция обработки полей с фильтрацией по строкам
-     */
     const sendFilterInputText = (fieldName: any) => {
         const request: any = {
             page,
@@ -180,9 +123,6 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(request));
     };
 
-    /**
-     * функция обработки полей с фильтрацией от и до
-     */
     const sendDateFiltersSumValue = () => {
         const request: any = {
             page,
@@ -203,7 +143,6 @@ const ShipmentComponent = () => {
         dispatch(fetchDataShipment(request));
     };
 
-    // console.log(findValue);
     if (inputs && headersShipment && tableShipment) {
         return (
             <main className="main-content">

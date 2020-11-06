@@ -1,6 +1,3 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
@@ -11,40 +8,21 @@ import CsvDownload from 'react-json-to-csv';
 // import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ru';
 
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataPayment } from '../../../../actions/paymentActions/paymentActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 import { PaymentListReq } from '../../../../constants/paymentTypes/paymentsTypes';
 
-/**
- * ********** Импорт utils **********
- * */
 import Popover from '../../../../__utils__/tablePopover/tablePopover';
 import Loader from '../../../../__utils__/Spinner';
 
-/**
- * ********** импорт лого (лупа) для поля ввода **********
- * */
 import Magnifier from '../../../../images/magnifier.svg';
 import Arrow from '../../../../images/arrow_input.svg';
 import sortingColumn from '../../../../images/sorting_column.svg';
 import filterColumn from '../../../../images/filter.svg';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Payment.scss';
 
-/**
- * Дополнительный хук для получения предыдущего значения
- * */
 const usePreviousValue = (data: any) => {
     const ref = useRef();
     useEffect(() => {
@@ -68,53 +46,24 @@ const PaymentComponent = () => {
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
-    /**
-     * ********** Импорт состояния pricelist из Redux **********
-     * */
     const { headersPayment, tablePayment } = useSelector((state: PersonalCabinet) => state.payment, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
-    /**
-     * Отправка действий для изменения на сервере
-     * */
+
     const dispatch = useDispatch();
 
-    /**
-     * Дополнительный хук для получения предыдущего значения
-     * */
     const prevSortDirection = usePreviousValue(+!sortDirection);
 
-    /**
-     * Запрос данных с сервера
-     * */
     useEffect(() => {
         const request: PaymentListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataPayment(request));
         dispatch(fetchDataNotifications());
     }, []);
 
-    /**
-     * Открыть/Закрыть модальное окно скачивания таблицы
-     * */
-    // const handleExportDocumentModal = (event: MouseEvent | any) => {
-    //     event.currentTarget.classList.toggle('buttons--active');
-    //     setExportModal(!exportModal);
-    //     const element = document.getElementsByClassName('buttons__export');
-    //     if (event.target !== element) {
-    //         setExportModal(!exportModal);
-    //     }
-    // };
-
-    /**
-     * Открыть/Закрыть инпуты быстрого поиска
-     * */
     const togglerHideShowQuicSearchInput = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('buttons--active');
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Фильтрация по колонкам
-     * */
     // @ts-ignore
     const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
@@ -158,9 +107,6 @@ const PaymentComponent = () => {
         dispatch(fetchDataPayment(request));
     };
 
-    /**
-     * функция обработки полей с фильтрацией от и до
-     */
     const sendDateFiltersSumValue = () => {
         const request: any = {
             page,

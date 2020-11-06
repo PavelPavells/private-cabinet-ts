@@ -1,44 +1,24 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, /* useDispatch, */ shallowEqual } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
-
-/**
- * ********** Импорт экшенов **********
- */
 // import { newPassword } from '../../actions/authActions';
 
-/**
- * ********** Импорт стилей **********
- */
 import './Auth.scss';
 
 const NewPassword = () => {
     const [newPass, setNewPass] = useState('');
     const [repeatNewPass, setRepeatNewPass] = useState('');
 
-    /**
-     * ********** Импорт состояния pricelist из Redux **********
-     * */
     const { error } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     // const dispatch = useDispatch();
 
     const onSubmit = () => {
-        const passwords = { newPass, repeatNewPass };
-        console.log(passwords);
+        // const passwords = { newPass, repeatNewPass };
         // dispatch(newPassword(passwords));
     };
 
-    /**
-     * ********** Скрыть/Отобразить Пароль **********
-     */
     const showOrHidePassword = () => {
         const password: HTMLElement | any = document.getElementById('newPass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[0];
@@ -50,9 +30,6 @@ const NewPassword = () => {
         }
     };
 
-    /**
-     * ********** Скрыть/Отобразить Пароль **********
-     */
     const showOrHidePasswordRepeat = () => {
         const password: HTMLElement | any = document.getElementById('repeatNewPass');
         const access: HTMLElement | any = document.getElementsByClassName('inaccess')[1];
@@ -65,9 +42,6 @@ const NewPassword = () => {
     };
 
     return (
-        /**
-         * Компонент NewPassword
-         */
         <div className="auth">
             <div className="auth__left left">
                 <div

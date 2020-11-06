@@ -1,11 +1,5 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React from 'react';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Settings.scss';
 
 const Settings: React.FC = () => {

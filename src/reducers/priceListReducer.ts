@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     PriceListActions,
     PriceListState,
@@ -20,9 +17,6 @@ const initialState: PriceListState = {
     tablePriceList: null
 };
 
-/**
- * ********** Редьюсер компонента PriceList **********
- */
 export default function priceListReducer(state = initialState, action: PriceListActions): PriceListState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

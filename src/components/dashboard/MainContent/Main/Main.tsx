@@ -1,42 +1,17 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { CircularProgressbar } from 'react-circular-progressbar';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataMain } from '../../../../actions/mainActions/mainActions';
 import { fetchDataNotifications } from '../../../../actions/notificationsActions/notificationsActions';
 import { MainListReq } from '../../../../constants/mainTypes/mainTypes';
-
-/**
- * ********** Импорт типа store **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './Main.scss';
 import 'react-circular-progressbar/dist/styles.css';
 
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../__utils__/Spinner';
-
-/**
- * Импорт лого
- */
 // import Calendar from '../../../../images/Main/calendar.svg';
-
-/**
- * Импорт компонентов
- */
 import PreviewNews from './PreviewNews/PreviewNews';
 import CompanyNews from './CompanyNews/CompanyNews';
 import PersonalOffer from './PersonalOffer/PersonalOffer';
@@ -47,20 +22,11 @@ interface Chat {
     setIsOpen: any;
 }
 const MainComponent: React.FC<Chat> = ({ isOpen, setIsOpen }: Chat) => {
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { isFetching, main, table } = useSelector((state: PersonalCabinet) => state.main, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
-    /**
-     * запрос данных с сервера
-     * */
     useEffect(() => {
         const request: MainListReq = { uuid: user };
         dispatch(fetchDataMain(request));

@@ -1,15 +1,8 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- */
 import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
 // import jwt_decode from 'jwt-decode';
 import md5 from 'md5';
 import bcrypt from 'bcryptjs';
-
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     AuthActions,
     userDataRegister,
@@ -26,29 +19,15 @@ import {
     GET_ERROR_REGISTER,
     GET_DATA_BUSINESS
 } from '../../constants/authTypes/authTypes';
-
-/**
- * ********** ПО для установки токена в заголовки при запросах **********
- */
 import setAuthToken from '../../__utils__/setAuthToken';
-
-/**
- * ********** Импорт глобальной переменной для переключения Продакшн/Девелопмент **********
- */
 import site from '../../constants/GlobalSettings/Global';
 
-/**
- * ********** Экшен для установки текущего пользователя **********
- */
 export const dataLoadingRequest = (): AuthActions => {
     return {
         type: DATA_LOADING_REQUEST
     };
 };
 
-/**
- * ********** Экшен для установки текущего пользователя **********
- */
 export const setCurrentUser = (userUuid: Object): AuthActions => {
     return {
         type: SET_CURRENT_USER,
@@ -56,18 +35,12 @@ export const setCurrentUser = (userUuid: Object): AuthActions => {
     };
 };
 
-/**
- * ********** Экшен для сброса пароля **********
- */
 export const setUserLoading = (): AuthActions => {
     return {
         type: USER_LOADING
     };
 };
 
-/**
- * ********** Экшен для обработки ошибки **********
- */
 export const setErrorLoading = (err: any): AuthActions => {
     return {
         type: USER_ERROR_LOADING,
@@ -75,9 +48,6 @@ export const setErrorLoading = (err: any): AuthActions => {
     };
 };
 
-/**
- * ********** Экшен для обработки ошибки **********
- */
 export const setUserCompanyName = (company: string): AuthActions => {
     return {
         type: SET_USER_COMPANY_NAME,
@@ -85,41 +55,26 @@ export const setUserCompanyName = (company: string): AuthActions => {
     };
 };
 
-/**
- * ********** Экшен для обработки ошибки **********
- */
 export const changeErrorName = (result: any): AuthActions => ({
     type: CHANGE_ERROR_NAME,
     payload: result
 });
 
-/**
- * ********** Экшен для обработки ошибки **********
- */
 export const changeUserDataErrorRegister = (data: any): AuthActions => ({
     type: CHANGE_USER_DATA_ERROR_REGISTER,
     payload: data
 });
 
-/**
- * ********** Экшен для обработки ошибки **********
- */
 export const getErrorRegister = (data: any): AuthActions => ({
     type: GET_ERROR_REGISTER,
     payload: data
 });
 
-/**
- * ********** Экшен для обработки данных на странице Регистрация в поле "Вид деятельности" **********
- */
 export const dataRegisterBusinessTypes = (data: any): AuthActions => ({
     type: GET_DATA_BUSINESS,
     payload: data
 });
 
-/**
- * ********** Экшен для логина существующего пользователя **********
- */
 export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions>) => {
     // @ts-ignore
     const { login, passHash } = userData;
@@ -162,11 +117,7 @@ export const loginUser = (userData: LoginReq) => (dispatch: Dispatch<AuthActions
     });
 };
 
-/**
- * ********** Экшен для доступа на регистрацию **********
- */
-// @ts-ignore
-export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
+export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch<AuthActions>) => {
     dispatch(dataLoadingRequest());
     await axios
         .get(`${site}auth/singup/checkinvitecode?invitecode=${uuid}&appuuid=23423443543534543`)
@@ -180,10 +131,7 @@ export const getAccessRegister = (uuid: any) => async (dispatch: Dispatch) => {
         });
 };
 
-/**
- * ********** Экшен для доступа на сброс пароля **********
- */
-export const getAccessNewPassword = (uuid: any) => async (dispatch: Dispatch<any>) => {
+export const getAccessNewPassword = (uuid: any) => async (dispatch: Dispatch<AuthActions>) => {
     dispatch(dataLoadingRequest());
     await axios
         .get(`${site}auth/newpassword?resetcode=${uuid}`)
@@ -197,10 +145,6 @@ export const getAccessNewPassword = (uuid: any) => async (dispatch: Dispatch<any
         });
 };
 
-/**
- * ********** Экшен для запроса на сброс пароля **********
-
- */
 export const registerUser = (userData: userDataRegister) => (dispatch: Dispatch<AuthActions>) => {
     try {
         const { pass } = userData;
@@ -240,18 +184,13 @@ export const registerUser = (userData: userDataRegister) => (dispatch: Dispatch<
                 agreement
             })
             .then((response) => {
-                // console.log(response.data);
                 dispatch(getErrorRegister(response.data));
             });
-        // .then(() => history.push('/register'));
     } catch (error) {
         return error;
     }
 };
 
-/**
- * ********** Экшен для регистрации нового пользователя **********
- */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const resetPassword = (email: string) => (dispatch: Dispatch<AuthActions>) => {
     try {
@@ -263,9 +202,6 @@ export const resetPassword = (email: string) => (dispatch: Dispatch<AuthActions>
     }
 };
 
-/**
- * ********** Экшен для запроса на сброс пароля **********
- */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActions>) => {
     try {
@@ -288,9 +224,6 @@ export const newPassword = (password: string[]) => (dispatch: Dispatch<AuthActio
     }
 };
 
-/**
- * ********** Экшен для логаута пользователя **********
- */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const logoutUser = () => (dispatch: Dispatch<AuthActions>) => {
     window.location.href = '/';

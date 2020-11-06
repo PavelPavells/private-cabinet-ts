@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import {
     DATA_LOADING_REQUEST,
     DATA_LOADING_SUCCESS,
@@ -16,9 +13,6 @@ const initialState: EditUserState = {
     // inputs: {}
 };
 
-/**
- * ********** Редьюсер компонента Edit Role **********
- */
 export default function editUserReducer(state = initialState, action: EditUserActions): EditUserState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

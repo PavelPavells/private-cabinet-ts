@@ -1,39 +1,15 @@
-/**
- * ********** Импорт основных библиотек из NPM **********
- * */
 import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- * */
 import { fetchDataPriceList, priceListSetInput } from '../../../../actions/priceListActions/priceListActions';
-
-/**
- * ********** Импорт типов **********
- * */
 import { PersonalCabinet } from '../../../../store/store';
 import { PriceListReq } from '../../../../constants/priceListTypes/pricelListTypes';
 
-/**
- * ********** Импорт LOADER из __UTILS__ **********
- * */
 import Loader from '../../../../__utils__/Spinner';
-
-/**
- * ********** импорт логотипов для поля ввода **********
- * */
 import Magnifier from '../../../../images/magnifier.svg';
 import Arrow from '../../../../images/arrow_input.svg';
 
-/**
- * ********** Импорт файлов стилей **********
- * */
 import './PriceList.scss';
 
-/**
- * Дополнительный хук для получения предыдущего значения
- * */
 const usePreviousValue = (data: any) => {
     const ref = useRef();
     useEffect(() => {
@@ -54,50 +30,24 @@ const PriceListComponent = () => {
     const [exportModal] = useState(false);
     const [filterModal, setFilterModal] = useState(false);
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { headersPriceList, tablePriceList, inputs } = useSelector((state: PersonalCabinet) => state.pricelist, shallowEqual);
     const { user } = useSelector((state: PersonalCabinet) => state.auth, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
-    /**
-     * Дополнительный хук для получения предыдущего значения
-     * */
     const prevSortDirection = usePreviousValue(+!sortDirection);
 
-    /**
-     * Запрос данных с сервера
-     * */
     useEffect(() => {
         // @ts-ignore
         const request: PriceListReq = { page, limit, sortBy, sortDirection, groupBy, findBy, findValue, uuid: user };
         dispatch(fetchDataPriceList(request));
     }, []);
 
-    /**
-     * Открыть/Закрыть модальное окно скачивания таблицы
-     * */
-    // const handleExportDocumentModal = (event: React.SyntheticEvent) => {
-    //     event.currentTarget.classList.toggle('buttons--active');
-    //     setExportModal(!exportModal);
-    // };
-
-    /**
-     * Открыть/Закрыть инпуты быстрого поиска
-     * */
     const togglerHideShowQuickSearchInput = (event: React.SyntheticEvent) => {
         event.currentTarget.classList.toggle('buttons--active');
         setFilterModal(!filterModal);
     };
 
-    /**
-     * Фильтрация по колонкам
-     * */
     const filterOnColumns = (fieldName: string) => {
         setSortDirection(+!sortDirection);
         const filter: PriceListReq = {

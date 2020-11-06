@@ -1,23 +1,10 @@
-/**
- * импорт зависимостей из Npm
- */
 import React, { useState } from 'react';
-
-/**
- * импорт лого, фото
- */
 import Calendar from '../../../../../../images/Read/calendar.svg';
 import Warning from '../../../../../../images/Read/warning.svg';
 import Stock from '../../../../../../images/Read/stock.svg';
 
-/**
- * импорт стилей
- */
 import './ReadOffer.scss';
 
-/**
- * интерфейс пропсов
- */
 interface ReadOffer {
     offer: any;
     offerId: number;

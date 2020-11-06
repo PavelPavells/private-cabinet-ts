@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import { ProfileActions, ProfileState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/profileTypes/profileTypes';
 
 const initialState: ProfileState = {
@@ -10,9 +7,6 @@ const initialState: ProfileState = {
     profile: []
 };
 
-/**
- * ********** Редьюсер компонента Account **********
- */
 export default function profileReducer(state = initialState, action: ProfileActions): ProfileState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

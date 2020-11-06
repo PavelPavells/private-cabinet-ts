@@ -1,24 +1,14 @@
-/**
- * ********** import dependencies from NPM **********
- */
 import React, { useRef, useEffect } from 'react';
 
-/**
- * ********** import styles **********
- */
 import './Message.scss';
 
 const Message = ({ id, msgs }: any) => {
-    /**
-     * ********** ref link **********
-     */
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         messagesEndRef.current!.scrollIntoView({ behavior: 'smooth' });
     }, [msgs]);
 
-    // console.log(msgs);
     return (
         <>
             {msgs ? (

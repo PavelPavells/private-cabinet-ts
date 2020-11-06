@@ -1,6 +1,3 @@
-/**
- * ********** Импорт глобальных переменных **********
- */
 import { WebAppActions, WebAppState, DATA_LOADING_REQUEST, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/webAppTypes/webAppTypes';
 
 const initialState: WebAppState = {
@@ -9,9 +6,6 @@ const initialState: WebAppState = {
     data: []
 };
 
-/**
- * ********** Редьюсер компонента WebApp **********
- */
 export default function webAppReducer(state = initialState, action: WebAppActions): WebAppState {
     switch (action.type) {
         case DATA_LOADING_REQUEST:

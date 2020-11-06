@@ -1,16 +1,9 @@
-/**
- * ********** Глобальные переменные для асинхронных запросов на сервер **********
- */
 export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
 export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
 export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
 export const DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS = 'DATA_LOADING_SUCCESS_DISCOUNT_SETTINGS';
 export const DATA_LOADING_NEWS = 'DATA_LOADING_NEWS';
 export const DATA_LOADING_OFFERS = 'DATA_LOADING_OFFERS';
-
-/**
- * *********** Интерфейсы стейта Компонента Main **********
- */
 
 export interface ResponseStatus {
     code: number;

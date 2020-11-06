@@ -1,17 +1,6 @@
-/**
- * ********** Импорт зависимостей **********
- */
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-
-/**
- * ********** Импорт экшенов **********
- */
 import { changeProfilePassword } from '../../../../../actions/profielActions/profileActions';
-
-/**
- * ********** Импорт стилей **********
- */
 import './ChangeRegisterData.scss';
 import { PersonalCabinet } from '../../../../../store/store';
 // eslint-disable-next-line import/order
@@ -29,14 +18,8 @@ const ChangeRegisterData = () => {
     const [checkboxTwo, setCheckboxTwo] = useState(false);
     const [checkboxThree, setCheckboxThree] = useState(false);
 
-    /**
-     * ********** Импорт состояния из Redux **********
-     * */
     const { profile } = useSelector((state: PersonalCabinet) => state.profile, shallowEqual);
 
-    /**
-     * Отправка действий для изменения на сервере
-     * */
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -56,7 +39,6 @@ const ChangeRegisterData = () => {
         setPhone(profile.phone ? profile.phone : '');
     }, [profile]);
 
-    /** ********** RESPONSE DATA FOR LOGIN ACCOUNT ********** */
     // @ts-ignore
     const onSubmit = () => {
         // eslint-disable-next-line no-shadow

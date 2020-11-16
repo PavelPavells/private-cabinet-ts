@@ -1,0 +1,114 @@
+{
+    "data": {
+        "result": {
+            "code": 0
+        },
+        "payload": [
+            {
+                "id": 0,
+                "type": "Электронная проходная",
+                "name": "STR-01E",
+                "salePrice": "30 900 P",
+                "currentPrice": "40 900 Р"
+            },
+            {
+                "id": 1,
+                "type": "Электронная проходная",
+                "name": "STR-02E",
+                "salePrice": "31 900 P",
+                "currentPrice": "41 900 Р"
+            },
+            {
+                "id": 2,
+                "type": "Электронная проходная",
+                "name": "STR-03A",
+                "salePrice": "32 900 P",
+                "currentPrice": "42 900 Р"
+            },
+            {
+                "id": 3,
+                "type": "Электронная проходная",
+                "name": "STR-04A",
+                "salePrice": "33 900 P",
+                "currentPrice": "43 900 Р"
+            },
+            {
+                "id": 4,
+                "type": "Электронная проходная",
+                "name": "STR-05A",
+                "salePrice": "34 900 P",
+                "currentPrice": "44 900 Р"
+            },
+            {
+                "id": 5,
+                "type": "Электронная проходная",
+                "name": "STR-06A",
+                "salePrice": "35 900 P",
+                "currentPrice": "45 900 Р"
+            },
+            {
+                "id": 6,
+                "type": "Электронная проходная",
+                "name": "STR-07A",
+                "salePrice": "36 900 P",
+                "currentPrice": "46 900 Р"
+            },
+            {
+                "id": 7,
+                "type": "Электронная проходная",
+                "name": "STR-08A",
+                "salePrice": "37 900 P",
+                "currentPrice": "47 900 Р"
+            },
+            {
+                "id": 8,
+                "type": "Электронная проходная",
+                "name": "STR-09A",
+                "salePrice": "38 900 P",
+                "currentPrice": "48 900 Р"
+            },
+            {
+                "id": 9,
+                "type": "Электронная проходная",
+                "name": "STR-10A",
+                "salePrice": "39 900 P",
+                "currentPrice": "49 900 Р"
+            },
+            {
+                "id": 10,
+                "type": "Электронная проходная",
+                "name": "STR-11A",
+                "salePrice": "40 900 P",
+                "currentPrice": "50 900 Р"
+            },
+            {
+                "id": 11,
+                "type": "Электронная проходная",
+                "name": "STR-12A",
+                "salePrice": "41 900 P",
+                "currentPrice": "51 900 Р"
+            },
+            {
+                "id": 12,
+                "type": "Электронная проходная",
+                "name": "STR-13A",
+                "salePrice": "42 900 P",
+                "currentPrice": "52 900 Р"
+            },
+            {
+                "id": 13,
+                "type": "Электронная проходная",
+                "name": "STR-14A",
+                "salePrice": "43 900 P",
+                "currentPrice": "53 900 Р"
+            },
+            {
+                "id": 14,
+                "type": "Электронная проходная",
+                "name": "STR-15A",
+                "salePrice": "44 900 P",
+                "currentPrice": "54 900 Р"
+            }
+        ]
+    }
+}

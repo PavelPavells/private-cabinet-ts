@@ -63,6 +63,7 @@ import Control from './MainContent/Control/Control';
 import Notification from './MainContent/Notification/Notification';
 import Payment from './MainContent/Payment/Payment';
 import Shipment from './MainContent/Shipment/Shipment';
+import Catalog from './MainContent/Catalog/Catalog/Catalog';
 import Configurator from './MainContent/Configurator/Configurator';
 // import BreadCrumbs from './MainContent/BreadCrumbs/BreadCrumbs';
 
@@ -84,9 +85,6 @@ const Layout = () => {
             <TopNav />
             <main className="main-container">
                 <SideNav />
-                {/* <div className="breadcrumbs">
-                    <Route path="/:path" component={BreadCrumbs} />
-                </div> */}
                 <Switch>
                     <Route path="/dashboard" render={() => <Main isOpen={isOpen} setIsOpen={setIsOpen} />} />
                     {/* <Route path="/media" component={MediaFiles} /> */}
@@ -102,10 +100,10 @@ const Layout = () => {
                     <Route path="/notification" component={Notification} />
                     <Route path="/payment" component={Payment} />
                     <Route path="/shipment" component={Shipment} />
+                    <Route path="/catalog" component={Catalog} />
                     <Route path="/configurator" component={Configurator} />
                 </Switch>
                 <div className="wrapper__chat">
-                    {/* style={{ width: '95vw', height: '95vh', position: 'absolute' }}> */}
                     {/** @ts-ignore */}
                     <Draggable bounds="parent">
                         <Chat isOpen={isOpen} handleChangeIsOpenChat={handleChangeIsOpenChat} />

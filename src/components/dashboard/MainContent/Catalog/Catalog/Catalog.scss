@@ -1,0 +1,67 @@
+@import '../../../../../styles/base.scss';
+
+.catalog {
+    display: flex;
+    flex-direction: column;
+
+    .catalog__basket {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+        background-color: $brandPantonBlue;
+        color: $white;
+
+        .basket__block:nth-child(1) {
+            border-right: 1px solid $white;
+        }
+
+        .basket__block:nth-child(3) {
+            padding: 10px 40px;
+            color: $brandPantonBlue;
+            font-family: $font-regular;
+            font-size: 14px;
+            background-color: $white;
+            border-radius: 30px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .basket__block {
+            flex: 1;
+            margin: 13px;
+            padding: 7px;
+
+            .icon {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .catalog__main {
+        display: flex;
+        border: 1px solid green;
+
+        .filters {
+            flex: 1;
+            border: 1px solid red;
+        }
+
+        .items {
+            flex: 3;
+            border: 1px solid red;
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid green;
+            }
+        }
+    }
+
+    .catalog__basket {
+        display: flex;
+        border: 1px solid green;
+    }
+}

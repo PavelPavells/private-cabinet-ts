@@ -16,6 +16,7 @@ import priceListReducer from './priceListReducer';
 import notificationsReducer from './notificationsReducers/notificationsReducer';
 import ordersReducer from './ordersReducer';
 import salePartnersReducer from './salePartnersReducer';
+import catalogReducer from './catalogReducers/catalogReducers';
 import shipmentReducer from './shipmentReducer';
 import sideNavReducer from './sideNavReducer';
 import topNavReducer from './topNavReducer';
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
     pricelist: priceListReducer,
     orders: ordersReducer,
     salepartners: salePartnersReducer,
+    catalog: catalogReducer,
     shipment: shipmentReducer,
     sidenav: sideNavReducer,
     topnav: topNavReducer,

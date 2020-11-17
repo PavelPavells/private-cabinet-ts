@@ -41,27 +41,154 @@
 
     .catalog__main {
         display: flex;
-        border: 1px solid green;
 
         .filters {
             flex: 1;
-            border: 1px solid red;
+
+            .filters__checkboxes {
+                border: 1px solid green;
+            }
         }
 
-        .items {
-            flex: 3;
-            border: 1px solid red;
+        .items__block {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+            height: 70vh;
+            overflow-y: scroll;
 
-            .item {
+            .block__headings {
                 display: flex;
-                justify-content: space-between;
-                border: 1px solid green;
+                margin: 30px 0 10px 0;
+
+                .headings__item:nth-child(1) {
+                    margin-left: 0.5vw;
+                    margin-right: 10vw;
+                }
+
+                .headings__item:nth-child(3) {
+                    margin-left: 12.8vw;
+                    margin-right: 8vw;
+                }
+
+                .headings__item:nth-child(5) {
+                    margin-left: 8.8vw;
+                }
+
+
+                .headings__item {
+                    font-size: 12px;
+                    color: $brandPantonSubText;
+                }
+            }
+
+            .block__items {
+                .item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    background-color: $white;
+    
+                    .item__photo {
+                        display: flex;
+                        align-items: center;
+                        width: 80px;
+                        height: 80px;
+                        margin: 10px;
+                        padding: 10px 18px;
+                        background-color: $brandBorderColor;
+                    }
+    
+                    .item__name {
+                        .name__type {
+                            margin-bottom: 10px;
+                            font-size: 12px;
+                            color: $brandPantonSubText;
+                        }
+    
+                        .name {
+                            font-size: 16px;
+                            color: $brandPantonBlack;
+                        }
+                    }
+    
+                    .item__value {
+                        display: flex;
+                        align-items: center;
+    
+                        .value__number {
+                            margin-right: 22px;
+                        }
+    
+                        .value__choose:nth-child(2) {
+                            margin-right: 1px;
+                            border-radius: 5px 0 0 5px;
+                        }
+    
+                        .value__choose:nth-child(3) {
+                            border-radius: 0 5px 5px 0;
+                        }
+    
+                        .value__choose {
+                            padding: 2px 8px;
+                            font-size: 25px;
+                            background-color: $brandBorderColor;
+    
+                            &:hover {
+                                color: $white;
+                                background-color: $brandPantonBlue;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+    
+                    .item__sale {
+                        .sale:nth-child(1) {
+                            margin-bottom: 12px;
+                            color: $brandPantonSubText;
+                            text-decoration: line-through;
+                        }
+                        .sale:nth-child(2) {
+                            color: $brandPantonGreen;
+                        }
+                        .sale {
+                            font-size: 14px;
+                        }
+                    }
+    
+                    .item__price {
+                        font-size: 16px ;
+                    }
+    
+                    .item__icon {
+                        margin-right: 20px;
+                    }
+                }
             }
         }
     }
 
     .catalog__basket {
         display: flex;
-        border: 1px solid green;
+    }
+
+    .item__value {
+        margin: 20px 0;
+        font-size: 14px;
+       
+        span {
+            font-size: 16px;
+            color: $brandPantonBlue;
+        }
+    }
+
+    .reset {
+        padding: 15px 60px;
+        border: 1px solid $brandPantonBlue;
+        border-radius: 30px;
+        font-size: 14px;
+        font-family: $font-regular;
+        color: $brandPantonBlue;
     }
 }

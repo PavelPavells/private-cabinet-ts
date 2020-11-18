@@ -45,8 +45,56 @@
         .filters {
             flex: 1;
 
-            .filters__checkboxes {
-                border: 1px solid green;
+            .filters__block {
+                display: flex;
+                flex-direction: column;
+                height: 35vh;
+                max-width: 27vw;
+                overflow-y: scroll;
+                margin-top: 50px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                .block__turnstile {
+                    color: $brandPantonBlue;
+                }
+
+                input[type='checkbox'] {
+                    margin-right: 10px;
+                }
+
+                .block--outside {
+                    padding: 10px;
+                    background-color: $white;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+
+                .block--inside {
+                    padding: 10px 20px;
+                    background-color: $white;
+                    color: $brandPantonGreyText;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+
+                .block--superinside {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 30px;
+                    background-color: $white;
+                    color: $brandPantonBlack;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
             }
         }
 
@@ -183,6 +231,11 @@
         }
     }
 
+    .filter__button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     .reset {
         padding: 15px 60px;
         border: 1px solid $brandPantonBlue;

@@ -1,13 +1,26 @@
 @import '../../../../../styles/base.scss';
 
+.wrap__catalog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.heading__text {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 .catalog {
     display: flex;
     flex-direction: column;
+    width: 1020px;
 
     .catalog__basket {
         display: flex;
         align-items: center;
-        margin-top: 50px;
         background-color: $brandPantonBlue;
         color: $white;
 
@@ -42,14 +55,18 @@
     .catalog__main {
         display: flex;
 
+        .main {
+            flex: 2;
+        }
+
         .filters {
             flex: 1;
 
             .filters__block {
                 display: flex;
                 flex-direction: column;
-                height: 35vh;
-                max-width: 27vw;
+                height: 40vh;
+                margin-right: 50px;
                 overflow-y: scroll;
                 margin-top: 50px;
 
@@ -61,11 +78,20 @@
                     color: $brandPantonBlue;
                 }
 
+                .blocks__execution {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 5px 0;
+                    color: $brandPantonGreyText;
+                }
+
                 input[type='checkbox'] {
                     margin-right: 10px;
                 }
 
                 .block--outside {
+                    display: flex;
+                    justify-content: space-between;
                     padding: 10px;
                     background-color: $white;
 
@@ -75,7 +101,7 @@
                 }
 
                 .block--inside {
-                    padding: 10px 20px;
+                    padding: 10px 10px 10px 20px;
                     background-color: $white;
                     color: $brandPantonGreyText;
 
@@ -85,9 +111,7 @@
                 }
 
                 .block--superinside {
-                    display: flex;
-                    align-items: center;
-                    padding: 10px 30px;
+                    padding: 10px 0px 10px 30px;
                     background-color: $white;
                     color: $brandPantonBlack;
 
@@ -101,8 +125,7 @@
         .items__block {
             display: flex;
             flex-direction: column;
-            flex: 2;
-            height: 70vh;
+            height: 60vh;
             overflow-y: scroll;
 
             .block__headings {
@@ -111,16 +134,16 @@
 
                 .headings__item:nth-child(1) {
                     margin-left: 0.5vw;
-                    margin-right: 10vw;
+                    margin-right: 4vw;
                 }
 
                 .headings__item:nth-child(3) {
-                    margin-left: 12.8vw;
-                    margin-right: 8vw;
+                    margin-left: 6.8vw;
+                    margin-right: 2vw;
                 }
 
                 .headings__item:nth-child(5) {
-                    margin-left: 8.8vw;
+                    margin-left: 2.8vw;
                 }
 
 
@@ -217,8 +240,55 @@
         }
     }
 
-    .catalog__basket {
+    .catalog__pagination {
         display: flex;
+        align-items: center;
+        margin-top: 10px;
+        padding: 0 30px;
+        background-color: $white;
+
+        .pagination__shevron:nth-child(1) {
+            margin-right: 30px;
+            background: url('../../../../../images/Catalog/Pagination/left_twin_shevron.svg') no-repeat center;
+        }
+
+        .pagination__shevron:nth-child(2) {
+            margin-right: 120px;
+            background: url('../../../../../images/Catalog/Pagination/left_shevron.svg') no-repeat center;
+        }
+
+        .pagination__shevron:nth-child(4) {
+            margin-left: 120px;
+            margin-right: 30px;
+            transform: rotate(180deg);
+            background: url('../../../../../images/Catalog/Pagination/left_shevron.svg') no-repeat center;
+        }
+
+        .pagination__shevron:nth-child(5) {
+            transform: rotate(180deg);
+            background: url('../../../../../images/Catalog/Pagination/left_twin_shevron.svg') no-repeat center;
+        }
+
+        .pagination__shevron {
+            width: 10px;
+            height: 10px;
+        }
+
+        .pagination__pages {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+
+            .page {
+                padding: 12px;
+                border-bottom: 2px solid transparent;
+
+                &:hover {
+                    cursor: pointer;
+                    border-bottom: 2px solid $brandPantonBlue;
+                }
+            }
+        }
     }
 
     .item__value {
@@ -243,5 +313,11 @@
         font-size: 14px;
         font-family: $font-regular;
         color: $brandPantonBlue;
+
+        &:hover {
+            cursor: pointer;
+            color: $white;
+            background-color: $brandPantonBlue;
+        }
     }
 }

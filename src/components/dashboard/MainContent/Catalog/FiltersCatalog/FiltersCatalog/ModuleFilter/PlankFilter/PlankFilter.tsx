@@ -4,12 +4,12 @@ const PlankFilter = () => {
     return (
         <>
             <div className="checkboxes block--superinside">
-                <input type="checkbox" id="standard" className="checkbox" />
-                <label htmlFor="standard">Стандартные</label>
+                <input type="checkbox" id="standardplank" className="checkbox" />
+                <label htmlFor="standardplank">Стандартные</label>
             </div>
             <div className="checkboxes block--superinside">
-                <input type="checkbox" id="antipanicmech" className="checkbox" />
-                <label htmlFor="antipanicmech">Механическая "Антипаника"</label>
+                <input type="checkbox" id="antipanicmechplank" className="checkbox" />
+                <label htmlFor="antipanicmechplank">Механическая "Антипаника"</label>
             </div>
             <div className="checkboxes block--superinside">
                 <input type="checkbox" id="antipanicauto" className="checkbox" />

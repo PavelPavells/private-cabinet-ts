@@ -1,6 +1,8 @@
 import React, { useState, Suspense, lazy } from 'react';
 import ResetButton from '../ResetButton/ResetButton';
 import Loader from '../../../../../../__utils__/Spinner';
+import Plus from '../../../../../../images/Catalog/Items/plus.svg';
+import Minus from '../../../../../../images/Catalog/Items/minus.svg';
 
 const ExecuteFilter = lazy(() => import('./ExecuteFilter/ExecuteFilter'));
 const ModuleFilter = lazy(() => import('./ModuleFilter/ModuleFilter'));
@@ -65,33 +67,39 @@ const FiltersCatalog: React.FC<FilterCatalog> = ({ value }: FilterCatalog) => {
     };
 
     return (
-        <Suspense fallback={<Loader />}>
+        <>
             <section className="filters">
                 <div className="filters__block">
                     <div onClick={handleChangeOpenTurnstile} className="block__turnstile block--outside">
-                        Турникеты
+                        <span>Турникеты</span>
+                        <img src={openTurnstile ? Minus : Plus} alt="turnstile" />
                     </div>
                     {openTurnstile ? (
                         <>
                             <div className="turnstule__blocks block--inside">
                                 <div onClick={() => handleChangeOpenInsideBlocks('EXECUTE')} className="blocks__execution">
-                                    Исполнение корпуса
+                                    <span>Исполнение корпуса</span>
+                                    <img src={openExecute ? Minus : Plus} alt="imageExecute" />
                                 </div>
-                                {openExecute ? <ExecuteFilter /> : null}
+                                <Suspense fallback={<Loader />}>{openExecute ? <ExecuteFilter /> : null}</Suspense>
                             </div>
                             <div className="turnstule__blocks block--inside">
                                 <div onClick={() => handleChangeOpenInsideBlocks('MODULE')} className="blocks__execution">
-                                    Модули
+                                    <span>Модули</span>
+                                    <img src={openModule ? Minus : Plus} alt="imageModule" />
                                 </div>
-                                {openModule ? (
-                                    <ModuleFilter state={state} handleChangeOpenInsideBlocks={handleChangeOpenInsideBlocks} />
-                                ) : null}
+                                <Suspense fallback={<Loader />}>
+                                    {openModule ? (
+                                        <ModuleFilter state={state} handleChangeOpenInsideBlocks={handleChangeOpenInsideBlocks} />
+                                    ) : null}
+                                </Suspense>
                             </div>
                             <div className="turnstule__blocks block--inside">
                                 <div onClick={() => handleChangeOpenInsideBlocks('RELATED')} className="blocks__execution">
-                                    Сопутствующая продукция
+                                    <span>Сопутствующая продукция</span>
+                                    <img src={openRelated ? Minus : Plus} alt="imageRelated" />
                                 </div>
-                                {openRelated ? <RelatedFilter /> : null}
+                                <Suspense fallback={<Loader />}>{openRelated ? <RelatedFilter /> : null}</Suspense>
                             </div>
                         </>
                     ) : null}
@@ -100,7 +108,7 @@ const FiltersCatalog: React.FC<FilterCatalog> = ({ value }: FilterCatalog) => {
                     <ResetButton value={value} />
                 </div>
             </section>
-        </Suspense>
+        </>
     );
 };
 

@@ -100,7 +100,7 @@ const Layout = () => {
                     <Route path="/notification" component={Notification} />
                     <Route path="/payment" component={Payment} />
                     <Route path="/shipment" component={Shipment} />
-                    <Route path="/catalog" component={Catalog} />
+                    <Route path="/catalog/:basket?" component={Catalog} />
                     <Route path="/configurator" component={Configurator} />
                 </Switch>
                 <div className="wrapper__chat">

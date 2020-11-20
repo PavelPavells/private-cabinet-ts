@@ -10,6 +10,7 @@ import './Catalog.scss';
 const Basket = lazy(() => import('../Basket/Basket'));
 const FiltersCatalog = lazy(() => import('../FiltersCatalog/FiltersCatalog/FiltersCatalog'));
 const CatalogItems = lazy(() => import('../CatalogItems/CatalogItems'));
+const CatalogItem = lazy(() => import('../CatalogItem/CatalogItem'));
 const Pagination = lazy(() => import('../Pagination/Pagination'));
 const BasketItems = lazy(() => import('../Basket/BasketItems/BasketItems'));
 
@@ -17,7 +18,7 @@ const Catalog: React.FC<any> = (): any => {
     const { isFetching, catalog } = useSelector((state: PersonalCabinet) => state.catalog, shallowEqual);
 
     const dispatch = useDispatch();
-    const { basket } = useParams<any>();
+    const { basket, item } = useParams<any>();
 
     useEffect(() => {
         dispatch(fetchDataControl());
@@ -25,11 +26,7 @@ const Catalog: React.FC<any> = (): any => {
 
     const value: number = 50;
 
-    if (basket && catalog) {
-        return <BasketItems />;
-    }
-
-    if (!isFetching && catalog && !basket) {
+    if (!isFetching && catalog && !basket && !item) {
         return (
             <Suspense fallback={<Loader />}>
                 <div className="main-content">
@@ -54,6 +51,15 @@ const Catalog: React.FC<any> = (): any => {
             </Suspense>
         );
     }
+
+    if (basket && !item && catalog) {
+        return <BasketItems />;
+    }
+
+    if (basket && item && catalog) {
+        return <CatalogItem catalog={catalog} />;
+    }
+
     return <Loader />;
 };
 

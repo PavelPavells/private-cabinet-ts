@@ -1,0 +1,29 @@
+@import '../../../../../styles/base.scss';
+
+.basket__block:nth-child(1) {
+    border-right: 1px solid $white;
+}
+
+.basket__block:nth-child(3) {
+    padding: 10px 40px;
+    text-align: center;
+    color: $brandPantonBlue;
+    font-family: $font-regular;
+    font-size: 14px;
+    background-color: $white;
+    border-radius: 30px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.basket__block {
+    flex: 1;
+    margin: 13px;
+    padding: 7px;
+
+    .icon {
+        margin-left: 20px;
+    }
+}

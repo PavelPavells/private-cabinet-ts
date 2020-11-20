@@ -1,0 +1,70 @@
+@import '../../../../../../styles/base.scss';
+
+.filters {
+    flex: 1;
+
+    .filters__block {
+        display: flex;
+        flex-direction: column;
+        height: 40vh;
+        margin-right: 50px;
+        overflow-y: scroll;
+        margin-top: 50px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .block__turnstile {
+            color: $brandPantonBlue;
+        }
+
+        .blocks__execution {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            color: $brandPantonGreyText;
+        }
+
+        input[type='checkbox'] {
+            margin-right: 10px;
+        }
+
+        .block--outside {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: $white;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .block--inside {
+            padding: 10px 10px 10px 20px;
+            background-color: $white;
+            color: $brandPantonGreyText;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .block--superinside {
+            padding: 10px 0px 10px 30px;
+            background-color: $white;
+            color: $brandPantonBlack;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+    // .filter__button {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
+}

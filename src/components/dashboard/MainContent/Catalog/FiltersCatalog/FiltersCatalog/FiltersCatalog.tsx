@@ -3,6 +3,7 @@ import ResetButton from '../ResetButton/ResetButton';
 import Loader from '../../../../../../__utils__/Spinner';
 import Plus from '../../../../../../images/Catalog/Items/plus.svg';
 import Minus from '../../../../../../images/Catalog/Items/minus.svg';
+import './FiltersCatalog.scss';
 
 const ExecuteFilter = lazy(() => import('./ExecuteFilter/ExecuteFilter'));
 const ModuleFilter = lazy(() => import('./ModuleFilter/ModuleFilter'));

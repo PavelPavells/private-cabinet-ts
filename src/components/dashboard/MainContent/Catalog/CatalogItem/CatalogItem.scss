@@ -1,0 +1,11 @@
+@import '../../../../../styles/base.scss';
+
+.main__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 366px;
+    height: 366px;
+    margin-top: 20px;
+    background-color: #F1F1F1;
+}

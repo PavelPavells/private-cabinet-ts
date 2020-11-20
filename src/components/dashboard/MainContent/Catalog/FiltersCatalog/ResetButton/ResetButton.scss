@@ -1,0 +1,26 @@
+@import '../../../../../../styles/base.scss';
+
+.item__value {
+    margin: 20px 0;
+    font-size: 14px;
+   
+    span {
+        font-size: 16px;
+        color: $brandPantonBlue;
+    }
+}
+
+.reset {
+    padding: 15px 60px;
+    border: 1px solid $brandPantonBlue;
+    border-radius: 30px;
+    font-size: 14px;
+    font-family: $font-regular;
+    color: $brandPantonBlue;
+
+    &:hover {
+        cursor: pointer;
+        color: $white;
+        background-color: $brandPantonBlue;
+    }
+}

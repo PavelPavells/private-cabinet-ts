@@ -1,4 +1,5 @@
 import React from 'react';
+import './Pagination.scss';
 
 const Pagination: React.FC<any> = (): any => {
     return (

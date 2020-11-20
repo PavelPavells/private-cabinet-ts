@@ -13,231 +13,26 @@
     margin-bottom: 30px;
 }
 
+.catalog__basket {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: $brandPantonBlue;
+    color: $white;
+}
+
 .catalog {
     display: flex;
     flex-direction: column;
     width: 1020px;
 
-    .catalog__basket {
-        display: flex;
-        align-items: center;
-        background-color: $brandPantonBlue;
-        color: $white;
-
-        .basket__block:nth-child(1) {
-            border-right: 1px solid $white;
-        }
-
-        .basket__block:nth-child(3) {
-            padding: 10px 40px;
-            color: $brandPantonBlue;
-            font-family: $font-regular;
-            font-size: 14px;
-            background-color: $white;
-            border-radius: 30px;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        .basket__block {
-            flex: 1;
-            margin: 13px;
-            padding: 7px;
-
-            .icon {
-                margin-left: 20px;
-            }
-        }
-    }
-
     .catalog__main {
         display: flex;
+    }
 
-        .main {
-            flex: 2;
-        }
-
-        .filters {
-            flex: 1;
-
-            .filters__block {
-                display: flex;
-                flex-direction: column;
-                height: 40vh;
-                margin-right: 50px;
-                overflow-y: scroll;
-                margin-top: 50px;
-
-                &:hover {
-                    cursor: pointer;
-                }
-
-                .block__turnstile {
-                    color: $brandPantonBlue;
-                }
-
-                .blocks__execution {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 5px 0;
-                    color: $brandPantonGreyText;
-                }
-
-                input[type='checkbox'] {
-                    margin-right: 10px;
-                }
-
-                .block--outside {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px;
-                    background-color: $white;
-
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
-
-                .block--inside {
-                    padding: 10px 10px 10px 20px;
-                    background-color: $white;
-                    color: $brandPantonGreyText;
-
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
-
-                .block--superinside {
-                    padding: 10px 0px 10px 30px;
-                    background-color: $white;
-                    color: $brandPantonBlack;
-
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-
-        .items__block {
-            display: flex;
-            flex-direction: column;
-            height: 60vh;
-            overflow-y: scroll;
-
-            .block__headings {
-                display: flex;
-                margin: 30px 0 10px 0;
-
-                .headings__item:nth-child(1) {
-                    margin-left: 0.5vw;
-                    margin-right: 4vw;
-                }
-
-                .headings__item:nth-child(3) {
-                    margin-left: 6.8vw;
-                    margin-right: 2vw;
-                }
-
-                .headings__item:nth-child(5) {
-                    margin-left: 2.8vw;
-                }
-
-
-                .headings__item {
-                    font-size: 12px;
-                    color: $brandPantonSubText;
-                }
-            }
-
-            .block__items {
-                .item {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 10px;
-                    background-color: $white;
-    
-                    .item__photo {
-                        display: flex;
-                        align-items: center;
-                        width: 80px;
-                        height: 80px;
-                        margin: 10px;
-                        padding: 10px 18px;
-                        background-color: $brandBorderColor;
-                    }
-    
-                    .item__name {
-                        .name__type {
-                            margin-bottom: 10px;
-                            font-size: 12px;
-                            color: $brandPantonSubText;
-                        }
-    
-                        .name {
-                            font-size: 16px;
-                            color: $brandPantonBlack;
-                        }
-                    }
-    
-                    .item__value {
-                        display: flex;
-                        align-items: center;
-    
-                        .value__number {
-                            margin-right: 22px;
-                        }
-    
-                        .value__choose:nth-child(2) {
-                            margin-right: 1px;
-                            border-radius: 5px 0 0 5px;
-                        }
-    
-                        .value__choose:nth-child(3) {
-                            border-radius: 0 5px 5px 0;
-                        }
-    
-                        .value__choose {
-                            padding: 2px 8px;
-                            font-size: 25px;
-                            background-color: $brandBorderColor;
-    
-                            &:hover {
-                                color: $white;
-                                background-color: $brandPantonBlue;
-                                cursor: pointer;
-                            }
-                        }
-                    }
-    
-                    .item__sale {
-                        .sale:nth-child(1) {
-                            margin-bottom: 12px;
-                            color: $brandPantonSubText;
-                            text-decoration: line-through;
-                        }
-                        .sale:nth-child(2) {
-                            color: $brandPantonGreen;
-                        }
-                        .sale {
-                            font-size: 14px;
-                        }
-                    }
-    
-                    .item__price {
-                        font-size: 16px ;
-                    }
-    
-                    .item__icon {
-                        margin-right: 20px;
-                    }
-                }
-            }
-        }
+    .main {
+        flex: 2;
+        margin-bottom: 20px;
     }
 
     .catalog__pagination {
@@ -246,78 +41,5 @@
         margin-top: 10px;
         padding: 0 30px;
         background-color: $white;
-
-        .pagination__shevron:nth-child(1) {
-            margin-right: 30px;
-            background: url('../../../../../images/Catalog/Pagination/left_twin_shevron.svg') no-repeat center;
-        }
-
-        .pagination__shevron:nth-child(2) {
-            margin-right: 120px;
-            background: url('../../../../../images/Catalog/Pagination/left_shevron.svg') no-repeat center;
-        }
-
-        .pagination__shevron:nth-child(4) {
-            margin-left: 120px;
-            margin-right: 30px;
-            transform: rotate(180deg);
-            background: url('../../../../../images/Catalog/Pagination/left_shevron.svg') no-repeat center;
-        }
-
-        .pagination__shevron:nth-child(5) {
-            transform: rotate(180deg);
-            background: url('../../../../../images/Catalog/Pagination/left_twin_shevron.svg') no-repeat center;
-        }
-
-        .pagination__shevron {
-            width: 10px;
-            height: 10px;
-        }
-
-        .pagination__pages {
-            display: flex;
-            justify-content: space-between;
-            flex: 1;
-
-            .page {
-                padding: 12px;
-                border-bottom: 2px solid transparent;
-
-                &:hover {
-                    cursor: pointer;
-                    border-bottom: 2px solid $brandPantonBlue;
-                }
-            }
-        }
-    }
-
-    .item__value {
-        margin: 20px 0;
-        font-size: 14px;
-       
-        span {
-            font-size: 16px;
-            color: $brandPantonBlue;
-        }
-    }
-
-    .filter__button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .reset {
-        padding: 15px 60px;
-        border: 1px solid $brandPantonBlue;
-        border-radius: 30px;
-        font-size: 14px;
-        font-family: $font-regular;
-        color: $brandPantonBlue;
-
-        &:hover {
-            cursor: pointer;
-            color: $white;
-            background-color: $brandPantonBlue;
-        }
     }
 }

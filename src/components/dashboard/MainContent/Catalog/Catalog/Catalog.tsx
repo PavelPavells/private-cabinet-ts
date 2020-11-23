@@ -14,7 +14,7 @@ const CatalogItem = lazy(() => import('../CatalogItem/CatalogItem'));
 const Pagination = lazy(() => import('../Pagination/Pagination'));
 const BasketItems = lazy(() => import('../Basket/BasketItems/BasketItems'));
 
-const Catalog: React.FC<any> = (): any => {
+const Catalog = () => {
     const { isFetching, catalog } = useSelector((state: PersonalCabinet) => state.catalog, shallowEqual);
 
     const dispatch = useDispatch();

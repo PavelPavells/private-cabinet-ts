@@ -9,3 +9,140 @@
     margin-top: 20px;
     background-color: #F1F1F1;
 }
+.card {
+    // display: flex;
+    margin-left: 30px;
+    
+    .card__header {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #F1F1F1;
+
+        .header__blocks {
+
+            .blocks__model {
+                margin-bottom: 10px;
+                font-size: 12px;
+                color: $brandPantonSubText;
+            }
+
+            .blocks__naming {
+                font-size: 20px;
+                color: $brandPantonBlack;
+            }
+        }
+    }
+
+    .card__prices {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding: 16px 20px;
+        background-color: $white;
+        border: 1px solid #F1F1F1;
+
+        .prices {
+            display: flex;
+            font-size: 16px;
+
+            &:nth-child(2) {
+                span {
+                    color: $brandPantonGreen;
+                }
+            }
+
+            span {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .card__heading {
+        margin: 30px 0 20px 0;
+        font-size: 16px;
+    }
+
+    .card__description {
+        margin-bottom: 60px;
+        line-height: 20px;
+    }
+
+    .card__kit {
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+
+            .kit__image {
+                margin-right: 10px;
+                padding: 2px 7px;
+                font-size: 20px;
+                color: $brandPantonBlue ;
+                border: 1px solid $brandPantonBlue;
+                border-radius: 100%;
+            }
+        }
+    }
+
+    .card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $brandBorderColor;
+        border-radius: 0 30px 30px 0;
+        background-color: $white;
+
+        .footer__block:nth-child(1) {
+            margin-left: 20px;
+        }
+
+        .footer__block {
+            display: flex;
+
+            .block__text {
+                color: $brandPantonSubText;
+
+                span {
+                    margin-left: 10px;
+                    color: $brandPantonBlack;
+                }
+            }
+
+            .block__button:nth-child(1) {
+                margin-right: 1px;
+                border-radius: 5px 0 0 5px;
+            }
+
+            .block__button:nth-child(2) {
+                border-radius: 0 5px 5px 0;
+            }
+
+            .block__button {
+                padding: 3px 7px;
+                font-size: 20px;
+                background-color: $brandBorderColor;
+
+                &:hover {
+                    cursor: pointer;
+                    color: $white;
+                    background-color: $brandPantonBlue;
+                }
+            }
+        }
+
+        .footer__button {
+            padding: 15px 26px;
+            font-size: 14px;
+            background-color: $brandPantonBlue;
+            color: $white;
+            border-radius: 30px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

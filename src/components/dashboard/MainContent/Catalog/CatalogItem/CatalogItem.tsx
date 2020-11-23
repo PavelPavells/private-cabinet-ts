@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { useParams } from 'react-router-dom';
 import ImageDescription from '../../../../../images/Catalog/Item/image_description.svg';
 import Basket from '../Basket/Basket';
 
 import './CatalogItem.scss';
+
+const Card = lazy(() => import('./Card/Card'));
 
 interface CatalogItem {
     catalog: any;
@@ -27,7 +29,11 @@ const CatalogItem: React.FC<CatalogItem> = ({ catalog }: CatalogItem) => {
                                         <div className="main__image">
                                             <img src={ImageDescription} alt="" className="image" />
                                         </div>
-                                        <div className="main">INFO</div>
+                                        <div className="main">
+                                            <div className="main__card">
+                                                <Card catalog={index} />
+                                            </div>
+                                        </div>
                                     </section>
                                 </section>
                             </div>

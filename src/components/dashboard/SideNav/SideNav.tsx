@@ -1,14 +1,12 @@
-import React, { useEffect, Suspense, lazy, memo } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
-import Loader from '../../../__utils__/Spinner';
+import SideNavMainPart from './SideNavMainPart/SideNavMainPart/SideNavMainPart';
+import SideNavHistoryPart from './SideNavHistoryPart/SideNavHistroryPart/SideNavHistoryPart';
+import SideNavSettingsPart from './SideNavSettingsPart/SideNavSettingsPart/SideNavSettingsPart';
+import SideNavConfiguratorPart from './SideNavConfiguratorPart/SideNavConfiguratorPart';
 
 import './SideNav.scss';
-
-const SideNavMainPart = lazy(() => import('./SideNavMainPart/SideNavMainPart/SideNavMainPart'));
-const SideNavHistoryPart = lazy(() => import('./SideNavHistoryPart/SideNavHistroryPart/SideNavHistoryPart'));
-const SideNavSettingsPart = lazy(() => import('./SideNavSettingsPart/SideNavSettingsPart/SideNavSettingsPart'));
-const SideNavConfiguratorPart = lazy(() => import('./SideNavConfiguratorPart/SideNavConfiguratorPart'));
 
 const SideNav = () => {
     const dispatch = useDispatch();
@@ -31,17 +29,17 @@ const SideNav = () => {
     });
 
     return (
-        <Suspense fallback={Loader}>
-            <nav className="side">
-                <ul className="side__top">
+        <nav className="side">
+            <ul className="side__top">
+                <>
                     <SideNavMainPart />
                     <SideNavHistoryPart />
                     <SideNavSettingsPart />
                     <SideNavConfiguratorPart />
-                </ul>
-            </nav>
-        </Suspense>
+                </>
+            </ul>
+        </nav>
     );
 };
 
-export default memo(SideNav);
+export default SideNav;

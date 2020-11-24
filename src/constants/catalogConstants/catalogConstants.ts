@@ -1,6 +1,6 @@
-export const DATA_LOADING_REQUEST = 'DATA_LOADING_REQUEST';
-export const DATA_LOADING_SUCCESS = 'DATA_LOADING_SUCCESS';
-export const DATA_LOADING_FAILURE = 'DATA_LOADING_FAILURE';
+export const DATA_LOADING_REQUEST_CATALOG = 'DATA_LOADING_REQUEST_CATALOG';
+export const DATA_LOADING_SUCCESS_CATALOG = 'DATA_LOADING_SUCCESS_CATALOG';
+export const DATA_LOADING_FAILURE_CATALOG = 'DATA_LOADING_FAILURE_CATALOG';
 
 export interface ResponseStatus {
     code: string;
@@ -31,16 +31,16 @@ export interface CatalogState {
 }
 
 interface CatalogRequest {
-    type: typeof DATA_LOADING_REQUEST;
+    type: typeof DATA_LOADING_REQUEST_CATALOG;
 }
 
 interface CatalogSuccess {
-    type: typeof DATA_LOADING_SUCCESS;
+    type: typeof DATA_LOADING_SUCCESS_CATALOG;
     payload: CatalogState[];
 }
 
 interface CatalogFailure {
-    type: typeof DATA_LOADING_FAILURE;
+    type: typeof DATA_LOADING_FAILURE_CATALOG;
     payload: CatalogList;
 }
 

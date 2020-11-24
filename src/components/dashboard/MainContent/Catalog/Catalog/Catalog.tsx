@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchDataControl } from '../../../../../actions/catalogActions/catalogActions';
+import { fetchDataCatalog } from '../../../../../actions/catalogActions/catalogActions';
 import { PersonalCabinet } from '../../../../../store/store';
 import Loader from '../../../../../__utils__/Spinner';
 
@@ -21,8 +21,8 @@ const Catalog = () => {
     const { basket, item } = useParams<any>();
 
     useEffect(() => {
-        dispatch(fetchDataControl());
-    }, [dispatch]);
+        dispatch(fetchDataCatalog());
+    }, []);
 
     const value: number = 50;
 
@@ -52,11 +52,11 @@ const Catalog = () => {
         );
     }
 
-    if (basket && !item && catalog) {
+    if (!item && basket && catalog) {
         return <BasketItems />;
     }
 
-    if (basket && item && catalog) {
+    if (item && !basket && catalog) {
         return <CatalogItem catalog={catalog} />;
     }
 

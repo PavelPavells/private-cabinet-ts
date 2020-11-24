@@ -4,6 +4,7 @@ import { IsOpenSideMenu } from '../../../actions/topNavActions/topNavActions';
 import SideNavMainPart from './SideNavMainPart/SideNavMainPart/SideNavMainPart';
 import SideNavHistoryPart from './SideNavHistoryPart/SideNavHistroryPart/SideNavHistoryPart';
 import SideNavSettingsPart from './SideNavSettingsPart/SideNavSettingsPart/SideNavSettingsPart';
+import SideNavCatalogPart from './SideNavCatalogPart/SideNavCatalogPart';
 import SideNavConfiguratorPart from './SideNavConfiguratorPart/SideNavConfiguratorPart';
 
 import './SideNav.scss';
@@ -33,6 +34,7 @@ const SideNav = () => {
             <ul className="side__top">
                 <>
                     <SideNavMainPart />
+                    <SideNavCatalogPart />
                     <SideNavHistoryPart />
                     <SideNavSettingsPart />
                     <SideNavConfiguratorPart />

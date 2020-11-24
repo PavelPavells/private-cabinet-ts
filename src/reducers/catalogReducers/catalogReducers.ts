@@ -1,9 +1,9 @@
 import {
     CatalogActions,
     CatalogState,
-    DATA_LOADING_REQUEST,
-    DATA_LOADING_SUCCESS,
-    DATA_LOADING_FAILURE
+    DATA_LOADING_REQUEST_CATALOG,
+    DATA_LOADING_SUCCESS_CATALOG,
+    DATA_LOADING_FAILURE_CATALOG
 } from '../../constants/catalogConstants/catalogConstants';
 
 export const initialState: CatalogState = {
@@ -14,18 +14,18 @@ export const initialState: CatalogState = {
 
 export default function paymentReducer(state = initialState, action: CatalogActions): CatalogState {
     switch (action.type) {
-        case DATA_LOADING_REQUEST:
+        case DATA_LOADING_REQUEST_CATALOG:
             return {
                 ...state,
                 isFetching: true
             };
-        case DATA_LOADING_SUCCESS:
+        case DATA_LOADING_SUCCESS_CATALOG:
             return {
                 ...state,
                 isFetching: false,
                 catalog: action.payload
             };
-        case DATA_LOADING_FAILURE:
+        case DATA_LOADING_FAILURE_CATALOG:
             return {
                 ...state,
                 isFetching: false,

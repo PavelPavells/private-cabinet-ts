@@ -82,7 +82,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
         const { error } = this.props.auth;
 
         return (
-            <div className="auth">
+            <section className="auth">
                 <div className="auth__left left">
                     <div
                         className="auth__logo 
@@ -122,7 +122,16 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                 d="M13.61,15.52a3.08,3.08,0,0,1,.89.77,3.71,3.71,0,0,1,.87,2.41l0,9.81c0,.59-.67.85-1.19.85-.74,0-1.2-.35-1.2-.92V20.23a2.77,2.77,0,0,0-2.5-2.89c-5.12,0-7.68,0-8.15,0a.94.94,0,0,1-.77-.78,1.2,1.2,0,0,1-.05-.42,1.51,1.51,0,0,1,0-.34,1,1,0,0,1,.89-.86h9A4,4,0,0,1,13.61,15.52Z"
                             />
                         </svg>
-                        <div className="auth__text">Личный кабинет партнера</div>
+                    </div>
+                    <div className="auth__text">
+                        <div>WEB-приложение «Личный кабинет партнеров CARDDEX» </div>
+                        <div>Это оперативное получение информации, простое управление закупками и продажами оборудования CARDDEX.</div>
+                        <div>
+                            <span>Подробности об использовании WEB-приложения по телефону</span>
+                            <a href="tel:88003339336">8(800)333-93-36</a>
+                            <span>или</span>
+                            <a href="mailto:sales@carddex.ru">sales@carddex.ru</a>
+                        </div>
                     </div>
                     <div className="auth__heading">
                         <h1>Вход</h1>
@@ -253,7 +262,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         );
     }
 }

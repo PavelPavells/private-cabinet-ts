@@ -36,7 +36,7 @@ input {
 		display: flex;
 		flex-direction: column;
 		width: 50%;
-		padding: 220px;
+		padding: 150px 220px;
 		background-color: $white;
 		overflow: auto;
 		z-index: 1000;
@@ -220,7 +220,7 @@ input {
 			img {
 				display: block;
 				position: absolute;
-				top: 23vh;
+				top: 17vh;
 			}
 
 			&__photo {
@@ -317,5 +317,28 @@ input {
 
 	img {
 		top: 7vh!important;
+	}
+}
+
+@media screen and (max-width:850px) {
+	.auth {
+		width: 100%;
+
+		&__text {
+			font-size: 12px;
+		}
+
+		&__left {
+			width: 100%;
+			padding: 30px;
+		}
+
+		&__right {
+			display: none;
+		}
+
+		&__button {
+			margin: 30px;
+		}
 	}
 }

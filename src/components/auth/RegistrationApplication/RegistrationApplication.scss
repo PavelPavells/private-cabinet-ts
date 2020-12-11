@@ -1,0 +1,125 @@
+@import '../../../styles/base.scss';
+
+.regapp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.473);
+    font-family: $font-regular;
+    transition: all .25s cubic-bezier(.02,.01,.47,1);
+    z-index: 10000;
+
+    .regapp__window {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: absolute;
+        overflow: scroll;
+        margin: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 570px;
+        height: 660px;
+        padding: 30px;
+        background-color: $white;
+        z-index: 10000;
+        box-shadow: 0 2px 30px 0 rgba(0,0,0,.3);
+        border-radius: 5px;
+
+        .order__header {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .header__description {
+                display: flex;
+                justify-content: flex-end;
+
+                .close {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .text {
+                font-size: 26px;
+                font-weight: 400;
+            }
+        }
+        .order__main {
+            width: 100%;
+
+            .main {
+                display: flex;
+
+                .main__field:last-child {
+                    margin-bottom: 30px;
+                }
+
+                .main__field {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .field__label {
+                        margin-top: 20px;
+                        font-size: 12px;
+                        color: $brandPantonSubText;
+                    }
+
+                    .field__input {
+                        padding: 12px 0;
+                        border: none;
+                        outline: none;
+                        border-bottom: 1px solid $brandBorderColor;
+                    }
+                }
+            }
+        }
+        .order__footer {
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            .button__order {
+                width: 196px;
+                height: 30px;
+                margin-right: 40px;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                border-radius: 20px;
+                letter-spacing: 1px;
+                background-color: $brandPantonBlue;
+                color: $white;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .footer__text {
+                margin: 0;
+                font-size: 11px;
+
+                & > a {
+                    color: $brandPantonBlue;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+::placeholder {
+    font-size: 14px;
+}

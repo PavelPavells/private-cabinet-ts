@@ -81,7 +81,6 @@ input {
 			line-height: 18px;
 			padding: 10px 0;
 			border-bottom: 1px solid $brandBorderColor;
-			z-index: 1000;
 		}
 
 		.auth__label {
@@ -94,7 +93,7 @@ input {
 
 			&.active {
 				position: relative;
-				top: 0;
+				top: 10px;
 				font-size: 12px;
 				color: $brandPantonSubText;
 			}
@@ -103,7 +102,7 @@ input {
 
 	&__password-ask {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
 		margin-bottom: 10px;
 
 		label {
@@ -116,8 +115,9 @@ input {
 		}
 
 		.ask__password {
+			margin-top: 10px;
 			font-size: 12px;
-			line-height: 18ph;
+			line-height: 18px;
 			color: $brandPantonBlue;
 			text-decoration: underline;
 		}
@@ -125,6 +125,10 @@ input {
 		span {
 			font-size: 12px;
 			color: $brandPantonSubText;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		a {
@@ -134,19 +138,23 @@ input {
 	}
 
 	&__button {
-		width: 196px;
-		height: 30px;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin: 30px 0;
-		background: $brandPantonBlue;
-		font-family: $font-regular;
-		font-size: 14px;
-		color: $white;
-		border: none;
-		border-radius: 15px;
-		cursor: pointer;
+
+		.button {
+			width: 196px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 30px 0;
+			background: $brandPantonBlue;
+			font-family: $font-regular;
+			font-size: 14px;
+			color: $white;
+			border: none;
+			border-radius: 15px;
+			cursor: pointer;
+		}
 	}
 
 	&__registration {
@@ -338,6 +346,8 @@ input {
 		}
 
 		&__button {
+			display: flex;
+			justify-content: center;
 			margin: 30px;
 		}
 	}

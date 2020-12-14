@@ -1,7 +1,7 @@
 import React, { FormEvent, SyntheticEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
-import RegistrationApplication from './RegistrationApplication/RegistrationApplication';
 import Logo from '../../images/Auth/carddex_logo.svg';
 // import Button from '@atlaskit/button';
 // import Form, { CheckboxField, ErrorMessage, Field, FormFooter } from '@atlaskit/form';
@@ -31,6 +31,15 @@ class Login extends React.PureComponent<Partial<LoginState>> {
 
     public componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
+        window.addEventListener('load', function cb() {
+            const elem = document.getElementsByClassName('auth__label');
+            // eslint-disable-next-line no-plusplus
+            for (let i = 0; i < elem.length; i++) {
+                // @ts-ignore
+                elem[i].classList.add('active');
+            }
+        });
+
         // @ts-ignore
         if (this.props.auth.isAuthenticated) {
             // @ts-ignore
@@ -85,7 +94,7 @@ class Login extends React.PureComponent<Partial<LoginState>> {
     };
 
     public render() {
-        const { login, passHash, isOpenRegistrationApplication } = this.state;
+        const { login, passHash } = this.state;
         // @ts-ignore
         const { error } = this.props.auth;
 
@@ -121,7 +130,6 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         id="login"
                                         type="text"
                                         className="auth__input warning"
-                                        autoCorrect="off"
                                         minLength={1}
                                         maxLength={255}
                                         required
@@ -136,7 +144,6 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                         id="login"
                                         type="text"
                                         className="auth__input"
-                                        autoCorrect="off"
                                         minLength={1}
                                         maxLength={255}
                                         autoFocus
@@ -156,7 +163,6 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             id="passHash"
                                             type="password"
                                             className="auth__input warning"
-                                            autoCorrect="off"
                                             minLength={8}
                                             maxLength={255}
                                             // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
@@ -174,7 +180,6 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                                             id="passHash"
                                             type="password"
                                             className="auth__input"
-                                            autoCorrect="off"
                                             minLength={8}
                                             maxLength={255}
                                             // pattern="^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[A-Za-zА-Яа-я\d]{8,}$"
@@ -188,18 +193,13 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                             </label>
                         </div>
                         <div className="auth__password-ask ask">
-                            <span onClick={this.handleChangeIsOpenRegistrationApplication} className="ask__password">
+                            {/* <span onClick={this.handleChangeIsOpenRegistrationApplication} className="ask__password">
                                 Заявка на регистрацию
-                            </span>
+                                </span> */}
                             <a href="/reset" className="ask__password">
                                 Не помню пароль
                             </a>
                         </div>
-                        {isOpenRegistrationApplication ? (
-                            <RegistrationApplication
-                                handleChangeIsOpenRegistrationApplication={this.handleChangeIsOpenRegistrationApplication}
-                            />
-                        ) : null}
                         {login && passHash ? (
                             <div className="auth__button">
                                 <button type="submit" className="button">
@@ -215,16 +215,13 @@ class Login extends React.PureComponent<Partial<LoginState>> {
                         )}
                         {error !== '' ? <div className="auth__error unsuccess">{error}</div> : null}
                     </form>
-                    {/*
-                        <div className="auth__registration registration">
-                            <div className="registration__no-login">Нет логина?</div>
-                            <div className="registration__link">
-                                <Link to="/register">Зарегистрируйтесь</Link>
-                                &nbsp;или войдите с помощью соцсетей
-                            </div>
+                    <div className="auth__registration registration">
+                        <div className="registration__no-login">Нет логина?</div>
+                        <div className="registration__link">
+                            <Link to="/bid">Зарегистрируйтесь</Link>
+                            <span> или войдите с помощью соцсетей</span>
                         </div>
-                        */}
-
+                    </div>
                     <div className="auth__password-ask">
                         <a
                             href="https://resources.carddex.ru/public/team_carddex/conf_policy_team_carddex.pdf"

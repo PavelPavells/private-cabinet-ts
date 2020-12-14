@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import NumberFormat from 'react-number-format';
 import Close from '../../../images/addUsersRole/close_add_role_window.svg';

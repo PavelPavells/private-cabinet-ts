@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, /* useDispatch, */ shallowEqual } from 'react-redux';
 import { PersonalCabinet } from '../../store/store';
 // import { newPassword } from '../../actions/authActions';
+import Logo from '../../images/Auth/carddex_logo.svg';
 
 import './Auth.scss';
 
@@ -153,14 +154,14 @@ const NewPassword = () => {
                         </label>
                     </div>
                     {newPass && repeatNewPass ? (
-                        <div>
-                            <button type="submit" className="auth__button">
+                        <div onClick={onSubmit} className="auth__button">
+                            <button type="submit" className="button">
                                 Изменить пароль
                             </button>
                         </div>
                     ) : (
-                        <div>
-                            <button type="submit" className="auth__button inaccessible">
+                        <div onClick={onSubmit} className="auth__button">
+                            <button type="submit" className="button inaccessible">
                                 Изменить пароль
                             </button>
                         </div>
@@ -174,7 +175,10 @@ const NewPassword = () => {
             </div>
             <div className="auth__right right">
                 <div className="right__image image">
-                    <div className="image__photo" />
+                    <img src={Logo} alt="carddex" className="auth__logo" />
+                    <div className="image__photo">
+                        <div className="photo" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ import { setCurrentUser, getAccessRegister, logoutUser } from './actions/authAct
 import store, { PersonalCabinet } from './store/store';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import RegisterRequest from './components/auth/RegisterRequest';
 import Reset from './components/auth/Reset';
 import NewPassword from './components/auth/NewPassword';
 import Layout from './components/dashboard/Layout';
@@ -79,6 +80,7 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" component={Login} />
                         <Route exact path="/register" component={errorResult.code === 0 ? Register : NotFound} />
+                        <Route exact path="/bid" component={RegisterRequest} />
                         <Route exact path="/reset" component={Reset} />
                         <Route exact path="/new-password" component={errorResult.code === 0 ? NewPassword : NotFound} />
                         <PrivateRoute
